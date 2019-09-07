@@ -8,7 +8,7 @@ namespace MatrixR {
 	Line* inputM(int &);
 	void outputM(const char *, Line *, int);
 	int getNum(char *, char*, int &);
-	bool evenNum(int);
-	Line *filterM(Line *, int);
+	bool evenDNum(int);
+	Line *filterM(Line *, int, int &);
 	//Line *erase(Line *&row, int rows);
 }

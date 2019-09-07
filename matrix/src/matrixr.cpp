@@ -74,15 +74,16 @@ namespace MatrixR {
 		}
 	}
 
-	bool evenNum(int num) {
+	bool evenDNum(int num) {
 		while (num > 0) {
 			if ((num % 10) % 2 == 1) 
 				return 0;
+			num /= 10;
 		}
 		return 1;
 	}
 
-	Line *filterM(Line *source, int rows) {
+	Line *filterM(Line *source, int rows, int &row_c) {
 		Line *conv = nullptr;
 
 		try {
@@ -92,14 +93,41 @@ namespace MatrixR {
 			return nullptr;
 		}
 
-		int row_c = 0;
-		int col_c = 0;
+		row_c = -1;
+		int col_c;
+
+		bool fitrow;
 
 		for (int rs = 0; rs < rows; ++rs) {
+			fitrow = 0;
+			col_c = 0;
+
 			for (int cs = 0; cs < source[rs].elemsc; ++cs) {
-				std::cout<<evenNum(source[rs].row[cs]);
+				if(evenDNum(source[rs].row[cs])) {
+					if (fitrow == 0) {
+						fitrow = 1;
+						++row_c;
+						try {
+							conv[row_c].row = new int[source[rs].elemsc];
+						} catch (std::bad_alloc &ba) {
+							std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
+							//eraseM(lines, r);
+							return nullptr;
+						}
+
+					}
+					std::cout << source[rs].row[cs];
+					conv[row_c].row[col_c] = source[rs].row[cs];
+					++col_c;
+				}
 			}
-			std::cout<<std::endl;
+
+			std::cout << std::endl;
+
+			conv[row_c].elemsc = col_c;
 		}
+
+		++row_c;
+		return conv;
 	}
 }
