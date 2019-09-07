@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "matrixr.h"
 
 namespace MatrixR {
@@ -68,6 +69,7 @@ namespace MatrixR {
 	void outputM(const char *msg, Line *lines, int rows) {
 		std::cout << msg << std::endl;
 		for (int i = 0; i < rows; ++i) {
+			std::cout << "(" << lines[i].elemsc << ")";
 			for (int j = 0; j < lines[i].elemsc; ++j)
 				std::cout << lines[i].row[j] << "\t";
 			std::cout << std::endl;
@@ -106,7 +108,10 @@ namespace MatrixR {
 				if(evenDNum(source[rs].row[cs])) {
 					if (fitrow == 0) {
 						fitrow = 1;
-						++row_c;
+						++row_c;		
+						conv[row_c].nzelems = 0;
+						conv[row_c].elemsc = 0;
+						
 						try {
 							conv[row_c].row = new int[source[rs].elemsc];
 						} catch (std::bad_alloc &ba) {
@@ -116,18 +121,37 @@ namespace MatrixR {
 						}
 
 					}
-					std::cout << source[rs].row[cs];
+					std::cout << source[rs].row[cs] << " ";
 					conv[row_c].row[col_c] = source[rs].row[cs];
 					++col_c;
+
+					if (conv[row_c].row[col_c]) 
+						conv[row_c].nzelems++; 
+					conv[row_c].elemsc++;
 				}
 			}
 
 			std::cout << std::endl;
-
-			conv[row_c].elemsc = col_c;
 		}
 
 		++row_c;
+
+		for (int rnc = 0; rnc < row_c; ++rnc) {
+			int *new_line;
+			
+			try {
+				new_line = new int[conv[rnc].elemsc];
+			} catch (std::bad_alloc &ba) {
+				std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
+				//eraseM(lines, r);
+				return nullptr;
+			}
+
+			std::memcpy(new_line, conv[rnc].row, sizeof(int) * conv[rnc].elemsc);
+			delete[] conv[rnc].row;
+			conv[rnc].row = new_line;
+		}
+
 		return conv;
 	}
 }
