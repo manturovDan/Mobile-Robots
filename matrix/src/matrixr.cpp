@@ -8,18 +8,24 @@ namespace MatrixR {
 		std::cin >> inp;
 		if (!std::cin.good())
 			return -1;
+		if(std::abs(inp) > 100000000)
+			return 2;
 		return 1;
 	}
 
 	int getNatNum(const char *welcome, const char *again, int &inp) {
 		bool moretime = false;
+		int gnStatus;
 		do {
 			if (moretime)
 				std::cout << again << std::endl;
 			else
 				std::cout << welcome << std::endl;
-			if (getNum(inp) < 0)
+			gnStatus = getNum(inp);
+			if (gnStatus < 0)
 				return -1;
+			if (gnStatus == 2)
+				inp = -1;
 
 			moretime = true;
 		} while (inp < 1);
@@ -56,10 +62,17 @@ namespace MatrixR {
 			}
 
 			std::cout << "Enter " << cols << " element(-s) for line " << (r + 1) << " in different lines" << std::endl;
+			int gnStatus;
 			for (int c = 0; c < cols; ++c) {
-				if (getNum(lines[r].row[c]) < 0) {
+				gnStatus = getNum(lines[r].row[c]);
+				if (gnStatus < 0) {
 					eraseM(lines, r + 1);
 					return nullptr;
+				}
+
+				if (gnStatus == 2) {
+					std::cout << "Too big number. Try again" << std::endl;
+					--c;
 				}
 			}
 		}
