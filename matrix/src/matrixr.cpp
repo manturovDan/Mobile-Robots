@@ -91,6 +91,7 @@ namespace MatrixR {
 	}
 
 	bool evenDNum(int num) {
+		num = std::abs(num);
 		while (num > 0) {
 			if ((num % 10) % 2 == 1) 
 				return 0;
