@@ -12,5 +12,5 @@ namespace MatrixR {
 	Line *filterM(Line *, int, int &);
 	int compLines(const void *, const void *);
 	void sortM(Line *, int);
-	//Line *erase(Line *&row, int rows);
+	void eraseM(Line *&, int);
 }

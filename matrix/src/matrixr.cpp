@@ -51,14 +51,14 @@ namespace MatrixR {
 				lines[r].row = new int[cols];
 			} catch (std::bad_alloc &ba) {
 				std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
-				//eraseM(lines, r);
+				eraseM(lines, r);
 				return nullptr;
 			}
 
 			std::cout << "Enter " << cols << " element(-s) for line " << (r + 1) << " in different lines" << std::endl;
 			for (int c = 0; c < cols; ++c) {
 				if (getNum(lines[r].row[c]) < 0) {
-					//eraseM(lines, r + 1);
+					eraseM(lines, r + 1);
 					return nullptr;
 				}
 			}
@@ -70,7 +70,7 @@ namespace MatrixR {
 	void outputM(const char *msg, Line *lines, int rows) {
 		std::cout << msg << std::endl;
 		for (int i = 0; i < rows; ++i) {
-			std::cout << "(" << lines[i].elemsc << ") ["  << lines[i].nzelems << "]\t";
+			//std::cout << "(" << lines[i].elemsc << ") ["  << lines[i].nzelems << "]\t";
 			for (int j = 0; j < lines[i].elemsc; ++j)
 				std::cout << lines[i].row[j] << "\t";
 			std::cout << std::endl;
@@ -99,6 +99,7 @@ namespace MatrixR {
 			conv = new Line[rows];
 		} catch (std::bad_alloc &ba) {
 			std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
+			eraseM(source, rows);
 			return nullptr;
 		}
 
@@ -123,7 +124,8 @@ namespace MatrixR {
 							conv[row_c].row = new int[source[rs].elemsc];
 						} catch (std::bad_alloc &ba) {
 							std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
-							//eraseM(lines, r);
+							eraseM(source, rows);
+							eraseM(conv, row_c+1);
 							return nullptr;
 						}
 
@@ -151,7 +153,8 @@ namespace MatrixR {
 				new_line = new int[conv[rnc].elemsc];
 			} catch (std::bad_alloc &ba) {
 				std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
-				//eraseM(lines, r);
+				eraseM(source, rows);
+				eraseM(conv, row_c);
 				return nullptr;
 			}
 
@@ -165,5 +168,11 @@ namespace MatrixR {
 
 	void sortM(Line *matr, int rows) {
 		std::qsort(matr, rows, sizeof(Line), compLines);
+	}
+
+	void eraseM(Line *&lines, int rows) {
+		for (int i = 0; i < rows; ++i)
+			delete[] lines[i].row;
+		delete[] lines;
 	}
 }
