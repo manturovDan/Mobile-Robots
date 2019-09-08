@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 #include "matrixr.h"
 
 namespace MatrixR {
@@ -69,7 +70,7 @@ namespace MatrixR {
 	void outputM(const char *msg, Line *lines, int rows) {
 		std::cout << msg << std::endl;
 		for (int i = 0; i < rows; ++i) {
-			std::cout << "(" << lines[i].elemsc << ")";
+			std::cout << "(" << lines[i].elemsc << ") ["  << lines[i].nzelems << "]\t";
 			for (int j = 0; j < lines[i].elemsc; ++j)
 				std::cout << lines[i].row[j] << "\t";
 			std::cout << std::endl;
@@ -83,6 +84,12 @@ namespace MatrixR {
 			num /= 10;
 		}
 		return 1;
+	}
+
+	int compLines(const void *line1, const void *line2) {
+		if ((*(Line*)line1).nzelems > (*(Line*)line2).nzelems)
+			return 1;
+		return -1;
 	}
 
 	Line *filterM(Line *source, int rows, int &row_c) {
@@ -121,17 +128,18 @@ namespace MatrixR {
 						}
 
 					}
-					std::cout << source[rs].row[cs] << " ";
+					//std::cout << source[rs].row[cs] << " ";
 					conv[row_c].row[col_c] = source[rs].row[cs];
-					++col_c;
 
-					if (conv[row_c].row[col_c]) 
-						conv[row_c].nzelems++; 
+					if (conv[row_c].row[col_c] != 0) 
+						conv[row_c].nzelems++;
+
 					conv[row_c].elemsc++;
+					++col_c;
 				}
 			}
 
-			std::cout << std::endl;
+			//std::cout << std::endl;
 		}
 
 		++row_c;
@@ -153,5 +161,9 @@ namespace MatrixR {
 		}
 
 		return conv;
+	}
+
+	void sortM(Line *matr, int rows) {
+		std::qsort(matr, rows, sizeof(Line), compLines);
 	}
 }

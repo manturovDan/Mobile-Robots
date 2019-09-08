@@ -10,5 +10,7 @@ namespace MatrixR {
 	int getNum(char *, char*, int &);
 	bool evenDNum(int);
 	Line *filterM(Line *, int, int &);
+	int compLines(const void *, const void *);
+	void sortM(Line *, int);
 	//Line *erase(Line *&row, int rows);
 }
