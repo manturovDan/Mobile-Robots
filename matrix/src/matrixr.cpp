@@ -56,7 +56,7 @@ namespace MatrixR {
 			try {
 				lines[r].row = new int[cols];
 			} catch (std::bad_alloc &ba) {
-				std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
+				std::cout << "--------error - no memory for creating row: " << ba.what() << std::endl;
 				eraseM(lines, r);
 				return nullptr;
 			}
@@ -137,7 +137,7 @@ namespace MatrixR {
 						try {
 							conv[row_c].row = new int[source[rs].elemsc];
 						} catch (std::bad_alloc &ba) {
-							std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
+							std::cout << "--------error - no memory for new row (1): " << ba.what() << std::endl;
 							eraseM(source, rows);
 							eraseM(conv, row_c+1);
 							return nullptr;
@@ -166,7 +166,7 @@ namespace MatrixR {
 			try {
 				new_line = new int[conv[rnc].elemsc];
 			} catch (std::bad_alloc &ba) {
-				std::cout << "--------error - too many rows in matrix: " << ba.what() << std::endl;
+				std::cout << "--------error - not memory for new row (2): " << ba.what() << std::endl;
 				eraseM(source, rows);
 				eraseM(conv, row_c);
 				return nullptr;
