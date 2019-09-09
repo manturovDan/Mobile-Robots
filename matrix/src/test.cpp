@@ -167,6 +167,61 @@ TEST (matrTest, mat3delLastRowCompl) {
 	ASSERT_EQ(0, conv[0].row[4]);
 }
 
+TEST (matrTest, mat4delFRow) {
+	int *row1 = new int[3] {1, 3, -227}; //must be deleted
+	int *row2 = new int[3] {5, 0, 0};
+	int *row3 = new int[3] {2, 2, 9};
+	int *row4 = new int[3] {0, 0, 0};
+
+	Line *lines = new Line[4] {{3, 0, row1}, {3, 0, row2}, {3, 0, row3}, {3, 0, row4}};
+	//outputM("Test", lines, 5);
+	
+	int rows_c;
+	Line *conv = filterM(lines, 4, rows_c);
+	//outputM("TestC", conv, 3);
+
+	ASSERT_EQ(3, rows_c);
+	ASSERT_EQ(2, conv[0].elemsc);
+	ASSERT_EQ(2, conv[1].elemsc);
+	ASSERT_EQ(3, conv[2].elemsc);
+
+	ASSERT_EQ(0, conv[0].nzelems);
+	ASSERT_EQ(2, conv[1].nzelems);
+	ASSERT_EQ(0, conv[2].nzelems);
+
+	ASSERT_EQ(0, conv[0].row[0]);
+	ASSERT_EQ(0, conv[0].row[1]);
+
+	ASSERT_EQ(2, conv[1].row[0]);
+	ASSERT_EQ(2, conv[1].row[1]);
+
+	ASSERT_EQ(0, conv[2].row[0]);
+	ASSERT_EQ(0, conv[2].row[1]);
+	ASSERT_EQ(0, conv[2].row[2]);
+
+	sortM(conv, rows_c);
+	//outputM("TestS", conv, 3);
+	ASSERT_EQ(3, rows_c);
+	ASSERT_EQ(2, conv[0].elemsc);
+	ASSERT_EQ(2, conv[2].elemsc);
+	ASSERT_EQ(3, conv[1].elemsc);
+
+	ASSERT_EQ(0, conv[0].nzelems);
+	ASSERT_EQ(2, conv[2].nzelems);
+	ASSERT_EQ(0, conv[1].nzelems);
+
+	ASSERT_EQ(0, conv[0].row[0]);
+	ASSERT_EQ(0, conv[0].row[1]);
+
+	ASSERT_EQ(2, conv[2].row[0]);
+	ASSERT_EQ(2, conv[2].row[1]);
+
+	ASSERT_EQ(0, conv[1].row[0]);
+	ASSERT_EQ(0, conv[1].row[1]);
+	ASSERT_EQ(0, conv[1].row[2]);
+
+}
+
 TEST (specifyTest, empResMatr) {
 	int *row1 = new int[2] {1, 19};
 	int *row2 = new int[2] {1, -1};
