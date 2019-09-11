@@ -1,16 +1,19 @@
 namespace MatrixR {
+	struct nzel {
+		int number;
+		int position;
+		nzel *next;
+	};
+
 	struct Line {
 		int elemsc; //count of elems
 		int nzelems; //count of non zero elems
-		int *row;
+		int number;
+		nzel *row;
+		Line *nextRow;
 	};
 
 	Line* inputM(int &);
-	void outputM(const char *, Line *, int);
-	int getNum(char *, char*, int &);
-	bool evenDNum(int);
-	Line *filterM(Line *, int, int &);
-	int compLines(const void *, const void *);
-	void sortM(Line *, int);
-	void eraseM(Line *&, int);
+	void printTable(Line *);
+	
 }

@@ -3,7 +3,7 @@
 
 using namespace MatrixR;
 
-TEST (PreTest, natDNum) {
+/*TEST (PreTest, natDNum) {
 	ASSERT_EQ(0, evenDNum(12));
 	ASSERT_EQ(1, evenDNum(22));
 	ASSERT_EQ(1, evenDNum(0));
@@ -231,7 +231,7 @@ TEST (specifyTest, empResMatr) {
 	int rows_c;
 	Line *conv = filterM(lines, 2, rows_c);
 	ASSERT_EQ(0, rows_c);
-}
+}*/
 
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
