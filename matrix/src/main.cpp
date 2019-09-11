@@ -1,3 +1,4 @@
+//тут надо всё переделать :((
 #include <iostream>
 #include "matrixr.h"
 
