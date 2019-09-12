@@ -6,8 +6,12 @@ using namespace MatrixR;
 
 int main() {
 	int rows;
-	Line *mat = MatrixR::inputM(rows);
+	int cols;
+	Line *mat;
+	int getm = inputM(mat, cols, rows);
 	
 	printTable(mat);
+	outputM(mat, cols, rows);
+
 	return 0;
 }

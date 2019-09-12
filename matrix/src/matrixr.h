@@ -13,7 +13,8 @@ namespace MatrixR {
 		Line *nextRow;
 	};
 
-	Line* inputM(int &);
+	int inputM(Line *&, int &, int &);
 	void printTable(Line *);
+	void outputM(Line *, int, int);
 	
 }

@@ -31,18 +31,16 @@ namespace MatrixR {
 		return 0;
 	}
 
-	Line *inputM(int &rows) {
-		int cols;
+	int inputM(Line *&origin, int &cols, int &rows) {
 		const char *repeat = "Input natural number in the correct range!";
 
 		if (getNatNum("Enter count of rows:", repeat, rows) < 0 || getNatNum("Enter count of columns:", repeat, cols) < 0)
-			return nullptr;
+			return 1;
 
-		std::cout<<rows<<" "<<cols<<std::endl;
 
 		int gnStatus;
 		int inpNum;
-		Line *origin = nullptr;
+		origin = nullptr;
 		Line *curPtr = nullptr;
 		Line *newPtr = nullptr;
 
@@ -56,7 +54,7 @@ namespace MatrixR {
 					gnStatus = getNum(inpNum);
 					if (gnStatus == -1) {
 						//erase
-						return nullptr;
+						return 1;
 					}
 				} while (gnStatus != 1);
 
@@ -93,7 +91,7 @@ namespace MatrixR {
 			lastone = nullptr;
 		}
 
-		return origin;
+		return 0;
 	}
 
 	void printTable(Line *line) {
@@ -106,6 +104,30 @@ namespace MatrixR {
 			}
 			std::cout << std::endl;
 			line = line->nextRow;
+		}
+	}
+
+	void outputM(Line *line, int cols, int rows) {
+		for (int rw = 0; rw < rows; ++rw) {
+			if (line->number == rw) {
+				nzel *lel = line->row;
+				for (int c = 0; c < cols; ++c) {
+					if (lel->position == c) {
+						std::cout << lel->number << " ";
+						if (lel->next)
+							lel = lel->next;
+					}
+					else
+						std::cout << "0 ";
+				}
+				if (line->nextRow)
+					line = line->nextRow;
+			}
+			else {
+				for (int c = 0; c < cols; ++c)
+					std::cout << "0 ";
+			}
+			std::cout << std::endl;
 		}
 	}
 }
