@@ -122,7 +122,7 @@ namespace MatrixR {
 
 	void printTable(Line *line) {
 		while (line != nullptr) {
-			std::cout << line->number << " row:";
+			std::cout << line->number << " row all:" << line->elemsc << " nz: " << line->nzelems;
 			nzel *pnt = line->row;
 			while(pnt != nullptr) {
 				std::cout << " -> {" << pnt->number << ", " << pnt->position << "}";
@@ -137,24 +137,34 @@ namespace MatrixR {
 		if (line) {
 			for (int rw = 0; rw < rows; ++rw) {
 				if (line->number == rw) {
-					nzel *lel = line->row;
-					for (int c = 0; c < cols; ++c) {
-						if (lel->position == c) {
-							std::cout << lel->number << " ";
-							if (lel->next)
-								lel = lel->next;
+					if (line->row) {
+						nzel *lel = line->row;
+						for (int c = 0; c < line->elemsc; ++c) {
+							if (lel->position == c) {
+								std::cout << lel->number << " ";
+								if (lel->next)
+									lel = lel->next;
+							}
+							else
+								std::cout << "0 ";
 						}
-						else
-							std::cout << "0 ";
+
+						std::cout << std::endl;
 					}
+					else if (line->elemsc) {
+						for (int c = 0; c < line->elemsc; ++c)
+							std::cout << "0 ";
+						std::cout << std::endl;
+					}
+
 					if (line->nextRow)
 						line = line->nextRow;
 				}
 				else {
 					for (int c = 0; c < cols; ++c)
 						std::cout << "0 ";
+					std::cout << std::endl;
 				}
-				std::cout << std::endl;
 			}
 		}
 		else {
@@ -180,13 +190,14 @@ namespace MatrixR {
 		if (line) {
 			conv = new Line[nzcou];
 			int crow = 0;
+			int empsp = 0;
 			while (line != nullptr) {
 				nzel *rel = line->row;
 				nzel *current = nullptr;
 				conv[crow].row = nullptr;
 				conv[crow].elemsc = cols;
 				conv[crow].nzelems = 0;
-				conv[crow].number = line->number;
+				conv[crow].number = line->number - empsp;
 
 				while(rel != nullptr) {
 					if (evenDNum(rel->number)) {
@@ -200,6 +211,7 @@ namespace MatrixR {
 						}
 
 						current->number = rel->number;
+						current->position = rel->position - (line->elemsc - conv[crow].elemsc);
 						std::cout<<current->number<<std::endl;
 						++conv[crow].nzelems;
 					}
@@ -211,16 +223,23 @@ namespace MatrixR {
 				}
 
 				line = line->nextRow;
-				if (crow < nzcou - 1)
+				if (!conv[crow].elemsc) {
+					++empsp;
+					continue;
+				}
+
+				if (crow < nzcou - empsp - 1)
 					conv[crow].nextRow = &(conv[crow+1]);
 
 				++crow;
+
 			}
+			
+			return rows - empsp;
 		}
 		else {
 			return -1; //zero matrix
 		}
 
-		return 0;
 	}
 }

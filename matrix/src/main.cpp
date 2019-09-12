@@ -15,9 +15,9 @@ int main() {
 
 	Line *conv;
 
-	convertM(conv, mat, rows, cols, getm);
+	int filr = convertM(conv, mat, rows, cols, getm);
 	printTable(conv);
-	outputM(conv, cols, rows);
+	outputM(conv, cols, filr);
 
 	return 0;
 }
