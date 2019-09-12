@@ -13,5 +13,11 @@ int main() {
 	printTable(mat);
 	outputM(mat, cols, rows);
 
+	Line *conv;
+
+	convertM(conv, mat, rows, cols, getm);
+	printTable(conv);
+	outputM(conv, cols, rows);
+
 	return 0;
 }

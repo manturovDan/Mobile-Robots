@@ -16,5 +16,5 @@ namespace MatrixR {
 	int inputM(Line *&, int &, int &);
 	void printTable(Line *);
 	void outputM(Line *, int, int);
-	
+	int convertM(Line *&, Line *, int, int, int);
 }

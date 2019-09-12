@@ -35,7 +35,7 @@ namespace MatrixR {
 		const char *repeat = "Input natural number in the correct range!";
 
 		if (getNatNum("Enter count of rows:", repeat, rows) < 0 || getNatNum("Enter count of columns:", repeat, cols) < 0)
-			return 2; //input error
+			return -2; //input error
 
 
 		int gnStatus;
@@ -47,6 +47,8 @@ namespace MatrixR {
 		nzel *lastone = nullptr;
 		nzel *current = nullptr;
 
+		int nzcount = 0;
+
 		for(int rw = 0; rw < rows; ++rw) {
 			std::cout << "Input number(-s) of " << (rw + 1) << " row by Enter:" << std::endl;
 			for (int col = 0; col < cols; ++col) {
@@ -54,7 +56,7 @@ namespace MatrixR {
 					gnStatus = getNum(inpNum);
 					if (gnStatus == -1) {
 						//erase
-						return 2;
+						return -2;
 					}
 				} while (gnStatus != 1);
 
@@ -65,7 +67,7 @@ namespace MatrixR {
 					} catch (std::bad_alloc &ba) {
 						std::cout << "Memory allocation error!" << ba.what() << std::endl;
 						//erase
-						return 1; //memory error
+						return -1; //memory error
 					}
 
 					current->number =  inpNum;
@@ -84,7 +86,6 @@ namespace MatrixR {
 								//erase
 								return 1; //memory error
 							}
-							
 							curPtr = origin;
 						}
 						else {
@@ -98,6 +99,8 @@ namespace MatrixR {
 
 							curPtr = curPtr->nextRow;
 						}
+
+						++nzcount;
 						curPtr->elemsc = cols;
 						curPtr->nzelems = 0;
 						curPtr->number = rw;
@@ -114,7 +117,7 @@ namespace MatrixR {
 			lastone = nullptr;
 		}
 
-		return 0;
+		return nzcount;
 	}
 
 	void printTable(Line *line) {
@@ -161,5 +164,63 @@ namespace MatrixR {
 				std::cout << std::endl;
 			}
 		}
+	}
+
+	bool evenDNum(int num) {
+		num = std::abs(num);
+		while (num > 0) {
+			if ((num % 10) % 2 == 1) 
+				return 0;
+			num /= 10;
+		}
+		return 1;
+	}
+
+	int convertM(Line *&conv, Line *line, int rows, int cols, int nzcou) {
+		if (line) {
+			conv = new Line[nzcou];
+			int crow = 0;
+			while (line != nullptr) {
+				nzel *rel = line->row;
+				nzel *current = nullptr;
+				conv[crow].row = nullptr;
+				conv[crow].elemsc = cols;
+				conv[crow].nzelems = 0;
+				conv[crow].number = line->number;
+
+				while(rel != nullptr) {
+					if (evenDNum(rel->number)) {
+						if (conv[crow].row) {
+							current->next = new nzel;
+							current = current->next;
+						}
+						else {
+							conv[crow].row = new nzel;
+							current = conv[crow].row;
+						}
+
+						current->number = rel->number;
+						std::cout<<current->number<<std::endl;
+						++conv[crow].nzelems;
+					}
+					else {
+						--conv[crow].elemsc;
+					}
+
+					rel = rel->next;
+				}
+
+				line = line->nextRow;
+				if (crow < nzcou - 1)
+					conv[crow].nextRow = &(conv[crow+1]);
+
+				++crow;
+			}
+		}
+		else {
+			return -1; //zero matrix
+		}
+
+		return 0;
 	}
 }
