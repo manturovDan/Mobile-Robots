@@ -17,4 +17,6 @@ namespace MatrixR {
 	void printTable(Line *);
 	void outputM(Line *, int, int);
 	int convertM(Line *&, Line *, int, int, int);
+	void sortM(Line *, int, int);
+	int complines(const void *, const void *);
 }

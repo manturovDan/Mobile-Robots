@@ -17,7 +17,11 @@ int main() {
 
 	int filr = convertM(conv, mat, rows, cols, getm);
 	printTable(conv);
-	outputM(conv, cols, filr);
+	outputM(conv, cols, rows - filr);
+
+	sortM(conv, rows - filr, getm - filr);
+	printTable(conv);
+	outputM(conv, cols, rows - filr);
 
 	return 0;
 }

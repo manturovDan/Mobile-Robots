@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 #include "matrixr.h"
 
 namespace MatrixR {
@@ -212,7 +214,7 @@ namespace MatrixR {
 
 						current->number = rel->number;
 						current->position = rel->position - (line->elemsc - conv[crow].elemsc);
-						std::cout<<current->number<<std::endl;
+						//std::cout<<current->number<<std::endl;
 						++conv[crow].nzelems;
 					}
 					else {
@@ -234,12 +236,35 @@ namespace MatrixR {
 				++crow;
 
 			}
+
+			Line *newl = new Line[nzcou - empsp];
+			std::memcpy(newl, conv, sizeof(Line) * nzcou - empsp);
+			delete[] conv;
+			conv = newl;
 			
-			return rows - empsp;
+			return empsp;
 		}
 		else {
 			return -1; //zero matrix
 		}
 
+	}
+
+	void sortM(Line *matr, int rows, int nzr) {
+		std::qsort(matr, nzr, sizeof(Line), complines);
+
+		for (int i = 0; i < nzr; ++i) {
+			matr[i].number = i + rows - nzr;
+			if (i < nzr - 1) 
+				matr[i].nextRow = &(matr[i+1]);
+			else
+				matr[i].nextRow = nullptr;
+		}
+	}
+
+	int complines(const void *line1, const void *line2) {
+		if ((*(Line*)line1).nzelems > (*(Line*)line2).nzelems)
+			return 1;
+		return -1;
 	}
 }
