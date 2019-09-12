@@ -35,7 +35,7 @@ namespace MatrixR {
 		const char *repeat = "Input natural number in the correct range!";
 
 		if (getNatNum("Enter count of rows:", repeat, rows) < 0 || getNatNum("Enter count of columns:", repeat, cols) < 0)
-			return 1;
+			return 2; //input error
 
 
 		int gnStatus;
@@ -48,18 +48,26 @@ namespace MatrixR {
 		nzel *current = nullptr;
 
 		for(int rw = 0; rw < rows; ++rw) {
-			std::cout << "Input number(-s) of " << (rw + 1) << " row by Enter:"<<std::endl;
+			std::cout << "Input number(-s) of " << (rw + 1) << " row by Enter:" << std::endl;
 			for (int col = 0; col < cols; ++col) {
 				do {
 					gnStatus = getNum(inpNum);
 					if (gnStatus == -1) {
 						//erase
-						return 1;
+						return 2;
 					}
 				} while (gnStatus != 1);
 
 				if (inpNum) {
-					current = new nzel;
+					current = nullptr;
+					try {
+						current = new nzel;
+					} catch (std::bad_alloc &ba) {
+						std::cout << "Memory allocation error!" << ba.what() << std::endl;
+						//erase
+						return 1; //memory error
+					}
+
 					current->number =  inpNum;
 					current->position = col;
 					current->next =  nullptr;
@@ -68,11 +76,26 @@ namespace MatrixR {
 						lastone->next = current;
 					else {
 						if (!curPtr) {
-							origin = new Line;
+							origin = nullptr;
+							try {
+								origin = new Line;
+							} catch (std::bad_alloc &ba) {
+								std::cout << "Memory allocation error!" << ba.what() << std::endl;
+								//erase
+								return 1; //memory error
+							}
+							
 							curPtr = origin;
 						}
 						else {
-							curPtr->nextRow = new Line;
+							try {
+								curPtr->nextRow = new Line;
+							} catch (std::bad_alloc &ba) {
+								std::cout << "Memory allocation error!" << ba.what() << std::endl;
+								//erase
+								return 1; //memory error
+							}
+
 							curPtr = curPtr->nextRow;
 						}
 						curPtr->elemsc = cols;
@@ -108,26 +131,35 @@ namespace MatrixR {
 	}
 
 	void outputM(Line *line, int cols, int rows) {
-		for (int rw = 0; rw < rows; ++rw) {
-			if (line->number == rw) {
-				nzel *lel = line->row;
-				for (int c = 0; c < cols; ++c) {
-					if (lel->position == c) {
-						std::cout << lel->number << " ";
-						if (lel->next)
-							lel = lel->next;
+		if (line) {
+			for (int rw = 0; rw < rows; ++rw) {
+				if (line->number == rw) {
+					nzel *lel = line->row;
+					for (int c = 0; c < cols; ++c) {
+						if (lel->position == c) {
+							std::cout << lel->number << " ";
+							if (lel->next)
+								lel = lel->next;
+						}
+						else
+							std::cout << "0 ";
 					}
-					else
+					if (line->nextRow)
+						line = line->nextRow;
+				}
+				else {
+					for (int c = 0; c < cols; ++c)
 						std::cout << "0 ";
 				}
-				if (line->nextRow)
-					line = line->nextRow;
+				std::cout << std::endl;
 			}
-			else {
-				for (int c = 0; c < cols; ++c)
+		}
+		else {
+			for (int rw = 0; rw < rows; ++rw) {
+				for (int c = 0; c < cols; ++c) 
 					std::cout << "0 ";
+				std::cout << std::endl;
 			}
-			std::cout << std::endl;
 		}
 	}
 }
