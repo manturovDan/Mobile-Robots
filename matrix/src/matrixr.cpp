@@ -230,15 +230,15 @@ namespace MatrixR {
 					continue;
 				}
 
-				if (crow < nzcou - empsp - 1)
-					conv[crow].nextRow = &(conv[crow+1]);
+				//if (crow < nzcou - empsp - 1)
+				//	conv[crow].nextRow = &(conv[crow+1]);
 
 				++crow;
 
 			}
 
 			Line *newl = new Line[nzcou - empsp];
-			std::memcpy(newl, conv, sizeof(Line) * nzcou - empsp);
+			std::memcpy(newl, conv, sizeof(Line) * (nzcou - empsp));
 			delete[] conv;
 			conv = newl;
 			
@@ -266,5 +266,32 @@ namespace MatrixR {
 		if ((*(Line*)line1).nzelems > (*(Line*)line2).nzelems)
 			return 1;
 		return -1;
+	}
+
+	void delnm(nzel *curel) {
+		while (curel) {
+			nzel *nextel = curel->next;
+			delete curel;
+			curel = nextel;
+		}
+	}
+
+	void eraseM(Line *matr) {
+		while (matr) {
+			delnm(matr->row);
+			Line *tmat = matr->nextRow;
+			delete matr;
+			matr = tmat;
+		}
+	}
+
+	void eraseMA(Line *mat) {
+		Line *matr = mat;
+		while (matr) {
+			delnm(matr->row);
+			matr = matr->nextRow;
+		}
+
+		delete[] mat;
 	}
 }

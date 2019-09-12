@@ -10,18 +10,23 @@ int main() {
 	Line *mat;
 	int getm = inputM(mat, cols, rows);
 	
-	printTable(mat);
+	std::cout << "Original matrix:" << std::endl;
 	outputM(mat, cols, rows);
+	std::cout << std::endl;
 
 	Line *conv;
-
 	int filr = convertM(conv, mat, rows, cols, getm);
-	printTable(conv);
-	outputM(conv, cols, rows - filr);
-
 	sortM(conv, rows - filr, getm - filr);
-	printTable(conv);
+
+	std::cout << "Result matrix:" << std::endl;
 	outputM(conv, cols, rows - filr);
 
+	std::cout<<std::endl;
+	printTable(mat);
+	std::cout<<std::endl;
+	printTable(conv);
+
+	eraseM(mat);
+	eraseMA(conv);
 	return 0;
 }
