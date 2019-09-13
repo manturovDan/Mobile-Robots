@@ -136,6 +136,63 @@ TEST (matrTest, allSpec) {
 	ASSERT_EQ(1, conv->nextRow->nextRow->nextRow->row->next->position);
 }
 
+TEST (matrTest, nevTest) {
+	Line *line1 = new Line {3, 0, 0, nullptr, nullptr};
+	line1->nextRow = new Line {3, 0, 1, nullptr, nullptr};
+	line1->nextRow->nextRow = new Line {3, 0, 2, nullptr, nullptr};
+
+	line1->row = new nzel {1, 0};
+	line1->row->next = new nzel {1, 1};
+	line1->row->next->next = new nzel {1, 2};
+
+	line1->nextRow->row = new nzel {1, 0};
+	line1->nextRow->row->next = new nzel {1, 1};
+	line1->nextRow->row->next->next = new nzel {1, 2};
+
+	line1->nextRow->nextRow->row = new nzel {1, 0};
+	line1->nextRow->nextRow->row->next = new nzel {1, 1};
+	line1->nextRow->nextRow->row->next->next = new nzel {1, 2};
+
+	Line *conv;
+	int filr = convertM(conv, line1, 3, 3, 3);
+	ASSERT_EQ(3, filr);
+}
+
+TEST(matrTest, firtstDel) {
+	Line *line1 = new Line {3, 0, 0, nullptr, nullptr};
+	line1->nextRow = new Line {3, 0, 1, nullptr, nullptr};
+	line1->nextRow->nextRow = new Line {3, 0, 2, nullptr, nullptr};
+
+	line1->row = new nzel {1, 0};
+	line1->row->next = new nzel {1, 1};
+	line1->row->next->next = new nzel {1, 2};
+
+	line1->nextRow->row = new nzel {2, 0};
+	line1->nextRow->row->next = new nzel {1, 1};
+	line1->nextRow->row->next->next = new nzel {1, 2};
+
+	line1->nextRow->nextRow->row = new nzel {1, 0};
+	line1->nextRow->nextRow->row->next = new nzel {-40, 2};
+
+	//printTable(line1);
+	Line *conv;
+	int filr = convertM(conv, line1, 3, 3, 3);
+	//printTable(conv);
+	ASSERT_EQ(1, filr);
+
+	ASSERT_EQ(0, conv->number);
+	ASSERT_EQ(1, conv->elemsc);
+	ASSERT_EQ(1, conv->nzelems);
+	ASSERT_EQ(2, conv->row->number);
+	ASSERT_EQ(0, conv->row->position);
+
+	ASSERT_EQ(1, conv->nextRow->number);
+	ASSERT_EQ(2, conv->nextRow->elemsc);
+	ASSERT_EQ(1, conv->nextRow->nzelems);
+	ASSERT_EQ(-40, conv->nextRow->row->number);
+	ASSERT_EQ(1, conv->nextRow->row->position);
+}
+
 
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);

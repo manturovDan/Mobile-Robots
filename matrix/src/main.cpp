@@ -26,7 +26,8 @@ int main() {
 			return 1;
 
 		outputM(conv, cols, rows - filr);
-
+		//std::cout<<std::endl;
+		//printTable(conv);
 		eraseM(conv);
 	}
 	else {
@@ -36,8 +37,6 @@ int main() {
 
 	//std::cout<<getm<<std::endl;
 	//printTable(mat);
-	//std::cout<<std::endl;
-	//printTable(conv);
 
 	eraseM(mat);
 	return 0;
