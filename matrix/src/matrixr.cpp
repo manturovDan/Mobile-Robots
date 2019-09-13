@@ -237,10 +237,12 @@ namespace MatrixR {
 
 			}
 
-			Line *newl = new Line[nzcou - empsp];
-			std::memcpy(newl, conv, sizeof(Line) * (nzcou - empsp));
-			delete[] conv;
-			conv = newl;
+			sortM(conv, rows - empsp, nzcou - empsp);
+
+			//Line *newl = new Line[nzcou - empsp];
+			//std::memcpy(newl, conv, sizeof(Line) * (nzcou - empsp));
+			//delete[] conv;
+			//conv = newl;
 			
 			return empsp;
 		}
@@ -250,7 +252,7 @@ namespace MatrixR {
 
 	}
 
-	void sortM(Line *matr, int rows, int nzr) {
+	void sortM(Line *&matr, int rows, int nzr) {
 		std::qsort(matr, nzr, sizeof(Line), complines);
 
 		for (int i = 0; i < nzr; ++i) {

@@ -16,7 +16,7 @@ int main() {
 
 	Line *conv;
 	int filr = convertM(conv, mat, rows, cols, getm);
-	sortM(conv, rows - filr, getm - filr);
+	//sortM(conv, rows - filr, getm - filr);
 
 	std::cout << "Result matrix:" << std::endl;
 	outputM(conv, cols, rows - filr);

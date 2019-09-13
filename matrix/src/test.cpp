@@ -3,7 +3,7 @@
 
 using namespace MatrixR;
 
-/*TEST (PreTest, natDNum) {
+TEST (PreTest, natDNum) {
 	ASSERT_EQ(0, evenDNum(12));
 	ASSERT_EQ(1, evenDNum(22));
 	ASSERT_EQ(1, evenDNum(0));
@@ -21,217 +21,121 @@ using namespace MatrixR;
 	ASSERT_EQ(0, evenDNum(1000000));
 }
 
-TEST (matrTest, mat1) {
-	int *row1 = new int[3] {4, 0, 66};
-	int *row2 = new int[3] {1, 2, 3};
+TEST(matrTest, mat1) {
+	Line *line1 = new Line {3, 0, 0, nullptr, nullptr};
+	line1->nextRow = new Line {3, 0, 1, nullptr, nullptr};
 
-	Line *lines = new Line[2] {{3, 0, row1}, {3, 0, row2}};
-	//outputM("Test", lines, 2);
-	
-	int rows_c;
-	Line *conv = filterM(lines, 2, rows_c);
-	//outputM("TestC", conv, 2);
+	line1->row = new nzel;
+	line1->row->number = 4;
+	line1->row->position = 0;
 
-	ASSERT_EQ(2, rows_c);
-	ASSERT_EQ(3, conv[0].elemsc);
-	ASSERT_EQ(1, conv[1].elemsc);
-	ASSERT_EQ(2, conv[0].nzelems);
-	ASSERT_EQ(1, conv[1].nzelems);
+	line1->row->next = new nzel;
+	line1->row->next->number = 66;
+	line1->row->next->position = 2;
 
-	sortM(conv, rows_c);
-	//outputM("TestS", conv, 2);
-	ASSERT_EQ(2, rows_c);
-	ASSERT_EQ(3, conv[1].elemsc);
-	ASSERT_EQ(1, conv[0].elemsc);
-	ASSERT_EQ(2, conv[1].nzelems);
-	ASSERT_EQ(1, conv[0].nzelems);
+	line1->nextRow->row = new nzel;
+	line1->nextRow->row->number = 1;
+	line1->nextRow->row->position = 0;
 
-	ASSERT_EQ(2, conv[0].row[0]);
-	ASSERT_EQ(4, conv[1].row[0]);
-	ASSERT_EQ(0, conv[1].row[1]);
-	ASSERT_EQ(66, conv[1].row[2]);
+	line1->nextRow->row->next = new nzel;
+	line1->nextRow->row->next->number = 2;
+	line1->nextRow->row->next->position = 1;
+
+	line1->nextRow->row->next->next = new nzel;
+	line1->nextRow->row->next->next->number = 3;
+	line1->nextRow->row->next->next->position = 2;
+
+
+	outputM(line1, 3, 2);
+	printTable(line1);
+	std::cout<<std::endl;
+
+	Line *conv;
+	int filr = convertM(conv, line1, 2, 3, 2);
+	ASSERT_EQ(0, filr);
+	//sortM(conv, 2, 2);
+
+	outputM(conv, 3, 2);
+	printTable(conv);
+	std::cout<<std::endl;
+
+	ASSERT_EQ(0, conv->number);
+	ASSERT_EQ(1, conv->elemsc);
+	ASSERT_EQ(1, conv->nzelems);
+	ASSERT_EQ(2, conv->row->number);
+	ASSERT_EQ(0, conv->row->position);
+
+	ASSERT_EQ(1, conv->nextRow->number);
+	ASSERT_EQ(3, conv->nextRow->elemsc);
+	ASSERT_EQ(2, conv->nextRow->nzelems);
+	ASSERT_EQ(4, conv->nextRow->row->number);
+	ASSERT_EQ(0, conv->nextRow->row->position);
+	ASSERT_EQ(66, conv->nextRow->row->next->number);
+	ASSERT_EQ(2, conv->nextRow->row->next->position);
 }
 
-TEST (matrTest, mat2delrow) {
-	int *row1 = new int[3] {4, 0, 66};
-	int *row2 = new int[3] {1, 1, 1};
-	int *row3 = new int[3] {1, 2, 3};
+TEST (matrTest, allSpec) {
+	Line *line1 = new Line {3, 0, 0, nullptr, nullptr};
+	line1->nextRow = new Line {3, 0, 1, nullptr, nullptr};
+	line1->nextRow->nextRow = new Line {3, 0, 2, nullptr, nullptr};
+	line1->nextRow->nextRow->nextRow = new Line {3, 0, 3, nullptr, nullptr};
+	line1->nextRow->nextRow->nextRow->nextRow = new Line {3, 0, 4, nullptr, nullptr};
 
-	Line *lines = new Line[3] {{3, 0, row1}, {3, 0, row2}, {3, 0, row3}};
-	//outputM("Test", lines, 3);
-	
-	int rows_c;
-	Line *conv = filterM(lines, 3, rows_c);
-	//outputM("TestC", conv, 2);
+	line1->row = new nzel {2, 1};
 
-	ASSERT_EQ(2, rows_c);
-	ASSERT_EQ(3, conv[0].elemsc);
-	ASSERT_EQ(1, conv[1].elemsc);
-	ASSERT_EQ(2, conv[0].nzelems);
-	ASSERT_EQ(1, conv[1].nzelems);
+	line1->nextRow->row = new nzel {1, 0};
+	line1->nextRow->row->next = new nzel {1, 1};
+	line1->nextRow->row->next->next = new nzel {1, 2};
 
-	sortM(conv, rows_c);
-	//outputM("TestS", conv, 2);
-	ASSERT_EQ(2, rows_c);
-	ASSERT_EQ(3, conv[1].elemsc);
-	ASSERT_EQ(1, conv[0].elemsc);
-	ASSERT_EQ(2, conv[1].nzelems);
-	ASSERT_EQ(1, conv[0].nzelems);
+	line1->nextRow->nextRow->row = new nzel {2, 0};
+	line1->nextRow->nextRow->row->next = new nzel {2, 1};
+	line1->nextRow->nextRow->row->next->next = new nzel {9, 2};
 
-	ASSERT_EQ(2, conv[0].row[0]);
-	ASSERT_EQ(4, conv[1].row[0]);
-	ASSERT_EQ(0, conv[1].row[1]);
-	ASSERT_EQ(66, conv[1].row[2]);
+	line1->nextRow->nextRow->nextRow->row = new nzel {5, 1};
+	line1->nextRow->nextRow->nextRow->row->next = new nzel {-4, 2};
+
+	line1->nextRow->nextRow->nextRow->nextRow->row = new nzel {1, 1};
+	line1->nextRow->nextRow->nextRow->nextRow->row->next = new nzel {-1, 2};
+
+	outputM(line1, 3, 6);
+	printTable(line1);
+	std::cout<<std::endl;
+
+	Line *conv;
+	int filr = convertM(conv, line1, 6, 3, 5);
+	ASSERT_EQ(1, filr);
+
+	//sortM(conv, 5, 4);
+
+	outputM(conv, 3, 5);
+	printTable(conv);
+	std::cout<<std::endl;
+
+	ASSERT_EQ(1, conv->number);
+	ASSERT_EQ(1, conv->elemsc);
+	ASSERT_EQ(0, conv->nzelems);
+
+	ASSERT_EQ(2, conv->nextRow->number);
+	ASSERT_EQ(3, conv->nextRow->elemsc);
+	ASSERT_EQ(1, conv->nextRow->nzelems);
+	ASSERT_EQ(2, conv->nextRow->row->number);
+	ASSERT_EQ(1, conv->nextRow->row->position);
+
+	ASSERT_EQ(3, conv->nextRow->nextRow->number);
+	ASSERT_EQ(2, conv->nextRow->nextRow->elemsc);
+	ASSERT_EQ(1, conv->nextRow->nextRow->nzelems);
+	ASSERT_EQ(-4, conv->nextRow->nextRow->row->number);
+	ASSERT_EQ(1, conv->nextRow->nextRow->row->position);
+
+	ASSERT_EQ(4, conv->nextRow->nextRow->nextRow->number);
+	ASSERT_EQ(2, conv->nextRow->nextRow->nextRow->elemsc);
+	ASSERT_EQ(2, conv->nextRow->nextRow->nextRow->nzelems);
+	ASSERT_EQ(2, conv->nextRow->nextRow->nextRow->row->number);
+	ASSERT_EQ(0, conv->nextRow->nextRow->nextRow->row->position);
+	ASSERT_EQ(2, conv->nextRow->nextRow->nextRow->row->next->number);
+	ASSERT_EQ(1, conv->nextRow->nextRow->nextRow->row->next->position);
 }
 
-TEST (matrTest, mat3delLastRowCompl) {
-	int *row1 = new int[6] {0, 9, 12, 22, 44, 88};
-	int *row2 = new int[6] {0, 0, 0, 2, 3, 404};
-	int *row3 = new int[6] {-972, 2, -44, 68000, 21, 46};
-	int *row4 = new int[6] {0, 1, 0, 0, 0, 0};
-	int *row5 = new int[6] {1, 1, 1, 3, -1, -10002};
-
-	Line *lines = new Line[5] {{6, 0, row1}, {6, 0, row2}, {6, 0, row3}, {6, 0, row4}, {6, 0, row5}};
-	//outputM("Test", lines, 5);
-	
-	int rows_c;
-	Line *conv = filterM(lines, 6, rows_c);
-	//outputM("TestC", conv, 4);
-
-	ASSERT_EQ(4, rows_c);
-	ASSERT_EQ(4, conv[0].elemsc);
-	ASSERT_EQ(5, conv[1].elemsc);
-	ASSERT_EQ(4, conv[2].elemsc);
-	ASSERT_EQ(5, conv[3].elemsc);
-
-	ASSERT_EQ(3, conv[0].nzelems);
-	ASSERT_EQ(2, conv[1].nzelems);
-	ASSERT_EQ(4, conv[2].nzelems);
-	ASSERT_EQ(0, conv[3].nzelems);
-
-	ASSERT_EQ(0, conv[0].row[0]);
-	ASSERT_EQ(22, conv[0].row[1]);
-	ASSERT_EQ(44, conv[0].row[2]);
-	ASSERT_EQ(88, conv[0].row[3]);
-
-	ASSERT_EQ(0, conv[1].row[0]);
-	ASSERT_EQ(0, conv[1].row[1]);
-	ASSERT_EQ(0, conv[1].row[2]);
-	ASSERT_EQ(2, conv[1].row[3]);
-	ASSERT_EQ(404, conv[1].row[4]);
-
-	ASSERT_EQ(2, conv[2].row[0]);
-	ASSERT_EQ(-44, conv[2].row[1]);
-	ASSERT_EQ(68000, conv[2].row[2]);
-	ASSERT_EQ(46, conv[2].row[3]);
-
-	ASSERT_EQ(0, conv[3].row[0]);
-	ASSERT_EQ(0, conv[3].row[1]);
-	ASSERT_EQ(0, conv[3].row[2]);
-	ASSERT_EQ(0, conv[3].row[3]);
-	ASSERT_EQ(0, conv[3].row[4]);
-
-	sortM(conv, rows_c);
-	//outputM("TestS", conv, 4);
-	ASSERT_EQ(4, rows_c);
-	ASSERT_EQ(5, conv[0].elemsc);
-	ASSERT_EQ(5, conv[1].elemsc);
-	ASSERT_EQ(4, conv[2].elemsc);
-	ASSERT_EQ(4, conv[3].elemsc);
-
-	ASSERT_EQ(0, conv[0].nzelems);
-	ASSERT_EQ(2, conv[1].nzelems);
-	ASSERT_EQ(3, conv[2].nzelems);
-	ASSERT_EQ(4, conv[3].nzelems);
-
-	ASSERT_EQ(0, conv[2].row[0]);
-	ASSERT_EQ(22, conv[2].row[1]);
-	ASSERT_EQ(44, conv[2].row[2]);
-	ASSERT_EQ(88, conv[2].row[3]);
-
-	ASSERT_EQ(0, conv[1].row[0]);
-	ASSERT_EQ(0, conv[1].row[1]);
-	ASSERT_EQ(0, conv[1].row[2]);
-	ASSERT_EQ(2, conv[1].row[3]);
-	ASSERT_EQ(404, conv[1].row[4]);
-
-	ASSERT_EQ(2, conv[3].row[0]);
-	ASSERT_EQ(-44, conv[3].row[1]);
-	ASSERT_EQ(68000, conv[3].row[2]);
-	ASSERT_EQ(46, conv[3].row[3]);
-
-	ASSERT_EQ(0, conv[0].row[0]);
-	ASSERT_EQ(0, conv[0].row[1]);
-	ASSERT_EQ(0, conv[0].row[2]);
-	ASSERT_EQ(0, conv[0].row[3]);
-	ASSERT_EQ(0, conv[0].row[4]);
-}
-
-TEST (matrTest, mat4delFRow) {
-	int *row1 = new int[3] {1, 3, -227}; //must be deleted
-	int *row2 = new int[3] {5, 0, 0};
-	int *row3 = new int[3] {2, 2, 9};
-	int *row4 = new int[3] {0, 0, 0};
-
-	Line *lines = new Line[4] {{3, 0, row1}, {3, 0, row2}, {3, 0, row3}, {3, 0, row4}};
-	//outputM("Test", lines, 5);
-	
-	int rows_c;
-	Line *conv = filterM(lines, 4, rows_c);
-	//outputM("TestC", conv, 3);
-
-	ASSERT_EQ(3, rows_c);
-	ASSERT_EQ(2, conv[0].elemsc);
-	ASSERT_EQ(2, conv[1].elemsc);
-	ASSERT_EQ(3, conv[2].elemsc);
-
-	ASSERT_EQ(0, conv[0].nzelems);
-	ASSERT_EQ(2, conv[1].nzelems);
-	ASSERT_EQ(0, conv[2].nzelems);
-
-	ASSERT_EQ(0, conv[0].row[0]);
-	ASSERT_EQ(0, conv[0].row[1]);
-
-	ASSERT_EQ(2, conv[1].row[0]);
-	ASSERT_EQ(2, conv[1].row[1]);
-
-	ASSERT_EQ(0, conv[2].row[0]);
-	ASSERT_EQ(0, conv[2].row[1]);
-	ASSERT_EQ(0, conv[2].row[2]);
-
-	sortM(conv, rows_c);
-	//outputM("TestS", conv, 3);
-	ASSERT_EQ(3, rows_c);
-	ASSERT_EQ(2, conv[0].elemsc);
-	ASSERT_EQ(2, conv[2].elemsc);
-	ASSERT_EQ(3, conv[1].elemsc);
-
-	ASSERT_EQ(0, conv[0].nzelems);
-	ASSERT_EQ(2, conv[2].nzelems);
-	ASSERT_EQ(0, conv[1].nzelems);
-
-	ASSERT_EQ(0, conv[0].row[0]);
-	ASSERT_EQ(0, conv[0].row[1]);
-
-	ASSERT_EQ(2, conv[2].row[0]);
-	ASSERT_EQ(2, conv[2].row[1]);
-
-	ASSERT_EQ(0, conv[1].row[0]);
-	ASSERT_EQ(0, conv[1].row[1]);
-	ASSERT_EQ(0, conv[1].row[2]);
-
-}
-
-TEST (specifyTest, empResMatr) {
-	int *row1 = new int[2] {1, 19};
-	int *row2 = new int[2] {1, -1};
-	
-	Line *lines = new Line[2] {{2, 0, row1}, {2, 0, row2}};
-	
-	int rows_c;
-	Line *conv = filterM(lines, 2, rows_c);
-	ASSERT_EQ(0, rows_c);
-}*/
 
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
