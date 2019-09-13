@@ -239,10 +239,20 @@ namespace MatrixR {
 
 			sortM(conv, rows - empsp, nzcou - empsp);
 
-			//Line *newl = new Line[nzcou - empsp];
-			//std::memcpy(newl, conv, sizeof(Line) * (nzcou - empsp));
-			//delete[] conv;
-			//conv = newl;
+			Line *rnewl = nullptr;
+			Line *cur = nullptr;
+			for (int i = 0; i < nzcou - empsp; ++i) {
+				if (!i) {
+					rnewl = new Line { conv[i].elemsc, conv[i].nzelems, conv[i].number, conv[i].row, nullptr };
+					cur = rnewl;
+				}
+				else {
+					cur->nextRow = new Line { conv[i].elemsc, conv[i].nzelems, conv[i].number, conv[i].row, nullptr };
+					cur = cur->nextRow;
+				}
+			}
+			delete[] conv;
+			conv = rnewl;
 			
 			return empsp;
 		}

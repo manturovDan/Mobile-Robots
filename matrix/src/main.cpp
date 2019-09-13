@@ -32,6 +32,6 @@ int main() {
 	//printTable(conv);
 
 	eraseM(mat);
-	eraseMA(conv);
+	eraseM(conv);
 	return 0;
 }
