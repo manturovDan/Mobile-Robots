@@ -46,18 +46,18 @@ TEST(matrTest, mat1) {
 	line1->nextRow->row->next->next->position = 2;
 
 
-	outputM(line1, 3, 2);
-	printTable(line1);
-	std::cout<<std::endl;
+	//outputM(line1, 3, 2);
+	//printTable(line1);
+	//std::cout<<std::endl;
 
 	Line *conv;
 	int filr = convertM(conv, line1, 2, 3, 2);
 	ASSERT_EQ(0, filr);
 	//sortM(conv, 2, 2);
 
-	outputM(conv, 3, 2);
-	printTable(conv);
-	std::cout<<std::endl;
+	//outputM(conv, 3, 2);
+	//printTable(conv);
+	//std::cout<<std::endl;
 
 	ASSERT_EQ(0, conv->number);
 	ASSERT_EQ(1, conv->elemsc);
@@ -97,9 +97,9 @@ TEST (matrTest, allSpec) {
 	line1->nextRow->nextRow->nextRow->nextRow->row = new nzel {1, 1};
 	line1->nextRow->nextRow->nextRow->nextRow->row->next = new nzel {-1, 2};
 
-	outputM(line1, 3, 6);
-	printTable(line1);
-	std::cout<<std::endl;
+	//outputM(line1, 3, 6);
+	//printTable(line1);
+	//std::cout<<std::endl;
 
 	Line *conv;
 	int filr = convertM(conv, line1, 6, 3, 5);
@@ -107,9 +107,9 @@ TEST (matrTest, allSpec) {
 
 	//sortM(conv, 5, 4);
 
-	outputM(conv, 3, 5);
-	printTable(conv);
-	std::cout<<std::endl;
+	//outputM(conv, 3, 5);
+	//printTable(conv);
+	//std::cout<<std::endl;
 
 	ASSERT_EQ(1, conv->number);
 	ASSERT_EQ(1, conv->elemsc);

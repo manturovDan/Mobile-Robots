@@ -57,7 +57,6 @@ namespace MatrixR {
 				do {
 					gnStatus = getNum(inpNum);
 					if (gnStatus == -1) {
-						//erase
 						return -2;
 					}
 				} while (gnStatus != 1);
@@ -68,7 +67,7 @@ namespace MatrixR {
 						current = new nzel;
 					} catch (std::bad_alloc &ba) {
 						std::cout << "Memory allocation error!" << ba.what() << std::endl;
-						//erase
+						eraseM(origin);
 						return -1; //memory error
 					}
 
@@ -85,7 +84,7 @@ namespace MatrixR {
 								origin = new Line;
 							} catch (std::bad_alloc &ba) {
 								std::cout << "Memory allocation error!" << ba.what() << std::endl;
-								//erase
+								eraseM(origin);
 								return 1; //memory error
 							}
 							curPtr = origin;
@@ -95,7 +94,7 @@ namespace MatrixR {
 								curPtr->nextRow = new Line;
 							} catch (std::bad_alloc &ba) {
 								std::cout << "Memory allocation error!" << ba.what() << std::endl;
-								//erase
+								eraseM(origin);
 								return 1; //memory error
 							}
 
@@ -204,11 +203,25 @@ namespace MatrixR {
 				while(rel != nullptr) {
 					if (evenDNum(rel->number)) {
 						if (conv[crow].row) {
-							current->next = new nzel;
+							try {
+								current->next = new nzel;
+							} catch (std::bad_alloc &ba) {
+								std::cout << "Memory allocation error!" << ba.what() << std::endl;
+								eraseM(line);
+								eraseMA(conv);
+								return -2; //memory error
+							}
 							current = current->next;
 						}
 						else {
-							conv[crow].row = new nzel;
+							try {
+								conv[crow].row = new nzel;
+							} catch (std::bad_alloc &ba) {
+								std::cout << "Memory allocation error!" << ba.what() << std::endl;
+								eraseM(line);
+								eraseMA(conv);
+								return -2; //memory error
+							}
 							current = conv[crow].row;
 						}
 
@@ -243,11 +256,26 @@ namespace MatrixR {
 			Line *cur = nullptr;
 			for (int i = 0; i < nzcou - empsp; ++i) {
 				if (!i) {
-					rnewl = new Line { conv[i].elemsc, conv[i].nzelems, conv[i].number, conv[i].row, nullptr };
+					try {
+						rnewl = new Line { conv[i].elemsc, conv[i].nzelems, conv[i].number, conv[i].row, nullptr };
+					} catch (std::bad_alloc &ba) {
+						std::cout << "Memory allocation error!" << ba.what() << std::endl;
+						eraseM(line);
+						eraseMA(conv);
+						return -2; //memory error
+					}
 					cur = rnewl;
 				}
 				else {
-					cur->nextRow = new Line { conv[i].elemsc, conv[i].nzelems, conv[i].number, conv[i].row, nullptr };
+					try {
+						cur->nextRow = new Line { conv[i].elemsc, conv[i].nzelems, conv[i].number, conv[i].row, nullptr };
+					} catch (std::bad_alloc &ba) {
+						std::cout << "Memory allocation error!" << ba.what() << std::endl;
+						eraseM(line);
+						eraseM(rnewl);
+						eraseMA(conv);
+						return -2; //memory error
+					}
 					cur = cur->nextRow;
 				}
 			}

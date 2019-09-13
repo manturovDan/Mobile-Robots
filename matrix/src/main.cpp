@@ -18,20 +18,27 @@ int main() {
 	outputM(mat, cols, rows);
 	std::cout << std::endl;
 
-	Line *conv;
-	int filr = convertM(conv, mat, rows, cols, getm);
-	if (filr == -2)
-		return 1;
-
 	std::cout << "Result matrix:" << std::endl;
-	outputM(conv, cols, rows - filr);
+	if (getm) {
+		Line *conv;
+		int filr = convertM(conv, mat, rows, cols, getm);
+		if (filr == -2)
+			return 1;
 
-	//std::cout<<std::endl;
+		outputM(conv, cols, rows - filr);
+
+		eraseM(conv);
+	}
+	else {
+		outputM(mat, cols, rows);
+	}
+	
+
+	//std::cout<<getm<<std::endl;
 	//printTable(mat);
 	//std::cout<<std::endl;
 	//printTable(conv);
 
 	eraseM(mat);
-	eraseM(conv);
 	return 0;
 }
