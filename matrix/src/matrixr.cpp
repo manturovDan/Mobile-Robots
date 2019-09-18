@@ -33,8 +33,73 @@ namespace MatrixR {
 		return 0;
 	}
 
+	int inputNZ(Line *&origin, int &cols, int &rows) {
+		const char *repeat = "Input number in the correct range!";
+
+		if (getNatNum("Enter count of rows:", repeat, rows) < 0 || getNatNum("Enter count of columns:", repeat, cols) < 0)
+			return -2; //input error
+
+		int gnStatus;
+		int posStatus;
+		int inpStatus;
+		int inpNum;
+
+		int position = -1;
+		int curRow = -1;
+		int nzCount;
+
+		while (curRow < rows) {
+			int oldRow = curRow;
+			int oldPos = position;
+
+			if (getNatNum("Input number of row from 1:", repeat, curRow) < 0)
+				return -2;
+
+			--curRow;
+			if (curRow <= oldRow) {
+				curRow = oldRow;
+				std::cout<<"Incorrect input"<<std::endl;
+				continue;
+			}
+
+			if (getNatNum("Input count of non-zero numbers in this row:", repeat, nzCount) < 0)
+				return -2;
+
+			if (nzCount > cols) {
+				std::cout<<"Incorrect input"<<std::endl;
+				continue;
+			}
+
+			for (int el = 0; el < nzCount; ++el) {
+				if (getNatNum("Input position of element in row from 1:", repeat, nzCount) < 0)
+					return -2;
+
+				--position;
+
+				if (position <= oldPos || position >= cols) {
+					--el;
+					std::cout<<"Incorrect input"<<std::endl;
+					continue;
+				}
+				else {
+					do {
+						gnStatus = getNum(inpNum);
+						if (gnStatus == -1) {
+							return -2;
+						}
+					} while (gnStatus != 1);
+
+					if(inpNum) {
+						std::cout<<"Correct. Row"<<curRow<<" Col:" << position <<" El:" << inpNum << std::endl;
+					}
+				}
+			}
+
+		}
+	}
+
 	int inputM(Line *&origin, int &cols, int &rows) {
-		const char *repeat = "Input natural number in the correct range!";
+		const char *repeat = "Input number in the correct range!";
 
 		if (getNatNum("Enter count of rows:", repeat, rows) < 0 || getNatNum("Enter count of columns:", repeat, cols) < 0)
 			return -2; //input error
@@ -187,7 +252,7 @@ namespace MatrixR {
 		return 1;
 	}
 
-	int convertM(Line *&conv, Line *line, int rows, int cols, int nzcou) {
+	int convertM(Line *&conv, Line *line, int rows, int cols, int nzcou,  bool (*crit)(int)) {
 		if (line) {
 			conv = new Line[nzcou];
 			int crow = 0;
@@ -201,7 +266,7 @@ namespace MatrixR {
 				conv[crow].number = line->number - empsp;
 
 				while(rel != nullptr) {
-					if (evenDNum(rel->number)) {
+					if (crit(rel->number)) {
 						if (conv[crow].row) {
 							try {
 								current->next = new nzel;
@@ -285,6 +350,7 @@ namespace MatrixR {
 			return empsp;
 		}
 		else {
+			conv = nullptr;
 			return -1; //zero matrix
 		}
 

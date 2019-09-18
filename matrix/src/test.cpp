@@ -21,6 +21,7 @@ TEST (PreTest, natDNum) {
 	ASSERT_EQ(0, evenDNum(1000000));
 }
 
+
 TEST(matrTest, mat1) {
 	Line *line1 = new Line {3, 0, 0, nullptr, nullptr};
 	line1->nextRow = new Line {3, 0, 1, nullptr, nullptr};
@@ -51,7 +52,7 @@ TEST(matrTest, mat1) {
 	//std::cout<<std::endl;
 
 	Line *conv;
-	int filr = convertM(conv, line1, 2, 3, 2);
+	int filr = convertM(conv, line1, 2, 3, 2, evenDNum);
 	ASSERT_EQ(0, filr);
 	//sortM(conv, 2, 2);
 
@@ -102,7 +103,7 @@ TEST (matrTest, allSpec) {
 	//std::cout<<std::endl;
 
 	Line *conv;
-	int filr = convertM(conv, line1, 6, 3, 5);
+	int filr = convertM(conv, line1, 6, 3, 5, evenDNum);
 	ASSERT_EQ(1, filr);
 
 	//sortM(conv, 5, 4);
@@ -154,7 +155,7 @@ TEST (matrTest, nevTest) {
 	line1->nextRow->nextRow->row->next->next = new nzel {1, 2};
 
 	Line *conv;
-	int filr = convertM(conv, line1, 3, 3, 3);
+	int filr = convertM(conv, line1, 3, 3, 3, evenDNum);
 	ASSERT_EQ(3, filr);
 }
 
@@ -176,7 +177,7 @@ TEST(matrTest, firtstDel) {
 
 	//printTable(line1);
 	Line *conv;
-	int filr = convertM(conv, line1, 3, 3, 3);
+	int filr = convertM(conv, line1, 3, 3, 3, evenDNum);
 	//printTable(conv);
 	ASSERT_EQ(1, filr);
 

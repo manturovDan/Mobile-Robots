@@ -14,9 +14,10 @@ namespace MatrixR {
 	};
 
 	int inputM(Line *&, int &, int &);
+	int inputNZ(Line *&, int &, int&);
 	void printTable(Line *);
 	void outputM(Line *, int, int);
-	int convertM(Line *&, Line *, int, int, int);
+	int convertM(Line *&, Line *, int, int, int, bool (*)(int));
 	void sortM(Line *&, int, int);
 	int complines(const void *, const void *);
 	void eraseM(Line *);

@@ -18,24 +18,26 @@ int main() {
 	std::cout << std::endl;
 
 	std::cout << "Result matrix:" << std::endl;
-	if (getm) {
-		Line *conv;
-		int filr = convertM(conv, mat, rows, cols, getm);
-		if (filr == -2)
-			return 1;
+	
+	Line *conv;
+	int filr = convertM(conv, mat, rows, cols, getm, evenDNum);
+	if (filr == -2)
+		return 1;
+	else if (filr == -1) {
+		filr = 0;
+	}
 
-		outputM(conv, cols, rows - filr);
-		//std::cout<<std::endl;
-		//printTable(conv);
-		eraseM(conv);
-	}
-	else {
-		outputM(mat, cols, rows);
-	}
+
+	outputM(conv, cols, rows - filr);
+	//std::cout<<std::endl;
+	//printTable(conv);
+	eraseM(conv);
+	
 	
 
 	//std::cout<<getm<<std::endl;
-	//printTable(mat);
+	std::cout<<"\nReference List"<<std::endl;
+	printTable(mat);
 
 	eraseM(mat);
 	return 0;
