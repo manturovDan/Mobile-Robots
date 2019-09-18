@@ -33,6 +33,22 @@ namespace MatrixR {
 		return 0;
 	}
 
+	int choise() {
+		const char *repeat = "Input correct number!";
+
+		int chs;
+		while (1) {
+			if (getNatNum("Enter 1 to input matrix fully OR input 2 to input onle non-zero elements:", repeat, chs))
+				return -2;
+			else if (chs > 2) {
+				std::cout<<repeat<<std::endl;
+				continue;
+			}
+			else 
+				return chs;
+		}
+	}
+
 	int inputNZ(Line *&origin, int &cols, int &rows) {
 		const char *repeat = "Input number in the correct range!";
 

@@ -7,7 +7,20 @@ int main() {
 	int rows;
 	int cols;
 	Line *mat;
-	int getm = inputM(mat, cols, rows);
+	int chs = choise();
+	if(chs < 1) {
+		std::cout<<"Input error!"<<std::endl;
+		return 1;
+	}
+
+	int getm;
+	if (chs == 1) {
+		getm = inputM(mat, cols, rows);
+	}
+	else {
+		return 0;
+	}
+	
 	if (getm < 0) {
 		std::cout<<"Input error!"<<std::endl;
 		return 1;
