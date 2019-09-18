@@ -39,6 +39,7 @@ namespace MatrixR {
 		if (getNatNum("Enter count of rows:", repeat, rows) < 0 || getNatNum("Enter count of columns:", repeat, cols) < 0)
 			return -2; //input error
 
+
 		int gnStatus;
 		int posStatus;
 		int inpStatus;
