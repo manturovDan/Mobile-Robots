@@ -18,6 +18,7 @@ int main() {
 		getm = inputM(mat, cols, rows);
 	}
 	else {
+		inputNZ(mat, cols, rows);
 		return 0;
 	}
 	

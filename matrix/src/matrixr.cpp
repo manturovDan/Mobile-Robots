@@ -19,7 +19,7 @@ namespace MatrixR {
 		do {
 			if (moretime)
 				std::cout << again << std::endl;
-			else
+			else if (strcmp(welcome,"") != 0)
 				std::cout << welcome << std::endl;
 			gnStatus = getNum(inp);
 			if (gnStatus < 0)
@@ -31,6 +31,24 @@ namespace MatrixR {
 		} while (inp < 1);
 		
 		return 0;
+	}
+
+	int inpInSegment(const char *again, int &inp, int start, int end) {
+		bool more = false;
+		int gnStatus;
+		while (1) {
+			if (more)
+				std::cout << again << std::endl;
+			gnStatus = getNum(inp);
+			if (gnStatus < 0)
+				return -1;
+			if (gnStatus == 2)
+				more = true;
+			else if (inp >= start && inp <= end)
+				return 0;
+			else
+				more = true;
+		}
 	}
 
 	int choise() {
@@ -57,62 +75,77 @@ namespace MatrixR {
 
 
 		int gnStatus;
+		int nzcount;
+		int crStatus;
 		int inpNum;
 
-		int position = -1;
 		int curRow = -1;
 		int nzCount;
 
 		origin = nullptr;
+		Line *curPtr = nullptr;
+		nzel *lastone = nullptr;
 
-		while (curRow < rows) {
+		std::cout << "Input count of row(-s) with non-zero elements from 0 to " << rows << ":" << std::endl;
+		if (inpInSegment(repeat, nzcount, 0, rows) < 0)
+			return -2;
+
+		for (int i = 0; i < nzcount; ++i) {
+			if(curRow + 2 > rows) {
+				nzCount = i;
+				std::cout << "Reduction of rows count" << std::endl;
+				break;
+			}
+
 			int oldRow = curRow;
-			int oldPos = position;
 
-			if (getNatNum("Input number of row from 1:", repeat, curRow) < 0)
+			std::cout << "Input number of new row with non-zero elements from " << (curRow + 2) << " to " << rows << ", " << (nzcount - i)  << " left:" << std::endl;
+			if (inpInSegment(repeat, curRow, curRow + 2, rows) < 0)
 				return -2;
 
 			--curRow;
-			if (curRow <= oldRow) {
-				curRow = oldRow;
-				std::cout<<"Incorrect input"<<std::endl;
-				continue;
-			}
 
-			if (getNatNum("Input count of non-zero numbers in this row:", repeat, nzCount) < 0)
+			std::cout<< "Input count of non-zero numbers in " << (curRow + 1) << " row from 1 to " << cols << ":" <<std::endl;
+			if (inpInSegment(repeat, nzCount, 1, cols) < 0)
 				return -2;
 
-			if (nzCount > cols) {
-				std::cout<<"Incorrect input"<<std::endl;
-				continue;
-			}
-
+			
+			int position = -1;
 			for (int el = 0; el < nzCount; ++el) {
-				if (getNatNum("Input position of element in row from 1:", repeat, nzCount) < 0)
+				if (position + 2 > cols) {
+					nzCount = el;
+					std::cout << "Reduction of elements count" << std::endl;
+					break;
+				}
+
+				int oldPos = position;
+				std::cout << "Input position of " << (el+1) << "/" << nzCount << " element in " << (curRow + 1) << " row from " << (oldPos + 2) << " to " << cols << ":" << std::endl;
+				if (inpInSegment(repeat, position, (oldPos + 2), cols) < 0)
 					return -2;
 
 				--position;
 
-				if (position <= oldPos || position >= cols) {
-					--el;
-					std::cout<<"Incorrect input"<<std::endl;
-					continue;
+				std::cout << "Input number:" << std::endl;
+			
+				inpNum = 0;
+				while (1) {
+					if (inpInSegment(repeat, inpNum, -100000000, 100000000) < 0) //non-zero
+						return -2;
+					if(inpNum != 0)
+						break;
+					std::cout << "Input non-zero value" << std::endl;
 				}
-				else {
-					do {
-						gnStatus = getNum(inpNum);
-						if (gnStatus == -1) {
-							return -2;
-						}
-					} while (gnStatus != 1);
 
-					if(inpNum) {
-						std::cout<<"Correct. Row"<<curRow<<" Col:" << position <<" El:" << inpNum << std::endl;
-					}
+				if(inpNum) {
+					std::cout<<"Correct. Row"<<curRow<<" Col:" << position <<" El:" << inpNum << std::endl;
+					//crStatus = createPoint(origin, curPtr, lastone, position, curRow, inpNum);
 				}
+				
 			}
 
 		}
+
+		return nzcount;
 	}
 
 	int inputM(Line *&origin, int &cols, int &rows) {
@@ -201,7 +234,7 @@ namespace MatrixR {
 		return nzcount;
 	}
 
-	int createPoint(Line *&origin, Line *&curPtr, nzel *&lastone, int cols, int row, int inpNum) {
+	int createPoint(Line *&origin, Line *&curPtr, nzel *&lastone, int col, int row, int inpNum) {
 		nzel *current = nullptr;
 
 		int ret = 0;
@@ -214,7 +247,7 @@ namespace MatrixR {
 		}
 
 		current->number =  inpNum;
-		current->position = cols;
+		current->position = col;
 		current->next =  nullptr;
 
 		if(lastone) 
@@ -241,7 +274,7 @@ namespace MatrixR {
 				curPtr = curPtr->nextRow;
 			}
 
-			curPtr->elemsc = cols;
+			curPtr->elemsc = col;
 			curPtr->nzelems = 0;
 			curPtr->number = row;
 			curPtr->row = current;
