@@ -138,10 +138,12 @@ namespace MatrixR {
 
 				if(inpNum) {
 					std::cout<<"Correct. Row"<<curRow<<" Col:" << position <<" El:" << inpNum << std::endl;
-					//crStatus = createPoint(origin, curPtr, lastone, position, curRow, inpNum);
+					crStatus = createPoint(origin, curPtr, lastone, position, curRow, cols, inpNum);
 				}
 				
 			}
+
+			lastone = nullptr;
 
 		}
 
@@ -234,7 +236,7 @@ namespace MatrixR {
 		return nzcount;
 	}
 
-	int createPoint(Line *&origin, Line *&curPtr, nzel *&lastone, int col, int row, int inpNum) {
+	int createPoint(Line *&origin, Line *&curPtr, nzel *&lastone, int col, int row, int cols, int inpNum) {
 		nzel *current = nullptr;
 
 		int ret = 0;
@@ -274,7 +276,7 @@ namespace MatrixR {
 				curPtr = curPtr->nextRow;
 			}
 
-			curPtr->elemsc = col;
+			curPtr->elemsc = cols;
 			curPtr->nzelems = 0;
 			curPtr->number = row;
 			curPtr->row = current;
