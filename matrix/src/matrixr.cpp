@@ -135,7 +135,7 @@ namespace MatrixR {
 			
 				inpNum = 0;
 				while (1) {
-					if (inpInSegment(repeat, inpNum, -100000000, 100000000) < 0) //non-zero {
+					if (getNum(inpNum) < 0) { //non-zero 
 						eraseM(origin);
 						return -2;
 					}
@@ -145,7 +145,6 @@ namespace MatrixR {
 				}
 
 				if(inpNum) {
-					std::cout<<"Correct. Row"<<curRow<<" Col:" << position <<" El:" << inpNum << std::endl;
 					crStatus = createPoint(origin, curPtr, lastone, position, curRow, cols, inpNum);
 					if (crStatus < 0) {
 						eraseM(origin);
@@ -174,7 +173,6 @@ namespace MatrixR {
 		origin = nullptr;
 		Line *curPtr = nullptr;
 		nzel *lastone = nullptr;
-		nzel *current = nullptr;
 
 		int nzcount = 0;
 
@@ -189,55 +187,11 @@ namespace MatrixR {
 				} while (gnStatus != 1);
 
 				if (inpNum) {
-					current = nullptr;
-					try {
-						current = new nzel;
-					} catch (std::bad_alloc &ba) {
-						std::cout << "Memory allocation error!" << ba.what() << std::endl;
+					int crStatus = createPoint(origin, curPtr, lastone, col, rw, cols, inpNum);
+					if (crStatus < 0) {
 						eraseM(origin);
-						return -1; //memory error
+						return -2;
 					}
-
-					current->number =  inpNum;
-					current->position = col;
-					current->next =  nullptr;
-
-					if(lastone) 
-						lastone->next = current;
-					else {
-						if (!curPtr) {
-							origin = nullptr;
-							try {
-								origin = new Line;
-							} catch (std::bad_alloc &ba) {
-								std::cout << "Memory allocation error!" << ba.what() << std::endl;
-								eraseM(origin);
-								return -1; //memory error
-							}
-							curPtr = origin;
-						}
-						else {
-							try {
-								curPtr->nextRow = new Line;
-							} catch (std::bad_alloc &ba) {
-								std::cout << "Memory allocation error!" << ba.what() << std::endl;
-								eraseM(origin);
-								return -1; //memory error
-							}
-
-							curPtr = curPtr->nextRow;
-						}
-
-						++nzcount;
-						curPtr->elemsc = cols;
-						curPtr->nzelems = 0;
-						curPtr->number = rw;
-						curPtr->row = current;
-						curPtr->nextRow = nullptr;
-					}
-					
-					lastone = current;
-
 				}
 
 			}
