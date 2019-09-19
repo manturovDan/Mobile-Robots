@@ -24,4 +24,5 @@ namespace MatrixR {
 	void eraseMA(Line *);
 	bool evenDNum(int);
 	int choise();
+	int createPoint(Line *&, Line *&, nzel *&, int, int, int);
 }

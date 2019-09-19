@@ -57,13 +57,13 @@ namespace MatrixR {
 
 
 		int gnStatus;
-		int posStatus;
-		int inpStatus;
 		int inpNum;
 
 		int position = -1;
 		int curRow = -1;
 		int nzCount;
+
+		origin = nullptr;
 
 		while (curRow < rows) {
 			int oldRow = curRow;
@@ -126,8 +126,6 @@ namespace MatrixR {
 		int inpNum;
 		origin = nullptr;
 		Line *curPtr = nullptr;
-		Line *newPtr = nullptr;
-
 		nzel *lastone = nullptr;
 		nzel *current = nullptr;
 
@@ -201,6 +199,59 @@ namespace MatrixR {
 		}
 
 		return nzcount;
+	}
+
+	int createPoint(Line *&origin, Line *&curPtr, nzel *&lastone, int cols, int row, int inpNum) {
+		nzel *current = nullptr;
+
+		int ret = 0;
+		
+		try {
+			current = new nzel;
+		} catch (std::bad_alloc &ba) {
+			std::cout << "Memory allocation error!" << ba.what() << std::endl;
+			return -1; //memory error
+		}
+
+		current->number =  inpNum;
+		current->position = cols;
+		current->next =  nullptr;
+
+		if(lastone) 
+			lastone->next = current;
+		else {
+			if (!curPtr) {
+				origin = nullptr;
+				try {
+					origin = new Line;
+				} catch (std::bad_alloc &ba) {
+					std::cout << "Memory allocation error!" << ba.what() << std::endl;
+					return -1; //memory error
+				}
+				curPtr = origin;
+			}
+			else {
+				try {
+					curPtr->nextRow = new Line;
+				} catch (std::bad_alloc &ba) {
+					std::cout << "Memory allocation error!" << ba.what() << std::endl;
+					return -1; //memory error
+				}
+
+				curPtr = curPtr->nextRow;
+			}
+
+			curPtr->elemsc = cols;
+			curPtr->nzelems = 0;
+			curPtr->number = row;
+			curPtr->row = current;
+			curPtr->nextRow = nullptr;
+			ret = 1;
+		}
+
+		lastone = current;
+
+		return ret;
 	}
 
 	void printTable(Line *line) {
