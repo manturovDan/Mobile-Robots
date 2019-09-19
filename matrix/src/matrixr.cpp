@@ -100,14 +100,18 @@ namespace MatrixR {
 			int oldRow = curRow;
 
 			std::cout << "Input number of new row with non-zero elements from " << (curRow + 2) << " to " << rows << ", " << (nzcount - i)  << " left:" << std::endl;
-			if (inpInSegment(repeat, curRow, curRow + 2, rows) < 0)
+			if (inpInSegment(repeat, curRow, curRow + 2, rows) < 0) {
+				eraseM(origin);
 				return -2;
+			}
 
 			--curRow;
 
 			std::cout<< "Input count of non-zero numbers in " << (curRow + 1) << " row from 1 to " << cols << ":" <<std::endl;
-			if (inpInSegment(repeat, nzCount, 1, cols) < 0)
+			if (inpInSegment(repeat, nzCount, 1, cols) < 0) {
+				eraseM(origin);
 				return -2;
+			}
 
 			
 			int position = -1;
@@ -120,8 +124,10 @@ namespace MatrixR {
 
 				int oldPos = position;
 				std::cout << "Input position of " << (el+1) << "/" << nzCount << " element in " << (curRow + 1) << " row from " << (oldPos + 2) << " to " << cols << ":" << std::endl;
-				if (inpInSegment(repeat, position, (oldPos + 2), cols) < 0)
+				if (inpInSegment(repeat, position, (oldPos + 2), cols) < 0) {
+					eraseM(origin);
 					return -2;
+				}
 
 				--position;
 
@@ -129,8 +135,10 @@ namespace MatrixR {
 			
 				inpNum = 0;
 				while (1) {
-					if (inpInSegment(repeat, inpNum, -100000000, 100000000) < 0) //non-zero
+					if (inpInSegment(repeat, inpNum, -100000000, 100000000) < 0) //non-zero {
+						eraseM(origin);
 						return -2;
+					}
 					if(inpNum != 0)
 						break;
 					std::cout << "Input non-zero value" << std::endl;
@@ -139,6 +147,10 @@ namespace MatrixR {
 				if(inpNum) {
 					std::cout<<"Correct. Row"<<curRow<<" Col:" << position <<" El:" << inpNum << std::endl;
 					crStatus = createPoint(origin, curPtr, lastone, position, curRow, cols, inpNum);
+					if (crStatus < 0) {
+						eraseM(origin);
+						return -2;
+					}
 				}
 				
 			}
@@ -200,7 +212,7 @@ namespace MatrixR {
 							} catch (std::bad_alloc &ba) {
 								std::cout << "Memory allocation error!" << ba.what() << std::endl;
 								eraseM(origin);
-								return 1; //memory error
+								return -1; //memory error
 							}
 							curPtr = origin;
 						}
@@ -210,7 +222,7 @@ namespace MatrixR {
 							} catch (std::bad_alloc &ba) {
 								std::cout << "Memory allocation error!" << ba.what() << std::endl;
 								eraseM(origin);
-								return 1; //memory error
+								return -1; //memory error
 							}
 
 							curPtr = curPtr->nextRow;

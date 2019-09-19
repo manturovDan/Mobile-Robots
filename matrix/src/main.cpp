@@ -22,7 +22,7 @@ int main() {
 	}
 	
 	if (getm < 0) {
-		std::cout<<"Input error!"<<std::endl;
+		std::cout<<"Error!"<<std::endl;
 		return 1;
 	}
 
