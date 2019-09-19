@@ -192,6 +192,7 @@ namespace MatrixR {
 						eraseM(origin);
 						return -2;
 					}
+					nzcount += crStatus;
 				}
 
 			}
