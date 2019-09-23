@@ -177,6 +177,33 @@ aspiral.cpp.s:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/aspiral.cpp.s
 .PHONY : aspiral.cpp.s
 
+input.o: input.cpp.o
+
+.PHONY : input.o
+
+# target to build an object file
+input.cpp.o:
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/input.cpp.o
+.PHONY : input.cpp.o
+
+input.i: input.cpp.i
+
+.PHONY : input.i
+
+# target to preprocess a source file
+input.cpp.i:
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/input.cpp.i
+.PHONY : input.cpp.i
+
+input.s: input.cpp.s
+
+.PHONY : input.s
+
+# target to generate assembly for a file
+input.cpp.s:
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/input.cpp.s
+.PHONY : input.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -245,6 +272,9 @@ help:
 	@echo "... aspiral.o"
 	@echo "... aspiral.i"
 	@echo "... aspiral.s"
+	@echo "... input.o"
+	@echo "... input.i"
+	@echo "... input.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

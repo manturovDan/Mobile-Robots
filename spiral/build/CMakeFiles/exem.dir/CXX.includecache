@@ -16,9 +16,19 @@ aspiral.h
 math.h
 -
 
+/home/danila/source/labs3seb/spiral/src/input.cpp
+input.h
+/home/danila/source/labs3seb/spiral/src/input.h
+
+/home/danila/source/labs3seb/spiral/src/input.h
+iostream
+-
+
 /home/danila/source/labs3seb/spiral/src/main.cpp
 iostream
 -
 aspiral.h
 /home/danila/source/labs3seb/spiral/src/aspiral.h
+input.h
+/home/danila/source/labs3seb/spiral/src/input.h
 

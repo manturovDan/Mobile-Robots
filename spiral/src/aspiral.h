@@ -9,8 +9,8 @@ namespace aspiral {
 	public:
 		Spiral(double st = 1);
 		double getStep() const { return this->step; }
-		Spiral& setStep(double st);
-		double centerDist(double angle) const;
+		Spiral& setStep(double st) { this->step = st; return *this; }
+		//double centerDist(double angle) const { return (this->step)*angle/(2*M_PI) };
 	};
 }
 

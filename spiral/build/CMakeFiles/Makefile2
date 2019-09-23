@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/danila/source/labs3seb/spiral/build
 CMakeFiles/exem.dir/all:
 	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/depend
 	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=1,2,3 "Built target exem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=1,2,3,4 "Built target exem"
 .PHONY : CMakeFiles/exem.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/exem.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/exem.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/spiral/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/spiral/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/exem.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/spiral/build/CMakeFiles 0
 .PHONY : CMakeFiles/exem.dir/rule
@@ -103,7 +103,7 @@ clean: CMakeFiles/exem.dir/clean
 CMakeFiles/u_test.dir/all:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/depend
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=4,5,6 "Built target u_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=5,6,7 "Built target u_test"
 .PHONY : CMakeFiles/u_test.dir/all
 
 # Include target in all.
