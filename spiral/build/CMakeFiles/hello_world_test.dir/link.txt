@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++17  -rdynamic CMakeFiles/hello_world_test.dir/test.cpp.o  -o hello_world_test -Wl,-Bstatic -lgtest -Wl,-Bdynamic -lpthread 

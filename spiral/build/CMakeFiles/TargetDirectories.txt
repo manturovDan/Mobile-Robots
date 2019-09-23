@@ -1,0 +1,5 @@
+/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/rebuild_cache.dir
+/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/edit_cache.dir
+/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/test.dir
+/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/exem.dir
+/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/hello_world_test.dir

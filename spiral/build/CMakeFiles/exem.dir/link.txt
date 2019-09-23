@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++17  -rdynamic CMakeFiles/exem.dir/main.cpp.o  -o exem 
