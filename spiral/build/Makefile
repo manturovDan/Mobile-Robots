@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/danila/source/labs3seb/helloWorldTest/src
+CMAKE_SOURCE_DIR = /home/danila/source/labs3seb/spiral/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/danila/source/labs3seb/helloWorldTest/build
+CMAKE_BINARY_DIR = /home/danila/source/labs3seb/spiral/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -91,9 +91,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/spiral/build/CMakeFiles /home/danila/source/labs3seb/spiral/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/labs3seb/spiral/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -135,17 +135,47 @@ exem/fast:
 .PHONY : exem/fast
 
 #=============================================================================
-# Target rules for targets named hello_world_test
+# Target rules for targets named u_test
 
 # Build rule for target.
-hello_world_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 hello_world_test
-.PHONY : hello_world_test
+u_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 u_test
+.PHONY : u_test
 
 # fast build rule for target.
-hello_world_test/fast:
-	$(MAKE) -f CMakeFiles/hello_world_test.dir/build.make CMakeFiles/hello_world_test.dir/build
-.PHONY : hello_world_test/fast
+u_test/fast:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
+.PHONY : u_test/fast
+
+aspiral.o: aspiral.cpp.o
+
+.PHONY : aspiral.o
+
+# target to build an object file
+aspiral.cpp.o:
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/aspiral.cpp.o
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/aspiral.cpp.o
+.PHONY : aspiral.cpp.o
+
+aspiral.i: aspiral.cpp.i
+
+.PHONY : aspiral.i
+
+# target to preprocess a source file
+aspiral.cpp.i:
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/aspiral.cpp.i
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/aspiral.cpp.i
+.PHONY : aspiral.cpp.i
+
+aspiral.s: aspiral.cpp.s
+
+.PHONY : aspiral.s
+
+# target to generate assembly for a file
+aspiral.cpp.s:
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/aspiral.cpp.s
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/aspiral.cpp.s
+.PHONY : aspiral.cpp.s
 
 main.o: main.cpp.o
 
@@ -180,7 +210,7 @@ test.o: test.cpp.o
 
 # target to build an object file
 test.cpp.o:
-	$(MAKE) -f CMakeFiles/hello_world_test.dir/build.make CMakeFiles/hello_world_test.dir/test.cpp.o
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/test.cpp.o
 .PHONY : test.cpp.o
 
 test.i: test.cpp.i
@@ -189,7 +219,7 @@ test.i: test.cpp.i
 
 # target to preprocess a source file
 test.cpp.i:
-	$(MAKE) -f CMakeFiles/hello_world_test.dir/build.make CMakeFiles/hello_world_test.dir/test.cpp.i
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/test.cpp.i
 .PHONY : test.cpp.i
 
 test.s: test.cpp.s
@@ -198,7 +228,7 @@ test.s: test.cpp.s
 
 # target to generate assembly for a file
 test.cpp.s:
-	$(MAKE) -f CMakeFiles/hello_world_test.dir/build.make CMakeFiles/hello_world_test.dir/test.cpp.s
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
 # Help Target
@@ -211,7 +241,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... exem"
-	@echo "... hello_world_test"
+	@echo "... u_test"
+	@echo "... aspiral.o"
+	@echo "... aspiral.i"
+	@echo "... aspiral.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,5 +1,6 @@
-#include "hwl.h"
 #include <gtest/gtest.h>
+
+#include "aspiral.h"
 
 TEST (helloTest, Test) {
 	ASSERT_EQ(123, 123);

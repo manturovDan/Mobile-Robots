@@ -1,6 +1,6 @@
-#include "hwl.cpp"
+#include "aspiral.h"
 
 int main() {
-	hello_world();
+	aspiral::Spiral spir();
 	return 0;
 }

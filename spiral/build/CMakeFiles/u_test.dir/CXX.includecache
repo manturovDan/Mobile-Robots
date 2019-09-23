@@ -16,7 +16,9 @@ aspiral.h
 math.h
 -
 
-/home/danila/source/labs3seb/spiral/src/main.cpp
+/home/danila/source/labs3seb/spiral/src/test.cpp
+gtest/gtest.h
+-
 aspiral.h
 /home/danila/source/labs3seb/spiral/src/aspiral.h
 

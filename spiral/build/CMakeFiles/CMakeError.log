@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp
+Change Dir: /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_bf8a7/fast"
-/usr/bin/make -f CMakeFiles/cmTC_bf8a7.dir/build.make CMakeFiles/cmTC_bf8a7.dir/build
-make[1]: вход в каталог «/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_bf8a7.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_bf8a7.dir/CheckSymbolExists.c.o   -c /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_bf8a7
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bf8a7.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_bf8a7.dir/CheckSymbolExists.c.o  -o cmTC_bf8a7 
-CMakeFiles/cmTC_bf8a7.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command:"/usr/bin/make" "cmTC_331b2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_331b2.dir/build.make CMakeFiles/cmTC_331b2.dir/build
+make[1]: вход в каталог «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_331b2.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_331b2.dir/CheckSymbolExists.c.o   -c /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_331b2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_331b2.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_331b2.dir/CheckSymbolExists.c.o  -o cmTC_331b2 
+CMakeFiles/cmTC_331b2.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_bf8a7.dir/build.make:97: recipe for target 'cmTC_bf8a7' failed
-make[1]: *** [cmTC_bf8a7] Error 1
-make[1]: выход из каталога «/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp»
-Makefile:126: recipe for target 'cmTC_bf8a7/fast' failed
-make: *** [cmTC_bf8a7/fast] Error 2
+CMakeFiles/cmTC_331b2.dir/build.make:97: recipe for target 'cmTC_331b2' failed
+make[1]: *** [cmTC_331b2] Error 1
+make[1]: выход из каталога «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
+Makefile:126: recipe for target 'cmTC_331b2/fast' failed
+make: *** [cmTC_331b2/fast] Error 2
 
-File /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp
+Change Dir: /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_e8b40/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e8b40.dir/build.make CMakeFiles/cmTC_e8b40.dir/build
-make[1]: вход в каталог «/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_e8b40.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e8b40.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_e8b40
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e8b40.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_e8b40.dir/CheckFunctionExists.c.o  -o cmTC_e8b40 -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTC_2217e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2217e.dir/build.make CMakeFiles/cmTC_2217e.dir/build
+make[1]: вход в каталог «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_2217e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_2217e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2217e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2217e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_2217e.dir/CheckFunctionExists.c.o  -o cmTC_2217e -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_e8b40.dir/build.make:97: recipe for target 'cmTC_e8b40' failed
-make[1]: *** [cmTC_e8b40] Error 1
-make[1]: выход из каталога «/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/CMakeTmp»
-Makefile:126: recipe for target 'cmTC_e8b40/fast' failed
-make: *** [cmTC_e8b40/fast] Error 2
+CMakeFiles/cmTC_2217e.dir/build.make:97: recipe for target 'cmTC_2217e' failed
+make[1]: *** [cmTC_2217e] Error 1
+make[1]: выход из каталога «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
+Makefile:126: recipe for target 'cmTC_2217e/fast' failed
+make: *** [cmTC_2217e/fast] Error 2
 
 

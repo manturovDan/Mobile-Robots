@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++17  -rdynamic CMakeFiles/u_test.dir/test.cpp.o CMakeFiles/u_test.dir/aspiral.cpp.o  -o u_test -Wl,-Bstatic -lgtest -Wl,-Bdynamic -lpthread 

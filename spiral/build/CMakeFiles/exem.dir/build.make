@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/danila/source/labs3seb/helloWorldTest/src
+CMAKE_SOURCE_DIR = /home/danila/source/labs3seb/spiral/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/danila/source/labs3seb/helloWorldTest/build
+CMAKE_BINARY_DIR = /home/danila/source/labs3seb/spiral/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/exem.dir/depend.make
@@ -58,17 +58,17 @@ include CMakeFiles/exem.dir/progress.make
 include CMakeFiles/exem.dir/flags.make
 
 CMakeFiles/exem.dir/main.cpp.o: CMakeFiles/exem.dir/flags.make
-CMakeFiles/exem.dir/main.cpp.o: /home/danila/source/labs3seb/helloWorldTest/src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/exem.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exem.dir/main.cpp.o -c /home/danila/source/labs3seb/helloWorldTest/src/main.cpp
+CMakeFiles/exem.dir/main.cpp.o: /home/danila/source/labs3seb/spiral/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/exem.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exem.dir/main.cpp.o -c /home/danila/source/labs3seb/spiral/src/main.cpp
 
 CMakeFiles/exem.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/exem.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/labs3seb/helloWorldTest/src/main.cpp > CMakeFiles/exem.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/labs3seb/spiral/src/main.cpp > CMakeFiles/exem.dir/main.cpp.i
 
 CMakeFiles/exem.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/exem.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/labs3seb/helloWorldTest/src/main.cpp -o CMakeFiles/exem.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/labs3seb/spiral/src/main.cpp -o CMakeFiles/exem.dir/main.cpp.s
 
 CMakeFiles/exem.dir/main.cpp.o.requires:
 
@@ -81,17 +81,43 @@ CMakeFiles/exem.dir/main.cpp.o.provides: CMakeFiles/exem.dir/main.cpp.o.requires
 CMakeFiles/exem.dir/main.cpp.o.provides.build: CMakeFiles/exem.dir/main.cpp.o
 
 
+CMakeFiles/exem.dir/aspiral.cpp.o: CMakeFiles/exem.dir/flags.make
+CMakeFiles/exem.dir/aspiral.cpp.o: /home/danila/source/labs3seb/spiral/src/aspiral.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/exem.dir/aspiral.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/exem.dir/aspiral.cpp.o -c /home/danila/source/labs3seb/spiral/src/aspiral.cpp
+
+CMakeFiles/exem.dir/aspiral.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/exem.dir/aspiral.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/labs3seb/spiral/src/aspiral.cpp > CMakeFiles/exem.dir/aspiral.cpp.i
+
+CMakeFiles/exem.dir/aspiral.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/exem.dir/aspiral.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/labs3seb/spiral/src/aspiral.cpp -o CMakeFiles/exem.dir/aspiral.cpp.s
+
+CMakeFiles/exem.dir/aspiral.cpp.o.requires:
+
+.PHONY : CMakeFiles/exem.dir/aspiral.cpp.o.requires
+
+CMakeFiles/exem.dir/aspiral.cpp.o.provides: CMakeFiles/exem.dir/aspiral.cpp.o.requires
+	$(MAKE) -f CMakeFiles/exem.dir/build.make CMakeFiles/exem.dir/aspiral.cpp.o.provides.build
+.PHONY : CMakeFiles/exem.dir/aspiral.cpp.o.provides
+
+CMakeFiles/exem.dir/aspiral.cpp.o.provides.build: CMakeFiles/exem.dir/aspiral.cpp.o
+
+
 # Object files for target exem
 exem_OBJECTS = \
-"CMakeFiles/exem.dir/main.cpp.o"
+"CMakeFiles/exem.dir/main.cpp.o" \
+"CMakeFiles/exem.dir/aspiral.cpp.o"
 
 # External object files for target exem
 exem_EXTERNAL_OBJECTS =
 
 exem: CMakeFiles/exem.dir/main.cpp.o
+exem: CMakeFiles/exem.dir/aspiral.cpp.o
 exem: CMakeFiles/exem.dir/build.make
 exem: CMakeFiles/exem.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable exem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/labs3seb/spiral/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable exem"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/exem.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +126,7 @@ CMakeFiles/exem.dir/build: exem
 .PHONY : CMakeFiles/exem.dir/build
 
 CMakeFiles/exem.dir/requires: CMakeFiles/exem.dir/main.cpp.o.requires
+CMakeFiles/exem.dir/requires: CMakeFiles/exem.dir/aspiral.cpp.o.requires
 
 .PHONY : CMakeFiles/exem.dir/requires
 
@@ -108,6 +135,6 @@ CMakeFiles/exem.dir/clean:
 .PHONY : CMakeFiles/exem.dir/clean
 
 CMakeFiles/exem.dir/depend:
-	cd /home/danila/source/labs3seb/helloWorldTest/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/danila/source/labs3seb/helloWorldTest/src /home/danila/source/labs3seb/helloWorldTest/src /home/danila/source/labs3seb/helloWorldTest/build /home/danila/source/labs3seb/helloWorldTest/build /home/danila/source/labs3seb/helloWorldTest/build/CMakeFiles/exem.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/danila/source/labs3seb/spiral/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/danila/source/labs3seb/spiral/src /home/danila/source/labs3seb/spiral/src /home/danila/source/labs3seb/spiral/build /home/danila/source/labs3seb/spiral/build /home/danila/source/labs3seb/spiral/build/CMakeFiles/exem.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/exem.dir/depend
 
