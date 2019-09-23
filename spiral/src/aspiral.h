@@ -8,6 +8,7 @@ namespace aspiral {
 		double step;
 	public:
 		Spiral(double st = 1);
+		double getStep() const { return this->step; }
 		Spiral& setStep(double st);
 		double centerDist(double angle) const;
 	};

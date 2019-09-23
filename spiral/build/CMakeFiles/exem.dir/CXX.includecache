@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 /home/danila/source/labs3seb/spiral/src/aspiral.cpp
-iostream
+stdexcept
 -
 aspiral.h
 /home/danila/source/labs3seb/spiral/src/aspiral.h
@@ -17,6 +17,8 @@ math.h
 -
 
 /home/danila/source/labs3seb/spiral/src/main.cpp
+iostream
+-
 aspiral.h
 /home/danila/source/labs3seb/spiral/src/aspiral.h
 
