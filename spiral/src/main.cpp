@@ -41,12 +41,23 @@ int chooseNum() {
 	}
 }
 
+void distToCenter(aspiral::Spiral& spir) {
+	double fi;
+	std::cout << "Input the angle to calculate the distance to origin:" << std::endl;
+	inpNum(fi);
+	std::cout << "Result: " << spir.centerDist(fi) << std::endl;
+}
+
 int main() {
 	aspiral::Spiral spir;
 	int interface;
+	std::cout << "Default spiral (step = 1) has created" << std::endl;
 	while (1) {
-		std::cout << "Input \n1 - to set Spiral\n2 - to exit" << std::endl;
+		std::cout << "Choose the option: \n1 - to set Spiral\n2 - to continue with current spiral\n0 - to exit" << std::endl;
 		inpNum(interface);
+
+		if (interface == 0)
+			break;
 
 		if (interface == 1)
 		{
@@ -55,33 +66,34 @@ int main() {
 			 where ρ is the distance, a is the step, φ is the angle\nInput step:" << std::endl;
 			inpNum(step, 1);
 			spir.setStep(step);
-			int choise = chooseNum();
-			switch(choise) {
-				case 1:
-					//dist by fi
-					break;
-				case 2:
-					//area <> 2 secs
-					break;
-				case 3:
-					//n area
-					break;
-				case 4:
-					//circle area
-					break;
-				case 5:
-					//length
-					break;
-				case 6:
-					//radius curve
-					break;
-			}
-
-			std::cout << spir.getStep() << std::endl;
 		}
-		else if (interface == 2)
-			break;
+
+		int choise = chooseNum();
+		switch(choise) {
+			case 1:
+				//dist by fi
+				distToCenter(spir);
+				break;
+			case 2:
+				//area <> 2 ang
+				break;
+			case 3:
+				//n area
+				break;
+			case 4:
+				//circle area
+				break;
+			case 5:
+				//length
+				break;
+			case 6:
+				//radius curve
+				break;
+		}
+
+
 	}
 
+	std::cout << "The end!" << std::endl;
 	return 0;
 }
