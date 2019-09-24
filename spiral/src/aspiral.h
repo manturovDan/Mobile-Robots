@@ -13,6 +13,10 @@ namespace aspiral {
 		Spiral& setStep(double st) { this->step = st; return *this; }
 		double centerDist(double angle) const { return abs((this->step)*angle/(2*M_PI)); }
 		double areaOfSector(double, double) const;
+		double areaBefCoil(int) const;
+		double areaOfCircle(int) const;
+		double curveLen(double) const;
+		double curveRad(double) const;
 	};
 }
 

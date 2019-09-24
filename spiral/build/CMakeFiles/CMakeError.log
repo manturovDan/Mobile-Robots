@@ -1,22 +1,22 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a5dcd/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a5dcd.dir/build.make CMakeFiles/cmTC_a5dcd.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_f2e10/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f2e10.dir/build.make CMakeFiles/cmTC_f2e10.dir/build
 make[1]: вход в каталог «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_a5dcd.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_a5dcd.dir/CheckSymbolExists.c.o   -c /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_a5dcd
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5dcd.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_a5dcd.dir/CheckSymbolExists.c.o  -o cmTC_a5dcd 
-CMakeFiles/cmTC_a5dcd.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTC_f2e10.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_f2e10.dir/CheckSymbolExists.c.o   -c /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_f2e10
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f2e10.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_f2e10.dir/CheckSymbolExists.c.o  -o cmTC_f2e10 
+CMakeFiles/cmTC_f2e10.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_a5dcd.dir/build.make:97: recipe for target 'cmTC_a5dcd' failed
-make[1]: *** [cmTC_a5dcd] Error 1
+CMakeFiles/cmTC_f2e10.dir/build.make:97: recipe for target 'cmTC_f2e10' failed
+make[1]: *** [cmTC_f2e10] Error 1
 make[1]: выход из каталога «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
-Makefile:126: recipe for target 'cmTC_a5dcd/fast' failed
-make: *** [cmTC_a5dcd/fast] Error 2
+Makefile:126: recipe for target 'cmTC_f2e10/fast' failed
+make: *** [cmTC_f2e10/fast] Error 2
 
 File /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,20 +36,20 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_ecdaa/fast"
-/usr/bin/make -f CMakeFiles/cmTC_ecdaa.dir/build.make CMakeFiles/cmTC_ecdaa.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_fa0dc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_fa0dc.dir/build.make CMakeFiles/cmTC_fa0dc.dir/build
 make[1]: вход в каталог «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_ecdaa.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_ecdaa.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_ecdaa
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ecdaa.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_ecdaa.dir/CheckFunctionExists.c.o  -o cmTC_ecdaa -lpthreads 
+Building C object CMakeFiles/cmTC_fa0dc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_fa0dc.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fa0dc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fa0dc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_fa0dc.dir/CheckFunctionExists.c.o  -o cmTC_fa0dc -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_ecdaa.dir/build.make:97: recipe for target 'cmTC_ecdaa' failed
-make[1]: *** [cmTC_ecdaa] Error 1
+CMakeFiles/cmTC_fa0dc.dir/build.make:97: recipe for target 'cmTC_fa0dc' failed
+make[1]: *** [cmTC_fa0dc] Error 1
 make[1]: выход из каталога «/home/danila/source/labs3seb/spiral/build/CMakeFiles/CMakeTmp»
-Makefile:126: recipe for target 'cmTC_ecdaa/fast' failed
-make: *** [cmTC_ecdaa/fast] Error 2
+Makefile:126: recipe for target 'cmTC_fa0dc/fast' failed
+make: *** [cmTC_fa0dc/fast] Error 2
 
 

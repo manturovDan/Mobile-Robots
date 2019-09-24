@@ -26,7 +26,7 @@ int chooseNum() {
 	while (1) {
 		std::cout<<"Choose the number:\n\
 	1. Get distance to origin by angle\n\
-	2. Get area between two sectors (angles <= 2*π)\n\
+	2. Get area of secotor between two angles <= 2*π\n\
 	3. Get area of figure limited by n-th coil\n\
 	4. Get area of n-th circle\n\
 	5. Get length of arc to before given angle\n\
@@ -60,7 +60,7 @@ void secArea(aspiral::Spiral& spir) {
 			std::cout << "Input angles not bigger tnan 2*π" << std::endl;
 			continue;
 		}
-		else if (f1 < 0 && f2 < 0 || f1 > 0 & f2 > 0) {
+		else if (f1 <= 0 && f2 <= 0 || f1 >= 0 & f2 >= 0) {
 			std::cout << "Result: " << spir.areaOfSector(f1, f2) << std::endl;
 			return;
 		}
@@ -68,6 +68,35 @@ void secArea(aspiral::Spiral& spir) {
 			std::cout << "Input angles with the same sign" << std::endl;
 		}
 	}
+}
+
+
+void coilArea(aspiral::Spiral& spir) {
+	int n;
+	std::cout << "Input number of limiting coil:" << std::endl;
+	inpNum(n, 1);
+	std::cout << "Result: " << spir.areaBefCoil(n) << std::endl;
+}
+
+void circleArea(aspiral::Spiral& spir) {
+	int n;
+	std::cout << "Input number of circle:" << std::endl;
+	inpNum(n, 1);
+	std::cout <<"Result: " << spir.areaOfCircle(n) << std::endl;
+}
+
+void lenCurve(aspiral::Spiral& spir) {
+	double fi;
+	std::cout << "Input angle:" << std::endl;
+	inpNum(fi);
+	std::cout << "Result: " << spir.curveLen(fi) << std::endl;
+}
+
+void curRad(aspiral::Spiral& spir) {
+	double fi;
+	std::cout << "Input angle:" << std::endl;
+	inpNum(fi);
+	std::cout << "Result: " << spir.curveRad(fi) << std::endl;	
 }
 
 int main() {
@@ -102,15 +131,19 @@ int main() {
 				break;
 			case 3:
 				//n area
+				coilArea(spir);
 				break;
 			case 4:
 				//circle area
+				circleArea(spir);
 				break;
 			case 5:
 				//length
+				lenCurve(spir);
 				break;
 			case 6:
 				//radius curve
+				curRad(spir);
 				break;
 		}
 

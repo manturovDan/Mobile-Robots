@@ -4,9 +4,6 @@
 CMakeFiles/exem.dir/aspiral.cpp.o: /home/danila/source/labs3seb/spiral/src/aspiral.cpp
 CMakeFiles/exem.dir/aspiral.cpp.o: /home/danila/source/labs3seb/spiral/src/aspiral.h
 
-CMakeFiles/exem.dir/input.cpp.o: /home/danila/source/labs3seb/spiral/src/input.cpp
-CMakeFiles/exem.dir/input.cpp.o: /home/danila/source/labs3seb/spiral/src/input.h
-
 CMakeFiles/exem.dir/main.cpp.o: /home/danila/source/labs3seb/spiral/src/aspiral.h
 CMakeFiles/exem.dir/main.cpp.o: /home/danila/source/labs3seb/spiral/src/main.cpp
 
