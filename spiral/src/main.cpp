@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "aspiral.h"
-//#include "input.h"
 
 template <class T>
 int inpNum(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {

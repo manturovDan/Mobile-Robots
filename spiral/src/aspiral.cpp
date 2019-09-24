@@ -1,5 +1,3 @@
-#include <stdexcept>
-
 #include "aspiral.h"
 
 namespace aspiral {
@@ -7,6 +5,13 @@ namespace aspiral {
 		if(st < 0)
 			throw std::invalid_argument("Invalid step");
 		this->step = st;
+	}
+
+	Spiral& Spiral::setStep(double st) {
+		if(st < 0)
+			throw std::invalid_argument("Invalid step");
+		this->step = st;
+		return *this;
 	}
 
 	double Spiral::areaOfSector(double fi1, double fi2) const {
