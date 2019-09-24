@@ -75,6 +75,17 @@ TEST (spiralParams, lengthCurve) {
 	ASSERT_NEAR(139.524, spir.curveLen(-9.4 * M_PI), 0.1); //integral (1/pi)sqrt(1 + (x)^2)dx from 0 to 9.4*pi
 }
 
+TEST (spiralParams, curvRadius) {
+	aspiral::Spiral spir(0);
+	ASSERT_EQ(0, spir.curveRad(100));
+	ASSERT_EQ(0, spir.curveRad(-100));
+	spir.setStep(2);
+	ASSERT_NEAR(2/(4 * M_PI), spir.curveRad(0), 0.001);
+	ASSERT_NEAR(2/(4 * M_PI), spir.curveRad(0), 0.001);
+	ASSERT_NEAR(pow(pow(9.4 * M_PI, 2) + 1, 1.5) / (M_PI * (pow(9.4 * M_PI, 2) + 2)), spir.curveRad(9.4 * M_PI), 0.001);
+	ASSERT_NEAR(pow(pow(9.4 * M_PI, 2) + 1, 1.5) / (M_PI * (pow(9.4 * M_PI, 2) + 2)), spir.curveRad(-9.4 * M_PI), 0.001);
+}
+
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
