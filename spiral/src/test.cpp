@@ -35,6 +35,30 @@ TEST (spiralParams, distToCenter) {
 	ASSERT_NEAR(0, spir.centerDist(2.81 + 100*M_PI), 0.001);
 }
 
+TEST (spiralParams, secArea) {
+	aspiral::Spiral spir(0);
+	ASSERT_EQ(0, spir.areaOfSector(M_PI, 2*M_PI));
+	spir.setStep(3.14);
+	ASSERT_EQ(0, spir.areaOfSector(2*M_PI, 2*M_PI));
+
+	double angle = (2 - 0.15) * M_PI;
+	double s1 = (angle / 2) * pow(spir.centerDist(2 * M_PI), 2);
+	double s2 = (angle / 2) * pow(spir.centerDist(0.15 * M_PI), 2);
+	double s3 = (angle / 2) * sqrt(pow(spir.centerDist(2 * M_PI), 2) * pow(spir.centerDist(0.15 * M_PI), 2));
+
+	ASSERT_NEAR((s1 + s2 + s3) / 3, spir.areaOfSector(0.15*M_PI, 2*M_PI), 0.0001); //second formulae
+	ASSERT_NEAR((s1 + s2 + s3) / 3, spir.areaOfSector(-0.15*M_PI, -2*M_PI), 0.0001);
+	ASSERT_NEAR((s1 + s2 + s3) / 3, spir.areaOfSector(2*M_PI, 0.15*M_PI), 0.0001);
+}
+
+TEST (spiralParams, areaBefNCoil) {
+	aspiral::Spiral spir(0);
+	ASSERT_EQ(0, spir.areaBefCoil(100));
+	spir.setStep(3.14);
+	ASSERT_NEAR(spir.areaOfSector(0, 2*M_PI), spir.areaBefCoil(0), 0.00001);
+	ASSERT_NEAR((125 - 64)*(M_PI * pow(spir.centerDist(5*2*M_PI), 2))/(3*25), spir.areaBefCoil(5), 0.00001);//second formulae
+}
+
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
