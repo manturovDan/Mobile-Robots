@@ -48,6 +48,28 @@ void distToCenter(aspiral::Spiral& spir) {
 	std::cout << "Result: " << spir.centerDist(fi) << std::endl;
 }
 
+void secArea(aspiral::Spiral& spir) {
+	double f1, f2;
+	while (1) {
+		std::cout << "Input two angles with one sign (not bigger than 2*π)\nInput the first:" << std::endl;
+		inpNum(f1);
+		std::cout << "Input the second:" << std::endl;
+		inpNum(f2);
+
+		if (abs(f1) > 2 * M_PI || abs(f2) > 2 * M_PI) {
+			std::cout << "Input angles not bigger tnan 2*π" << std::endl;
+			continue;
+		}
+		else if (f1 < 0 && f2 < 0 || f1 > 0 & f2 > 0) {
+			std::cout << "Result: " << spir.areaOfSector(f1, f2) << std::endl;
+			return;
+		}
+		else {
+			std::cout << "Input angles with the same sign" << std::endl;
+		}
+	}
+}
+
 int main() {
 	aspiral::Spiral spir;
 	int interface;
@@ -76,6 +98,7 @@ int main() {
 				break;
 			case 2:
 				//area <> 2 ang
+				secArea(spir);
 				break;
 			case 3:
 				//n area
