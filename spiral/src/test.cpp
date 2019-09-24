@@ -59,6 +59,22 @@ TEST (spiralParams, areaBefNCoil) {
 	ASSERT_NEAR((125 - 64)*(M_PI * pow(spir.centerDist(5*2*M_PI), 2))/(3*25), spir.areaBefCoil(5), 0.00001);//second formulae
 }
 
+TEST (spiralParams, areaCircle) {
+	aspiral::Spiral spir(0);
+	ASSERT_EQ(0, spir.areaOfCircle(100));
+	spir.setStep(29.171);
+	ASSERT_NEAR(spir.areaBefCoil(101) - spir.areaBefCoil(100), spir.areaOfCircle(100), 0.001);
+}
+
+TEST (spiralParams, lengthCurve) {
+	aspiral::Spiral spir(0);
+	ASSERT_EQ(0, spir.curveLen(100));
+	ASSERT_EQ(0, spir.curveLen(-100));
+	spir.setStep(2);
+	ASSERT_NEAR(139.524, spir.curveLen(9.4 * M_PI), 0.1); //integral (1/pi)sqrt(1 + (x)^2)dx from 0 to 9.4*pi
+	ASSERT_NEAR(139.524, spir.curveLen(-9.4 * M_PI), 0.1); //integral (1/pi)sqrt(1 + (x)^2)dx from 0 to 9.4*pi
+}
+
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

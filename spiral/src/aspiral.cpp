@@ -32,7 +32,7 @@ namespace aspiral {
 	}
 
 	double Spiral::curveLen(double fi) const {
-		return (this->step) * (fi * sqrt(1 + fi*fi) + log(fi + sqrt(1 + fi*fi))) / (4 * M_PI);
+		return abs((this->step) * (fi * sqrt(1 + fi*fi) + log(fi + sqrt(1 + fi*fi))) / (4 * M_PI));
 	}
 
 	double Spiral::curveRad(double fi) const {
