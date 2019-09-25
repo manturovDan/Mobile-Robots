@@ -7,7 +7,7 @@ TEST (spiralClass, justConstrAndGetter) {
 	ASSERT_EQ(1, spir.getStep());
 	aspiral::Spiral spir2(5.1);
 	ASSERT_DOUBLE_EQ(5.1, spir2.getStep());
-	ASSERT_ANY_THROW(aspiral::Spiral spir3(-5.11110101));
+	ASSERT_THROW(aspiral::Spiral spir3(-5.11110101), std::invalid_argument);
 }
 
 TEST (spiralClass, setter) {
@@ -32,7 +32,7 @@ TEST (spiralParams, distToCenter) {
 	ASSERT_NEAR((8.9123 * (4 + 4*M_PI) / (2 * M_PI)), spir.centerDist(4 + 4*M_PI), 0.00001);
 
 	spir.setStep(0);
-	ASSERT_NEAR(0, spir.centerDist(2.81 + 100*M_PI), 0.001);
+	ASSERT_EQ(0, spir.centerDist(2.81 + 100*M_PI));
 }
 
 TEST (spiralParams, secArea) {

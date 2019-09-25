@@ -56,17 +56,19 @@ void secArea(aspiral::Spiral& spir) {
 		std::cout << "Input the second:" << std::endl;
 		inpNum(f2);
 
-		if (abs(f1) > 2 * M_PI || abs(f2) > 2 * M_PI) {
-			std::cout << "Input angles not bigger tnan 2*π" << std::endl;
+		double res;
+
+		try {
+			res = spir.areaOfSector(f1, f2);
+		}
+		catch (std::exception &ex) {
+			std::cout << ex.what() << std::endl;
 			continue;
 		}
-		else if (f1 <= 0 && f2 <= 0 || f1 >= 0 & f2 >= 0) {
-			std::cout << "Result: " << spir.areaOfSector(f1, f2) << std::endl;
-			return;
-		}
-		else {
-			std::cout << "Input angles with the same sign" << std::endl;
-		}
+
+
+		std::cout << "Result: " << res << std::endl;
+		return;
 	}
 }
 
@@ -75,6 +77,7 @@ void coilArea(aspiral::Spiral& spir) {
 	int n;
 	std::cout << "Input number of limiting coil:" << std::endl;
 	inpNum(n, 1);
+	double res;
 	std::cout << "Result: " << spir.areaBefCoil(n) << std::endl;
 }
 
