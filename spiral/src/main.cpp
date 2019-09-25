@@ -29,10 +29,11 @@ int chooseNum() {
 	3. Get area of figure limited by n-th coil\n\
 	4. Get area of n-th circle\n\
 	5. Get length of arc to before given angle\n\
-	6. Get radius of curvature depending on the angle" << std:: endl;	
+	6. Get radius of curvature depending on the angle\n\
+	0. Go Back" << std:: endl;	
 		
 		inpNum(choise);
-		if(choise >= 1 && choise <= 6)
+		if(choise >= 0 && choise <= 6)
 			return choise;
 
 		std::cout << "Incorrect value!" << std::endl;
