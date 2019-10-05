@@ -73,7 +73,7 @@ namespace timeD {
 		return 0;
 	}
 
-	int Diagram::cutDiag(int moment, bool left) {
+	int Diagram::cutDiag(int moment, bool left) const {
 		bool cut = 0;
 		int sig;
 
@@ -94,6 +94,15 @@ namespace timeD {
 		}
 
 		return sig;
+	}
+
+	Diagram &Diagram::replace(int position, const Diagram &add) {
+		int cutLeft = (*this).Diagram::cutDiag(position, 1);
+		int cutRight = add.Diagram::cutDiag(position);
+
+		this->interval[cutLeft].length = position - this->interval[cutLeft].start;
+
+		return *this;
 	}
 
 	std::ostream & Diagram::printDiagram(std::ostream& stream) const {
