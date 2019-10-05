@@ -28,14 +28,15 @@ namespace timeD {
 		std::ostream &printSignals(std::ostream&) const;
 
 		Diagram &copyDiagram(const Diagram&);
-		Diagram &uniDiagram(Diagram&);
-		Diagram &copyDiagram(int, Diagram&);
+		int uniDiagram(Diagram&);
+		int copyDiagram(int, Diagram&);
 		Diagram &rerlace(int, int, const Diagram&);
 		Diagram &shiftRight(int, Diagram&);
 		Diagram &shiftLeft(int, Diagram&);
 
 		Diagram &setLength(int, Diagram&);
 		int getLength() const { return length; }
+		int getSigNum() const { return sigNum; }
 	};
 }
 

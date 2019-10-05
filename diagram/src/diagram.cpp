@@ -12,10 +12,12 @@ namespace timeD {
 		if (len <= 0)
 			return *this;
 
+		bool sigVal;
+
 		if (symb == '0') {
-			interval[sigNum].val = 0;
+			sigVal = 0;
 		} else if (symb == '1') {
-			interval[sigNum].val = 1;
+			sigVal = 1;
 		} else if (symb == 'X') {
 			length = start + len;
 			return *this;
@@ -23,12 +25,34 @@ namespace timeD {
 			throw std::invalid_argument("Incorrect signal");
 		}
 
-		interval[sigNum].start = start;
-		interval[sigNum].length = len;
+		if (interval[sigNum-1].val == sigVal) {
+			interval[sigNum-1].length += len;
+		} else {
+			interval[sigNum].val = sigVal;
+			interval[sigNum].start = start;
+			interval[sigNum].length = len;
+			sigNum++;
+		}
+
 		length = start + len;
-		sigNum++;
 
 		return *this;
+	}
+
+	int Diagram::uniDiagram(Diagram &conc) {
+		if (length + conc.length > SZ)
+			return 1;
+
+		for (int i = 0; i < conc.length; ++i) {
+			interval[sigNum + i].val = conc.interval[i].val;
+			interval[sigNum + i].start = conc.interval[i].start + length;
+			interval[sigNum + i].length = conc.interval[i].length;
+		}
+
+		length += conc.length;
+		sigNum += conc.sigNum;
+
+		return 0;
 	}
 
 	std::ostream & Diagram::printDiagram(std::ostream& stream) const {
@@ -36,15 +60,16 @@ namespace timeD {
 		int signalEl = 0;
 		stream << "Time\t0\t1" << std::endl;
 		while (pos < length) {
-			if (pos < interval[signalEl].start) {
+			if (signalEl >= sigNum || pos < interval[signalEl].start) {
 				stream << pos << std::endl;
 				pos++;
 			} else {
 				for(; pos < interval[signalEl].start + interval[signalEl].length; pos++) {
 					if (interval[signalEl].val == 1)
 						stream << pos << "\t\t|" << std::endl;
-					else 
+					else {
 						stream << pos << "\t|\t" << std::endl;
+					}
 				}
 				signalEl++;
 			}
