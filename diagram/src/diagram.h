@@ -29,7 +29,7 @@ namespace timeD {
 
 		Diagram &copyDiagram(const Diagram&);
 		int uniDiagram(Diagram&);
-		int copyDiagram(int, Diagram&);
+		int copyDiagram(int);
 		Diagram &rerlace(int, int, const Diagram&);
 		Diagram &shiftRight(int, Diagram&);
 		Diagram &shiftLeft(int, Diagram&);

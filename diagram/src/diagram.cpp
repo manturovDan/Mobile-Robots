@@ -43,7 +43,7 @@ namespace timeD {
 		if (length + conc.length > SZ)
 			return 1;
 
-		for (int i = 0; i < conc.length; ++i) {
+		for (int i = 0; i < conc.sigNum; ++i) {
 			interval[sigNum + i].val = conc.interval[i].val;
 			interval[sigNum + i].start = conc.interval[i].start + length;
 			interval[sigNum + i].length = conc.interval[i].length;
@@ -51,6 +51,24 @@ namespace timeD {
 
 		length += conc.length;
 		sigNum += conc.sigNum;
+
+		return 0;
+	}
+
+	int Diagram::copyDiagram(int count) {
+		if (length * count > SZ)
+			return 1;
+
+		for (int sig = 0; sig < sigNum; sig++) {
+			for (int i = 1; i <= count; i++) {
+				interval[sigNum*i + sig].val = interval[sig].val;
+				interval[sigNum*i + sig].start = interval[sig].start + length*i;
+				interval[sigNum*i + sig].length = interval[sig].length;
+			}
+		}
+
+		length *= count;
+		sigNum *= sigNum;
 
 		return 0;
 	}
