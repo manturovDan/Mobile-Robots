@@ -33,5 +33,9 @@ int main() {
 	diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);
 
+	diag1.cutDiag(24);
+	diag1.printDiagram(std::cout);
+	diag1.printSignals(std::cout);
+
 
 }
