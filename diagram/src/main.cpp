@@ -29,13 +29,13 @@ int main() {
 	diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);
 
-	diag1.copyDiagram(3);
+	diag1.copyDiagram(2);
 	diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);
 
-	diag1.cutDiag(24);
-	diag1.printDiagram(std::cout);
-	diag1.printSignals(std::cout);
+
+	std::cout << diag1.cutDiag(63) << std::endl;
+	std::cout << diag1.cutDiag(63, 1) << std::endl;
 
 
 }

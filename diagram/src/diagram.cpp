@@ -73,11 +73,12 @@ namespace timeD {
 		return 0;
 	}
 
-	int Diagram::cutDiag(int moment) {
+	int Diagram::cutDiag(int moment, bool left) {
 		bool cut = 0;
 		int sig;
+
 		for (sig = 0; sig < sigNum; ++sig) {
-			if (interval[sig].start >= moment) {
+			if ((left == 0 && interval[sig].start >= moment) || (left == 1 && interval[sig].start > moment)) {
 				cut = 1;
 				--sig;
 				break;
@@ -86,16 +87,13 @@ namespace timeD {
 
 		if (!cut){
 			if (moment < length){
-				std::cout << "**** " << sigNum-1 << std::endl;
-				return 0;
+				return sigNum-1;
 			}
 			else
-				return 1;
+				return -2;
 		}
 
-		std::cout << "**** " << sig << std::endl;
-
-		return 0;
+		return sig;
 	}
 
 	std::ostream & Diagram::printDiagram(std::ostream& stream) const {
