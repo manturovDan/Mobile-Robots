@@ -60,7 +60,7 @@ namespace timeD {
 			return 1;
 
 		for (int sig = 0; sig < sigNum; sig++) {
-			for (int i = 1; i <= count; i++) {
+			for (int i = 1; i < count; i++) {
 				interval[sigNum*i + sig].val = interval[sig].val;
 				interval[sigNum*i + sig].start = interval[sig].start + length*i;
 				interval[sigNum*i + sig].length = interval[sig].length;
@@ -68,9 +68,15 @@ namespace timeD {
 		}
 
 		length *= count;
-		sigNum *= sigNum;
+		sigNum *= count;
 
 		return 0;
+	}
+
+	Diagram & Diagram::cutDiag(int moment) {
+		for (int t = 0; t < length; ++t) {
+
+		}
 	}
 
 	std::ostream & Diagram::printDiagram(std::ostream& stream) const {
