@@ -2,7 +2,7 @@
 #include "diagram.h"
 
 template <class T>
-int inpNum(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
+int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
 	bool more = false;
 	int gnStatus;
 	while (1) {
@@ -30,7 +30,7 @@ int chooseAct() {
 	5. Shift the diagram\n\
 	0. Exit" << std:: endl;	
 		
-		inpNum(choise);
+		inpSmt(choise);
 		if(choise >= 0 && choise <= 5)
 			return choise;
 
@@ -44,7 +44,7 @@ int chooseDiag(int diags, const char *welcome) {
 	
 	while (1) {
 		std::cout << "Choose one of " << diags << " diagrams or 0 to go back" << std::endl;
-		inpNum(choise);
+		inpSmt(choise);
 		if(choise >= 0 && choise <= diags)
 			return choise;
 
@@ -52,16 +52,49 @@ int chooseDiag(int diags, const char *welcome) {
 	}
 }
 
-int launchFunc(int act) {
-	switch (act) {
-		case 1:
+int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
+	if (act == 1) {
 			int diag = chooseDiag(2, "Choose diagram to adding segment");
-			if (!diag)
+
+			std::cout << "Input signal (0 or 1 or X)" << std::endl;
+			char symb;
+			inpSmt(symb);
+
+			if (symb != '0' && symb != '1' && symb != 'X') {
+				std::cout << "Incorrect signal" << std::endl;
 				return 1;
-			break;
-		default:
-			break;			
-	}
+			}
+
+			int maxStart;
+			int maxLen;
+			timeD::Diagram *work;
+
+			if (diag == 1)
+				work = &diag1;
+			else
+				work = &diag2;
+			
+			int start;
+			int len;
+
+			std::cout << "Input start time ot the segment" << std::endl;
+			inpSmt(start);
+			std::cout << "Input length of the segment" << std::endl;
+			inpSmt(len);
+
+			try {
+				work->addSignal(symb, start, len);
+			} catch (std::exception &ex) {
+				std::cout << ex.what() << std::endl;
+				return 1;
+			}
+
+			std::cout << "Successful adding" << std::endl;
+			return 0;
+		}
+		else {
+
+		}
 }
 
 int main() {
@@ -75,7 +108,7 @@ int main() {
 		choise = chooseAct();
 		if (!choise)
 			return 0;
-		launchFunc(choise);
+		launchFunc(diag1, diag2, choise);
 
 	}
 
