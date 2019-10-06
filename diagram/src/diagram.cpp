@@ -109,8 +109,16 @@ namespace timeD {
 					interval[sigNum].val = add.interval[sigAdd].val;
 					interval[sigNum].start = moment;
 					interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
-					sigNum++;
+				}
+				else {
+					interval[sigNum].val = interval[sigAdd].val;
+					interval[sigNum].start = interval[sigAdd].start;
+					interval[sigNum].length = interval[sigAdd].length;
+				}
+
+				if (add.sigNum - sigAdd > 1) {
 					length += interval[sigNum].length;
+					sigNum++;
 				}
 			}
 		}
