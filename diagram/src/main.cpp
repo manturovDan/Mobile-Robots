@@ -34,8 +34,9 @@ int main() {
 	diag1.printSignals(std::cout);
 
 
-	diag1.replace(27, diag2);
-	diag1.printDiagram(std::cout);
+	diag1.addSignal('X', 64, 1);
+	diag1.replace(25, diag2);
+	std::cout<<"cut"<<std::endl;
 	diag1.printSignals(std::cout);
 
 

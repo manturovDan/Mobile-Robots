@@ -73,35 +73,36 @@ namespace timeD {
 		return 0;
 	}
 
-	int Diagram::cutDiag(int moment, bool left) const {
-		bool cut = 0;
+	int Diagram::cutDiag(int moment) {
 		int sig;
 
 		for (sig = 0; sig < sigNum; ++sig) {
-			if ((left == 0 && interval[sig].start >= moment) || (left == 1 && interval[sig].start > moment)) {
-				cut = 1;
-				--sig;
-				break;
+			if(interval[sig].start + interval[sig].length > moment) { //start of next signal
+				if (interval[sig].start < moment) {
+					interval[sig].length = moment - interval[sig].start;
+					sigNum = sig + 1;
+					length = moment;
+				}
+				else { //cutting in X, nothing to change
+					sigNum = sig;
+					length = moment;
+				}
+				return 0;
 			}
 		}
 
-		if (!cut){
-			if (moment < length){
-				return sigNum-1;
-			}
-			else
-				return -2;
-		}
+		if (moment >= length)
+			return 1;
+		
 
-		return sig;
 	}
 
 	Diagram &Diagram::replace(int position, const Diagram &add) {
-		int cutLeft = (*this).Diagram::cutDiag(position, 1);
-		int cutRight = add.Diagram::cutDiag(position);
+		int cutLeft = (*this).Diagram::cutDiag(position);
+		if (cutLeft == 1)
+			throw std::invalid_argument("Incorrect position");
 
-		this->interval[cutLeft].length = position - this->interval[cutLeft].start;
-
+		std::cout << cutLeft << std::endl;
 		return *this;
 	}
 
