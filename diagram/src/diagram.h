@@ -28,7 +28,7 @@ namespace timeD {
 		std::ostream &printSignals(std::ostream&) const;
 
 		Diagram &copyDiagram(const Diagram&);
-		int uniDiagram(Diagram&);
+		int uniDiagram(const Diagram&);
 		int copyDiagram(int);
 		int cutDiag(int);
 		Diagram &replace(int, const Diagram&);

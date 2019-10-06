@@ -12,8 +12,6 @@ int main() {
 	diag1.addSignal('X', 16, 8);
 	std::cout << diag1.getLength() <<std::endl;
 	std::cout << diag1.getSigNum() <<std::endl;
-	diag1.printDiagram(std::cout);
-	diag1.printSignals(std::cout);
 
 	timeD::Diagram diag2;
 	diag2.addSignal('1', 0, 1);
@@ -21,22 +19,23 @@ int main() {
 	diag2.addSignal('X', 3, 2);
 	diag2.addSignal('0', 5, 3);
 
-	diag2.printDiagram(std::cout);
-	diag2.printSignals(std::cout);
+	//diag2.printDiagram(std::cout);
+	//diag2.printSignals(std::cout);
 
 	diag1.uniDiagram(diag2);
 
-	diag1.printDiagram(std::cout);
+	//diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);
 
-	diag2.addSignal('1', 10, 15);
+	diag2.addSignal('0', 10, 5);
+	diag2.addSignal('1', 15, 10);
 	diag2.addSignal('0', 25, 4);
-	diag2.addSignal('1', 29, 3);
+	diag2.addSignal('1', 29, 5);
 
-	diag2.printDiagram(std::cout);
+	//diag2.printDiagram(std::cout);
 	diag2.printSignals(std::cout);
 
-	diag1.replace(11, diag2);
+	diag1.replace(9, diag2);
 	std::cout<<"cut"<<std::endl;
 	//diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);

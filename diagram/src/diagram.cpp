@@ -25,7 +25,7 @@ namespace timeD {
 			throw std::invalid_argument("Incorrect signal");
 		}
 
-		if (interval[sigNum-1].val == sigVal) {
+		if (interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
 			interval[sigNum-1].length += len;
 		} else {
 			interval[sigNum].val = sigVal;
@@ -39,7 +39,7 @@ namespace timeD {
 		return *this;
 	}
 
-	int Diagram::uniDiagram(Diagram &conc) {
+	int Diagram::uniDiagram(const Diagram &conc) {
 		if (length + conc.length > SZ)
 			return 1;
 
@@ -111,15 +111,14 @@ namespace timeD {
 					interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
 				}
 				else {
-					interval[sigNum].val = interval[sigAdd].val;
-					interval[sigNum].start = interval[sigAdd].start;
-					interval[sigNum].length = interval[sigAdd].length;
+					interval[sigNum].val = add.interval[sigAdd].val;
+					interval[sigNum].start = add.interval[sigAdd].start;
+					interval[sigNum].length = add.interval[sigAdd].length;
 				}
 
-				if (add.sigNum - sigAdd > 1) {
-					length += interval[sigNum].length;
-					sigNum++;
-				}
+				length = interval[sigNum].start + interval[sigNum].length;
+				sigNum++;
+				
 			}
 		}
 
