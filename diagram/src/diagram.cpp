@@ -142,12 +142,40 @@ namespace timeD {
 						interval[sig].length = SZ - interval[sig].start;
 					}
 
-					break;
+					return 0;
 				}
 			}
+
+			length = SZ;
+			sigNum = 0;
+
+		}
+		else if (interval[0].start < 0) {
+			for (int sig = 0; sig < sigNum; ++sig) {
+				if (interval[sig].start + interval[sig].length > 0) {
+					std::cout << sig << std::endl;
+					if (interval[sig].start < 0) {
+						interval[sig].length += interval[sig].start;
+						interval[sig].start = 0;
+					}
+
+					for (int i = sig; i < sigNum; ++i) {
+						interval[i - sig].val = interval[i].val;
+						interval[i - sig].start = interval[i].start;
+						interval[i - sig].length = interval[i].length;
+					}
+
+					sigNum -= sig;
+
+					return 0;
+				}
+			}
+
+			length = 0;
+			sigNum = 0;
 		}
 
-
+		return 0;
 	}
 
 	std::ostream & Diagram::printDiagram(std::ostream& stream) const {

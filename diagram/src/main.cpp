@@ -37,11 +37,11 @@ int main() {
 	diag2.printSignals(std::cout);
 
 	diag1.replace(35, diag2);
-	std::cout<<"cut"<<std::endl;
+	//std::cout<<"cut"<<std::endl;
 	//diag1.printDiagram(std::cout);
-	diag1.printSignals(std::cout);
+	//diag1.printSignals(std::cout);
 
-	diag2.shift(0);
+	diag2.shift(-100);
 	diag2.printSignals(std::cout);
 
 
