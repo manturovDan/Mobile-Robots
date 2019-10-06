@@ -99,6 +99,9 @@ namespace timeD {
 	}
 
 	Diagram &Diagram::replace(int moment, const Diagram &add) {
+		if (&add == this)
+			return *this;
+
 		int cutLeft = (*this).Diagram::cutDiag(moment);
 		if (cutLeft == 1)
 			throw std::invalid_argument("Incorrect position");

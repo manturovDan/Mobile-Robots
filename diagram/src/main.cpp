@@ -44,9 +44,9 @@ int chooseDiag(int diags, const char *welcome) {
 	std::cout << welcome << std::endl;
 	
 	while (1) {
-		std::cout << "Choose one of " << diags << " diagrams or 0 to go back" << std::endl;
+		std::cout << "Choose one of " << diags << " diagrams" << std::endl;
 		inpSmt(choise);
-		if(choise >= 0 && choise <= diags)
+		if(choise > 0 && choise <= diags)
 			return choise;
 
 		std::cout << "Incorrect value!" << std::endl;
