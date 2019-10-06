@@ -153,7 +153,6 @@ namespace timeD {
 		else if (interval[0].start < 0) {
 			for (int sig = 0; sig < sigNum; ++sig) {
 				if (interval[sig].start + interval[sig].length > 0) {
-					std::cout << sig << std::endl;
 					if (interval[sig].start < 0) {
 						interval[sig].length += interval[sig].start;
 						interval[sig].start = 0;

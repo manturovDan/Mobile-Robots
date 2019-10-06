@@ -1,48 +1,82 @@
 #include <iostream>
-
 #include "diagram.h"
 
+template <class T>
+int inpNum(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
+	bool more = false;
+	int gnStatus;
+	while (1) {
+		if (more) 
+			std::cout << again << std::endl;
+
+		std::cin >> inp;
+		if (!std::cin.good())
+			throw std::invalid_argument("Invalid input");
+		if(std::abs(inp) > 100000000 || unneg && inp < 0)
+			more = true;
+		else 
+			return 0;
+	}
+}
+
+int chooseAct() {
+	int choise;
+	while (1) {
+		std::cout<<"Choose the number:\n\
+	1. Input signal segment\n\
+	2. Unite two diagrams\n\
+	3. Replace the first diagram on the second (from definetely time)\n\
+	4. Copy the diagram n times\n\
+	5. Shift the diagram\n\
+	0. Exit" << std:: endl;	
+		
+		inpNum(choise);
+		if(choise >= 0 && choise <= 5)
+			return choise;
+
+		std::cout << "Incorrect value!" << std::endl;
+	}
+}
+
+int chooseDiag(int diags, const char *welcome) {
+	int choise;
+	std::cout << welcome << std::endl;
+	
+	while (1) {
+		std::cout << "Choose one of " << diags << " diagrams or 0 to go back" << std::endl;
+		inpNum(choise);
+		if(choise >= 0 && choise <= diags)
+			return choise;
+
+		std::cout << "Incorrect value!" << std::endl;
+	}
+}
+
+int launchFunc(int act) {
+	switch (act) {
+		case 1:
+			int diag = chooseDiag(2, "Choose diagram to adding segment");
+			if (!diag)
+				return 1;
+			break;
+		default:
+			break;			
+	}
+}
+
 int main() {
-	std::cout<<"Hello"<<std::endl;
 	timeD::Diagram diag1;
-	std::cout << diag1.getLength() <<std::endl;
-	diag1.addSignal('1', 5, 3);
-	diag1.addSignal('0', 8, 4);
-	diag1.addSignal('0', 12, 4);
-	diag1.addSignal('X', 16, 8);
-	std::cout << diag1.getLength() <<std::endl;
-	std::cout << diag1.getSigNum() <<std::endl;
-
 	timeD::Diagram diag2;
-	diag2.addSignal('1', 0, 1);
-	diag2.addSignal('1', 1, 2);
-	diag2.addSignal('X', 3, 2);
-	diag2.addSignal('0', 5, 3);
+	
+	std::cout << "Two diagrams have created (Empty)." << std::endl;
 
-	//diag2.printDiagram(std::cout);
-	//diag2.printSignals(std::cout);
+	int choise;
+	while (1) {
+		choise = chooseAct();
+		if (!choise)
+			return 0;
+		launchFunc(choise);
 
-	diag1.uniDiagram(diag2);
-	diag1.addSignal('X', 32, 8);
-
-	//diag1.printDiagram(std::cout);
-	diag1.printSignals(std::cout);
-
-	diag2.addSignal('0', 10, 5);
-	diag2.addSignal('1', 15, 10);
-	diag2.addSignal('0', 28, 4);
-	diag2.addSignal('1', 36, 5);
-
-	//diag2.printDiagram(std::cout);
-	diag2.printSignals(std::cout);
-
-	diag1.replace(35, diag2);
-	//std::cout<<"cut"<<std::endl;
-	//diag1.printDiagram(std::cout);
-	//diag1.printSignals(std::cout);
-
-	diag2.shift(-100);
-	diag2.printSignals(std::cout);
-
+	}
 
 }
