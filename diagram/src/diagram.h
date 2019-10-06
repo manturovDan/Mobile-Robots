@@ -32,8 +32,7 @@ namespace timeD {
 		int copyDiagram(int);
 		int cutDiag(int);
 		Diagram &replace(int, const Diagram&);
-		Diagram &shiftRight(int, Diagram&);
-		Diagram &shiftLeft(int, Diagram&);
+		int shift(int);
 
 		Diagram &setLength(int, Diagram&);
 		int getLength() const { return length; }

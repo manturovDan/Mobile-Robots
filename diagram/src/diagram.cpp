@@ -93,8 +93,9 @@ namespace timeD {
 
 		if (moment >= length)
 			return 1;
-		
-
+		else {
+			length = moment;
+		}
 	}
 
 	Diagram &Diagram::replace(int moment, const Diagram &add) {
@@ -123,6 +124,30 @@ namespace timeD {
 		}
 
 		return *this;
+	}
+
+	int Diagram::shift(int times) {
+		for (int sig = 0; sig < sigNum; ++sig) {
+			interval[sig].start += times;
+		}
+
+		length += times;
+
+		if (length > SZ) {
+			for (int sig = sigNum-1; sig >= 0; --sig) {
+				if (interval[sig].start < SZ) {
+					sigNum = sig + 1;
+					length = SZ;
+					if (interval[sig].start + interval[sig].length > SZ) {
+						interval[sig].length = SZ - interval[sig].start;
+					}
+
+					break;
+				}
+			}
+		}
+
+
 	}
 
 	std::ostream & Diagram::printDiagram(std::ostream& stream) const {
