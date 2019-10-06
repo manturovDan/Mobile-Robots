@@ -25,18 +25,20 @@ int main() {
 	diag2.printSignals(std::cout);
 
 	diag1.uniDiagram(diag2);
-	std::cout << "United" << std::endl;
+
 	diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);
 
-	diag1.copyDiagram(2);
-	diag1.printDiagram(std::cout);
-	diag1.printSignals(std::cout);
+	diag2.addSignal('1', 10, 15);
+	diag2.addSignal('0', 25, 4);
+	diag2.addSignal('1', 29, 3);
 
+	diag2.printDiagram(std::cout);
+	diag2.printSignals(std::cout);
 
-	diag1.addSignal('X', 64, 1);
-	diag1.replace(25, diag2);
+	diag1.replace(11, diag2);
 	std::cout<<"cut"<<std::endl;
+	diag1.printDiagram(std::cout);
 	diag1.printSignals(std::cout);
 
 

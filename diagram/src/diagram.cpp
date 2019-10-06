@@ -97,12 +97,24 @@ namespace timeD {
 
 	}
 
-	Diagram &Diagram::replace(int position, const Diagram &add) {
-		int cutLeft = (*this).Diagram::cutDiag(position);
+	Diagram &Diagram::replace(int moment, const Diagram &add) {
+		int cutLeft = (*this).Diagram::cutDiag(moment);
 		if (cutLeft == 1)
 			throw std::invalid_argument("Incorrect position");
 
-		std::cout << cutLeft << std::endl;
+		int sigAdd;
+		for (sigAdd = 0; sigAdd < add.sigNum; ++sigAdd) {
+			if (add.interval[sigAdd].start + add.interval[sigAdd].length > moment) {
+				if (add.interval[sigAdd].start <= moment) {
+					interval[sigNum].val = add.interval[sigAdd].val;
+					interval[sigNum].start = moment;
+					interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
+					sigNum++;
+					length += interval[sigNum].length;
+				}
+			}
+		}
+
 		return *this;
 	}
 
