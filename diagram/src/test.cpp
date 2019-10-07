@@ -196,8 +196,84 @@ TEST (uniTest, intfTest) {
 	ASSERT_EQ(diag2.getSig(0), 0);
 	ASSERT_EQ(diag2.getSigStart(0), 3);
 	ASSERT_EQ(diag2.getSigLen(0), 1);
+}
 
+TEST (copyTest, intfTest) {
+	timeD::Diagram diag1;
+	timeD::Diagram diag2;
 
+	diag1.addSignal('0', 5, 7);
+	diag1.addSignal('1', 12, 14);
+
+	diag2.addSignal('0', 3, 1);
+	diag2.addSignal('1', 4, 8);
+	diag2.addSignal('0', 12, 5);
+
+	ASSERT_EQ(diag1.copyDiagram(0), 0);
+	ASSERT_EQ(diag1.getLength(), 0);
+	ASSERT_EQ(diag1.getSigNum(), 0);
+
+	ASSERT_EQ(diag2.copyDiagram(1), 0);
+
+	for (int i = 1; i <= 1; ++i) {
+		ASSERT_EQ(diag2.getLength(), 17);
+		ASSERT_EQ(diag2.getSigNum(), 3);
+
+		ASSERT_EQ(diag2.getSig(0 + 3*(i - 1)), 0);
+		ASSERT_EQ(diag2.getSigStart(0 + 3*(i - 1)), 3 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(0 + 3*(i - 1)), 1);
+		
+		ASSERT_EQ(diag2.getSig(1 + 3*(i - 1)), 1);
+		ASSERT_EQ(diag2.getSigStart(1 + 3*(i - 1)), 4 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(1 + 3*(i - 1)), 8);
+
+		ASSERT_EQ(diag2.getSig(2 + 3*(i - 1)), 0);
+		ASSERT_EQ(diag2.getSigStart(2 + 3*(i - 1)), 12 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(2 + 3*(i - 1)), 5);
+	}
+
+	ASSERT_EQ(diag2.copyDiagram(5), 0);
+
+	for (int i = 1; i <= 5; i++) {
+		ASSERT_EQ(diag2.getLength(), 17*5);
+		ASSERT_EQ(diag2.getSigNum(), 3*5);
+
+		ASSERT_EQ(diag2.getSig(0 + 3*(i - 1)), 0);
+		ASSERT_EQ(diag2.getSigStart(0 + 3*(i - 1)), 3 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(0 + 3*(i - 1)), 1);
+		
+		ASSERT_EQ(diag2.getSig(1 + 3*(i - 1)), 1);
+		ASSERT_EQ(diag2.getSigStart(1 + 3*(i - 1)), 4 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(1 + 3*(i - 1)), 8);
+
+		ASSERT_EQ(diag2.getSig(2 + 3*(i - 1)), 0);
+		ASSERT_EQ(diag2.getSigStart(2 + 3*(i - 1)), 12 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(2 + 3*(i - 1)), 5);
+	}
+
+	ASSERT_EQ(diag2.copyDiagram(2), 1);
+
+	for (int i = 1; i <= 5; i++) {
+		ASSERT_EQ(diag2.getLength(), 17*5);
+		ASSERT_EQ(diag2.getSigNum(), 3*5);
+
+		ASSERT_EQ(diag2.getSig(0 + 3*(i - 1)), 0);
+		ASSERT_EQ(diag2.getSigStart(0 + 3*(i - 1)), 3 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(0 + 3*(i - 1)), 1);
+		
+		ASSERT_EQ(diag2.getSig(1 + 3*(i - 1)), 1);
+		ASSERT_EQ(diag2.getSigStart(1 + 3*(i - 1)), 4 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(1 + 3*(i - 1)), 8);
+
+		ASSERT_EQ(diag2.getSig(2 + 3*(i - 1)), 0);
+		ASSERT_EQ(diag2.getSigStart(2 + 3*(i - 1)), 12 + 17*(i-1));
+		ASSERT_EQ(diag2.getSigLen(2 + 3*(i - 1)), 5);
+	}
+
+	ASSERT_EQ(diag1.copyDiagram(2), 0);
+	ASSERT_EQ(diag1.copyDiagram(0), 0);
+	ASSERT_EQ(diag1.getLength(), 0);
+	ASSERT_EQ(diag1.getSigNum(), 0);
 }
 
 int main(int argc, char **argv) {
