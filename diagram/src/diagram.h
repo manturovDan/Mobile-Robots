@@ -39,7 +39,8 @@ namespace timeD {
 		int getSigNum() const { return sigNum; }
 		int getSZ() const { return SZ; }
 		int getSig(int num) { return interval[num].val; }
-	};
+		int getSigStart(int num) { return interval[num].start; }
+		int getSigLen(int num) { return interval[num].length; }	};
 }
 
 #endif
