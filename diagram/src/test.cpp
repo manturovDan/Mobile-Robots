@@ -4,9 +4,80 @@
 
 TEST (ConstrTest, ASCIItest) {
 	char str[] = "010101001XXX000X1111";
+	char str2[] = "0110XXX0010";
 	timeD::Diagram diag1(str);
+	timeD::Diagram diag2(str2);
 
-	
+	ASSERT_EQ(diag1.getLength(), 20);
+	ASSERT_EQ(diag1.getSigNum(), 10);
+
+	ASSERT_EQ(diag1.getSig(0), 0);
+	ASSERT_EQ(diag1.getSigStart(0), 0);
+	ASSERT_EQ(diag1.getSigLen(0), 1);
+
+	ASSERT_EQ(diag1.getSig(1), 1);
+	ASSERT_EQ(diag1.getSigStart(1), 1);
+	ASSERT_EQ(diag1.getSigLen(1), 1);
+
+	ASSERT_EQ(diag1.getSig(2), 0);
+	ASSERT_EQ(diag1.getSigStart(2), 2);
+	ASSERT_EQ(diag1.getSigLen(2), 1);
+
+	ASSERT_EQ(diag1.getSig(3), 1);
+	ASSERT_EQ(diag1.getSigStart(3), 3);
+	ASSERT_EQ(diag1.getSigLen(3), 1);
+
+	ASSERT_EQ(diag1.getSig(4), 0);
+	ASSERT_EQ(diag1.getSigStart(4), 4);
+	ASSERT_EQ(diag1.getSigLen(4), 1);
+
+	ASSERT_EQ(diag1.getSig(5), 1);
+	ASSERT_EQ(diag1.getSigStart(5), 5);
+	ASSERT_EQ(diag1.getSigLen(5), 1);
+
+	ASSERT_EQ(diag1.getSig(6), 0);
+	ASSERT_EQ(diag1.getSigStart(6), 6);
+	ASSERT_EQ(diag1.getSigLen(6), 2);
+
+	ASSERT_EQ(diag1.getSig(7), 1);
+	ASSERT_EQ(diag1.getSigStart(7), 8);
+	ASSERT_EQ(diag1.getSigLen(7), 1);
+
+	ASSERT_EQ(diag1.getSig(8), 0);
+	ASSERT_EQ(diag1.getSigStart(8), 12);
+	ASSERT_EQ(diag1.getSigLen(8), 3);
+
+	ASSERT_EQ(diag1.getSig(9), 1);
+	ASSERT_EQ(diag1.getSigStart(9), 16);
+	ASSERT_EQ(diag1.getSigLen(9), 4);
+	//
+
+	ASSERT_EQ(diag2.getLength(), 11);
+	ASSERT_EQ(diag2.getSigNum(), 6);
+
+	ASSERT_EQ(diag2.getSig(0), 0);
+	ASSERT_EQ(diag2.getSigStart(0), 0);
+	ASSERT_EQ(diag2.getSigLen(0), 1);
+
+	ASSERT_EQ(diag2.getSig(1), 1);
+	ASSERT_EQ(diag2.getSigStart(1), 1);
+	ASSERT_EQ(diag2.getSigLen(1), 2);
+
+	ASSERT_EQ(diag2.getSig(2), 0);
+	ASSERT_EQ(diag2.getSigStart(2), 3);
+	ASSERT_EQ(diag2.getSigLen(2), 1);
+
+	ASSERT_EQ(diag2.getSig(3), 0);
+	ASSERT_EQ(diag2.getSigStart(3), 7);
+	ASSERT_EQ(diag2.getSigLen(3), 2);
+
+	ASSERT_EQ(diag2.getSig(4), 1);
+	ASSERT_EQ(diag2.getSigStart(4), 9);
+	ASSERT_EQ(diag2.getSigLen(4), 1);
+
+	ASSERT_EQ(diag2.getSig(5), 0);
+	ASSERT_EQ(diag2.getSigStart(5), 10);
+	ASSERT_EQ(diag2.getSigLen(5), 1);
 }
 
 TEST (ConstrTest, commonConstr) {
