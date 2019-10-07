@@ -21,7 +21,7 @@ namespace timeD {
 	public:
 		Diagram(): length(0), sigNum(0) {}
 		Diagram(char *, int);
-		Diagram(char, int length=SZ);
+		Diagram(char symb): length(0), sigNum(0) { addSignal(symb, 0, SZ); }
 
 		Diagram &addSignal(char, int, int);
 		std::ostream &printDiagram(std::ostream&) const;
@@ -37,6 +37,8 @@ namespace timeD {
 		Diagram &setLength(int, Diagram&);
 		int getLength() const { return length; }
 		int getSigNum() const { return sigNum; }
+		int getSZ() const { return SZ; }
+		int getSig(int num) { return interval[num].val; }
 	};
 }
 

@@ -1,6 +1,7 @@
 #include "diagram.h"
 
 namespace timeD {
+
 	Diagram & Diagram::addSignal(char symb, int start, int len) {
 		if (start < length)
 			throw std::invalid_argument("Incorrect start position");
@@ -25,7 +26,7 @@ namespace timeD {
 			throw std::invalid_argument("Incorrect signal");
 		}
 
-		if (interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
+		if (sigNum > 0 && interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
 			interval[sigNum-1].length += len;
 		} else {
 			interval[sigNum].val = sigVal;
