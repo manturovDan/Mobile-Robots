@@ -1,6 +1,36 @@
+#include <string.h>
+
 #include "diagram.h"
 
 namespace timeD {
+	Diagram::Diagram (char *acds) {
+		int len = strlen(acds);
+		
+		sigNum = 0;
+		length = 0;
+
+		if (!len) 
+			return;
+
+		char last = acds[0];
+		char cur;
+		
+		int curstart = 0;
+
+		for (int i = 1; i <= len; ++i) {
+			if (i == len) {
+				addSignal(last, curstart, i - curstart);
+				length = len;
+			}
+			else if (acds[i] != last) {
+				addSignal(last, curstart, i - curstart);
+				curstart = i;
+				last = acds[i];
+				length = i;
+			}
+		}
+		std::cout<<std::endl;
+	}
 
 	Diagram & Diagram::addSignal(char symb, int start, int len) {
 		if (start < length)

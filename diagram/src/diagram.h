@@ -20,7 +20,7 @@ namespace timeD {
 		int sigNum;
 	public:
 		Diagram(): length(0), sigNum(0) {}
-		Diagram(char *, int);
+		Diagram(char *);
 		Diagram(char symb): length(0), sigNum(0) { addSignal(symb, 0, SZ); }
 
 		Diagram &addSignal(char, int, int);

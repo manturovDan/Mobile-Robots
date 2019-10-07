@@ -2,8 +2,11 @@
 
 #include "diagram.h"
 
-TEST (TestOfTest, Test123) {
-	ASSERT_EQ(123, 123);
+TEST (ConstrTest, ASCIItest) {
+	char str[] = "010101001XXX000X1111";
+	timeD::Diagram diag1(str);
+
+	
 }
 
 TEST (ConstrTest, commonConstr) {
