@@ -489,6 +489,70 @@ TEST (noShiftTest, intfTest) {
 	ASSERT_EQ(diag1.getSigLen(4), 5);
 }
 
+TEST (replaceTest, intfTest) {
+	timeD::Diagram diag1;
+	timeD::Diagram diag2;
+	timeD::Diagram diag3('0');
+
+	diag1.addSignal('0', 5, 7);
+	diag1.addSignal('1', 12, 14);
+
+	diag2.addSignal('1', 3, 1);
+	diag2.addSignal('0', 4, 7);
+	diag2.addSignal('1', 11, 8);
+
+	ASSERT_THROW(diag2.replace(20, diag1), std::invalid_argument);
+
+	diag1.replace(14, diag2);
+
+	ASSERT_EQ(diag1.getLength(), 19);
+	ASSERT_EQ(diag1.getSigNum(), 2);
+
+	ASSERT_EQ(diag1.getSig(0), 0);
+	ASSERT_EQ(diag1.getSigStart(0), 5);
+	ASSERT_EQ(diag1.getSigLen(0), 7);
+
+	ASSERT_EQ(diag1.getSig(1), 1);
+	ASSERT_EQ(diag1.getSigStart(1), 12);
+	ASSERT_EQ(diag1.getSigLen(1), 7);
+
+	diag2.replace(17, diag3);
+	ASSERT_EQ(diag2.getLength(), 100);
+	ASSERT_EQ(diag2.getSigNum(), 4);
+
+	ASSERT_EQ(diag2.getSig(0), 1);
+	ASSERT_EQ(diag2.getSigStart(0), 3);
+	ASSERT_EQ(diag2.getSigLen(0), 1);
+
+	ASSERT_EQ(diag2.getSig(1), 0);
+	ASSERT_EQ(diag2.getSigStart(1), 4);
+	ASSERT_EQ(diag2.getSigLen(1), 7);
+
+	ASSERT_EQ(diag2.getSig(2), 1);
+	ASSERT_EQ(diag2.getSigStart(2), 11);
+	ASSERT_EQ(diag2.getSigLen(2), 6);
+
+	ASSERT_EQ(diag2.getSig(3), 0);
+	ASSERT_EQ(diag2.getSigStart(3), 17);
+	ASSERT_EQ(diag2.getSigLen(3), 83);
+
+	diag2.replace(4, diag1);
+	ASSERT_EQ(diag2.getLength(), 19);
+	ASSERT_EQ(diag2.getSigNum(), 3);
+
+	ASSERT_EQ(diag2.getSig(0), 1);
+	ASSERT_EQ(diag2.getSigStart(0), 3);
+	ASSERT_EQ(diag2.getSigLen(0), 1);
+
+	ASSERT_EQ(diag2.getSig(1), 0);
+	ASSERT_EQ(diag2.getSigStart(1), 5);
+	ASSERT_EQ(diag2.getSigLen(1), 7);
+
+	ASSERT_EQ(diag2.getSig(2), 1);
+	ASSERT_EQ(diag2.getSigStart(2), 12);
+	ASSERT_EQ(diag2.getSigLen(2), 7);
+}
+
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

@@ -111,9 +111,15 @@ namespace timeD {
 		for (sigAdd = 0; sigAdd < add.sigNum; ++sigAdd) {
 			if (add.interval[sigAdd].start + add.interval[sigAdd].length > moment) {
 				if (add.interval[sigAdd].start <= moment) {
-					interval[sigNum].val = add.interval[sigAdd].val;
-					interval[sigNum].start = moment;
-					interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
+					if (interval[sigNum-1].val == add.interval[sigAdd].val) {
+						interval[sigNum-1].length += add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
+						sigNum--;
+					}
+					else {
+						interval[sigNum].val = add.interval[sigAdd].val;
+						interval[sigNum].start = moment;
+						interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
+					}
 				}
 				else {
 					interval[sigNum].val = add.interval[sigAdd].val;
