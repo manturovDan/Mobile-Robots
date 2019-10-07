@@ -276,6 +276,88 @@ TEST (copyTest, intfTest) {
 	ASSERT_EQ(diag1.getSigNum(), 0);
 }
 
+TEST (ShiftRightTest, intfTest) {
+	timeD::Diagram diag1;
+
+	diag1.addSignal('0', 5, 7);
+	diag1.addSignal('1', 12, 14);
+	diag1.addSignal('0', 28, 3);
+	diag1.addSignal('1', 31, 2);
+	diag1.addSignal('0', 33, 7);
+	diag1.addSignal('X', 42, 2);
+
+	diag1.shift(6);
+
+	ASSERT_EQ(diag1.getLength(), 50);
+	ASSERT_EQ(diag1.getSigNum(), 5);
+
+	ASSERT_EQ(diag1.getSig(0), 0);
+	ASSERT_EQ(diag1.getSigStart(0), 11);
+	ASSERT_EQ(diag1.getSigLen(0), 7);
+
+	ASSERT_EQ(diag1.getSig(1), 1);
+	ASSERT_EQ(diag1.getSigStart(1), 18);
+	ASSERT_EQ(diag1.getSigLen(1), 14);
+
+	ASSERT_EQ(diag1.getSig(2), 0);
+	ASSERT_EQ(diag1.getSigStart(2), 34);
+	ASSERT_EQ(diag1.getSigLen(2), 3);
+
+	ASSERT_EQ(diag1.getSig(3), 1);
+	ASSERT_EQ(diag1.getSigStart(3), 37);
+	ASSERT_EQ(diag1.getSigLen(3), 2);
+
+	ASSERT_EQ(diag1.getSig(4), 0);
+	ASSERT_EQ(diag1.getSigStart(4), 39);
+	ASSERT_EQ(diag1.getSigLen(4), 7);
+
+	//
+	diag1.shift(51);
+
+	ASSERT_EQ(diag1.getLength(), 100);
+	ASSERT_EQ(diag1.getSigNum(), 5);
+
+	ASSERT_EQ(diag1.getSigStart(4), 90);
+	ASSERT_EQ(diag1.getSigLen(4), 7);
+
+	diag1.shift(3);
+
+	ASSERT_EQ(diag1.getLength(), 100);
+	ASSERT_EQ(diag1.getSigNum(), 5);
+
+	ASSERT_EQ(diag1.getSigStart(4), 93);
+	ASSERT_EQ(diag1.getSigLen(4), 7);
+
+	diag1.shift(5);
+
+	ASSERT_EQ(diag1.getLength(), 100);
+	ASSERT_EQ(diag1.getSigNum(), 5);
+
+	ASSERT_EQ(diag1.getSigStart(4), 98);
+	ASSERT_EQ(diag1.getSigLen(4), 2);
+
+	diag1.shift(3);
+
+	ASSERT_EQ(diag1.getLength(), 100);
+	ASSERT_EQ(diag1.getSigNum(), 4);
+
+	ASSERT_EQ(diag1.getSigStart(3), 99);
+	ASSERT_EQ(diag1.getSigLen(3), 1);
+
+	diag1.shift(2);
+
+	ASSERT_EQ(diag1.getLength(), 100);
+	ASSERT_EQ(diag1.getSigNum(), 3);
+
+	ASSERT_EQ(diag1.getSigStart(2), 98);
+	ASSERT_EQ(diag1.getSigLen(2), 2);
+
+	diag1.shift(300);
+
+	ASSERT_EQ(diag1.getLength(), 100);
+	ASSERT_EQ(diag1.getSigNum(), 0);
+}
+
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
