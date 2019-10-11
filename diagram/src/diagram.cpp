@@ -3,7 +3,7 @@
 #include "diagram.h"
 
 namespace timeD {
-	Diagram::Diagram (char *acds) {
+	Diagram::Diagram (const char *acds) {
 		int len = strlen(acds);
 		
 		sigNum = 0;
@@ -35,7 +35,7 @@ namespace timeD {
 	Diagram & Diagram::addSignal(char symb, int start, int len) {
 		if (start < length)
 			throw std::invalid_argument("Incorrect start position");
-		if (start + len > SZ)
+		if (start + len > SZlen)
 			throw std::invalid_argument("Diagram is too big");
 
 		int signal;
@@ -56,6 +56,9 @@ namespace timeD {
 			throw std::invalid_argument("Incorrect signal");
 		}
 
+		if (sigNum >= SZsig)
+			throw std::invalid_argument("Count of signals is too big");
+
 		if (sigNum > 0 && interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
 			interval[sigNum-1].length += len;
 		} else {
@@ -71,24 +74,47 @@ namespace timeD {
 	}
 
 	int Diagram::uniDiagram(const Diagram &conc) {
-		if (length + conc.length > SZ)
+		if (length + conc.length > SZlen)
+			return 1;
+		if (sigNum + conc.getSigNum() > SZsig)
 			return 1;
 
-		for (int i = 0; i < conc.sigNum; ++i) {
+		int ist = 0;
+		if(interval[sigNum-1].val == conc.interval[0].val && conc.interval[0].start == 0) {
+			interval[sigNum-1].length += conc.interval[0].length;
+			ist = 1;
+		}
+
+		for (int i = ist; i < conc.sigNum; ++i) {
 			interval[sigNum + i].val = conc.interval[i].val;
 			interval[sigNum + i].start = conc.interval[i].start + length;
 			interval[sigNum + i].length = conc.interval[i].length;
 		}
 
 		length += conc.length;
-		sigNum += conc.sigNum;
+		sigNum += conc.sigNum - ist;
 
 		return 0;
 	}
 
 	int Diagram::copyDiagram(int count) {
-		if (length * count > SZ)
+		if (length * count > SZlen)
 			return 1;
+		if (sigNum * count > SZsig)
+			return 1;
+
+		int sigst = 0;
+
+		if (interval[sigNum - 1].val == interval[0].val && interval[0].start == 0) {
+			if (sigNum == 1) {
+				length *= count;
+				interval[0].length *= count;
+				return 0;
+			}
+			interval[0].length += interval[sigNum - 1].length;
+			sigst = interval[sigNum - 1].length;
+			sigNum--;
+		}
 
 		for (int sig = 0; sig < sigNum; sig++) {
 			for (int i = 1; i < count; i++) {
@@ -100,6 +126,8 @@ namespace timeD {
 
 		length *= count;
 		sigNum *= count;
+
+		interval[0].length -= sigst;
 
 		return 0;
 	}
@@ -173,20 +201,20 @@ namespace timeD {
 
 		length += times;
 
-		if (length > SZ) {
+		if (length > SZlen) {
 			for (int sig = sigNum-1; sig >= 0; --sig) {
-				if (interval[sig].start < SZ) {
+				if (interval[sig].start < SZlen) {
 					sigNum = sig + 1;
-					length = SZ;
-					if (interval[sig].start + interval[sig].length > SZ) {
-						interval[sig].length = SZ - interval[sig].start;
+					length = SZlen;
+					if (interval[sig].start + interval[sig].length > SZlen) {
+						interval[sig].length = SZlen - interval[sig].start;
 					}
 
 					return 0;
 				}
 			}
 
-			length = SZ;
+			length = SZlen;
 			sigNum = 0;
 
 		}

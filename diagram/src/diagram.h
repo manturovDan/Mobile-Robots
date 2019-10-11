@@ -14,30 +14,30 @@ namespace timeD {
 
 	class Diagram {
 	private:
-		static const int SZ = 100; //and max length of diagram
-		signal interval[SZ];
+		static const int SZlen = 100; //and max length of diagram
+		static const int SZsig = 100;
+		signal interval[SZsig];
 		int length;
 		int sigNum;
 	public:
 		Diagram(): length(0), sigNum(0) {}
-		Diagram(char *);
-		Diagram(char symb): length(0), sigNum(0) { addSignal(symb, 0, SZ); }
+		Diagram(const char *);
+		Diagram(char symb): length(0), sigNum(0) { addSignal(symb, 0, SZlen); }
 
 		Diagram &addSignal(char, int, int);
 		std::ostream &printDiagram(std::ostream&) const;
 		std::ostream &printSignals(std::ostream&) const;
 
-		Diagram &copyDiagram(const Diagram&);
 		int uniDiagram(const Diagram&);
 		int copyDiagram(int);
 		int cutDiag(int);
 		Diagram &replace(int, const Diagram&);
 		int shift(int);
 
-		Diagram &setLength(int, Diagram&);
 		int getLength() const { return length; }
 		int getSigNum() const { return sigNum; }
-		int getSZ() const { return SZ; }
+		int getSZlen() const { return SZlen; }
+		int getSZsig() const { return SZsig; }
 		int getSig(int num) { return interval[num].val; }
 		int getSigStart(int num) { return interval[num].start; }
 		int getSigLen(int num) { return interval[num].length; }	};
