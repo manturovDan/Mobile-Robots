@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/diagram.dir/main.cpp.o  -o diagram 
+/usr/bin/c++   -std=c++17 -g   CMakeFiles/diagram.dir/src/main.cpp.o  -o diagram 

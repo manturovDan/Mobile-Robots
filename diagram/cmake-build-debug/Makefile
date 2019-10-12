@@ -78,6 +78,17 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles/progress.marks
@@ -123,32 +134,72 @@ diagram/fast:
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/build
 .PHONY : diagram/fast
 
-main.o: main.cpp.o
+#=============================================================================
+# Target rules for targets named u_test
 
-.PHONY : main.o
+# Build rule for target.
+u_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 u_test
+.PHONY : u_test
+
+# fast build rule for target.
+u_test/fast:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
+.PHONY : u_test/fast
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-main.i: main.cpp.i
+src/main.i: src/main.cpp.i
 
-.PHONY : main.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-main.s: main.cpp.s
+src/main.s: src/main.cpp.s
 
-.PHONY : main.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+src/test.o: src/test.cpp.o
+
+.PHONY : src/test.o
+
+# target to build an object file
+src/test.cpp.o:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/test.cpp.o
+.PHONY : src/test.cpp.o
+
+src/test.i: src/test.cpp.i
+
+.PHONY : src/test.i
+
+# target to preprocess a source file
+src/test.cpp.i:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/test.cpp.i
+.PHONY : src/test.cpp.i
+
+src/test.s: src/test.cpp.s
+
+.PHONY : src/test.s
+
+# target to generate assembly for a file
+src/test.cpp.s:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/test.cpp.s
+.PHONY : src/test.cpp.s
 
 # Help Target
 help:
@@ -157,11 +208,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... diagram"
 	@echo "... edit_cache"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... test"
+	@echo "... diagram"
+	@echo "... u_test"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/test.o"
+	@echo "... src/test.i"
+	@echo "... src/test.s"
 .PHONY : help
 
 
