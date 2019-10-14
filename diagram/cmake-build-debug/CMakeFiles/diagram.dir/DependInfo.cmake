@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/danila/CLionProjects/labs3sem/diagram/src/diagram.cpp" "/home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/src/diagram.cpp.o"
   "/home/danila/CLionProjects/labs3sem/diagram/src/main.cpp" "/home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

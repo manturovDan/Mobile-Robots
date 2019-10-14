@@ -140,6 +140,14 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/danila/CLionProjects/labs3sem/diagram/src/diagram.cpp">
+			<Option target="diagram"/>
+			<Option target="u_test"/>
+		</Unit>
+		<Unit filename="/home/danila/CLionProjects/labs3sem/diagram/src/diagram.h">
+			<Option target="diagram"/>
+			<Option target="u_test"/>
+		</Unit>
 		<Unit filename="/home/danila/CLionProjects/labs3sem/diagram/src/main.cpp">
 			<Option target="diagram"/>
 		</Unit>

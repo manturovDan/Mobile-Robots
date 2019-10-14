@@ -147,6 +147,36 @@ u_test/fast:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
 .PHONY : u_test/fast
 
+src/diagram.o: src/diagram.cpp.o
+
+.PHONY : src/diagram.o
+
+# target to build an object file
+src/diagram.cpp.o:
+	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagram.cpp.o
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/diagram.cpp.o
+.PHONY : src/diagram.cpp.o
+
+src/diagram.i: src/diagram.cpp.i
+
+.PHONY : src/diagram.i
+
+# target to preprocess a source file
+src/diagram.cpp.i:
+	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagram.cpp.i
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/diagram.cpp.i
+.PHONY : src/diagram.cpp.i
+
+src/diagram.s: src/diagram.cpp.s
+
+.PHONY : src/diagram.s
+
+# target to generate assembly for a file
+src/diagram.cpp.s:
+	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagram.cpp.s
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/diagram.cpp.s
+.PHONY : src/diagram.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -212,6 +242,9 @@ help:
 	@echo "... test"
 	@echo "... diagram"
 	@echo "... u_test"
+	@echo "... src/diagram.o"
+	@echo "... src/diagram.i"
+	@echo "... src/diagram.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
