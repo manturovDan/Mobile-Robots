@@ -425,6 +425,7 @@ TEST (intfTest, uniTestGluing) {
 TEST (intfTest, uniTestAddition) {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
+    timeD::Diagram diag3;
 
     diag1.addSignal('1', 5, 7);
     diag1.addSignal('0', 12, 4);
@@ -433,7 +434,7 @@ TEST (intfTest, uniTestAddition) {
     diag2.addSignal('1', 4, 8);
     diag2.addSignal('0', 12, 5);
 
-    timeD::Diagram diag3 = diag1 + diag2;
+    diag3 = diag1 + diag2;
 
     ASSERT_EQ(diag3.getLength(), 33);
     ASSERT_EQ(diag3.getSigNum(), 4);
@@ -878,6 +879,7 @@ TEST (replaceTest, intfTest) {
 
 TEST (intfTest, Segment) {
     timeD::Diagram diag1;
+    timeD::Diagram diag2;
 
     diag1.addSignal('0', 5, 7);
     diag1.addSignal('1', 12, 10);
@@ -888,7 +890,13 @@ TEST (intfTest, Segment) {
     diag1.addSignal('1', 45, 2);
     diag1.addSignal('X', 50, 2);
 
-    diag1(11, 30);
+    ASSERT_THROW(diag1(48, 53), std::invalid_argument);
+    ASSERT_THROW(diag1(28, 28), std::invalid_argument);
+    ASSERT_THROW(diag1(29, 28), std::invalid_argument);
+
+    diag2 = diag1(51, 52);
+
+    std::cout<<diag2<<std::endl;
 }
 
 int main(int argc, char **argv) {

@@ -335,6 +335,21 @@ namespace timeD {
 
             std::cout << "First_Start: " << first_start << "; First_Length: " << first_length << "; Full_Length: " << full_len << "; End_Length: " << end_length << std::endl << std::endl;
 
+            diag.sigNum = end - start + 1;
+            diag.length = b - a;
+
+            for (int i = 0; i < sigNum; ++i) {
+                diag.interval[i].val = interval[i + start].val;
+                diag.interval[i].start = interval[i + start].start - a;
+                diag.interval[i].length = interval[i + start].length;
+            }
+
+            diag.interval[0].start = first_start;
+            diag.interval[0].length = first_length;
+            diag.interval[diag.sigNum - 1].length = end_length;
+
+            return diag;
+
         }
 
     }
