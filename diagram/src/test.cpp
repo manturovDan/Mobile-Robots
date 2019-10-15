@@ -981,6 +981,30 @@ TEST (intfTest, Segment) {
     ASSERT_EQ(diag2.getLength(), 4);
     ASSERT_EQ(diag2.getSigNum(), 0);
 
+    diag1 = diag1(6, 37);
+    ASSERT_EQ(diag1.getLength(), 31);
+    ASSERT_EQ(diag1.getSigNum(), 5);
+
+    ASSERT_EQ(diag1.getSig(0), 0);
+    ASSERT_EQ(diag1.getSigStart(0), 0);
+    ASSERT_EQ(diag1.getSigLen(0), 6);
+
+    ASSERT_EQ(diag1.getSig(1), 1);
+    ASSERT_EQ(diag1.getSigStart(1), 6);
+    ASSERT_EQ(diag1.getSigLen(1), 10);
+
+    ASSERT_EQ(diag1.getSig(2), 0);
+    ASSERT_EQ(diag1.getSigStart(2), 22);
+    ASSERT_EQ(diag1.getSigLen(2), 3);
+
+    ASSERT_EQ(diag1.getSig(3), 1);
+    ASSERT_EQ(diag1.getSigStart(3), 25);
+    ASSERT_EQ(diag1.getSigLen(3), 2);
+
+    ASSERT_EQ(diag1.getSig(4), 0);
+    ASSERT_EQ(diag1.getSigStart(4), 27);
+    ASSERT_EQ(diag1.getSigLen(4), 2);
+
 }
 
 int main(int argc, char **argv) {

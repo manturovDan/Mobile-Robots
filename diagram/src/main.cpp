@@ -12,7 +12,7 @@ int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try aga
         std::cin >> inp;
         if (!std::cin.good())
             throw std::invalid_argument("Invalid input");
-        if(std::abs(inp) > 100000000 || unneg && inp < 0)
+        if(std::abs(inp) > 100000000 || (unneg && inp < 0))
             more = true;
         else
             return 0;
@@ -29,10 +29,11 @@ int chooseAct() {
 	4. Copy the diagram n times\n\
 	5. Shift the diagram\n\
 	6. Print diagram\n\
+	7. Make one diagram as the segment of another one\n\
 	0. Exit" << std:: endl;
 
         inpSmt(choise);
-        if(choise >= 0 && choise <= 6)
+        if(choise >= 0 && choise <= 7)
             return choise;
 
         std::cout << "Incorrect value!" << std::endl;
@@ -90,7 +91,7 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
             return 1;
         }
 
-        std::cout << "Successful adding" << std::endl;
+        std::cout << "Correct adding" << std::endl;
         return 0;
     }
     else if (act == 2) {
@@ -110,11 +111,11 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
             add = &diag2;
 
         if((*root) += (*add)) {
-            std::cout << "Unsuccessfull union" << std::endl;
+            std::cout << "Incorrect union" << std::endl;
             return 1;
         }
 
-        std::cout << "Successfull union" << std::endl;
+        std::cout << "Correct union" << std::endl;
         return 0;
 
     }
@@ -145,7 +146,7 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
             return 1;
         }
 
-        std::cout << "Successfull replacing" << std::endl;
+        std::cout << "Correct replacing" << std::endl;
         return 0;
     }
     else if (act == 4) {
@@ -166,7 +167,7 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
             return 1;
         }
 
-        std::cout << "Successfull copying" << std::endl;
+        std::cout << "Correct copying" << std::endl;
         return 0;
     }
     else if (act == 5) {
@@ -193,7 +194,7 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
             return 1;
         }
 
-        std::cout << "Successfull shifting" << std::endl;
+        std::cout << "Correct shifting" << std::endl;
         return 0;
     }
     else if (act == 6) {
@@ -209,6 +210,41 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
 
         return 0;
     }
+    else if (act == 7) {
+        int d1 = chooseDiag(2, "Choose source diagram");
+        int d2 = chooseDiag(2, "Choose victim diagram (well be cleared)");
+        int a;
+        int b;
+
+        timeD::Diagram *from;
+        timeD::Diagram *to;
+
+        if (d1 == 1)
+            from = &diag1;
+        else
+            from = &diag2;
+
+        if (d2 == 1)
+            to = &diag1;
+        else
+            to = &diag2;
+
+        std::cout << "Input left boundary number - segment [ )" << std::endl;
+        inpSmt(a, true);
+        std::cout << "Input right boundary number" << std::endl;
+        inpSmt(b, true);
+
+        try {
+            (*to) = (*from)(a, b);
+        } catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
+            return 1;
+        }
+
+        std::cout << "Correct segment copying" << std::endl;
+
+        return 0;
+    }
 
     return -1;
 }
@@ -217,7 +253,7 @@ int main() {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
 
-    std::cout << "Two diagrams have created (Empty)." << std::endl;
+    std::cout << "II Realisation\nTwo diagrams have created (Empty)." << std::endl;
 
     int choise;
     while (1) {
