@@ -895,8 +895,92 @@ TEST (intfTest, Segment) {
     ASSERT_THROW(diag1(29, 28), std::invalid_argument);
 
     diag2 = diag1(51, 52);
+    ASSERT_EQ(diag2.getLength(), 1);
+    ASSERT_EQ(diag2.getSigNum(), 0);
 
-    std::cout<<diag2<<std::endl;
+    diag2 = diag1(28, 29);
+    ASSERT_EQ(diag2.getLength(), 1);
+    ASSERT_EQ(diag2.getSigNum(), 1);
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 1);
+
+    diag2 = diag1(6, 33);
+    ASSERT_EQ(diag2.getLength(), 27);
+    ASSERT_EQ(diag2.getSigNum(), 4);
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 6);
+
+    ASSERT_EQ(diag2.getSig(1), 1);
+    ASSERT_EQ(diag2.getSigStart(1), 6);
+    ASSERT_EQ(diag2.getSigLen(1), 10);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 22);
+    ASSERT_EQ(diag2.getSigLen(2), 3);
+
+    ASSERT_EQ(diag2.getSig(3), 1);
+    ASSERT_EQ(diag2.getSigStart(3), 25);
+    ASSERT_EQ(diag2.getSigLen(3), 2);
+
+    diag2 = diag1(6, 37);
+    ASSERT_EQ(diag2.getLength(), 31);
+    ASSERT_EQ(diag2.getSigNum(), 5);
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 6);
+
+    ASSERT_EQ(diag2.getSig(1), 1);
+    ASSERT_EQ(diag2.getSigStart(1), 6);
+    ASSERT_EQ(diag2.getSigLen(1), 10);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 22);
+    ASSERT_EQ(diag2.getSigLen(2), 3);
+
+    ASSERT_EQ(diag2.getSig(3), 1);
+    ASSERT_EQ(diag2.getSigStart(3), 25);
+    ASSERT_EQ(diag2.getSigLen(3), 2);
+
+    ASSERT_EQ(diag2.getSig(4), 0);
+    ASSERT_EQ(diag2.getSigStart(4), 27);
+    ASSERT_EQ(diag2.getSigLen(4), 2);
+
+    diag2 = diag1(6, 34);
+    ASSERT_EQ(diag2.getLength(), 28);
+    ASSERT_EQ(diag2.getSigNum(), 5);
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 6);
+
+    ASSERT_EQ(diag2.getSig(1), 1);
+    ASSERT_EQ(diag2.getSigStart(1), 6);
+    ASSERT_EQ(diag2.getSigLen(1), 10);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 22);
+    ASSERT_EQ(diag2.getSigLen(2), 3);
+
+    ASSERT_EQ(diag2.getSig(3), 1);
+    ASSERT_EQ(diag2.getSigStart(3), 25);
+    ASSERT_EQ(diag2.getSigLen(3), 2);
+
+    ASSERT_EQ(diag2.getSig(4), 0);
+    ASSERT_EQ(diag2.getSigStart(4), 27);
+    ASSERT_EQ(diag2.getSigLen(4), 1);
+
+    diag2 = diag1(36, 40);
+    ASSERT_EQ(diag2.getLength(), 4);
+    ASSERT_EQ(diag2.getSigNum(), 0);
+
+    diag2 = diag1(48, 52);
+    ASSERT_EQ(diag2.getLength(), 4);
+    ASSERT_EQ(diag2.getSigNum(), 0);
+
 }
 
 int main(int argc, char **argv) {

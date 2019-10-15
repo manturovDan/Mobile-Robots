@@ -29,7 +29,6 @@ namespace timeD {
                 length = i;
             }
         }
-        std::cout<<std::endl;
     }
 
     Diagram & Diagram::addSignal(char symb, int start, int len) {
@@ -307,8 +306,6 @@ namespace timeD {
         }
 
 
-        std::cout << "ST-End " << start << " - " << end << std::endl;
-
         if (start > end) {
             diag.sigNum = 0;
             diag.length = b - a;
@@ -332,8 +329,6 @@ namespace timeD {
 
             if (end_length > interval[end].length)
                 end_length = interval[end].length;
-
-            std::cout << "First_Start: " << first_start << "; First_Length: " << first_length << "; Full_Length: " << full_len << "; End_Length: " << end_length << std::endl << std::endl;
 
             diag.sigNum = end - start + 1;
             diag.length = b - a;
