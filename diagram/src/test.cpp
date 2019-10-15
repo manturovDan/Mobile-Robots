@@ -547,8 +547,53 @@ TEST (intfTest, copyGluingTest) {
     diag1.addSignal('0', 6, 1);
 
     diag1.copyDiagram(5);
-    diag1.printDiagram(std::cout);
-    diag1.printSignals(std::cout);
+
+    ASSERT_EQ(diag1.getLength(), 35);
+    ASSERT_EQ(diag1.getSigNum(), 11);
+
+    ASSERT_EQ(diag1.getSig(0), 0);
+    ASSERT_EQ(diag1.getSigStart(0), 0);
+    ASSERT_EQ(diag1.getSigLen(0), 2);
+
+    ASSERT_EQ(diag1.getSig(1), 1);
+    ASSERT_EQ(diag1.getSigStart(1), 2);
+    ASSERT_EQ(diag1.getSigLen(1), 3);
+
+    ASSERT_EQ(diag1.getSig(2), 0);
+    ASSERT_EQ(diag1.getSigStart(2), 6);
+    ASSERT_EQ(diag1.getSigLen(2), 3);
+
+    ASSERT_EQ(diag1.getSig(3), 1);
+    ASSERT_EQ(diag1.getSigStart(3), 9);
+    ASSERT_EQ(diag1.getSigLen(4), 3);
+
+    ASSERT_EQ(diag1.getSig(4), 0);
+    ASSERT_EQ(diag1.getSigStart(4), 13);
+    ASSERT_EQ(diag1.getSigLen(4), 3);
+
+    ASSERT_EQ(diag1.getSig(5), 1);
+    ASSERT_EQ(diag1.getSigStart(5), 16);
+    ASSERT_EQ(diag1.getSigLen(5), 3);
+
+    ASSERT_EQ(diag1.getSig(6), 0);
+    ASSERT_EQ(diag1.getSigStart(6), 20);
+    ASSERT_EQ(diag1.getSigLen(6), 3);
+
+    ASSERT_EQ(diag1.getSig(7), 1);
+    ASSERT_EQ(diag1.getSigStart(7), 23);
+    ASSERT_EQ(diag1.getSigLen(7), 3);
+
+    ASSERT_EQ(diag1.getSig(8), 0);
+    ASSERT_EQ(diag1.getSigStart(8), 27);
+    ASSERT_EQ(diag1.getSigLen(8), 3);
+
+    ASSERT_EQ(diag1.getSig(9), 1);
+    ASSERT_EQ(diag1.getSigStart(9), 30);
+    ASSERT_EQ(diag1.getSigLen(9), 3);
+
+    ASSERT_EQ(diag1.getSig(10), 0);
+    ASSERT_EQ(diag1.getSigStart(10), 34);
+    ASSERT_EQ(diag1.getSigLen(10), 1);
 }
 
 TEST (ShiftRightTest, intfTest) {

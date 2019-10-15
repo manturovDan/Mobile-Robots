@@ -152,7 +152,6 @@ namespace timeD {
             sigNum *= count;
 
         interval[sigNum - 1].length -= sigst;
-        std::cout << "SN: " << sigNum << std::endl;
         return 0;
     }
 
