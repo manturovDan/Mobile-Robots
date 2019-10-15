@@ -876,6 +876,21 @@ TEST (replaceTest, intfTest) {
     ASSERT_EQ(diag2.getSigLen(2), 7);
 }
 
+TEST (intfTest, Segment) {
+    timeD::Diagram diag1;
+
+    diag1.addSignal('0', 5, 7);
+    diag1.addSignal('1', 12, 10);
+    diag1.addSignal('0', 28, 3);
+    diag1.addSignal('1', 31, 2);
+    diag1.addSignal('0', 33, 2);
+    diag1.addSignal('X', 42, 2);
+    diag1.addSignal('1', 45, 2);
+    diag1.addSignal('X', 50, 2);
+
+    diag1(11, 30);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

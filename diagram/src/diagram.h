@@ -35,6 +35,7 @@ namespace timeD {
         int operator << (int);
         int operator >> (int);
         friend std::ostream & operator << (std::ostream &, const Diagram &);
+        Diagram operator () (const int, const int);
 
         int copyDiagram(int);
         int cutDiag(int);

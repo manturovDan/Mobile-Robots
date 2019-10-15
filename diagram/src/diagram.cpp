@@ -280,6 +280,65 @@ namespace timeD {
         return shift(times);
     }
 
+    Diagram Diagram::operator() (const int a, const int b) { // [ )
+        if (a >= length || b > length || a >= b)
+            throw std::invalid_argument("Incorrect interval");
+
+        Diagram diag;
+
+        int start = sigNum-1;
+        int end = sigNum-1;
+
+        for (int sig = 0; sig < sigNum; ++sig) {
+            if (interval[sig].start + interval[sig].length > a) {
+                start = sig;
+                break;
+            }
+        }
+
+        for (int sig = start; sig < sigNum; ++sig) {
+            if (interval[sig].start + interval[sig].length >= b) {
+                if (interval[sig].start >= b)
+                    end = sig-1;
+                else
+                    end = sig;
+                break;
+            }
+        }
+
+
+        std::cout << "ST-End " << start << " - " << end << std::endl;
+
+        if (start > end) {
+            diag.sigNum = 0;
+            diag.length = b - a;
+            return diag;
+        }
+        else if (start == end && start == sigNum-1 && a > interval[sigNum - 1].start) {
+            diag.sigNum = 0;
+            diag.length = b - a;
+            return diag;
+        }
+        else {
+            int first_start = 0;
+            int first_length = interval[start]. start + interval[start].length - a;
+            if (first_length > interval[start].length) {
+                first_start = first_length - interval[start].length;
+                first_length = interval[start].length;
+            }
+
+            int full_len = b - a;
+            int end_length = b - interval[end].start;
+
+            if (end_length > interval[end].length)
+                end_length = interval[end].length;
+
+            std::cout << "First_Start: " << first_start << "; First_Length: " << first_length << "; Full_Length: " << full_len << "; End_Length: " << end_length << std::endl << std::endl;
+
+        }
+
+    }
+
     std::ostream & Diagram::printDiagram(std::ostream& stream) const {
         int pos = 0;
         int signalEl = 0;
