@@ -182,7 +182,13 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         int shf;
         inpSmt(shf);
 
-        if(work->shift(shf)) {
+        int retStat = 0;
+        if (shf >= 0)
+            retStat = (*work)>>shf;
+        else
+            retStat = (*work)<<(-shf);
+
+        if(retStat) {
             std::cout << "Error while shifting" << std::endl;
             return 1;
         }

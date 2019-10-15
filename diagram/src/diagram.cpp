@@ -268,6 +268,18 @@ namespace timeD {
         return 0;
     }
 
+    int Diagram::operator << (int times) {
+        if (times < 0)
+            return 1;
+        return shift(-times);
+    }
+
+    int Diagram::operator >> (int times) {
+        if (times < 0)
+            return 1;
+        return shift(times);
+    }
+
     std::ostream & Diagram::printDiagram(std::ostream& stream) const {
         int pos = 0;
         int signalEl = 0;

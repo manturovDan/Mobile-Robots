@@ -32,6 +32,8 @@ namespace timeD {
         Diagram operator ++ ();
         Diagram operator ++ (int);
         Diagram operator + (const Diagram &);
+        int operator << (int);
+        int operator >> (int);
 
         int copyDiagram(int);
         int cutDiag(int);

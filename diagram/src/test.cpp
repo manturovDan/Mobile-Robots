@@ -606,7 +606,7 @@ TEST (ShiftRightTest, intfTest) {
     diag1.addSignal('0', 33, 7);
     diag1.addSignal('X', 42, 2);
 
-    diag1.shift(6);
+    diag1>>6;
 
     ASSERT_EQ(diag1.getLength(), 50);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -632,7 +632,7 @@ TEST (ShiftRightTest, intfTest) {
     ASSERT_EQ(diag1.getSigLen(4), 7);
 
     //
-    diag1.shift(51);
+    diag1>>51;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -640,7 +640,7 @@ TEST (ShiftRightTest, intfTest) {
     ASSERT_EQ(diag1.getSigStart(4), 90);
     ASSERT_EQ(diag1.getSigLen(4), 7);
 
-    diag1.shift(3);
+    diag1>>3;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -648,7 +648,7 @@ TEST (ShiftRightTest, intfTest) {
     ASSERT_EQ(diag1.getSigStart(4), 93);
     ASSERT_EQ(diag1.getSigLen(4), 7);
 
-    diag1.shift(5);
+    diag1>>5;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -656,7 +656,7 @@ TEST (ShiftRightTest, intfTest) {
     ASSERT_EQ(diag1.getSigStart(4), 98);
     ASSERT_EQ(diag1.getSigLen(4), 2);
 
-    diag1.shift(3);
+    diag1>>3;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 4);
@@ -664,7 +664,7 @@ TEST (ShiftRightTest, intfTest) {
     ASSERT_EQ(diag1.getSigStart(3), 99);
     ASSERT_EQ(diag1.getSigLen(3), 1);
 
-    diag1.shift(2);
+    diag1>>2;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 3);
@@ -672,7 +672,7 @@ TEST (ShiftRightTest, intfTest) {
     ASSERT_EQ(diag1.getSigStart(2), 98);
     ASSERT_EQ(diag1.getSigLen(2), 2);
 
-    diag1.shift(300);
+    diag1>>300;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 0);
@@ -688,7 +688,7 @@ TEST (ShiftLeft, intfTest) {
     diag1.addSignal('0', 33, 7);
     diag1.addSignal('X', 42, 2);
 
-    diag1.shift(-3);
+    diag1<<3;
 
     ASSERT_EQ(diag1.getLength(), 41);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -697,7 +697,7 @@ TEST (ShiftLeft, intfTest) {
     ASSERT_EQ(diag1.getSigStart(0), 2);
     ASSERT_EQ(diag1.getSigLen(0), 7);
 
-    diag1.shift(-4);
+    diag1<<4;
 
     ASSERT_EQ(diag1.getLength(), 37);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -723,7 +723,7 @@ TEST (ShiftLeft, intfTest) {
     ASSERT_EQ(diag1.getSigLen(4), 7);
 
     //
-    diag1.shift(-6);
+    diag1<<6;
 
     ASSERT_EQ(diag1.getLength(), 31);
     ASSERT_EQ(diag1.getSigNum(), 4);
@@ -744,7 +744,7 @@ TEST (ShiftLeft, intfTest) {
     ASSERT_EQ(diag1.getSigStart(3), 33-7-6);
     ASSERT_EQ(diag1.getSigLen(3), 7);
 
-    diag1.shift(-14);
+    diag1<<14;
 
     ASSERT_EQ(diag1.getLength(), 31-14);
     ASSERT_EQ(diag1.getSigNum(), 3);
@@ -761,11 +761,11 @@ TEST (ShiftLeft, intfTest) {
     ASSERT_EQ(diag1.getSigStart(2), 33-7-6-14);
     ASSERT_EQ(diag1.getSigLen(2), 7);
 
-    diag1.shift(-140);
+    diag1<<140;
     ASSERT_EQ(diag1.getLength(), 0);
     ASSERT_EQ(diag1.getSigNum(), 0);
 
-    diag1.shift(140);
+    diag1>>140;
 
     ASSERT_EQ(diag1.getLength(), 100);
     ASSERT_EQ(diag1.getSigNum(), 0);
@@ -783,7 +783,10 @@ TEST (noShiftTest, intfTest) {
 
     ASSERT_EQ(diag1 += diag2, 0);
 
-    diag1.shift(0);
+    diag1<<0;
+
+    ASSERT_EQ(diag1<<(-5), 1);
+    ASSERT_EQ(diag1>>(-900), 1);
 
     ASSERT_EQ(diag1.getLength(), 43);
     ASSERT_EQ(diag1.getSigNum(), 5);
