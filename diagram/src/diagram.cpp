@@ -311,4 +311,11 @@ namespace timeD {
 
         return stream;
     }
+
+    std::ostream & operator << (std::ostream &stream, const Diagram & diag) {
+        diag.printDiagram(stream);
+        diag.printSignals(stream);
+
+        return stream;
+    }
 }

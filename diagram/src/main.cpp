@@ -205,8 +205,7 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         else
             work = &diag2;
 
-        work->printDiagram(std::cout);
-        work->printSignals(std::cout);
+        std::cout << (*work) << std::endl;
 
         return 0;
     }
