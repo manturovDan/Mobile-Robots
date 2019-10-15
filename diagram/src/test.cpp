@@ -539,6 +539,18 @@ TEST (intfTest, copyTestSimp) {
     ASSERT_EQ(diag1.getSigNum(), 0);
 }
 
+TEST (intfTest, copyGluingTest) {
+    timeD::Diagram diag1;
+
+    diag1.addSignal('0', 0, 2);
+    diag1.addSignal('1', 2, 3);
+    diag1.addSignal('0', 6, 1);
+
+    diag1.copyDiagram(5);
+    diag1.printDiagram(std::cout);
+    diag1.printSignals(std::cout);
+}
+
 TEST (ShiftRightTest, intfTest) {
     timeD::Diagram diag1;
 

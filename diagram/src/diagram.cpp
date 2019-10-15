@@ -122,6 +122,7 @@ namespace timeD {
             return 1;
 
         int sigst = 0;
+        int sigP = 0;
 
         if (interval[sigNum - 1].val == interval[0].val && interval[0].start == 0) {
             if (sigNum == 1) {
@@ -130,27 +131,28 @@ namespace timeD {
                 return 0;
             }
 
-            interval[0].length += interval[sigNum - 1].length;
-            sigst = interval[sigNum - 1].length;
-            sigNum--;
+            interval[sigNum - 1].length += interval[0].length;
+            sigst = interval[0].length;
+            sigP = 1;
         }
 
-        for (int sig = 0; sig < sigNum; sig++) {
+        for (int sig = sigP; sig < sigNum; sig++) {
             for (int i = 1; i < count; i++) {
-                interval[sigNum*i + sig].val = interval[sig].val;
-                int add = 0;
-                if (sig)
-                    add = i * sigst;
-                interval[sigNum*i + sig].start = interval[sig].start + length*i + add;
-                interval[sigNum*i + sig].length = interval[sig].length;
+                interval[(sigNum - sigP)*i + sig].val = interval[sig].val;
+                interval[(sigNum - sigP)*i + sig].start = interval[sig].start + length*i;
+                interval[(sigNum - sigP)*i + sig].length = interval[sig].length;
             }
         }
 
         length *= count;
-        sigNum *= count;
 
-        interval[0].length -= sigst;
+        if (sigP)
+            sigNum = count * (sigNum - 1) + 1;
+        else
+            sigNum *= count;
 
+        interval[sigNum - 1].length -= sigst;
+        std::cout << "SN: " << sigNum << std::endl;
         return 0;
     }
 
