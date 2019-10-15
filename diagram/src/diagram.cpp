@@ -129,6 +129,7 @@ namespace timeD {
                 interval[0].length *= count;
                 return 0;
             }
+
             interval[0].length += interval[sigNum - 1].length;
             sigst = interval[sigNum - 1].length;
             sigNum--;
@@ -137,7 +138,10 @@ namespace timeD {
         for (int sig = 0; sig < sigNum; sig++) {
             for (int i = 1; i < count; i++) {
                 interval[sigNum*i + sig].val = interval[sig].val;
-                interval[sigNum*i + sig].start = interval[sig].start + length*i;
+                int add = 0;
+                if (sig)
+                    add = i * sigst;
+                interval[sigNum*i + sig].start = interval[sig].start + length*i + add;
                 interval[sigNum*i + sig].length = interval[sig].length;
             }
         }
