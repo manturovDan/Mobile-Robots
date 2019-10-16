@@ -391,13 +391,16 @@ namespace timeD {
 
         stream.getline(getst, size + 1);
 
-        if (strlen(getst) > size) {
-            throw std::invalid_argument("Input error");
+        if (!stream.good()) {
+            return stream;
         }
 
-        timeD::Diagram diagr(getst);
-
-        diag = diagr;
+        try {
+            timeD::Diagram diagr(getst);
+            diag = diagr;
+        } catch (std::exception &ex){
+            stream.setstate(std::ios_base::failbit);
+        }
 
         return stream;
     }

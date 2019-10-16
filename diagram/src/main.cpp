@@ -257,11 +257,12 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
 
         std::cout << "Input ASCII string of symbols" << std::endl;
 
-        try {
-            std::cin.get();
-            std::cin >> (*diag);
-        } catch (std::exception &ex) {
-            std::cout << ex.what() << std::endl;
+        std::cin.get();
+        std::cin >> (*diag);
+
+        if (!std::cin.good()) {
+            std::cout << "Invalid input (stream error)" <<std::endl;
+            std::cin.clear();
             return 1;
         }
 
