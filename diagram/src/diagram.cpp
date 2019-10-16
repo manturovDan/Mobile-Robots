@@ -1,279 +1,407 @@
-#include <string.h>
-
 #include "diagram.h"
 
 namespace timeD {
-	Diagram::Diagram (const char *acds) {
-		int len = strlen(acds);
-		
-		sigNum = 0;
-		length = 0;
+    Diagram::Diagram (const char *acds) {
+        int len = strlen(acds);
 
-		if (!len) 
-			return;
+        sigNum = 0;
+        length = 0;
 
-		char last = acds[0];
-		char cur;
-		
-		int curstart = 0;
+        if (!len)
+            return;
 
-		for (int i = 1; i <= len; ++i) {
-			if (i == len) {
-				addSignal(last, curstart, i - curstart);
-				length = len;
-			}
-			else if (acds[i] != last) {
-				addSignal(last, curstart, i - curstart);
-				curstart = i;
-				last = acds[i];
-				length = i;
-			}
-		}
-		std::cout<<std::endl;
-	}
+        char last = acds[0];
+        char cur;
 
-	Diagram & Diagram::addSignal(char symb, int start, int len) {
-		if (start < length)
-			throw std::invalid_argument("Incorrect start position");
-		if (start + len > SZlen)
-			throw std::invalid_argument("Diagram is too big");
+        int curstart = 0;
 
-		int signal;
+        for (int i = 1; i <= len; ++i) {
+            if (i == len) {
+                addSignal(last, curstart, i - curstart);
+                length = len;
+            }
+            else if (acds[i] != last) {
+                addSignal(last, curstart, i - curstart);
+                curstart = i;
+                last = acds[i];
+                length = i;
+            }
+        }
+    }
 
-		if (len <= 0)
-			return *this;
+    Diagram & Diagram::addSignal(char symb, int start, int len) {
+        if (start < length)
+            throw std::invalid_argument("Incorrect start position");
+        if (start + len > SZlen)
+            throw std::invalid_argument("Diagram is too big");
 
-		bool sigVal;
+        int signal;
 
-		if (symb == '0') {
-			sigVal = 0;
-		} else if (symb == '1') {
-			sigVal = 1;
-		} else if (symb == 'X') {
-			length = start + len;
-			return *this;
-		} else {
-			throw std::invalid_argument("Incorrect signal");
-		}
+        if (len <= 0)
+            return *this;
 
-		if (sigNum >= SZsig)
-			throw std::invalid_argument("Count of signals is too big");
+        bool sigVal;
 
-		if (sigNum > 0 && interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
-			interval[sigNum-1].length += len;
-		} else {
-			interval[sigNum].val = sigVal;
-			interval[sigNum].start = start;
-			interval[sigNum].length = len;
-			sigNum++;
-		}
+        if (symb == '0') {
+            sigVal = 0;
+        } else if (symb == '1') {
+            sigVal = 1;
+        } else if (symb == 'X') {
+            length = start + len;
+            return *this;
+        } else {
+            throw std::invalid_argument("Incorrect signal");
+        }
 
-		length = start + len;
+        if (sigNum >= SZsig)
+            throw std::invalid_argument("Count of signals is too big");
 
-		return *this;
-	}
+        if (sigNum > 0 && interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
+            interval[sigNum-1].length += len;
+        } else {
+            interval[sigNum].val = sigVal;
+            interval[sigNum].start = start;
+            interval[sigNum].length = len;
+            sigNum++;
+        }
 
-	int Diagram::uniDiagram(const Diagram &conc) {
-		if (length + conc.length > SZlen)
-			return 1;
-		if (sigNum + conc.getSigNum() > SZsig)
-			return 1;
+        length = start + len;
 
-		int ist = 0;
-		if(interval[sigNum-1].val == conc.interval[0].val && conc.interval[0].start == 0) {
-			interval[sigNum-1].length += conc.interval[0].length;
-			ist = 1;
-		}
+        return *this;
+    }
 
-		for (int i = ist; i < conc.sigNum; ++i) {
-			interval[sigNum + i].val = conc.interval[i].val;
-			interval[sigNum + i].start = conc.interval[i].start + length;
-			interval[sigNum + i].length = conc.interval[i].length;
-		}
+    Diagram & Diagram::operator += (const Diagram &conc) {
+        if (length + conc.length > SZlen)
+            throw std::invalid_argument("Invalid lengths");
+        if (sigNum + conc.getSigNum() > SZsig)
+            throw std::invalid_argument("Invalid count of signals");
 
-		length += conc.length;
-		sigNum += conc.sigNum - ist;
+        int ist = 0;
+        if(interval[sigNum-1].val == conc.interval[0].val && conc.interval[0].start == 0) {
+            interval[sigNum-1].length += conc.interval[0].length;
+            ist = 1;
+        }
 
-		return 0;
-	}
+        for (int i = ist; i < conc.sigNum; ++i) {
+            interval[sigNum + i - ist].val = conc.interval[i].val;
+            interval[sigNum + i - ist].start = conc.interval[i].start + length;
+            interval[sigNum + i - ist].length = conc.interval[i].length;
+        }
 
-	int Diagram::copyDiagram(int count) {
-		if (length * count > SZlen)
-			return 1;
-		if (sigNum * count > SZsig)
-			return 1;
+        length += conc.length;
+        sigNum += conc.sigNum - ist;
 
-		int sigst = 0;
+        return *this;
+    }
 
-		if (interval[sigNum - 1].val == interval[0].val && interval[0].start == 0) {
-			if (sigNum == 1) {
-				length *= count;
-				interval[0].length *= count;
-				return 0;
-			}
-			interval[0].length += interval[sigNum - 1].length;
-			sigst = interval[sigNum - 1].length;
-			sigNum--;
-		}
+    Diagram & Diagram::operator++() {
+        *this += *this; // !!!
+        return *this;
+    }
 
-		for (int sig = 0; sig < sigNum; sig++) {
-			for (int i = 1; i < count; i++) {
-				interval[sigNum*i + sig].val = interval[sig].val;
-				interval[sigNum*i + sig].start = interval[sig].start + length*i;
-				interval[sigNum*i + sig].length = interval[sig].length;
-			}
-		}
+    Diagram Diagram::operator++(int) {
+        Diagram diag = *this;
+        ++(*this);
+        return diag;
+    }
 
-		length *= count;
-		sigNum *= count;
+    Diagram operator + (const Diagram & ftestm, const Diagram & sterm) {
+        Diagram diag = ftestm;
+        diag += sterm;
+        return diag;
+    }
 
-		interval[0].length -= sigst;
+    int Diagram::copyDiagram(int count) {
+        if (length * count > SZlen)
+            return 1;
+        if (sigNum * count > SZsig)
+            return 1;
 
-		return 0;
-	}
+        int sigst = 0;
+        int sigP = 0;
 
-	int Diagram::cutDiag(int moment) {
-		int sig;
+        if (interval[sigNum - 1].val == interval[0].val && interval[0].start == 0) {
+            if (sigNum == 1) {
+                length *= count;
+                interval[0].length *= count;
+                return 0;
+            }
 
-		for (sig = 0; sig < sigNum; ++sig) {
-			if(interval[sig].start + interval[sig].length > moment) { //start of next signal
-				if (interval[sig].start < moment) {
-					interval[sig].length = moment - interval[sig].start;
-					sigNum = sig + 1;
-					length = moment;
-				}
-				else { //cutting in X, nothing to change
-					sigNum = sig;
-					length = moment;
-				}
-				return 0;
-			}
-		}
+            interval[sigNum - 1].length += interval[0].length;
+            sigst = interval[0].length;
+            sigP = 1;
+        }
 
-		if (moment >= length)
-			return 1;
-		else {
-			length = moment;
-		}
-	}
+        for (int sig = sigP; sig < sigNum; sig++) {
+            for (int i = 1; i < count; i++) {
+                interval[(sigNum - sigP)*i + sig].val = interval[sig].val;
+                interval[(sigNum - sigP)*i + sig].start = interval[sig].start + length*i;
+                interval[(sigNum - sigP)*i + sig].length = interval[sig].length;
+            }
+        }
 
-	Diagram &Diagram::replace(int moment, const Diagram &add) {
-		if (&add == this)
-			return *this;
+        length *= count;
 
-		int cutLeft = (*this).Diagram::cutDiag(moment);
-		if (cutLeft == 1)
-			throw std::invalid_argument("Incorrect position");
+        if (sigP)
+            sigNum = count * (sigNum - 1) + 1;
+        else
+            sigNum *= count;
 
-		int sigAdd;
-		for (sigAdd = 0; sigAdd < add.sigNum; ++sigAdd) {
-			if (add.interval[sigAdd].start + add.interval[sigAdd].length > moment) {
-				if (add.interval[sigAdd].start <= moment) {
-					if (interval[sigNum-1].val == add.interval[sigAdd].val) {
-						interval[sigNum-1].length += add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
-						sigNum--;
-					}
-					else {
-						interval[sigNum].val = add.interval[sigAdd].val;
-						interval[sigNum].start = moment;
-						interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
-					}
-				}
-				else {
-					interval[sigNum].val = add.interval[sigAdd].val;
-					interval[sigNum].start = add.interval[sigAdd].start;
-					interval[sigNum].length = add.interval[sigAdd].length;
-				}
+        interval[sigNum - 1].length -= sigst;
+        return 0;
+    }
 
-				length = interval[sigNum].start + interval[sigNum].length;
-				sigNum++;
-				
-			}
-		}
+    int Diagram::cutDiag(int moment) {
+        int sig;
 
-		return *this;
-	}
+        for (sig = 0; sig < sigNum; ++sig) {
+            if(interval[sig].start + interval[sig].length > moment) { //start of next signal
+                if (interval[sig].start < moment) {
+                    interval[sig].length = moment - interval[sig].start;
+                    sigNum = sig + 1;
+                    length = moment;
+                }
+                else { //cutting in X, nothing to change
+                    sigNum = sig;
+                    length = moment;
+                }
+                return 0;
+            }
+        }
 
-	int Diagram::shift(int times) {
-		for (int sig = 0; sig < sigNum; ++sig) {
-			interval[sig].start += times;
-		}
+        if (moment >= length)
+            return 1;
+        else {
+            length = moment;
+        }
+    }
 
-		length += times;
+    Diagram &Diagram::replace(int moment, const Diagram &add) {
+        if (&add == this)
+            return *this;
 
-		if (length > SZlen) {
-			for (int sig = sigNum-1; sig >= 0; --sig) {
-				if (interval[sig].start < SZlen) {
-					sigNum = sig + 1;
-					length = SZlen;
-					if (interval[sig].start + interval[sig].length > SZlen) {
-						interval[sig].length = SZlen - interval[sig].start;
-					}
+        int cutLeft = (*this).Diagram::cutDiag(moment);
+        if (cutLeft == 1)
+            throw std::invalid_argument("Incorrect position");
 
-					return 0;
-				}
-			}
+        int sigAdd;
+        for (sigAdd = 0; sigAdd < add.sigNum; ++sigAdd) {
+            if (add.interval[sigAdd].start + add.interval[sigAdd].length > moment) {
+                if (add.interval[sigAdd].start <= moment) {
+                    if (interval[sigNum-1].val == add.interval[sigAdd].val) {
+                        interval[sigNum-1].length += add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
+                        sigNum--;
+                    }
+                    else {
+                        interval[sigNum].val = add.interval[sigAdd].val;
+                        interval[sigNum].start = moment;
+                        interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
+                    }
+                }
+                else {
+                    interval[sigNum].val = add.interval[sigAdd].val;
+                    interval[sigNum].start = add.interval[sigAdd].start;
+                    interval[sigNum].length = add.interval[sigAdd].length;
+                }
 
-			length = SZlen;
-			sigNum = 0;
+                length = interval[sigNum].start + interval[sigNum].length;
+                sigNum++;
 
-		}
-		else if (interval[0].start < 0) {
-			for (int sig = 0; sig < sigNum; ++sig) {
-				if (interval[sig].start + interval[sig].length > 0) {
-					if (interval[sig].start < 0) {
-						interval[sig].length += interval[sig].start;
-						interval[sig].start = 0;
-					}
+            }
+        }
 
-					for (int i = sig; i < sigNum; ++i) {
-						interval[i - sig].val = interval[i].val;
-						interval[i - sig].start = interval[i].start;
-						interval[i - sig].length = interval[i].length;
-					}
+        return *this;
+    }
 
-					sigNum -= sig;
+    int Diagram::shift(int times) {
+        for (int sig = 0; sig < sigNum; ++sig) {
+            interval[sig].start += times;
+        }
 
-					return 0;
-				}
-			}
+        length += times;
 
-			length = 0;
-			sigNum = 0;
-		}
+        if (length > SZlen) {
+            for (int sig = sigNum-1; sig >= 0; --sig) {
+                if (interval[sig].start < SZlen) {
+                    sigNum = sig + 1;
+                    length = SZlen;
+                    if (interval[sig].start + interval[sig].length > SZlen) {
+                        interval[sig].length = SZlen - interval[sig].start;
+                    }
 
-		return 0;
-	}
+                    return 0;
+                }
+            }
 
-	std::ostream & Diagram::printDiagram(std::ostream& stream) const {
-		int pos = 0;
-		int signalEl = 0;
-		stream << "Time\t0\t1" << std::endl;
-		while (pos < length) {
-			if (signalEl >= sigNum || pos < interval[signalEl].start) {
-				stream << pos << std::endl;
-				pos++;
-			} else {
-				for(; pos < interval[signalEl].start + interval[signalEl].length; pos++) {
-					if (interval[signalEl].val == 1)
-						stream << pos << "\t\t|" << std::endl;
-					else {
-						stream << pos << "\t|\t" << std::endl;
-					}
-				}
-				signalEl++;
-			}
+            length = SZlen;
+            sigNum = 0;
 
-		}
-		return stream;
-	}
+        }
+        else if (interval[0].start < 0) {
+            for (int sig = 0; sig < sigNum; ++sig) {
+                if (interval[sig].start + interval[sig].length > 0) {
+                    if (interval[sig].start < 0) {
+                        interval[sig].length += interval[sig].start;
+                        interval[sig].start = 0;
+                    }
 
-	std::ostream & Diagram::printSignals(std::ostream& stream) const {
-		stream << "length: " << length << std::endl;
-		for (int i = 0; i < sigNum; i++) {
-			stream << interval[i].val << " - " << interval[i].start << " - " << interval[i].length << std::endl;  
-		}
+                    for (int i = sig; i < sigNum; ++i) {
+                        interval[i - sig].val = interval[i].val;
+                        interval[i - sig].start = interval[i].start;
+                        interval[i - sig].length = interval[i].length;
+                    }
 
-		return stream;
-	}
+                    sigNum -= sig;
+
+                    return 0;
+                }
+            }
+
+            length = 0;
+            sigNum = 0;
+        }
+
+        return 0;
+    }
+
+    Diagram & Diagram::operator << (int times) {
+        if (times < 0)
+            throw std::invalid_argument("Negative shift");
+        shift(-times);
+        return *this;
+    }
+
+    Diagram & Diagram::operator >> (int times) {
+        if (times < 0)
+            throw std::invalid_argument("Negative shift");
+        shift(times);
+        return *this;
+    }
+
+    int Diagram::operator() (const int a, const int b, Diagram &diag) { // [ )
+        if (a >= length || b > length || a >= b)
+            throw std::invalid_argument("Incorrect interval");
+
+        int start = sigNum-1;
+        int end = sigNum-1;
+
+        for (int sig = 0; sig < sigNum; ++sig) {
+            if (interval[sig].start + interval[sig].length > a) {
+                start = sig;
+                break;
+            }
+        }
+
+        for (int sig = start; sig < sigNum; ++sig) {
+            if (interval[sig].start + interval[sig].length >= b) {
+                if (interval[sig].start >= b)
+                    end = sig-1;
+                else
+                    end = sig;
+                break;
+            }
+        }
+
+
+        if (start > end) {
+            diag.sigNum = 0;
+            diag.length = b - a;
+            return 0;
+        }
+        else if (start == end && start == sigNum-1 && a > interval[sigNum - 1].start) {
+            diag.sigNum = 0;
+            diag.length = b - a;
+            return 0;
+        }
+        else {
+            int first_start = 0;
+            int first_length = interval[start]. start + interval[start].length - a;
+            if (first_length > interval[start].length) {
+                first_start = first_length - interval[start].length;
+                first_length = interval[start].length;
+            }
+
+            int full_len = b - a;
+            int end_length = b - interval[end].start;
+
+            if (end_length > interval[end].length)
+                end_length = interval[end].length;
+
+            diag.sigNum = end - start + 1;
+            diag.length = b - a;
+
+            for (int i = 0; i < sigNum; ++i) {
+                diag.interval[i].val = interval[i + start].val;
+                diag.interval[i].start = interval[i + start].start - a;
+                diag.interval[i].length = interval[i + start].length;
+            }
+
+            diag.interval[0].start = first_start;
+            diag.interval[0].length = first_length;
+            diag.interval[diag.sigNum - 1].length = end_length;
+
+            return 0;
+
+        }
+
+    }
+
+    std::ostream & Diagram::printDiagram(std::ostream& stream) const {
+        int pos = 0;
+        int signalEl = 0;
+        stream << "Time\t0\t1" << std::endl;
+        while (pos < length) {
+            if (signalEl >= sigNum || pos < interval[signalEl].start) {
+                stream << pos << std::endl;
+                pos++;
+            } else {
+                for(; pos < interval[signalEl].start + interval[signalEl].length; pos++) {
+                    if (interval[signalEl].val == 1)
+                        stream << pos << "\t\t|" << std::endl;
+                    else {
+                        stream << pos << "\t|\t" << std::endl;
+                    }
+                }
+                signalEl++;
+            }
+
+        }
+        return stream;
+    }
+
+    std::ostream & Diagram::printSignals(std::ostream& stream) const {
+        stream << "length: " << length << std::endl;
+        for (int i = 0; i < sigNum; i++) {
+            stream << interval[i].val << " - " << interval[i].start << " - " << interval[i].length << std::endl;
+        }
+
+        return stream;
+    }
+
+    std::ostream & operator << (std::ostream &stream, const Diagram & diag) {
+        diag.printDiagram(stream);
+        diag.printSignals(stream);
+
+        return stream;
+    }
+
+    std::istream & operator >> (std::istream &stream, Diagram & diag) {
+        int size = diag.getSZlen();
+        char getst[size];
+
+        stream.getline(getst, size + 1);
+
+        if (!stream.good()) {
+            return stream;
+        }
+
+        try {
+            timeD::Diagram diagr(getst);
+            diag = diagr;
+        } catch (std::exception &ex){
+            stream.setstate(std::ios_base::failbit);
+        }
+
+        return stream;
+    }
 }

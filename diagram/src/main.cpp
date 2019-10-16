@@ -3,224 +3,290 @@
 
 template <class T>
 int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
-	bool more = false;
-	int gnStatus;
-	while (1) {
-		if (more) 
-			std::cout << again << std::endl;
+    bool more = false;
+    int gnStatus;
+    while (1) {
+        if (more)
+            std::cout << again << std::endl;
 
-		std::cin >> inp;
-		if (!std::cin.good())
-			throw std::invalid_argument("Invalid input");
-		if(std::abs(inp) > 100000000 || unneg && inp < 0)
-			more = true;
-		else 
-			return 0;
-	}
+        std::cin >> inp;
+        if (!std::cin.good())
+            throw std::invalid_argument("Invalid input (inpSmt)");
+        if(std::abs(inp) > 100000000 || (unneg && inp < 0))
+            more = true;
+        else
+            return 0;
+    }
 }
 
 int chooseAct() {
-	int choise;
-	while (1) {
-		std::cout<<"Choose the number:\n\
+    int choise;
+    while (1) {
+        std::cout<<"Choose the number:\n\
 	1. Input signal segment\n\
 	2. Unite two diagrams\n\
 	3. Replace the first diagram on the second (from definetely time)\n\
 	4. Copy the diagram n times\n\
 	5. Shift the diagram\n\
 	6. Print diagram\n\
-	0. Exit" << std:: endl;	
-		
-		inpSmt(choise);
-		if(choise >= 0 && choise <= 6)
-			return choise;
+	7. Make one diagram as the segment of another one\n\
+	8. Create diagram from ASCII\n\
+	0. Exit" << std:: endl;
 
-		std::cout << "Incorrect value!" << std::endl;
-	}
+        inpSmt(choise);
+        if(choise >= 0 && choise <= 8)
+            return choise;
+
+        std::cout << "Incorrect value!" << std::endl;
+    }
 }
 
 int chooseDiag(int diags, const char *welcome) {
-	int choise;
-	std::cout << welcome << std::endl;
-	
-	while (1) {
-		std::cout << "Choose one of " << diags << " diagrams" << std::endl;
-		inpSmt(choise);
-		if(choise > 0 && choise <= diags)
-			return choise;
+    int choise;
+    std::cout << welcome << std::endl;
 
-		std::cout << "Incorrect value!" << std::endl;
-	}
+    while (1) {
+        std::cout << "Choose one of " << diags << " diagrams" << std::endl;
+        inpSmt(choise);
+        if(choise > 0 && choise <= diags)
+            return choise;
+
+        std::cout << "Incorrect value!" << std::endl;
+    }
 }
 
 int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
-	if (act == 1) {
-			int diag = chooseDiag(2, "Choose diagram to adding segment");
+    if (act == 1) {
+        int diag = chooseDiag(2, "Choose diagram to adding segment");
 
-			std::cout << "Input signal (0 or 1 or X)" << std::endl;
-			char symb;
-			inpSmt(symb);
+        std::cout << "Input signal (0 or 1 or X)" << std::endl;
+        char symb;
+        inpSmt(symb);
 
-			if (symb != '0' && symb != '1' && symb != 'X') {
-				std::cout << "Incorrect signal" << std::endl;
-				return 1;
-			}
+        if (symb != '0' && symb != '1' && symb != 'X') {
+            std::cout << "Incorrect signal" << std::endl;
+            return 1;
+        }
 
-			int maxStart;
-			int maxLen;
-			timeD::Diagram *work;
+        int maxStart;
+        int maxLen;
+        timeD::Diagram *work;
 
-			if (diag == 1)
-				work = &diag1;
-			else
-				work = &diag2;
-			
-			int start;
-			int len;
+        if (diag == 1)
+            work = &diag1;
+        else
+            work = &diag2;
 
-			std::cout << "Input start time ot the segment" << std::endl;
-			inpSmt(start);
-			std::cout << "Input length of the segment" << std::endl;
-			inpSmt(len);
+        int start;
+        int len;
 
-			try {
-				work->addSignal(symb, start, len);
-			} catch (std::exception &ex) {
-				std::cout << ex.what() << std::endl;
-				return 1;
-			}
+        std::cout << "Input start time ot the segment" << std::endl;
+        inpSmt(start);
+        std::cout << "Input length of the segment" << std::endl;
+        inpSmt(len);
 
-			std::cout << "Successful adding" << std::endl;
-			return 0;
-		}
-		else if (act == 2) {
-			int diagLeft = chooseDiag(2, "Choose the root diagram");
-			int diagRight = chooseDiag(2, "Choose diagram which to add");
+        try {
+            work->addSignal(symb, start, len);
+        } catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
+            return 1;
+        }
 
-			timeD::Diagram *root;
-			timeD::Diagram *add;
-			if (diagLeft == 1)
-				root = &diag1;
-			else
-				root = &diag2;
+        std::cout << "Correct adding" << std::endl;
+        return 0;
+    }
+    else if (act == 2) {
+        int diagLeft = chooseDiag(2, "Choose the root diagram");
+        int diagRight = chooseDiag(2, "Choose diagram which to add");
 
-			if (diagRight == 1)
-				add = &diag1;
-			else
-				add = &diag2;
+        timeD::Diagram *root;
+        timeD::Diagram *add;
+        if (diagLeft == 1)
+            root = &diag1;
+        else
+            root = &diag2;
 
-			if(root->uniDiagram(*add)) {
-				std::cout << "Unsuccessfull union" << std::endl;
-				return 1;
-			}
+        if (diagRight == 1)
+            add = &diag1;
+        else
+            add = &diag2;
 
-			std::cout << "Successfull union" << std::endl;
-			return 0;
+        try {
+            (*root) += (*add);
+        }
+        catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
+            std::cout << "Incorrect union" << std::endl;
+            return 1;
+        }
 
-		}
-		else if (act == 3) {
-			int diagLeft = chooseDiag(2, "Choose the root diagram");
-			int diagRight = chooseDiag(2, "Choose diagram which to add");
+        std::cout << "Correct union" << std::endl;
+        return 0;
 
-			timeD::Diagram *root;
-			timeD::Diagram *add;
-			if (diagLeft == 1)
-				root = &diag1;
-			else
-				root = &diag2;
+    }
+    else if (act == 3) {
+        int diagLeft = chooseDiag(2, "Choose the root diagram");
+        int diagRight = chooseDiag(2, "Choose diagram which to add");
 
-			if (diagRight == 1)
-				add = &diag1;
-			else
-				add = &diag2;
+        timeD::Diagram *root;
+        timeD::Diagram *add;
+        if (diagLeft == 1)
+            root = &diag1;
+        else
+            root = &diag2;
 
-			std::cout << "Input moment of time from which root diagram will be changed" << std::endl;
-			int moment;
-			inpSmt(moment);
+        if (diagRight == 1)
+            add = &diag1;
+        else
+            add = &diag2;
 
-			try {
-				root->replace(moment, *add);
-			} catch (std::exception &ex) {
-				std::cout << ex.what() << std::endl;
-				return 1;
-			}
+        std::cout << "Input moment of time from which root diagram will be changed" << std::endl;
+        int moment;
+        inpSmt(moment);
 
-			std::cout << "Successfull replacing" << std::endl;
-			return 0;
-		}
-		else if (act == 4) {
-			int diag = chooseDiag(2, "Choose diagram to copy");
-			
-			timeD::Diagram *work;
-			if (diag == 1)
-				work = &diag1;
-			else
-				work = &diag2;
+        try {
+            root->replace(moment, *add);
+        } catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
+            return 1;
+        }
 
-			std::cout << "Input count of copies" << std::endl;
-			int ccnt;
-			inpSmt(ccnt);
+        std::cout << "Correct replacing" << std::endl;
+        return 0;
+    }
+    else if (act == 4) {
+        int diag = chooseDiag(2, "Choose diagram to copy");
 
-			if(work->copyDiagram(ccnt)) {
-				std::cout << "Error. Diagram will be too big" << std::endl;
-				return 1;
-			}
+        timeD::Diagram *work;
+        if (diag == 1)
+            work = &diag1;
+        else
+            work = &diag2;
 
-			std::cout << "Successfull copying" << std::endl;
-			return 0;
-		}
-		else if (act == 5) {
-			int diag = chooseDiag(2, "Choose diagram to shift");
-			
-			timeD::Diagram *work;
-			if (diag == 1)
-				work = &diag1;
-			else
-				work = &diag2;
+        std::cout << "Input count of copies" << std::endl;
+        int ccnt;
+        inpSmt(ccnt);
 
-			std::cout << "Input number of shift (+/-)" << std::endl;
-			int shf;
-			inpSmt(shf);
+        if(work->copyDiagram(ccnt)) {
+            std::cout << "Error. Diagram will be too big" << std::endl;
+            return 1;
+        }
 
-			if(work->shift(shf)) {
-				std::cout << "Error while shifting" << std::endl;
-				return 1;
-			}
+        std::cout << "Correct copying" << std::endl;
+        return 0;
+    }
+    else if (act == 5) {
+        int diag = chooseDiag(2, "Choose diagram to shift");
 
-			std::cout << "Successfull shifting" << std::endl;
-			return 0;
-		}
-		else if (act == 6) {
-			int diag = chooseDiag(2, "Choose diagram to print");
+        timeD::Diagram *work;
+        if (diag == 1)
+            work = &diag1;
+        else
+            work = &diag2;
 
-			timeD::Diagram *work;
-			if (diag == 1)
-				work = &diag1;
-			else
-				work = &diag2;
+        std::cout << "Input number of shift (+/-)" << std::endl;
+        int shf;
+        inpSmt(shf);
 
-			work->printDiagram(std::cout);
-			work->printSignals(std::cout);
+        if (shf >= 0)
+            (*work)>>shf;
+        else
+            (*work)<<(-shf);
 
-			return 0;
-		}
 
-		return -1;
+        std::cout << "Correct shifting" << std::endl;
+        return 0;
+    }
+    else if (act == 6) {
+        int diag = chooseDiag(2, "Choose diagram to print");
+
+        timeD::Diagram *work;
+        if (diag == 1)
+            work = &diag1;
+        else
+            work = &diag2;
+
+        std::cout << (*work) << std::endl;
+
+        return 0;
+    }
+    else if (act == 7) {
+        int d1 = chooseDiag(2, "Choose source diagram");
+        int d2 = chooseDiag(2, "Choose victim diagram (well be cleared)");
+        int a;
+        int b;
+
+        timeD::Diagram *from;
+        timeD::Diagram *to;
+
+        if (d1 == 1)
+            from = &diag1;
+        else
+            from = &diag2;
+
+        if (d2 == 1)
+            to = &diag1;
+        else
+            to = &diag2;
+
+        std::cout << "Input left boundary number - segment [ )" << std::endl;
+        inpSmt(a, true);
+        std::cout << "Input right boundary number" << std::endl;
+        inpSmt(b, true);
+
+        try {
+            (*from)(a, b, *to);
+        } catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
+            return 1;
+        }
+
+        std::cout << "Correct segment copying" << std::endl;
+
+        return 0;
+    }
+    else if (act == 8) {
+        int dgr = chooseDiag(2, "Choose diagram to input");
+
+        timeD::Diagram *diag;
+
+        if (dgr == 1)
+            diag = &diag1;
+        else
+            diag = &diag2;
+
+        std::cout << "Input ASCII string of symbols" << std::endl;
+
+        std::cin.get();
+        std::cin >> (*diag);
+
+        if (!std::cin.good()) {
+            std::cout << "Invalid input (stream error)" <<std::endl;
+            std::cin.clear();
+            return 1;
+        }
+
+        std::cout << "Correctly created" << std::endl;
+
+        return 0;
+    }
+
+    return -1;
 }
 
 int main() {
-	timeD::Diagram diag1;
-	timeD::Diagram diag2;
-	
-	std::cout << "Two diagrams have created (Empty)." << std::endl;
+    timeD::Diagram diag1;
+    timeD::Diagram diag2;
 
-	int choise;
-	while (1) {
-		choise = chooseAct();
-		if (!choise)
-			return 0;
-		launchFunc(diag1, diag2, choise);
+    std::cout << "II Realisation\nTwo diagrams have created (Empty)." << std::endl;
 
-	}
+    int choise;
+    while (1) {
+        choise = chooseAct();
+        if (!choise)
+            return 0;
+        launchFunc(diag1, diag2, choise);
+
+    }
 
 }
