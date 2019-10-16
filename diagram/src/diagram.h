@@ -4,6 +4,7 @@
 #include <iostream>
 #include <exception>
 #include <string.h>
+#include <iomanip>
 
 namespace timeD {
     struct signal {
@@ -28,14 +29,15 @@ namespace timeD {
         std::ostream &printDiagram(std::ostream&) const;
         std::ostream &printSignals(std::ostream&) const;
 
-        int operator += (const Diagram&);
-        Diagram operator ++ ();
+        Diagram& operator += (const Diagram&); // A+=B+=C;
+        Diagram & operator ++ (); // ++ ++ A;
         Diagram operator ++ (int);
-        Diagram operator + (const Diagram &);
-        int operator << (int);
-        int operator >> (int);
+        Diagram & operator << (int);
+        Diagram & operator >> (int);
         friend std::ostream & operator << (std::ostream &, const Diagram &);
-        Diagram operator () (const int, const int);
+        friend std::istream & operator >> (std::istream &, Diagram &);
+        friend Diagram operator + (const Diagram &, const Diagram &);
+        int operator () ( int,  int, Diagram &);
 
         int copyDiagram(int);
         int cutDiag(int);

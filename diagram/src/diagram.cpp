@@ -1,5 +1,3 @@
-#include <string.h>
-
 #include "diagram.h"
 
 namespace timeD {
@@ -72,11 +70,11 @@ namespace timeD {
         return *this;
     }
 
-    int Diagram::operator += (const Diagram &conc) {
+    Diagram & Diagram::operator += (const Diagram &conc) {
         if (length + conc.length > SZlen)
-            return 1;
+            throw std::invalid_argument("Invalid lengths");
         if (sigNum + conc.getSigNum() > SZsig)
-            return 1;
+            throw std::invalid_argument("Invalid count of signals");
 
         int ist = 0;
         if(interval[sigNum-1].val == conc.interval[0].val && conc.interval[0].start == 0) {
@@ -93,13 +91,12 @@ namespace timeD {
         length += conc.length;
         sigNum += conc.sigNum - ist;
 
-        return 0;
+        return *this;
     }
 
-    Diagram Diagram::operator++() {
-        *this += *this;
-        Diagram diag = *this;
-        return diag;
+    Diagram & Diagram::operator++() {
+        *this += *this; // !!!
+        return *this;
     }
 
     Diagram Diagram::operator++(int) {
@@ -108,9 +105,9 @@ namespace timeD {
         return diag;
     }
 
-    Diagram Diagram::operator + (const Diagram & term) {
-        Diagram diag = *this;
-        diag += term;
+    Diagram operator + (const Diagram & ftestm, const Diagram & sterm) {
+        Diagram diag = ftestm;
+        diag += sterm;
         return diag;
     }
 
@@ -267,23 +264,23 @@ namespace timeD {
         return 0;
     }
 
-    int Diagram::operator << (int times) {
+    Diagram & Diagram::operator << (int times) {
         if (times < 0)
-            return 1;
-        return shift(-times);
+            throw std::invalid_argument("Negative shift");
+        shift(-times);
+        return *this;
     }
 
-    int Diagram::operator >> (int times) {
+    Diagram & Diagram::operator >> (int times) {
         if (times < 0)
-            return 1;
-        return shift(times);
+            throw std::invalid_argument("Negative shift");
+        shift(times);
+        return *this;
     }
 
-    Diagram Diagram::operator() (const int a, const int b) { // [ )
+    int Diagram::operator() (const int a, const int b, Diagram &diag) { // [ )
         if (a >= length || b > length || a >= b)
             throw std::invalid_argument("Incorrect interval");
-
-        Diagram diag;
 
         int start = sigNum-1;
         int end = sigNum-1;
@@ -309,12 +306,12 @@ namespace timeD {
         if (start > end) {
             diag.sigNum = 0;
             diag.length = b - a;
-            return diag;
+            return 0;
         }
         else if (start == end && start == sigNum-1 && a > interval[sigNum - 1].start) {
             diag.sigNum = 0;
             diag.length = b - a;
-            return diag;
+            return 0;
         }
         else {
             int first_start = 0;
@@ -343,7 +340,7 @@ namespace timeD {
             diag.interval[0].length = first_length;
             diag.interval[diag.sigNum - 1].length = end_length;
 
-            return diag;
+            return 0;
 
         }
 
@@ -384,6 +381,23 @@ namespace timeD {
     std::ostream & operator << (std::ostream &stream, const Diagram & diag) {
         diag.printDiagram(stream);
         diag.printSignals(stream);
+
+        return stream;
+    }
+
+    std::istream & operator >> (std::istream &stream, Diagram & diag) {
+        int size = diag.getSZlen();
+        char getst[size];
+
+        stream.getline(getst, size + 1);
+
+        if (strlen(getst) > size) {
+            throw std::invalid_argument("Input error");
+        }
+
+        timeD::Diagram diagr(getst);
+
+        diag = diagr;
 
         return stream;
     }

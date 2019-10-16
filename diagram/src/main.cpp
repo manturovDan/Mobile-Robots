@@ -11,7 +11,7 @@ int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try aga
 
         std::cin >> inp;
         if (!std::cin.good())
-            throw std::invalid_argument("Invalid input");
+            throw std::invalid_argument("Invalid input (inpSmt)");
         if(std::abs(inp) > 100000000 || (unneg && inp < 0))
             more = true;
         else
@@ -30,10 +30,11 @@ int chooseAct() {
 	5. Shift the diagram\n\
 	6. Print diagram\n\
 	7. Make one diagram as the segment of another one\n\
+	8. Create diagram from ASCII\n\
 	0. Exit" << std:: endl;
 
         inpSmt(choise);
-        if(choise >= 0 && choise <= 7)
+        if(choise >= 0 && choise <= 8)
             return choise;
 
         std::cout << "Incorrect value!" << std::endl;
@@ -110,7 +111,11 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         else
             add = &diag2;
 
-        if((*root) += (*add)) {
+        try {
+            (*root) += (*add);
+        }
+        catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
             std::cout << "Incorrect union" << std::endl;
             return 1;
         }
@@ -183,16 +188,11 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         int shf;
         inpSmt(shf);
 
-        int retStat = 0;
         if (shf >= 0)
-            retStat = (*work)>>shf;
+            (*work)>>shf;
         else
-            retStat = (*work)<<(-shf);
+            (*work)<<(-shf);
 
-        if(retStat) {
-            std::cout << "Error while shifting" << std::endl;
-            return 1;
-        }
 
         std::cout << "Correct shifting" << std::endl;
         return 0;
@@ -235,13 +235,37 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         inpSmt(b, true);
 
         try {
-            (*to) = (*from)(a, b);
+            (*from)(a, b, *to);
         } catch (std::exception &ex) {
             std::cout << ex.what() << std::endl;
             return 1;
         }
 
         std::cout << "Correct segment copying" << std::endl;
+
+        return 0;
+    }
+    else if (act == 8) {
+        int dgr = chooseDiag(2, "Choose diagram to input");
+
+        timeD::Diagram *diag;
+
+        if (dgr == 1)
+            diag = &diag1;
+        else
+            diag = &diag2;
+
+        std::cout << "Input ASCII string of symbols" << std::endl;
+
+        try {
+            std::cin.get();
+            std::cin >> (*diag);
+        } catch (std::exception &ex) {
+            std::cout << ex.what() << std::endl;
+            return 1;
+        }
+
+        std::cout << "Correctly created" << std::endl;
 
         return 0;
     }
