@@ -6,6 +6,8 @@
 #include <string.h>
 #include <iomanip>
 
+//version 3
+
 namespace timeD {
     struct signal {
         bool val;
