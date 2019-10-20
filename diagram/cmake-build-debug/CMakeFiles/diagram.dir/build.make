@@ -43,10 +43,10 @@ RM = /home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -E remove
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/danila/CLionProjects/labs3sem/diagram
+CMAKE_SOURCE_DIR = /home/danila/source/labs3sem/diagram
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug
+CMAKE_BINARY_DIR = /home/danila/source/labs3sem/diagram/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/diagram.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/diagram.dir/flags.make
 
 CMakeFiles/diagram.dir/src/main.cpp.o: CMakeFiles/diagram.dir/flags.make
 CMakeFiles/diagram.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/diagram.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diagram.dir/src/main.cpp.o -c /home/danila/CLionProjects/labs3sem/diagram/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/diagram.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diagram.dir/src/main.cpp.o -c /home/danila/source/labs3sem/diagram/src/main.cpp
 
 CMakeFiles/diagram.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diagram.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/CLionProjects/labs3sem/diagram/src/main.cpp > CMakeFiles/diagram.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/labs3sem/diagram/src/main.cpp > CMakeFiles/diagram.dir/src/main.cpp.i
 
 CMakeFiles/diagram.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diagram.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/CLionProjects/labs3sem/diagram/src/main.cpp -o CMakeFiles/diagram.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/labs3sem/diagram/src/main.cpp -o CMakeFiles/diagram.dir/src/main.cpp.s
 
 CMakeFiles/diagram.dir/src/diagram.cpp.o: CMakeFiles/diagram.dir/flags.make
 CMakeFiles/diagram.dir/src/diagram.cpp.o: ../src/diagram.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/diagram.dir/src/diagram.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diagram.dir/src/diagram.cpp.o -c /home/danila/CLionProjects/labs3sem/diagram/src/diagram.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/diagram.dir/src/diagram.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diagram.dir/src/diagram.cpp.o -c /home/danila/source/labs3sem/diagram/src/diagram.cpp
 
 CMakeFiles/diagram.dir/src/diagram.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diagram.dir/src/diagram.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/CLionProjects/labs3sem/diagram/src/diagram.cpp > CMakeFiles/diagram.dir/src/diagram.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/labs3sem/diagram/src/diagram.cpp > CMakeFiles/diagram.dir/src/diagram.cpp.i
 
 CMakeFiles/diagram.dir/src/diagram.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diagram.dir/src/diagram.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/CLionProjects/labs3sem/diagram/src/diagram.cpp -o CMakeFiles/diagram.dir/src/diagram.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/labs3sem/diagram/src/diagram.cpp -o CMakeFiles/diagram.dir/src/diagram.cpp.s
 
 # Object files for target diagram
 diagram_OBJECTS = \
@@ -95,7 +95,7 @@ diagram: CMakeFiles/diagram.dir/src/main.cpp.o
 diagram: CMakeFiles/diagram.dir/src/diagram.cpp.o
 diagram: CMakeFiles/diagram.dir/build.make
 diagram: CMakeFiles/diagram.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable diagram"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable diagram"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/diagram.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/diagram.dir/clean:
 .PHONY : CMakeFiles/diagram.dir/clean
 
 CMakeFiles/diagram.dir/depend:
-	cd /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/danila/CLionProjects/labs3sem/diagram /home/danila/CLionProjects/labs3sem/diagram /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug /home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/danila/source/labs3sem/diagram/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/danila/source/labs3sem/diagram /home/danila/source/labs3sem/diagram /home/danila/source/labs3sem/diagram/cmake-build-debug /home/danila/source/labs3sem/diagram/cmake-build-debug /home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/diagram.dir/depend
 

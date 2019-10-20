@@ -1,4 +1,4 @@
-# Install script for directory: /home/danila/CLionProjects/labs3sem/diagram
+# Install script for directory: /home/danila/source/labs3sem/diagram
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/danila/CLionProjects/labs3sem/diagram/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/danila/source/labs3sem/diagram/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
