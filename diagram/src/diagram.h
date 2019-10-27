@@ -7,7 +7,7 @@
 #include <iomanip>
 
 //version 3
-
+//TODO Refactoring ref scale
 namespace timeD {
     struct signal {
         bool val;
@@ -24,7 +24,11 @@ namespace timeD {
         int length;
         int sigNum;
         int scale; //count og magnifiers
+
         int cutDiag(int);
+        void copyInterval(const Diagram &, int, int);
+        void copyInterval(const signal *, int, int);
+        int shift(int);
     public:
         Diagram(): length(0), sigNum(0), scale(1), interval(new signal[magnifier]) {}
         Diagram(const char *);
@@ -49,10 +53,10 @@ namespace timeD {
         friend std::istream & operator >> (std::istream &, Diagram &);
         friend Diagram operator + (const Diagram &, const Diagram &);
         int operator () ( int,  int, Diagram &);
+        int refScale();
 
         int copyDiagram(int);
         Diagram &replace(int, const Diagram&);
-        int shift(int);
 
         int getLength() const { return length; }
         int getSigNum() const { return sigNum; }

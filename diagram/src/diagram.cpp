@@ -35,10 +35,8 @@ namespace timeD {
 
     Diagram::Diagram(const Diagram &reference): sigNum(reference.sigNum), length(reference.length), scale(reference.scale) {
         interval = new signal[scale * magnifier];
-        for (int i = 0; i < sigNum; ++i) { //TODO refactoring in one function
-            interval[i].start = reference.interval[i].start;
-            interval[i].length = reference.interval[i].length;
-            interval[i].val = reference.interval[i].val;
+        for (int i = 0; i < sigNum; ++i) {
+            copyInterval(reference, i, i);
         }
     }
 
@@ -78,9 +76,7 @@ namespace timeD {
                 signal *old = interval;
                 interval = new signal[magnifier * (++scale)];
                 for (int i = 0; i < sigNum; ++i) {
-                    interval[i].start = old[i].start;
-                    interval[i].length = old[i].length;
-                    interval[i].val = old[i].val;
+                    copyInterval(old, i, i);
                 }
                 delete[] old;
             }
@@ -105,9 +101,7 @@ namespace timeD {
             interval = new signal[scale * magnifier];
 
             for (int i = 0; i < sigNum; ++i) {
-                interval[i].start = reference.interval[i].start;
-                interval[i].length = reference.interval[i].length;
-                interval[i].val = reference.interval[i].val;
+                copyInterval(reference, i, i);
             }
         }
         return *this;
@@ -143,9 +137,7 @@ namespace timeD {
             signal *old = interval;
             interval = new signal[magnifier * newScale];
             for (int ia = 0; ia < sigNum; ++ia) {
-                interval[ia].start = old[ia].start;
-                interval[ia].length = old[ia].length;
-                interval[ia].val = old[ia].val;
+                copyInterval(old, ia, ia);
             }
             delete[] old;
             scale = newScale;
@@ -209,9 +201,7 @@ namespace timeD {
             signal *old = interval;
             interval = new signal[magnifier * newScale];
             for (int ia = 0; ia < sigNum; ++ia) {
-                interval[ia].start = old[ia].start;
-                interval[ia].length = old[ia].length;
-                interval[ia].val = old[ia].val;
+                copyInterval(old, ia, ia);
             }
             scale = newScale;
             delete[] old;
@@ -236,7 +226,7 @@ namespace timeD {
         return 0;
     }
 
-    int Diagram::cutDiag(int moment) {
+    int Diagram::cutDiag(int moment) { // don't forget about freeing mem
         int sig;
 
         for (sig = 0; sig < sigNum; ++sig) {
@@ -285,13 +275,11 @@ namespace timeD {
                         sigNum--;
                     }
                     else {
-                        if (sigNum >= magnifier * scale) { //TODO refactor
+                        if (sigNum >= magnifier * scale) {
                             signal *old = interval;
                             interval = new signal[magnifier * (++scale)];
                             for (int i = 0; i < sigNum; ++i) {
-                                interval[i].start = old[i].start;
-                                interval[i].length = old[i].length;
-                                interval[i].val = old[i].val;
+                                copyInterval(old, i, i);
                             }
                             delete[] old;
                         }
@@ -306,16 +294,12 @@ namespace timeD {
                         signal *old = interval;
                         interval = new signal[magnifier * (++scale)];
                         for (int i = 0; i < sigNum; ++i) {
-                            interval[i].start = old[i].start;
-                            interval[i].length = old[i].length;
-                            interval[i].val = old[i].val;
+                            copyInterval(old, i, i);
                         }
                         delete[] old;
                     }
 
-                    interval[sigNum].val = add.interval[sigAdd].val;
-                    interval[sigNum].start = add.interval[sigAdd].start;
-                    interval[sigNum].length = add.interval[sigAdd].length;
+                    copyInterval(add, sigNum, sigAdd);
                 }
 
                 length = interval[sigNum].start + interval[sigNum].length;
@@ -345,24 +329,7 @@ namespace timeD {
 
         length += times;
 
-        if (length > maxLen) {
-            for (int sig = sigNum-1; sig >= 0; --sig) {
-                if (interval[sig].start < maxLen) {
-                    sigNum = sig + 1;
-                    length = maxLen;
-                    if (interval[sig].start + interval[sig].length > maxLen) {
-                        interval[sig].length = maxLen - interval[sig].start;
-                    }
-
-                    return 0;
-                }
-            }
-
-            length = maxLen;
-            sigNum = 0;
-
-        }
-        else if (interval[0].start < 0) {
+        if (interval[0].start < 0) {
             for (int sig = 0; sig < sigNum; ++sig) {
                 if (interval[sig].start + interval[sig].length > 0) {
                     if (interval[sig].start < 0) {
@@ -400,6 +367,34 @@ namespace timeD {
         if (times < 0)
             throw std::invalid_argument("Negative shift");
         shift(times);
+
+        if (length > maxLen) {
+            for (int sig = sigNum-1; sig >= 0; --sig) {
+                if (interval[sig].start < maxLen) {
+                    sigNum = sig + 1;
+                    length = maxLen;
+                    if (interval[sig].start + interval[sig].length > maxLen) {
+                        interval[sig].length = maxLen - interval[sig].start;
+                    }
+
+                    if (refScale() < scale) {
+                        signal *old = interval;
+                        interval = new signal[refScale()];
+                        for (int i = 0; i < sigNum; ++i) {
+                            copyInterval(old, i, i);
+                        }
+                        delete[] old;
+                    }
+
+                    return *this;
+                }
+            }
+
+            length = maxLen;
+            sigNum = 0;
+
+        }
+
         return *this;
     }
 
@@ -469,6 +464,25 @@ namespace timeD {
 
         }
 
+    }
+
+    void Diagram::copyInterval(const Diagram & recipient, int leftPos, int rightPos) {
+        interval[leftPos].val = recipient.interval[rightPos].val;
+        interval[leftPos].start = recipient.interval[rightPos].start;
+        interval[leftPos].length = recipient.interval[rightPos].length;
+    }
+
+    void Diagram::copyInterval(const timeD::signal * old, int leftPos, int rightPos) {
+        interval[leftPos].start = old[rightPos].start;
+        interval[leftPos].length = old[rightPos].length;
+        interval[leftPos].val = old[rightPos].val;
+    }
+
+    int Diagram::refScale() {
+        int newScale = sigNum / magnifier;
+        if (sigNum % magnifier > 0)
+            ++newScale;
+        return newScale;
     }
 
     std::ostream & Diagram::printDiagram(std::ostream& stream) const {
