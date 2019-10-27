@@ -861,7 +861,10 @@ TEST(intfTest, shiftRightBoundary) {
 
         ASSERT_EQ(diag.getScale(), 2);
 
-        diag>>20;
+        diag>>19;
+        ASSERT_EQ(diag.getSigNum(), 0);
+
+        diag>>10;
         ASSERT_EQ(diag.getLength(), diag.getMaxLen());
         ASSERT_EQ(diag.getSigNum(), 0);
         ASSERT_EQ(diag.getScale(), 1);
@@ -869,8 +872,8 @@ TEST(intfTest, shiftRightBoundary) {
     }
 }
 
-/*
-TEST (ShiftLeft, intfTest) {
+
+TEST (intfTest, ShiftLeft) {
     timeD::Diagram diag1;
 
     diag1.addSignal('0', 5, 7);
@@ -959,10 +962,43 @@ TEST (ShiftLeft, intfTest) {
 
     diag1>>140;
 
-    ASSERT_EQ(diag1.getLength(), 100);
+    ASSERT_EQ(diag1.getLength(), 140);
     ASSERT_EQ(diag1.getSigNum(), 0);
 }
 
+TEST(intfTest, shiftLefttBoundary) {
+    timeD::Diagram diag("010101010101010101010101111");
+    ASSERT_EQ(diag.getLength(), 27);
+    ASSERT_EQ(diag.getSigNum(), 24);
+    ASSERT_EQ(diag.getScale(), 3);
+
+    diag<<5;
+    ASSERT_EQ(diag.getLength(), 22);
+    ASSERT_EQ(diag.getSigNum(), 19);
+    ASSERT_EQ(diag.getScale(), 2);
+
+    diag<<10;
+    ASSERT_EQ(diag.getLength(), 12);
+    ASSERT_EQ(diag.getSigNum(), 9);
+    ASSERT_EQ(diag.getScale(), 1);
+
+    diag<<5;
+    ASSERT_EQ(diag.getLength(), 7);
+    ASSERT_EQ(diag.getSigNum(), 4);
+    ASSERT_EQ(diag.getScale(), 1);
+
+    diag<<7;
+    ASSERT_EQ(diag.getLength(), 0);
+    ASSERT_EQ(diag.getSigNum(), 0);
+    ASSERT_EQ(diag.getScale(), 1);
+
+    diag<<7;
+    ASSERT_EQ(diag.getLength(), 0);
+    ASSERT_EQ(diag.getSigNum(), 0);
+    ASSERT_EQ(diag.getScale(), 1);
+
+}
+/*
 TEST (replaceTest, intfTest) {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
@@ -1026,6 +1062,7 @@ TEST (replaceTest, intfTest) {
     ASSERT_EQ(diag2.getSigStart(2), 12);
     ASSERT_EQ(diag2.getSigLen(2), 7);
 }
+
 
 TEST (intfTest, Segment) {
     timeD::Diagram diag1;

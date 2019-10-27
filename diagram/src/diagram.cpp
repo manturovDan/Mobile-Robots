@@ -329,6 +329,14 @@ namespace timeD {
 
         length += times;
 
+        return 0;
+    }
+
+    Diagram & Diagram::operator << (int times) {
+        if (times < 0)
+            throw std::invalid_argument("Negative shift");
+        shift(-times);
+
         if (interval[0].start < 0) {
             for (int sig = 0; sig < sigNum; ++sig) {
                 if (interval[sig].start + interval[sig].length > 0) {
@@ -338,28 +346,26 @@ namespace timeD {
                     }
 
                     for (int i = sig; i < sigNum; ++i) {
-                        interval[i - sig].val = interval[i].val;
-                        interval[i - sig].start = interval[i].start;
-                        interval[i - sig].length = interval[i].length;
+                        copyInterval(*this, i-sig, i);
                     }
 
                     sigNum -= sig;
 
-                    return 0;
+                    prettyInterval();
+
+                    return *this;
                 }
             }
 
             length = 0;
             sigNum = 0;
+            scale = 1;
+            delete[] interval;
+            interval = new signal[magnifier];
+        } else if(sigNum == 0 && length < 0) {
+            length = 0;
         }
 
-        return 0;
-    }
-
-    Diagram & Diagram::operator << (int times) {
-        if (times < 0)
-            throw std::invalid_argument("Negative shift");
-        shift(-times);
         return *this;
     }
 
@@ -377,15 +383,7 @@ namespace timeD {
                         interval[sig].length = maxLen - interval[sig].start;
                     }
 
-                    if (refScale() < scale) {
-                        signal *old = interval;
-                        interval = new signal[refScale()];
-                        for (int i = 0; i < sigNum; ++i) {
-                            copyInterval(old, i, i);
-                        }
-                        delete[] old;
-                        scale = refScale();
-                    }
+                    prettyInterval();
 
                     return *this;
                 }
@@ -489,6 +487,18 @@ namespace timeD {
         if (!newScale)
             return 1;
         return newScale;
+    }
+
+    void Diagram::prettyInterval() {
+        if (refScale() != scale) {
+            signal *old = interval;
+            interval = new signal[refScale() * magnifier];
+            for (int i = 0; i < sigNum; ++i) {
+                copyInterval(old, i, i);
+            }
+            delete[] old;
+            scale = refScale();
+        }
     }
 
     std::ostream & Diagram::printDiagram(std::ostream& stream) const {

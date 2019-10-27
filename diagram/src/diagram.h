@@ -7,7 +7,6 @@
 #include <iomanip>
 
 //version 3
-//TODO Refactoring ref scale
 namespace timeD {
     struct signal {
         bool val;
@@ -28,6 +27,7 @@ namespace timeD {
         int cutDiag(int);
         void copyInterval(const Diagram &, int, int);
         void copyInterval(const signal *, int, int);
+        void prettyInterval(); //TODO paste everywhere
         int shift(int);
     public:
         Diagram(): length(0), sigNum(0), scale(1), interval(new signal[magnifier]) {}
