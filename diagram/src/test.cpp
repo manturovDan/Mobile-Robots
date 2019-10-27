@@ -86,17 +86,15 @@ TEST (ConstrTest, commonConstr) {
     timeD::Diagram diag3('0');
     timeD::Diagram diag4('1');
 
-    //ASSERT_EQ(diag1.getLength(), diag1.getSZlen());
     ASSERT_EQ(diag1.getSigNum(), 0);
 
-    //ASSERT_EQ(diag3.getLength(), diag3.getSZlen());
     ASSERT_EQ(diag3.getSigNum(), 1);
     ASSERT_EQ(diag3.getSig(0), 0);
 
-    //ASSERT_EQ(diag4.getLength(), diag4.getSZlen());
     ASSERT_EQ(diag4.getSigNum(), 1);
     ASSERT_EQ(diag4.getSig(0), 1);
 }
+
 
 TEST (intfTest, addSig) {
     timeD::Diagram diag1;
@@ -112,8 +110,8 @@ TEST (intfTest, addSig) {
 
     ASSERT_THROW(diag1.addSignal('X', 5, 3), std::invalid_argument);
     ASSERT_THROW(diag1.addSignal('i', 15, 3), std::invalid_argument);
-    ASSERT_THROW(diag1.addSignal('X', 150, 3), std::invalid_argument);
-    ASSERT_THROW(diag1.addSignal('X', 15, 300), std::invalid_argument);
+    ASSERT_THROW(diag1.addSignal('X', 1e9, 3), std::invalid_argument);
+    ASSERT_THROW(diag1.addSignal('X', 15, 1e9), std::invalid_argument);
 
     diag1.addSignal('0', 8, 4);
     ASSERT_EQ(diag1.getLength(), 12);
@@ -252,26 +250,56 @@ TEST (intfTest, uniTest) {
     ASSERT_EQ(diag2.getSig(11), 0);
     ASSERT_EQ(diag2.getSigStart(11), 63);
     ASSERT_EQ(diag2.getSigLen(11), 5);
-
-    ASSERT_THROW(diag1 += diag2, std::invalid_argument);
-
-    ASSERT_EQ(diag1.getLength(), 43);
-    ASSERT_EQ(diag1.getSigNum(), 5);
-
-    ASSERT_EQ(diag1.getSig(0), 0);
-    ASSERT_EQ(diag1.getSigStart(0), 5);
-    ASSERT_EQ(diag1.getSigLen(0), 7);
-
-    ASSERT_THROW(diag2 += diag2, std::invalid_argument);
-
-    ASSERT_EQ(diag2.getLength(), 68);
-    ASSERT_EQ(diag2.getSigNum(), 12);
-
-    ASSERT_EQ(diag2.getSig(0), 0);
-    ASSERT_EQ(diag2.getSigStart(0), 3);
-    ASSERT_EQ(diag2.getSigLen(0), 1);
 }
 
+TEST(intfTest, unitTestMulty) {
+    timeD::Diagram diag1("100101XXX11");
+    timeD::Diagram diag2("1000XXX010110");
+    timeD::signal conc1[] = {{1, 0, 1}, {0, 1, 2}, {1, 3, 1}, {0, 4, 1}, {1, 5, 1},
+                             {1, 9, 3}, {0, 12, 3}, {0, 18, 1},
+                             {1, 19, 1}, {0, 20, 1}, {1, 21, 2}, {0, 23, 1}};
+    timeD::signal conc2[] = {{1, 0, 1}, {0, 1, 3}, {0, 7, 1}, {1, 8, 1},
+                             {0, 9, 1}, {1, 10, 2}, {0, 12, 1}};
+
+    ASSERT_NO_THROW(diag1 += diag2 += diag1 += diag2);
+
+    ASSERT_EQ(diag2.getSigNum(), 19);
+    ASSERT_EQ(diag2.getScale(), 2);
+    ASSERT_EQ(diag2.getLength(), 37);
+    for (int i = 0; i < 7; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << conc2[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), conc2[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), conc2[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), conc2[i].length);
+    }
+    for (int i = 7; i < 19; ++i) {
+        ASSERT_EQ(diag2.getSig(i), conc1[i - 7].val);
+        ASSERT_EQ(diag2.getSigStart(i), conc1[i - 7].start + 13);
+        ASSERT_EQ(diag2.getSigLen(i), conc1[i - 7].length);
+    }
+
+
+    ASSERT_EQ(diag1.getSigNum(), 31);
+    ASSERT_EQ(diag1.getScale(), 4);
+    ASSERT_EQ(diag1.getLength(), 61);
+    for (int i = 0; i < 12; ++i) {
+        ASSERT_EQ(diag1.getSig(i), conc1[i].val);
+        ASSERT_EQ(diag1.getSigStart(i), conc1[i].start);
+        ASSERT_EQ(diag1.getSigLen(i), conc1[i].length);
+    }
+    for (int i = 12; i < 19; ++i) {
+        ASSERT_EQ(diag1.getSig(i), conc2[i - 12].val);
+        ASSERT_EQ(diag1.getSigStart(i), conc2[i - 12].start + 24);
+        ASSERT_EQ(diag1.getSigLen(i), conc2[i - 12].length);
+    }
+    for (int i = 19; i < 31; ++i) {
+        ASSERT_EQ(diag1.getSig(i), conc1[i - 19].val);
+        ASSERT_EQ(diag1.getSigStart(i), conc1[i - 19].start + 37);
+        ASSERT_EQ(diag1.getSigLen(i), conc1[i - 19].length);
+    }
+
+}
+/*
 TEST (intfTest, uniTestPrefPP) {
     timeD::Diagram diag2;
     timeD::Diagram diag3;
@@ -426,7 +454,7 @@ TEST (intfTest, uniTestPostPPMult) {
 
     ASSERT_EQ(diag2.getSig(5), 1);
     ASSERT_EQ(diag2.getSigStart(5), 17);
-    ASSERT_EQ(diag2.getSigLen(5), 2);*/
+    ASSERT_EQ(diag2.getSigLen(5), 2);*//*
 
     std::cout << diag2;
 }
@@ -1085,7 +1113,7 @@ TEST (intfTest, Segment) {
     ASSERT_EQ(diag1.getSigStart(4), 27);
     ASSERT_EQ(diag1.getSigLen(4), 2);
 
-}
+}*/
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

@@ -19,7 +19,6 @@ namespace timeD {
 
         int curstart = 0;
 
-        std::cout << *this << std:: endl;
         for (int i = 1; i <= len; ++i) {
             if (i == len) {
                 addSignal(last, curstart, i - curstart);
@@ -136,14 +135,14 @@ namespace timeD {
             ist = 1;
         }
 
-        int newScale = (sigNum - ist + conc.sigNum) / 10;
-        if ((sigNum + conc.sigNum) % 10 > 0)
+        int newScale = (sigNum - ist + conc.sigNum) / magnifier;
+        if ((sigNum + conc.sigNum) % magnifier > 0)
             ++newScale;
 
         if (newScale > scale) {
             signal *old = interval;
             interval = new signal[magnifier * newScale];
-            for (int ia = 0; ia < sigNum - ist; ++ia) {
+            for (int ia = 0; ia < sigNum; ++ia) {
                 interval[ia].start = old[ia].start;
                 interval[ia].length = old[ia].length;
                 interval[ia].val = old[ia].val;
@@ -202,8 +201,8 @@ namespace timeD {
             sigP = 1;
         }
 
-        int newScale = (sigNum * count) / 10;
-        if ((sigNum * count) % 10 > 0)
+        int newScale = (sigNum * count) / magnifier;
+        if ((sigNum * count) % magnifier > 0)
             ++newScale;
 
         if (newScale > scale) {
@@ -251,6 +250,10 @@ namespace timeD {
                     sigNum = sig;
                     length = moment;
                 }
+
+                scale = moment / magnifier;
+                if (moment % magnifier > 0)
+                    ++scale;
                 return 0;
             }
         }
@@ -259,12 +262,15 @@ namespace timeD {
             return 1;
         else {
             length = moment;
+            return 0;
         }
     }
 
     Diagram &Diagram::replace(int moment, const Diagram &add) {
         if (&add == this)
             return *this;
+
+        int oldScale = scale;
 
         int cutLeft = (*this).Diagram::cutDiag(moment);
         if (cutLeft == 1)
@@ -279,12 +285,34 @@ namespace timeD {
                         sigNum--;
                     }
                     else {
+                        if (sigNum >= magnifier * scale) { //TODO refactor
+                            signal *old = interval;
+                            interval = new signal[magnifier * (++scale)];
+                            for (int i = 0; i < sigNum; ++i) {
+                                interval[i].start = old[i].start;
+                                interval[i].length = old[i].length;
+                                interval[i].val = old[i].val;
+                            }
+                            delete[] old;
+                        }
+
                         interval[sigNum].val = add.interval[sigAdd].val;
                         interval[sigNum].start = moment;
                         interval[sigNum].length = add.interval[sigAdd].start + add.interval[sigAdd].length - moment;
                     }
                 }
                 else {
+                    if (sigNum >= magnifier * scale) {
+                        signal *old = interval;
+                        interval = new signal[magnifier * (++scale)];
+                        for (int i = 0; i < sigNum; ++i) {
+                            interval[i].start = old[i].start;
+                            interval[i].length = old[i].length;
+                            interval[i].val = old[i].val;
+                        }
+                        delete[] old;
+                    }
+
                     interval[sigNum].val = add.interval[sigAdd].val;
                     interval[sigNum].start = add.interval[sigAdd].start;
                     interval[sigNum].length = add.interval[sigAdd].length;
@@ -294,6 +322,17 @@ namespace timeD {
                 sigNum++;
 
             }
+        }
+
+        if (scale < oldScale) {
+            signal *old = interval;
+            interval = new signal[magnifier * scale];
+            for (int i = 0; i < sigNum; ++i) {
+                interval[i].start = old[i].start;
+                interval[i].length = old[i].length;
+                interval[i].val = old[i].val;
+            }
+            delete[] old;
         }
 
         return *this;
@@ -433,6 +472,9 @@ namespace timeD {
     }
 
     std::ostream & Diagram::printDiagram(std::ostream& stream) const {
+        if (length > 500)
+            return stream;
+
         int pos = 0;
         int signalEl = 0;
         stream << "Time\t0\t1" << std::endl;
@@ -458,9 +500,9 @@ namespace timeD {
     std::ostream & Diagram::printSignals(std::ostream& stream) const {
         stream << "length: " << length << std::endl;
         stream << "Scale: " << scale << std::endl;
-        stream << "Signal - start - length" << std::endl;
+        stream << "\tSignal\tstart\tlength" << std::endl;
         for (int i = 0; i < sigNum; i++) {
-            stream << interval[i].val << " - " << interval[i].start << " - " << interval[i].length << std::endl;
+            stream << i << ".\t" << interval[i].val << "\t" << interval[i].start << "\t" << interval[i].length << std::endl;
         }
 
         return stream;
