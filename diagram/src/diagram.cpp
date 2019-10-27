@@ -1,17 +1,21 @@
 #include "diagram.h"
 
 namespace timeD {
-    Diagram::Diagram (const char *acds) {
+    Diagram::Diagram (const char *acds) { //TODO test 010101010
         int len = strlen(acds);
 
         sigNum = 0;
         length = 0;
+        scale = 0;
+        interval = nullptr;
 
         if (!len)
             return;
 
+        if (len > maxLen)
+            throw std::invalid_argument("Too big input");
+
         char last = acds[0];
-        char cur;
 
         int curstart = 0;
 
@@ -32,10 +36,8 @@ namespace timeD {
     Diagram & Diagram::addSignal(char symb, int start, int len) {
         if (start < length)
             throw std::invalid_argument("Incorrect start position");
-        if (start + len > SZlen)
+        if (start + len > maxLen)
             throw std::invalid_argument("Diagram is too big");
-
-        int signal;
 
         if (len <= 0)
             return *this;
@@ -53,12 +55,21 @@ namespace timeD {
             throw std::invalid_argument("Incorrect signal");
         }
 
-        if (sigNum >= SZsig)
+        if (sigNum >= maxSig)
             throw std::invalid_argument("Count of signals is too big");
 
         if (sigNum > 0 && interval[sigNum-1].val == sigVal && interval[sigNum-1].start + interval[sigNum-1].length == start) {
             interval[sigNum-1].length += len;
         } else {
+            if (sigNum >= magnifier * scale) {
+                signal *old = interval;
+                interval = new signal[magnifier * (++scale)];
+                if (old != nullptr) {
+                    std::memcpy(interval, old, length*sizeof(*old));
+                    delete[] old;
+                }
+            }
+
             interval[sigNum].val = sigVal;
             interval[sigNum].start = start;
             interval[sigNum].length = len;
@@ -71,9 +82,9 @@ namespace timeD {
     }
 
     Diagram & Diagram::operator += (const Diagram &conc) {
-        if (length + conc.length > SZlen)
+        if (length + conc.length > maxLen)
             throw std::invalid_argument("Invalid lengths");
-        if (sigNum + conc.getSigNum() > SZsig)
+        if (sigNum + conc.getSigNum() > maxSig)
             throw std::invalid_argument("Invalid count of signals");
 
         int ist = 0;
@@ -112,9 +123,9 @@ namespace timeD {
     }
 
     int Diagram::copyDiagram(int count) {
-        if (length * count > SZlen)
+        if (length * count > maxLen)
             return 1;
-        if (sigNum * count > SZsig)
+        if (sigNum * count > maxSig)
             return 1;
 
         int sigst = 0;
@@ -220,20 +231,20 @@ namespace timeD {
 
         length += times;
 
-        if (length > SZlen) {
+        if (length > maxLen) {
             for (int sig = sigNum-1; sig >= 0; --sig) {
-                if (interval[sig].start < SZlen) {
+                if (interval[sig].start < maxLen) {
                     sigNum = sig + 1;
-                    length = SZlen;
-                    if (interval[sig].start + interval[sig].length > SZlen) {
-                        interval[sig].length = SZlen - interval[sig].start;
+                    length = maxLen;
+                    if (interval[sig].start + interval[sig].length > maxLen) {
+                        interval[sig].length = maxLen - interval[sig].start;
                     }
 
                     return 0;
                 }
             }
 
-            length = SZlen;
+            length = maxLen;
             sigNum = 0;
 
         }
@@ -386,21 +397,22 @@ namespace timeD {
     }
 
     std::istream & operator >> (std::istream &stream, Diagram & diag) {
-        int size = diag.getSZlen();
-        char getst[size];
+        int size = diag.getMaxLen();
+        char getst[diag.maxLen];
 
-        stream.getline(getst, size + 1);
+        stream.getline(getst, diag.maxLen + 1);
 
         if (!stream.good()) {
             return stream;
         }
 
-        try {
+       // try {
             timeD::Diagram diagr(getst);
+
             diag = diagr;
-        } catch (std::exception &ex){
-            stream.setstate(std::ios_base::failbit);
-        }
+       // } catch (std::exception &ex){
+        //    stream.setstate(std::ios_base::failbit);
+        //}
 
         return stream;
     }

@@ -10,8 +10,8 @@ int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try aga
             std::cout << again << std::endl;
 
         std::cin >> inp;
-        if (!std::cin.good())
-            throw std::invalid_argument("Invalid input (inpSmt)");
+        //if (!std::cin.good())
+        //    throw std::invalid_argument("Invalid input (inpSmt)");
         if(std::abs(inp) > 100000000 || (unneg && inp < 0))
             more = true;
         else
@@ -260,11 +260,11 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         std::cin.get();
         std::cin >> (*diag);
 
-        if (!std::cin.good()) {
-            std::cout << "Invalid input (stream error)" <<std::endl;
-            std::cin.clear();
-            return 1;
-        }
+       // if (!std::cin.good()) {
+        //    std::cout << "Invalid input (stream error)" <<std::endl;
+        //    std::cin.clear();
+        //    return 1;
+        //}
 
         std::cout << "Correctly created" << std::endl;
 
@@ -278,7 +278,7 @@ int main() {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
 
-    std::cout << "II Realisation\nTwo diagrams have created (Empty)." << std::endl;
+    std::cout << "III Realisation\nTwo diagrams were created (Empty)." << std::endl;
 
     int choise;
     while (1) {
