@@ -24,6 +24,7 @@ namespace timeD {
         int length;
         int sigNum;
         int scale; //count og magnifiers
+        int cutDiag(int);
     public:
         Diagram(): length(0), sigNum(0), scale(1), interval(new signal[magnifier]) {}
         Diagram(const char *);
@@ -41,7 +42,6 @@ namespace timeD {
         Diagram & operator >> (int);
 
         Diagram &addSignal(char, int, int);
-        int lengthen();
         std::ostream &printDiagram(std::ostream&) const;
         std::ostream &printSignals(std::ostream&) const;
 
@@ -51,7 +51,6 @@ namespace timeD {
         int operator () ( int,  int, Diagram &);
 
         int copyDiagram(int);
-        int cutDiag(int);
         Diagram &replace(int, const Diagram&);
         int shift(int);
 
@@ -59,6 +58,7 @@ namespace timeD {
         int getSigNum() const { return sigNum; }
         int getScale() const { return scale; }
         int getMaxLen() const { return maxLen; }
+        int getMaxSig() const { return maxSig; }
         int getSig(int num) { return interval[num].val; } //сделать проверку и char TODO
         int getSigStart(int num) { return interval[num].start; }
         int getSigLen(int num) { return interval[num].length; }	};
