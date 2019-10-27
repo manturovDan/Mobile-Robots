@@ -17,8 +17,8 @@ namespace timeD {
 
     class Diagram {
     private:
-        static const int maxLen = 10e3; //TODO recalculate
-        static const int maxSig = 10e3;
+        static const int maxLen = 10e5; //TODO recalculate
+        static const int maxSig = 10e5;
         static const int magnifier = 10; //number on which vector increases all the time
         signal *interval;
         int length;
@@ -30,7 +30,7 @@ namespace timeD {
         Diagram(char symb): length(0), sigNum(0), scale(1), interval(new signal[magnifier]) { addSignal(symb, 0, maxLen); }
         Diagram(const Diagram &);
         Diagram(Diagram &&);
-        //~Diagram() { delete[] interval; };
+        ~Diagram() { delete[] interval; };
 
         Diagram & operator =(const Diagram &);
         Diagram & operator =(Diagram &&);
@@ -41,6 +41,7 @@ namespace timeD {
         Diagram & operator >> (int);
 
         Diagram &addSignal(char, int, int);
+        int lengthen();
         std::ostream &printDiagram(std::ostream&) const;
         std::ostream &printSignals(std::ostream&) const;
 

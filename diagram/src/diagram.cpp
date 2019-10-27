@@ -26,7 +26,6 @@ namespace timeD {
                 length = len;
             }
             else if (acds[i] != last) {
-                std::cout<<"LOOOL"<<std::endl;
                 addSignal(last, curstart, i - curstart);
                 curstart = i;
                 last = acds[i];
@@ -128,13 +127,29 @@ namespace timeD {
     Diagram & Diagram::operator += (const Diagram &conc) {
         if (length + conc.length > maxLen)
             throw std::invalid_argument("Invalid lengths");
-        if (sigNum + conc.getSigNum() > maxSig)
+        if (sigNum + conc.sigNum > maxSig)
             throw std::invalid_argument("Invalid count of signals");
 
         int ist = 0;
         if(interval[sigNum-1].val == conc.interval[0].val && conc.interval[0].start == 0) {
             interval[sigNum-1].length += conc.interval[0].length;
             ist = 1;
+        }
+
+        int newScale = (sigNum - ist + conc.sigNum) / 10;
+        if ((sigNum + conc.sigNum) % 10 > 0)
+            ++newScale;
+
+        if (newScale > scale) {
+            signal *old = interval;
+            interval = new signal[magnifier * newScale];
+            for (int ia = 0; ia < sigNum - ist; ++ia) {
+                interval[ia].start = old[ia].start;
+                interval[ia].length = old[ia].length;
+                interval[ia].val = old[ia].val;
+            }
+            delete[] old;
+            scale = newScale;
         }
 
         for (int i = ist; i < conc.sigNum; ++i) {
@@ -185,6 +200,22 @@ namespace timeD {
             interval[sigNum - 1].length += interval[0].length;
             sigst = interval[0].length;
             sigP = 1;
+        }
+
+        int newScale = (sigNum * count) / 10;
+        if ((sigNum * count) % 10 > 0)
+            ++newScale;
+
+        if (newScale > scale) {
+            signal *old = interval;
+            interval = new signal[magnifier * newScale];
+            for (int ia = 0; ia < sigNum; ++ia) {
+                interval[ia].start = old[ia].start;
+                interval[ia].length = old[ia].length;
+                interval[ia].val = old[ia].val;
+            }
+            scale = newScale;
+            delete[] old;
         }
 
         for (int sig = sigP; sig < sigNum; sig++) {
@@ -426,6 +457,8 @@ namespace timeD {
 
     std::ostream & Diagram::printSignals(std::ostream& stream) const {
         stream << "length: " << length << std::endl;
+        stream << "Scale: " << scale << std::endl;
+        stream << "Signal - start - length" << std::endl;
         for (int i = 0; i < sigNum; i++) {
             stream << interval[i].val << " - " << interval[i].start << " - " << interval[i].length << std::endl;
         }
@@ -450,9 +483,7 @@ namespace timeD {
         }
 
         try {
-            std::cout<<"THERE-1" << std::endl;
             timeD::Diagram diagr(getst);
-            std::cout<<"THERE0" << std::endl;
             diag = diagr;
         } catch (std::exception &ex){
             stream.setstate(std::ios_base::failbit);
