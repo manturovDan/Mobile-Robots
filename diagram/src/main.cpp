@@ -260,11 +260,11 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
         std::cin.get();
         std::cin >> (*diag);
 
-       // if (!std::cin.good()) {
-        //    std::cout << "Invalid input (stream error)" <<std::endl;
-        //    std::cin.clear();
-        //    return 1;
-        //}
+        if (!std::cin.good()) {
+            std::cout << "Invalid input (stream error)" <<std::endl;
+            std::cin.clear();
+            return 1;
+        }
 
         std::cout << "Correctly created" << std::endl;
 

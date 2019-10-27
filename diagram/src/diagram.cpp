@@ -2,12 +2,12 @@
 
 namespace timeD {
     Diagram::Diagram (const char *acds) { //TODO test 010101010
-        int len = strlen(acds);
+         int len = strlen(acds);
 
         sigNum = 0;
         length = 0;
-        scale = 0;
-        interval = nullptr;
+        scale = 1;
+        interval = new signal[10];
 
         if (!len)
             return;
@@ -19,18 +19,33 @@ namespace timeD {
 
         int curstart = 0;
 
+        std::cout << *this << std:: endl;
         for (int i = 1; i <= len; ++i) {
             if (i == len) {
                 addSignal(last, curstart, i - curstart);
                 length = len;
             }
             else if (acds[i] != last) {
+                std::cout<<"LOOOL"<<std::endl;
                 addSignal(last, curstart, i - curstart);
                 curstart = i;
                 last = acds[i];
                 length = i;
             }
         }
+    }
+
+    Diagram::Diagram(const Diagram &reference): sigNum(reference.sigNum), length(reference.length), scale(reference.scale) {
+        interval = new signal[scale * magnifier];
+        for (int i = 0; i < sigNum; ++i) { //TODO refactoring in one function
+            interval[i].start = reference.interval[i].start;
+            interval[i].length = reference.interval[i].length;
+            interval[i].val = reference.interval[i].val;
+        }
+    }
+
+    Diagram::Diagram (Diagram && reference): sigNum(reference.sigNum), length(reference.length), scale(reference.scale), interval(reference.interval) {
+        reference.interval = nullptr;
     }
 
     Diagram & Diagram::addSignal(char symb, int start, int len) {
@@ -64,10 +79,12 @@ namespace timeD {
             if (sigNum >= magnifier * scale) {
                 signal *old = interval;
                 interval = new signal[magnifier * (++scale)];
-                if (old != nullptr) {
-                    std::memcpy(interval, old, length*sizeof(*old));
-                    delete[] old;
+                for (int i = 0; i < sigNum; ++i) {
+                    interval[i].start = old[i].start;
+                    interval[i].length = old[i].length;
+                    interval[i].val = old[i].val;
                 }
+                delete[] old;
             }
 
             interval[sigNum].val = sigVal;
@@ -78,6 +95,33 @@ namespace timeD {
 
         length = start + len;
 
+        return *this;
+    }
+
+    Diagram & Diagram::operator =(const Diagram &reference) {
+        if (this != &reference) {
+            length = reference.length;
+            sigNum = reference.sigNum;
+            scale = reference.scale;
+            delete[] interval;
+            interval = new signal[scale * magnifier];
+
+            for (int i = 0; i < sigNum; ++i) {
+                interval[i].start = reference.interval[i].start;
+                interval[i].length = reference.interval[i].length;
+                interval[i].val = reference.interval[i].val;
+            }
+        }
+        return *this;
+    }
+
+    Diagram & Diagram::operator =(Diagram &&reference) {
+        length = reference.length;
+        sigNum = reference.sigNum;
+        scale = reference.scale;
+        delete[] interval;
+        interval = reference.interval;
+        reference.interval = nullptr;
         return *this;
     }
 
@@ -397,7 +441,6 @@ namespace timeD {
     }
 
     std::istream & operator >> (std::istream &stream, Diagram & diag) {
-        int size = diag.getMaxLen();
         char getst[diag.maxLen];
 
         stream.getline(getst, diag.maxLen + 1);
@@ -406,13 +449,14 @@ namespace timeD {
             return stream;
         }
 
-       // try {
+        try {
+            std::cout<<"THERE-1" << std::endl;
             timeD::Diagram diagr(getst);
-
+            std::cout<<"THERE0" << std::endl;
             diag = diagr;
-       // } catch (std::exception &ex){
-        //    stream.setstate(std::ios_base::failbit);
-        //}
+        } catch (std::exception &ex){
+            stream.setstate(std::ios_base::failbit);
+        }
 
         return stream;
     }
