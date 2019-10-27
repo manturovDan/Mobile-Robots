@@ -835,6 +835,40 @@ TEST (ShiftRightTest, intfTest) {
     }
 }
 
+TEST(intfTest, shiftRightBoundary) {
+    timeD::Diagram diag("010101010101010101010101111");
+    ASSERT_EQ(diag.getLength(), 27);
+    ASSERT_EQ(diag.getSigNum(), 24);
+    ASSERT_EQ(diag.getScale(), 3);
+
+    if (diag.getMaxLen() > 27) {
+        diag >> (diag.getMaxLen() - 27);
+        ASSERT_EQ(diag.getLength(), diag.getMaxLen());
+        ASSERT_EQ(diag.getSigNum(), 24);
+
+        ASSERT_EQ(diag.getSigStart(23), diag.getMaxLen() - 4);
+        ASSERT_EQ(diag.getSigLen(23), 4);
+
+        diag>>6;
+        ASSERT_EQ(diag.getSigStart(20), diag.getMaxLen() - 1);
+        ASSERT_EQ(diag.getSig(20), 0);
+        ASSERT_EQ(diag.getSigLen(20), 1);
+
+        diag>>2;
+        ASSERT_EQ(diag.getSigStart(18), diag.getMaxLen() - 1);
+        ASSERT_EQ(diag.getSig(18), 0);
+        ASSERT_EQ(diag.getSigLen(18), 1);
+
+        ASSERT_EQ(diag.getScale(), 2);
+
+        diag>>20;
+        ASSERT_EQ(diag.getLength(), diag.getMaxLen());
+        ASSERT_EQ(diag.getSigNum(), 0);
+        ASSERT_EQ(diag.getScale(), 1);
+
+    }
+}
+
 /*
 TEST (ShiftLeft, intfTest) {
     timeD::Diagram diag1;

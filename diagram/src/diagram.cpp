@@ -384,6 +384,7 @@ namespace timeD {
                             copyInterval(old, i, i);
                         }
                         delete[] old;
+                        scale = refScale();
                     }
 
                     return *this;
@@ -392,6 +393,9 @@ namespace timeD {
 
             length = maxLen;
             sigNum = 0;
+            scale = 1;
+            delete[] interval;
+            interval = new signal[magnifier];
 
         }
 
@@ -482,6 +486,8 @@ namespace timeD {
         int newScale = sigNum / magnifier;
         if (sigNum % magnifier > 0)
             ++newScale;
+        if (!newScale)
+            return 1;
         return newScale;
     }
 
