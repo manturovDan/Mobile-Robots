@@ -1101,7 +1101,7 @@ TEST (intfTest, replaceTestIncScale) {
 
 }
 
-/*
+
 TEST (intfTest, Segment) {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
@@ -1230,7 +1230,23 @@ TEST (intfTest, Segment) {
     ASSERT_EQ(diag1.getSigStart(4), 27);
     ASSERT_EQ(diag1.getSigLen(4), 2);
 
-}*/
+}
+
+TEST (intfTest, SegmentBig) {
+    timeD::Diagram diag1("10101010101010101010111111111111111111111110");
+    timeD::Diagram diag2;
+    timeD::signal checker[] = {{0, 0, 1}, {1, 1, 1}, {0, 2, 1}, {1, 3, 1}, {0, 4, 1}, {1, 5, 1}, {0, 6, 1},
+                               {1, 7, 1}, {0, 8, 1}, {1, 9, 1}, {0, 10, 1}, {1, 11, 1}, {0, 12, 1}, {1, 13, 1},
+                               {0, 14, 1}, {1, 15, 5}};
+    diag1(5, 25, diag2); //01010101010101011111 - diag2
+
+    for (int i = 0; i < 16; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

@@ -400,7 +400,7 @@ namespace timeD {
         return *this;
     }
 
-    int Diagram::operator() (const int a, const int b, Diagram &diag) { // [ )
+    int Diagram::operator() (const int a, const int b, Diagram &diag) const { // [ )
         if (a >= length || b > length || a >= b)
             throw std::invalid_argument("Incorrect interval");
 
@@ -451,6 +451,7 @@ namespace timeD {
 
             diag.sigNum = end - start + 1;
             diag.length = b - a;
+            diag.prettyInterval();
 
             for (int i = 0; i < sigNum; ++i) {
                 diag.interval[i].val = interval[i + start].val;

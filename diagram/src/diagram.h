@@ -44,6 +44,7 @@ namespace timeD {
         Diagram operator ++ (int);
         Diagram & operator << (int);
         Diagram & operator >> (int);
+        int operator () ( int,  int, Diagram &) const;
 
         Diagram &addSignal(char, int, int);
         std::ostream &printDiagram(std::ostream&) const;
@@ -52,7 +53,6 @@ namespace timeD {
         friend std::ostream & operator << (std::ostream &, const Diagram &);
         friend std::istream & operator >> (std::istream &, Diagram &);
         friend Diagram operator + (const Diagram &, const Diagram &);
-        int operator () ( int,  int, Diagram &);
         int refScale();
 
         int copyDiagram(int);
