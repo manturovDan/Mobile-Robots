@@ -241,8 +241,8 @@ namespace timeD {
                     length = moment;
                 }
 
-                scale = moment / magnifier;
-                if (moment % magnifier > 0)
+                scale = (sig+1) / magnifier;
+                if ((sig+1) % magnifier > 0 || !scale)
                     ++scale;
                 return 0;
             }
