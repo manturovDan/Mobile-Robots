@@ -161,7 +161,18 @@ namespace timeD {
     }
 
     Diagram & Diagram::operator++() {
-        *this += *this; // !!!
+        //*this += *this; // !!!
+        int oldSigNum = sigNum;
+        int oldLen = length;
+        char cur;
+        for (int i = 0; i < oldSigNum; ++i) {
+            if(interval[i].val == 1)
+                cur = '1';
+            else
+                cur = '0';
+            addSignal(cur, oldLen + interval[i].start, interval[i].length);
+        }
+        length = oldLen * 2;
         return *this;
     }
 
