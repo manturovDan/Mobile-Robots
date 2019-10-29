@@ -34,6 +34,7 @@ namespace timeD {
     }
 
     Diagram::Diagram(const Diagram &reference): sigNum(reference.sigNum), length(reference.length), scale(reference.scale) {
+        //std::cout << "COPY C" <<std::endl;
         interval = new signal[scale * magnifier];
         for (int i = 0; i < sigNum; ++i) {
             copyInterval(reference, i, i);
@@ -41,6 +42,7 @@ namespace timeD {
     }
 
     Diagram::Diagram (Diagram && reference): sigNum(reference.sigNum), length(reference.length), scale(reference.scale), interval(reference.interval) {
+        //std::cout << "MOVE C" <<std::endl;
         reference.interval = nullptr;
     }
 
@@ -93,6 +95,7 @@ namespace timeD {
     }
 
     Diagram & Diagram::operator =(const Diagram &reference) {
+        //std::cout << "COPY A" <<std::endl;
         if (this != &reference) {
             length = reference.length;
             sigNum = reference.sigNum;
@@ -108,6 +111,7 @@ namespace timeD {
     }
 
     Diagram & Diagram::operator =(Diagram &&reference) {
+        //std::cout << "MOVE A" <<std::endl;
         length = reference.length;
         sigNum = reference.sigNum;
         scale = reference.scale;

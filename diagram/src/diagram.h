@@ -39,7 +39,7 @@ namespace timeD {
 
         Diagram & operator =(const Diagram &);
         Diagram & operator =(Diagram &&);
-        Diagram& operator += (const Diagram&); // A+=B+=C;
+        Diagram & operator += (const Diagram&); // A+=B+=C;
         Diagram & operator ++ (); // ++ ++ A;
         Diagram operator ++ (int);
         Diagram & operator << (int);

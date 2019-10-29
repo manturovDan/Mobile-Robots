@@ -97,6 +97,107 @@ TEST (ConstrTest, commonConstr) {
     ASSERT_EQ(diag4.getSig(0), 1);
 }
 
+TEST (ConstrTest, copyConstructor) {
+    timeD::Diagram diag1 = "0000111010010100101010011101000001XXX110";
+    timeD::Diagram diag2 = diag1;
+
+    ASSERT_EQ(diag1.getLength(), diag2.getLength());
+    ASSERT_EQ(diag1.getSigNum(), diag2.getSigNum());
+    ASSERT_EQ(diag1.getScale(), diag2.getScale());
+
+    for (int i = 0; i < diag1.getSigNum(); ++i) {
+        ASSERT_EQ(diag1.getSig(i), diag2.getSig(i));
+        ASSERT_EQ(diag1.getSigStart(i), diag2.getSigStart(i));
+        ASSERT_EQ(diag1.getSigLen(i), diag2.getSigLen(i));
+    }
+
+    diag1<<39;
+
+    ASSERT_EQ(diag2.getLength(), 40);
+    ASSERT_EQ(diag2.getSigNum(), 22);
+    ASSERT_EQ(diag2.getScale(), 3);
+
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 4);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 7);
+    ASSERT_EQ(diag1.getSigLen(2), 1);
+
+    ASSERT_EQ(diag2.getSig(15), 1);
+    ASSERT_EQ(diag2.getSigStart(15), 23);
+    ASSERT_EQ(diag2.getSigLen(15), 3);
+}
+
+TEST (OverloadTest, copyAssemtion) {
+    timeD::Diagram diag1 = "0000111010010100101010011101000001XXX110";
+    timeD::Diagram diag2;
+    //std::cout << "COPY A START" << std::endl;
+    diag2 = diag1;
+
+    ASSERT_EQ(diag1.getLength(), diag2.getLength());
+    ASSERT_EQ(diag1.getSigNum(), diag2.getSigNum());
+    ASSERT_EQ(diag1.getScale(), diag2.getScale());
+
+    for (int i = 0; i < diag1.getSigNum(); ++i) {
+        ASSERT_EQ(diag1.getSig(i), diag2.getSig(i));
+        ASSERT_EQ(diag1.getSigStart(i), diag2.getSigStart(i));
+        ASSERT_EQ(diag1.getSigLen(i), diag2.getSigLen(i));
+    }
+
+    diag1<<39;
+
+    ASSERT_EQ(diag2.getLength(), 40);
+    ASSERT_EQ(diag2.getSigNum(), 22);
+    ASSERT_EQ(diag2.getScale(), 3);
+
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 4);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 7);
+    ASSERT_EQ(diag1.getSigLen(2), 1);
+
+    ASSERT_EQ(diag2.getSig(15), 1);
+    ASSERT_EQ(diag2.getSigStart(15), 23);
+    ASSERT_EQ(diag2.getSigLen(15), 3);
+}
+
+timeD::Diagram justDiag(timeD::Diagram diag) {
+    return diag;
+}
+
+TEST (ConsrTest, moveConstructor) {
+    timeD::Diagram diag2 = "101010";
+    timeD::Diagram diag3(justDiag(diag2));
+
+    timeD::signal checker[] = {{1, 0, 1}, {0, 1, 1}, {1, 2, 1}, {0, 3, 1}, {1, 4, 1}, {0, 5, 1}};
+    for (int i = 0; i < 6; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
+}
+
+
+TEST (OverloadTest, moveAssignment) {
+    timeD::Diagram diag2 = "101010";
+    timeD::Diagram diag3;
+    diag3 = justDiag(diag2);
+
+    timeD::signal checker[] = {{1, 0, 1}, {0, 1, 1}, {1, 2, 1}, {0, 3, 1}, {1, 4, 1}, {0, 5, 1}};
+    for (int i = 0; i < 6; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
+}
 
 TEST (intfTest, addSig) {
     timeD::Diagram diag1;
