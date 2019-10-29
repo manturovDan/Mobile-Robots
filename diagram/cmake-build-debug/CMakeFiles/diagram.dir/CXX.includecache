@@ -6,10 +6,12 @@
 
 #IncludeRegexTransform: 
 
-/home/danila/source/labs3sem/diagram/src/diagram.cpp
-diagram.h
-/home/danila/source/labs3sem/diagram/src/diagram.h
+/home/danila/source/labs3sem/diagram/src/diagfile.h
+fstream
+-
 string
+-
+algorithm
 -
 
 /home/danila/source/labs3sem/diagram/src/diagram.h
@@ -21,4 +23,12 @@ cstring
 -
 iomanip
 -
+
+/home/danila/source/labs3sem/diagram/src/main.cpp
+iostream
+-
+diagram.h
+/home/danila/source/labs3sem/diagram/src/diagram.h
+diagfile.h
+/home/danila/source/labs3sem/diagram/src/diagfile.h
 

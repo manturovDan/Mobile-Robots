@@ -1,5 +1,6 @@
 #include <iostream>
 #include "diagram.h"
+#include "diagfile.h"
 
 template <class T>
 int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
@@ -33,10 +34,11 @@ int chooseAct() {
 	6. Print diagram\n\
 	7. Make one diagram as the segment of another one\n\
 	8. Create diagram from ASCII\n\
+	9. Read diagram from .txt file\n\
 	0. Exit" << std:: endl;
 
         inpSmt(choise);
-        if(choise >= 0 && choise <= 8)
+        if(choise >= 0 && choise <= 9)
             return choise;
 
         std::cout << "Incorrect value!" << std::endl;
@@ -272,6 +274,44 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
 
         return 0;
     }
+    else if (act == 9) {
+        int dgr = chooseDiag(2, "Choose diagram to input");
+        timeD::Diagram *diag;
+
+        if (dgr == 1)
+            diag = &diag1;
+        else
+            diag = &diag2;
+
+        std::cout << "Input path to reading file" << std::endl;
+        std::string filename;
+        std::cin>>filename; //TODO good
+
+        std::string get_str;
+
+        std::ifstream is;
+        is.open(filename);
+        if (is.is_open()) {
+            std::getline(is, get_str);
+            std::replace(get_str.begin(), get_str.end(), '_', '0');
+            std::replace(get_str.begin(), get_str.end(), '-', '1');
+            std::replace(get_str.begin(), get_str.end(), ' ', 'X');
+            try {
+                (*diag) = timeD::Diagram(&get_str[0]);
+            } catch (std::exception &ex) {
+                std::cout << "File has incorrect diagram" << std::endl;
+                return 1;
+            }
+            is.close();
+        }
+        else {
+            std::cout << "File error" << std::endl;
+            return -1;
+        }
+
+        std::cout << "The diagram has alread read" << std::endl;
+        return 0;
+    }
 
     return -1;
 }
@@ -290,5 +330,6 @@ int main() {
         launchFunc(diag1, diag2, choise);
 
     }
+
 
 }
