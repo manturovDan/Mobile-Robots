@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/danila/source/labs3sem/diagram/src/diagfile.cpp
+iostream
+-
+diagfile.h
+/home/danila/source/labs3sem/diagram/src/diagfile.h
+
 /home/danila/source/labs3sem/diagram/src/diagfile.h
 fstream
 -
@@ -13,6 +19,8 @@ string
 -
 algorithm
 -
+diagram.h
+/home/danila/source/labs3sem/diagram/src/diagram.h
 
 /home/danila/source/labs3sem/diagram/src/diagram.h
 iostream

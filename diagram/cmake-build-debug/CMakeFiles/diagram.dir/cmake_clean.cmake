@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/diagram.dir/src/diagfile.cpp.o"
   "CMakeFiles/diagram.dir/src/diagram.cpp.o"
   "CMakeFiles/diagram.dir/src/main.cpp.o"
   "diagram"

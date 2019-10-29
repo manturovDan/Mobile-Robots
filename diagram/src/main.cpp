@@ -11,10 +11,11 @@ int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try aga
 
         std::cin >> inp;
         if (!std::cin.good()) {
-            //throw std::invalid_argument("Invalid input (inpSmt)");
             std::cin.clear();
+            std::cin.ignore(100, '\n');
+            more = 1;
+            continue;
         }
-
         if(std::abs(inp) > 100000000 || (unneg && inp < 0))
             more = true;
         else
@@ -285,32 +286,9 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
 
         std::cout << "Input path to reading file" << std::endl;
         std::string filename;
-        std::cin>>filename; //TODO good
+        fileD::inpString(filename);
 
-        std::string get_str;
-
-        std::ifstream is;
-        is.open(filename);
-        if (is.is_open()) {
-            std::getline(is, get_str);
-            std::replace(get_str.begin(), get_str.end(), '_', '0');
-            std::replace(get_str.begin(), get_str.end(), '-', '1');
-            std::replace(get_str.begin(), get_str.end(), ' ', 'X');
-            try {
-                (*diag) = timeD::Diagram(&get_str[0]);
-            } catch (std::exception &ex) {
-                std::cout << "File has incorrect diagram" << std::endl;
-                return 1;
-            }
-            is.close();
-        }
-        else {
-            std::cout << "File error" << std::endl;
-            return -1;
-        }
-
-        std::cout << "The diagram has alread read" << std::endl;
-        return 0;
+        return fileD::readTextDiag(filename, *diag);
     }
 
     return -1;
