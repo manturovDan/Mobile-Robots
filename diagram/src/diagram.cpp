@@ -554,9 +554,14 @@ namespace timeD {
     std::istream & operator >> (std::istream &stream, Diagram & diag) {
         std::string got_string;
 
-        stream.getline(&got_string[0], diag.maxLen + 1);
+        std::getline(stream, got_string);
 
         if (!stream.good()) {
+            return stream;
+        }
+
+        if(got_string.size() > diag.getMaxLen()) {
+            stream.setstate(std::ios_base::failbit);
             return stream;
         }
 

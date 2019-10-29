@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++17 -g   CMakeFiles/u_test.dir/src/test.cpp.o CMakeFiles/u_test.dir/src/diagram.cpp.o  -o u_test /usr/lib/libgtest.a -lpthread 

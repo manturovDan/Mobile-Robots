@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/danila/source/labs3sem/diagram/src/diagram.cpp
+diagram.h
+/home/danila/source/labs3sem/diagram/src/diagram.h
+string
+-
+
+/home/danila/source/labs3sem/diagram/src/diagram.h
+iostream
+-
+exception
+-
+cstring
+-
+iomanip
+-
+
