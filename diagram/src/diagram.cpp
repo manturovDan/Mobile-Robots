@@ -1,4 +1,5 @@
 #include "diagram.h"
+#include <string>
 
 namespace timeD {
     Diagram::Diagram (const char *acds) { //TODO test 010101010
@@ -551,13 +552,15 @@ namespace timeD {
     }
 
     std::istream & operator >> (std::istream &stream, Diagram & diag) {
-        char getst[diag.maxLen];
+        std::string got_string;
 
-        stream.getline(getst, diag.maxLen + 1);
+        stream.getline(&got_string[0], diag.maxLen + 1);
 
         if (!stream.good()) {
             return stream;
         }
+
+        char *getst = &got_string[0];
 
         try {
             timeD::Diagram diagr(getst);

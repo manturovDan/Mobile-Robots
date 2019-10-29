@@ -4,14 +4,16 @@
 template <class T>
 int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
     bool more = false;
-    int gnStatus;
     while (1) {
         if (more)
             std::cout << again << std::endl;
 
         std::cin >> inp;
-        //if (!std::cin.good())
-        //    throw std::invalid_argument("Invalid input (inpSmt)");
+        if (!std::cin.good()) {
+            //throw std::invalid_argument("Invalid input (inpSmt)");
+            std::cin.clear();
+        }
+
         if(std::abs(inp) > 100000000 || (unneg && inp < 0))
             more = true;
         else
