@@ -123,6 +123,10 @@ namespace timeD {
     }
 
     Diagram & Diagram::operator += (const Diagram &conc) {
+        if (this == &conc) {
+            return ++(*this);
+        }
+
         if (length + conc.length > maxLen)
             throw std::invalid_argument("Invalid lengths");
         if (sigNum + conc.sigNum > maxSig)
