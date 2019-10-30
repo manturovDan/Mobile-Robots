@@ -2,7 +2,7 @@
 #include <string>
 
 namespace timeD {
-    Diagram::Diagram (const char *acds) { //TODO test 010101010
+    Diagram::Diagram (const char *acds) {
          int len = strlen(acds);
 
         sigNum = 0;
@@ -98,11 +98,18 @@ namespace timeD {
     Diagram & Diagram::operator =(const Diagram &reference) {
         //std::cout << "COPY A" <<std::endl;
         if (this != &reference) {
+            signal *new_interval;
+            try {
+                new_interval = new signal[reference.scale * magnifier];
+            } catch (std::exception &ex) {
+                throw std::invalid_argument("No memory");
+            }
+
             length = reference.length;
             sigNum = reference.sigNum;
             scale = reference.scale;
             delete[] interval;
-            interval = new signal[scale * magnifier];
+            interval = new_interval;
 
             for (int i = 0; i < sigNum; ++i) {
                 copyInterval(reference, i, i);

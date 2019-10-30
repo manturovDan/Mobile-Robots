@@ -131,7 +131,7 @@ TEST (ConstrTest, copyConstructor) {
     ASSERT_EQ(diag2.getSigLen(15), 3);
 }
 
-TEST (OverloadTest, copyAssemtion) {
+TEST (OverloadTest, copyAssignment) {
     timeD::Diagram diag1 = "0000111010010100101010011101000001XXX110";
     timeD::Diagram diag2;
     //std::cout << "COPY A START" << std::endl;
