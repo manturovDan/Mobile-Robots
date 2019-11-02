@@ -201,9 +201,12 @@ namespace fileD {
         tinyxml2::XMLElement * pSigStart = pSigElem->FirstChildElement("Start");
         tinyxml2::XMLElement * pSigLen = pSigElem->FirstChildElement("Len");
 
+        timeD::Diagram new_diag;
 
         for (int i = 0; i < sigNum; ++i) {
             int val, start, len;
+            char sig;
+
             if (i != 0) {
                 pSigElem = pSigElem->NextSiblingElement("Sig");
                 if (pSigElem == nullptr) {
@@ -226,11 +229,35 @@ namespace fileD {
             eResult = pSigLen->QueryIntText(&len);
             if (eResult != 0) return fileDamaged(stream);
 
-            stream << val << ' ' << start << ' ' << len << std::endl;
+            if (val == 0)
+                sig = '0';
+            else if (val == 1)
+                sig = '1';
+            else
+                return fileDamaged(stream);
+
+            try {
+                new_diag.addSignal(sig, start, len);
+            } catch (std::exception &ex) {
+                return fileDamaged(stream);
+            }
+
         }
 
-        stream << length << ' ' << sigNum << std::endl;
+        if (new_diag.getLength() > length || new_diag.getSigNum() != sigNum)
+            return fileDamaged(stream);
 
+        if (new_diag.getLength() < length) {
+            try {
+                new_diag.addSignal('X', length-1, 1);
+            } catch (std::exception &ex) {
+                return fileDamaged(stream);
+            }
+        }
+
+        diag = new_diag;
+
+        stream << "Correct import" << str::endl;
         return 0;
     }
 }
