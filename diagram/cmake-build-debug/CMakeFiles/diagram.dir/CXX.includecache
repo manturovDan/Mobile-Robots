@@ -38,14 +38,6 @@ cstring
 iomanip
 -
 
-/home/danila/source/labs3sem/diagram/src/main.cpp
-iostream
--
-diagram.h
-/home/danila/source/labs3sem/diagram/src/diagram.h
-diagfile.h
-/home/danila/source/labs3sem/diagram/src/diagfile.h
-
 /home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.h
 ctype.h
 -

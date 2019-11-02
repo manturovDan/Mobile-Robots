@@ -117,13 +117,40 @@ namespace fileD {
     int writeXML(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
         tinyxml2::XMLDocument doc;
 
-        tinyxml2::XMLNode * pRoot = doc.NewElement("Root");
+        tinyxml2::XMLNode * pRoot = doc.NewElement("Diagram");
         doc.InsertFirstChild(pRoot);
 
-        tinyxml2::XMLElement * pElement = doc.NewElement("IntValue");
-        pElement->SetText(10);
+        tinyxml2::XMLElement * pLength = doc.NewElement("Length");
+        pLength->SetText(diag.getLength());
+        pRoot->InsertEndChild(pLength);
 
-        pRoot->InsertEndChild(pElement);
+        tinyxml2::XMLElement * pSignals = doc.NewElement("Signals");
+        pSignals->SetText(diag.getSigNum());
+        pRoot->InsertEndChild(pSignals);
+
+        tinyxml2::XMLElement * pSuccession = doc.NewElement("Succession");
+
+        doc.InsertFirstChild(pSuccession);
+        for(int i = 0; i < diag.getSigNum(); ++i) {
+            tinyxml2::XMLElement * pSig = doc.NewElement("Sig");
+            doc.InsertFirstChild(pSig);
+
+            tinyxml2::XMLElement * pVal = doc.NewElement("Val");
+            pVal->SetText(diag.getSig(i));
+            pSig->InsertEndChild(pVal);
+
+            tinyxml2::XMLElement * pStart = doc.NewElement("Start");
+            pStart->SetText(diag.getSigStart(i));
+            pSig->InsertEndChild(pStart);
+
+            tinyxml2::XMLElement * pLen = doc.NewElement("Len");
+            pLen->SetText(diag.getSigLen(i));
+            pSig->InsertEndChild(pLen);
+
+            pSuccession->InsertEndChild(pSig);
+        }
+
+        pRoot->InsertEndChild(pSuccession);
 
         doc.SaveFile(&filename[0]);
     }

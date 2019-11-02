@@ -1,0 +1,36 @@
+<Diagram>
+    <Length>24</Length>
+    <Signals>6</Signals>
+    <Succession>
+        <Sig>
+            <Val>0</Val>
+            <Start>0</Start>
+            <Len>3</Len>
+        </Sig>
+        <Sig>
+            <Val>0</Val>
+            <Start>5</Start>
+            <Len>2</Len>
+        </Sig>
+        <Sig>
+            <Val>1</Val>
+            <Start>8</Start>
+            <Len>2</Len>
+        </Sig>
+        <Sig>
+            <Val>0</Val>
+            <Start>11</Start>
+            <Len>2</Len>
+        </Sig>
+        <Sig>
+            <Val>1</Val>
+            <Start>14</Start>
+            <Len>6</Len>
+        </Sig>
+        <Sig>
+            <Val>0</Val>
+            <Start>20</Start>
+            <Len>3</Len>
+        </Sig>
+    </Succession>
+</Diagram>
