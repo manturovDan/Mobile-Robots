@@ -1,17 +1,21 @@
 #include <iostream>
 #include "diagram.h"
+#include "diagfile.h"
 
 template <class T>
 int inpSmt(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
     bool more = false;
-    int gnStatus;
     while (1) {
         if (more)
             std::cout << again << std::endl;
 
         std::cin >> inp;
-        if (!std::cin.good())
-            throw std::invalid_argument("Invalid input (inpSmt)");
+        if (!std::cin.good()) {
+            std::cin.clear();
+            std::cin.ignore(100, '\n');
+            more = 1;
+            continue;
+        }
         if(std::abs(inp) > 100000000 || (unneg && inp < 0))
             more = true;
         else
@@ -31,10 +35,12 @@ int chooseAct() {
 	6. Print diagram\n\
 	7. Make one diagram as the segment of another one\n\
 	8. Create diagram from ASCII\n\
+	9. Read diagram from .txt file\n\
+	10. Write to .txt file\n\
 	0. Exit" << std:: endl;
 
         inpSmt(choise);
-        if(choise >= 0 && choise <= 8)
+        if(choise >= 0 && choise <= 10)
             return choise;
 
         std::cout << "Incorrect value!" << std::endl;
@@ -53,6 +59,21 @@ int chooseDiag(int diags, const char *welcome) {
 
         std::cout << "Incorrect value!" << std::endl;
     }
+}
+
+timeD::Diagram * getFileAndDiag(char* welcome, timeD::Diagram & diag1, timeD::Diagram & diag2, std::string &filename) {
+    int dgr = chooseDiag(2, welcome);
+    timeD::Diagram *diag;
+
+    if (dgr == 1)
+        diag = &diag1;
+    else
+        diag = &diag2;
+
+    std::cout << "Input path to file" << std::endl;
+    fileD::inpString(filename);
+    return diag;
+
 }
 
 int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
@@ -270,6 +291,20 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
 
         return 0;
     }
+    else if (act == 9) {
+        std::string filename;
+        char welcome[] = "Choose diagram to input";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        return fileD::readTextDiag(filename, *diag);
+    }
+    else if (act == 10) {
+        std::string filename;
+        char welcome[] = "Choose diagram to input";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        return fileD::writeTextDiag(filename, *diag);
+    }
 
     return -1;
 }
@@ -278,7 +313,7 @@ int main() {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
 
-    std::cout << "II Realisation\nTwo diagrams have created (Empty)." << std::endl;
+    std::cout << "III Realisation\nTwo diagrams were created (Empty)." << std::endl;
 
     int choise;
     while (1) {
@@ -288,5 +323,6 @@ int main() {
         launchFunc(diag1, diag2, choise);
 
     }
+
 
 }

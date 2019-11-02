@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include <exception>
-#include <string.h>
+#include <cstring>
 #include <iomanip>
 
+//version 3
 namespace timeD {
     struct signal {
         bool val;
@@ -15,40 +16,54 @@ namespace timeD {
 
     class Diagram {
     private:
-        static const int SZlen = 100; //and max length of diagram
-        static const int SZsig = 100;
-        signal interval[SZsig];
+        static const int maxLen = 10e5; //TODO recalculate
+        static const int maxSig = 10e5;
+        static const int magnifier = 10; //number on which vector increases all the time
+        signal *interval;
         int length;
         int sigNum;
+        int scale; //count og magnifiers
+
+        int cutDiag(int);
+        void copyInterval(const Diagram &, int, int);
+        void copyInterval(const signal *, int, int);
+        void prettyInterval(); //TODO paste everywhere
+        int shift(int);
     public:
-        Diagram(): length(0), sigNum(0) {}
+        Diagram(): length(0), sigNum(0), scale(1), interval(new signal[magnifier]) {}
         Diagram(const char *);
-        Diagram(char symb): length(0), sigNum(0) { addSignal(symb, 0, SZlen); }
+        Diagram(char symb): length(0), sigNum(0), scale(1), interval(new signal[magnifier]) { addSignal(symb, 0, maxLen); }
+        Diagram(const Diagram &);
+        Diagram(Diagram &&);
+        ~Diagram() { delete[] interval; };
+
+        Diagram & operator =(const Diagram &);
+        Diagram & operator =(Diagram &&);
+        Diagram & operator += (const Diagram&); // A+=B+=C;
+        Diagram & operator ++ (); // ++ ++ A;
+        Diagram operator ++ (int);
+        Diagram & operator << (int);
+        Diagram & operator >> (int);
+        int operator () ( int,  int, Diagram &) const;
 
         Diagram &addSignal(char, int, int);
         std::ostream &printDiagram(std::ostream&) const;
         std::ostream &printSignals(std::ostream&) const;
 
-        Diagram& operator += (const Diagram&); // A+=B+=C;
-        Diagram & operator ++ (); // ++ ++ A;
-        Diagram operator ++ (int);
-        Diagram & operator << (int);
-        Diagram & operator >> (int);
         friend std::ostream & operator << (std::ostream &, const Diagram &);
         friend std::istream & operator >> (std::istream &, Diagram &);
         friend Diagram operator + (const Diagram &, const Diagram &);
-        int operator () ( int,  int, Diagram &);
+        int refScale();
 
         int copyDiagram(int);
-        int cutDiag(int);
         Diagram &replace(int, const Diagram&);
-        int shift(int);
 
         int getLength() const { return length; }
         int getSigNum() const { return sigNum; }
-        int getSZlen() const { return SZlen; }
-        int getSZsig() const { return SZsig; }
-        int getSig(int num) { return interval[num].val; }
+        int getScale() const { return scale; }
+        int getMaxLen() const { return maxLen; }
+        int getMaxSig() const { return maxSig; }
+        int getSig(int num) { return interval[num].val; } //сделать проверку и char TODO
         int getSigStart(int num) { return interval[num].start; }
         int getSigLen(int num) { return interval[num].length; }	};
 }

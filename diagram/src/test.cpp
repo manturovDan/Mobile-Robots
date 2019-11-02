@@ -8,6 +8,7 @@ TEST (ConstrTest, ASCIItest) {
     timeD::Diagram diag1(str);
     timeD::Diagram diag2(str2);
 
+    ASSERT_EQ(diag1.getScale(), 1);
     ASSERT_EQ(diag1.getLength(), 20);
     ASSERT_EQ(diag1.getSigNum(), 10);
 
@@ -52,6 +53,7 @@ TEST (ConstrTest, ASCIItest) {
     ASSERT_EQ(diag1.getSigLen(9), 4);
     //
 
+    ASSERT_EQ(diag2.getScale(), 1);
     ASSERT_EQ(diag2.getLength(), 11);
     ASSERT_EQ(diag2.getSigNum(), 6);
 
@@ -86,16 +88,115 @@ TEST (ConstrTest, commonConstr) {
     timeD::Diagram diag3('0');
     timeD::Diagram diag4('1');
 
-    //ASSERT_EQ(diag1.getLength(), diag1.getSZlen());
     ASSERT_EQ(diag1.getSigNum(), 0);
 
-    //ASSERT_EQ(diag3.getLength(), diag3.getSZlen());
     ASSERT_EQ(diag3.getSigNum(), 1);
     ASSERT_EQ(diag3.getSig(0), 0);
 
-    //ASSERT_EQ(diag4.getLength(), diag4.getSZlen());
     ASSERT_EQ(diag4.getSigNum(), 1);
     ASSERT_EQ(diag4.getSig(0), 1);
+}
+
+TEST (ConstrTest, copyConstructor) {
+    timeD::Diagram diag1 = "0000111010010100101010011101000001XXX110";
+    timeD::Diagram diag2 = diag1;
+
+    ASSERT_EQ(diag1.getLength(), diag2.getLength());
+    ASSERT_EQ(diag1.getSigNum(), diag2.getSigNum());
+    ASSERT_EQ(diag1.getScale(), diag2.getScale());
+
+    for (int i = 0; i < diag1.getSigNum(); ++i) {
+        ASSERT_EQ(diag1.getSig(i), diag2.getSig(i));
+        ASSERT_EQ(diag1.getSigStart(i), diag2.getSigStart(i));
+        ASSERT_EQ(diag1.getSigLen(i), diag2.getSigLen(i));
+    }
+
+    diag1<<39;
+
+    ASSERT_EQ(diag2.getLength(), 40);
+    ASSERT_EQ(diag2.getSigNum(), 22);
+    ASSERT_EQ(diag2.getScale(), 3);
+
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 4);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 7);
+    ASSERT_EQ(diag1.getSigLen(2), 1);
+
+    ASSERT_EQ(diag2.getSig(15), 1);
+    ASSERT_EQ(diag2.getSigStart(15), 23);
+    ASSERT_EQ(diag2.getSigLen(15), 3);
+}
+
+TEST (OverloadTest, copyAssignment) {
+    timeD::Diagram diag1 = "0000111010010100101010011101000001XXX110";
+    timeD::Diagram diag2;
+    //std::cout << "COPY A START" << std::endl;
+    diag2 = diag1;
+
+    ASSERT_EQ(diag1.getLength(), diag2.getLength());
+    ASSERT_EQ(diag1.getSigNum(), diag2.getSigNum());
+    ASSERT_EQ(diag1.getScale(), diag2.getScale());
+
+    for (int i = 0; i < diag1.getSigNum(); ++i) {
+        ASSERT_EQ(diag1.getSig(i), diag2.getSig(i));
+        ASSERT_EQ(diag1.getSigStart(i), diag2.getSigStart(i));
+        ASSERT_EQ(diag1.getSigLen(i), diag2.getSigLen(i));
+    }
+
+    diag1<<39;
+
+    ASSERT_EQ(diag2.getLength(), 40);
+    ASSERT_EQ(diag2.getSigNum(), 22);
+    ASSERT_EQ(diag2.getScale(), 3);
+
+
+    ASSERT_EQ(diag2.getSig(0), 0);
+    ASSERT_EQ(diag2.getSigStart(0), 0);
+    ASSERT_EQ(diag2.getSigLen(0), 4);
+
+    ASSERT_EQ(diag2.getSig(2), 0);
+    ASSERT_EQ(diag2.getSigStart(2), 7);
+    ASSERT_EQ(diag1.getSigLen(2), 1);
+
+    ASSERT_EQ(diag2.getSig(15), 1);
+    ASSERT_EQ(diag2.getSigStart(15), 23);
+    ASSERT_EQ(diag2.getSigLen(15), 3);
+}
+
+timeD::Diagram justDiag(timeD::Diagram diag) {
+    return diag;
+}
+
+TEST (ConsrTest, moveConstructor) {
+    timeD::Diagram diag2 = "101010";
+    timeD::Diagram diag3(justDiag(diag2));
+
+    timeD::signal checker[] = {{1, 0, 1}, {0, 1, 1}, {1, 2, 1}, {0, 3, 1}, {1, 4, 1}, {0, 5, 1}};
+    for (int i = 0; i < 6; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
+}
+
+
+TEST (OverloadTest, moveAssignment) {
+    timeD::Diagram diag2 = "101010";
+    timeD::Diagram diag3;
+    diag3 = justDiag(diag2);
+
+    timeD::signal checker[] = {{1, 0, 1}, {0, 1, 1}, {1, 2, 1}, {0, 3, 1}, {1, 4, 1}, {0, 5, 1}};
+    for (int i = 0; i < 6; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
 }
 
 TEST (intfTest, addSig) {
@@ -112,8 +213,8 @@ TEST (intfTest, addSig) {
 
     ASSERT_THROW(diag1.addSignal('X', 5, 3), std::invalid_argument);
     ASSERT_THROW(diag1.addSignal('i', 15, 3), std::invalid_argument);
-    ASSERT_THROW(diag1.addSignal('X', 150, 3), std::invalid_argument);
-    ASSERT_THROW(diag1.addSignal('X', 15, 300), std::invalid_argument);
+    ASSERT_THROW(diag1.addSignal('X', 1e9, 3), std::invalid_argument);
+    ASSERT_THROW(diag1.addSignal('X', 15, 1e9), std::invalid_argument);
 
     diag1.addSignal('0', 8, 4);
     ASSERT_EQ(diag1.getLength(), 12);
@@ -133,6 +234,8 @@ TEST (intfTest, addSig) {
     ASSERT_EQ(diag1.getSig(1), 1);
     ASSERT_EQ(diag1.getSigStart(1), 12);
     ASSERT_EQ(diag1.getSigLen(1), 14);
+
+    ASSERT_EQ(diag1.getScale(), 1);
 }
 
 TEST (intfTest, uniTest) {
@@ -147,6 +250,8 @@ TEST (intfTest, uniTest) {
     diag2.addSignal('0', 12, 5);
 
     ASSERT_NO_THROW(diag1 += diag2);
+    ASSERT_EQ(diag1.getScale(), 1);
+    ASSERT_EQ(diag2.getScale(), 1);
 
     ASSERT_EQ(diag1.getLength(), 43);
     ASSERT_EQ(diag1.getSigNum(), 5);
@@ -252,24 +357,54 @@ TEST (intfTest, uniTest) {
     ASSERT_EQ(diag2.getSig(11), 0);
     ASSERT_EQ(diag2.getSigStart(11), 63);
     ASSERT_EQ(diag2.getSigLen(11), 5);
+}
 
-    ASSERT_THROW(diag1 += diag2, std::invalid_argument);
+TEST(intfTest, unitTestMulty) {
+    timeD::Diagram diag1("100101XXX11");
+    timeD::Diagram diag2("1000XXX010110");
+    timeD::signal conc1[] = {{1, 0, 1}, {0, 1, 2}, {1, 3, 1}, {0, 4, 1}, {1, 5, 1},
+                             {1, 9, 3}, {0, 12, 3}, {0, 18, 1},
+                             {1, 19, 1}, {0, 20, 1}, {1, 21, 2}, {0, 23, 1}};
+    timeD::signal conc2[] = {{1, 0, 1}, {0, 1, 3}, {0, 7, 1}, {1, 8, 1},
+                             {0, 9, 1}, {1, 10, 2}, {0, 12, 1}};
 
-    ASSERT_EQ(diag1.getLength(), 43);
-    ASSERT_EQ(diag1.getSigNum(), 5);
+    ASSERT_NO_THROW(diag1 += diag2 += diag1 += diag2);
 
-    ASSERT_EQ(diag1.getSig(0), 0);
-    ASSERT_EQ(diag1.getSigStart(0), 5);
-    ASSERT_EQ(diag1.getSigLen(0), 7);
+    ASSERT_EQ(diag2.getSigNum(), 19);
+    ASSERT_EQ(diag2.getScale(), 2);
+    ASSERT_EQ(diag2.getLength(), 37);
+    for (int i = 0; i < 7; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << conc2[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), conc2[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), conc2[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), conc2[i].length);
+    }
+    for (int i = 7; i < 19; ++i) {
+        ASSERT_EQ(diag2.getSig(i), conc1[i - 7].val);
+        ASSERT_EQ(diag2.getSigStart(i), conc1[i - 7].start + 13);
+        ASSERT_EQ(diag2.getSigLen(i), conc1[i - 7].length);
+    }
 
-    ASSERT_THROW(diag2 += diag2, std::invalid_argument);
 
-    ASSERT_EQ(diag2.getLength(), 68);
-    ASSERT_EQ(diag2.getSigNum(), 12);
+    ASSERT_EQ(diag1.getSigNum(), 31);
+    ASSERT_EQ(diag1.getScale(), 4);
+    ASSERT_EQ(diag1.getLength(), 61);
+    for (int i = 0; i < 12; ++i) {
+        ASSERT_EQ(diag1.getSig(i), conc1[i].val);
+        ASSERT_EQ(diag1.getSigStart(i), conc1[i].start);
+        ASSERT_EQ(diag1.getSigLen(i), conc1[i].length);
+    }
+    for (int i = 12; i < 19; ++i) {
+        ASSERT_EQ(diag1.getSig(i), conc2[i - 12].val);
+        ASSERT_EQ(diag1.getSigStart(i), conc2[i - 12].start + 24);
+        ASSERT_EQ(diag1.getSigLen(i), conc2[i - 12].length);
+    }
+    for (int i = 19; i < 31; ++i) {
+        ASSERT_EQ(diag1.getSig(i), conc1[i - 19].val);
+        ASSERT_EQ(diag1.getSigStart(i), conc1[i - 19].start + 37);
+        ASSERT_EQ(diag1.getSigLen(i), conc1[i - 19].length);
+    }
 
-    ASSERT_EQ(diag2.getSig(0), 0);
-    ASSERT_EQ(diag2.getSigStart(0), 3);
-    ASSERT_EQ(diag2.getSigLen(0), 1);
 }
 
 TEST (intfTest, uniTestPrefPP) {
@@ -283,6 +418,7 @@ TEST (intfTest, uniTestPrefPP) {
 
     diag3 = ++diag2;
 
+    ASSERT_EQ(diag2.getScale(), 1);
     ASSERT_EQ(diag2.getLength(), 34);
     ASSERT_EQ(diag2.getSigNum(), 6);
 
@@ -350,6 +486,7 @@ TEST (intfTest, uniTestPostPP) {
 
     diag3 = diag2++;
 
+    ASSERT_EQ(diag2.getScale(), 1);
     ASSERT_EQ(diag2.getLength(), 34);
     ASSERT_EQ(diag2.getSigNum(), 5);
 
@@ -397,39 +534,41 @@ TEST (intfTest, uniTestPostPPMult) {
     diag2.addSignal('1', 4, 2);
     diag2.addSignal('0', 7, 2);
 
-    std::cout << diag2 <<std::endl;
+    timeD::signal checker[] {{0, 1, 1}, {1, 4, 2}, {0, 7, 2},
+                             {0, 10, 1}, {1, 13, 2}, {0, 16, 2},
+                             {0, 19, 1}, {1, 22, 2}, {0, 25, 2},
+                             {0, 28, 1}, {1, 31, 2},  {0, 34, 2},
+                             {0, 37, 1}, {1, 40, 2}, {0, 43, 2},
+                             {0, 46, 1}, {1, 49, 2}, {0, 52, 2},
+                             {0, 55, 1}, {1, 58, 2}, {0, 61, 2},
+                             {0, 64, 1}, {1, 67, 2}, {0, 70, 2}};
 
-    diag3 = ++ ++ ++ diag2;
 
-    /*ASSERT_EQ(diag2.getLength(), 72);
+    ASSERT_NO_THROW(diag3 = ++ ++ ++ diag2);
+
+    ASSERT_EQ(diag2.getScale(), 3);
+    ASSERT_EQ(diag2.getLength(), 72);
     ASSERT_EQ(diag2.getSigNum(), 24);
+    for (int i = 0; i < 24; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
 
-    ASSERT_EQ(diag2.getSig(0), 0);
-    ASSERT_EQ(diag2.getSigStart(0), 1);
-    ASSERT_EQ(diag2.getSigLen(0), 1);
 
-    ASSERT_EQ(diag2.getSig(1), 1);
-    ASSERT_EQ(diag2.getSigStart(1), 4);
-    ASSERT_EQ(diag2.getSigLen(1), 2);
+    ASSERT_EQ(diag3.getScale(), 3);
+    ASSERT_EQ(diag3.getLength(), 72);
+    ASSERT_EQ(diag3.getSigNum(), 24);
+    for (int i = 0; i < 24; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag3.getSig(i), checker[i].val);
+        ASSERT_EQ(diag3.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag3.getSigLen(i), checker[i].length);
+    }
 
-    ASSERT_EQ(diag2.getSig(2), 0);
-    ASSERT_EQ(diag2.getSigStart(2), 7);
-    ASSERT_EQ(diag2.getSigLen(2), 2);
-
-    ASSERT_EQ(diag2.getSig(3), 1);
-    ASSERT_EQ(diag2.getSigStart(3), 10);
-    ASSERT_EQ(diag2.getSigLen(3), 1);
-
-    ASSERT_EQ(diag2.getSig(4), 0);
-    ASSERT_EQ(diag2.getSigStart(4), 14);
-    ASSERT_EQ(diag2.getSigLen(4), 2);
-
-    ASSERT_EQ(diag2.getSig(5), 1);
-    ASSERT_EQ(diag2.getSigStart(5), 17);
-    ASSERT_EQ(diag2.getSigLen(5), 2);*/
-
-    std::cout << diag2;
 }
+
 
 TEST (intfTest, uniTestGluing) {
     timeD::Diagram diag1;
@@ -445,6 +584,7 @@ TEST (intfTest, uniTestGluing) {
     diag1 += diag2;
 
     ASSERT_EQ(diag1.getLength(), 33);
+    ASSERT_EQ(diag1.getScale(), 1);
     ASSERT_EQ(diag1.getSigNum(), 4);
 
     ASSERT_EQ(diag1.getSig(0), 1);
@@ -595,7 +735,8 @@ TEST (intfTest, copyTestSimp) {
         ASSERT_EQ(diag2.getSigLen(2 + 3*(i - 1)), 5);
     }
 
-    ASSERT_EQ(diag2.copyDiagram(2), 1);
+    ASSERT_EQ(diag2.copyDiagram(diag2.getMaxSig() / diag2.getSigNum() + 10), 1);
+    ASSERT_EQ(diag2.copyDiagram(diag2.getMaxLen() / diag2.getLength() + 10), 1);
 
     for (int i = 1; i <= 5; i++) {
         ASSERT_EQ(diag2.getLength(), 17*5);
@@ -675,6 +816,49 @@ TEST (intfTest, copyGluingTest) {
     ASSERT_EQ(diag1.getSig(10), 0);
     ASSERT_EQ(diag1.getSigStart(10), 34);
     ASSERT_EQ(diag1.getSigLen(10), 1);
+
+    ASSERT_EQ(diag1.getScale(), 2);
+}
+
+TEST (noShiftTest, intfTest) {
+    timeD::Diagram diag1;
+    timeD::Diagram diag2;
+    diag1.addSignal('0', 5, 7);
+    diag1.addSignal('1', 12, 14);
+
+    diag2.addSignal('0', 3, 1);
+    diag2.addSignal('1', 4, 8);
+    diag2.addSignal('0', 12, 5);
+
+    ASSERT_NO_THROW(diag1 += diag2);
+
+    diag1<<0;
+
+    ASSERT_THROW(diag1<<(-5), std::invalid_argument);
+    ASSERT_THROW(diag1>>(-900), std::invalid_argument);
+
+    ASSERT_EQ(diag1.getLength(), 43);
+    ASSERT_EQ(diag1.getSigNum(), 5);
+
+    ASSERT_EQ(diag1.getSig(0), 0);
+    ASSERT_EQ(diag1.getSigStart(0), 5);
+    ASSERT_EQ(diag1.getSigLen(0), 7);
+
+    ASSERT_EQ(diag1.getSig(1), 1);
+    ASSERT_EQ(diag1.getSigStart(1), 12);
+    ASSERT_EQ(diag1.getSigLen(1), 14);
+
+    ASSERT_EQ(diag1.getSig(2), 0);
+    ASSERT_EQ(diag1.getSigStart(2), 29);
+    ASSERT_EQ(diag1.getSigLen(2), 1);
+
+    ASSERT_EQ(diag1.getSig(3), 1);
+    ASSERT_EQ(diag1.getSigStart(3), 30);
+    ASSERT_EQ(diag1.getSigLen(3), 8);
+
+    ASSERT_EQ(diag1.getSig(4), 0);
+    ASSERT_EQ(diag1.getSigStart(4), 38);
+    ASSERT_EQ(diag1.getSigLen(4), 5);
 }
 
 TEST (ShiftRightTest, intfTest) {
@@ -715,7 +899,7 @@ TEST (ShiftRightTest, intfTest) {
     //
     diag1>>51;
 
-    ASSERT_EQ(diag1.getLength(), 100);
+    ASSERT_EQ(diag1.getLength(), 101);
     ASSERT_EQ(diag1.getSigNum(), 5);
 
     ASSERT_EQ(diag1.getSigStart(4), 90);
@@ -723,7 +907,7 @@ TEST (ShiftRightTest, intfTest) {
 
     diag1>>3;
 
-    ASSERT_EQ(diag1.getLength(), 100);
+    ASSERT_EQ(diag1.getLength(), 104);
     ASSERT_EQ(diag1.getSigNum(), 5);
 
     ASSERT_EQ(diag1.getSigStart(4), 93);
@@ -731,35 +915,66 @@ TEST (ShiftRightTest, intfTest) {
 
     diag1>>5;
 
-    ASSERT_EQ(diag1.getLength(), 100);
+    ASSERT_EQ(diag1.getLength(), 109);
     ASSERT_EQ(diag1.getSigNum(), 5);
 
     ASSERT_EQ(diag1.getSigStart(4), 98);
-    ASSERT_EQ(diag1.getSigLen(4), 2);
+    ASSERT_EQ(diag1.getSigLen(4), 7);
 
-    diag1>>3;
+    if (diag1.getMaxLen() > 109) {
+        diag1 >> (diag1.getMaxLen() - 109);
+        ASSERT_EQ(diag1.getLength(), diag1.getMaxLen());
+        ASSERT_EQ(diag1.getSigNum(), 5);
 
-    ASSERT_EQ(diag1.getLength(), 100);
-    ASSERT_EQ(diag1.getSigNum(), 4);
+        ASSERT_EQ(diag1.getSigStart(4), 98 + diag1.getMaxLen() - 109);
+        ASSERT_EQ(diag1.getSigLen(4), 7);
 
-    ASSERT_EQ(diag1.getSigStart(3), 99);
-    ASSERT_EQ(diag1.getSigLen(3), 1);
+        diag1>>6;
+        ASSERT_EQ(diag1.getSigStart(4), 104 + diag1.getMaxLen() - 109);
+        ASSERT_EQ(diag1.getSigLen(4), 5);
 
-    diag1>>2;
-
-    ASSERT_EQ(diag1.getLength(), 100);
-    ASSERT_EQ(diag1.getSigNum(), 3);
-
-    ASSERT_EQ(diag1.getSigStart(2), 98);
-    ASSERT_EQ(diag1.getSigLen(2), 2);
-
-    diag1>>300;
-
-    ASSERT_EQ(diag1.getLength(), 100);
-    ASSERT_EQ(diag1.getSigNum(), 0);
+    }
 }
 
-TEST (ShiftLeft, intfTest) {
+TEST(intfTest, shiftRightBoundary) {
+    timeD::Diagram diag("010101010101010101010101111");
+    ASSERT_EQ(diag.getLength(), 27);
+    ASSERT_EQ(diag.getSigNum(), 24);
+    ASSERT_EQ(diag.getScale(), 3);
+
+    if (diag.getMaxLen() > 27) {
+        diag >> (diag.getMaxLen() - 27);
+        ASSERT_EQ(diag.getLength(), diag.getMaxLen());
+        ASSERT_EQ(diag.getSigNum(), 24);
+
+        ASSERT_EQ(diag.getSigStart(23), diag.getMaxLen() - 4);
+        ASSERT_EQ(diag.getSigLen(23), 4);
+
+        diag>>6;
+        ASSERT_EQ(diag.getSigStart(20), diag.getMaxLen() - 1);
+        ASSERT_EQ(diag.getSig(20), 0);
+        ASSERT_EQ(diag.getSigLen(20), 1);
+
+        diag>>2;
+        ASSERT_EQ(diag.getSigStart(18), diag.getMaxLen() - 1);
+        ASSERT_EQ(diag.getSig(18), 0);
+        ASSERT_EQ(diag.getSigLen(18), 1);
+
+        ASSERT_EQ(diag.getScale(), 2);
+
+        diag>>19;
+        ASSERT_EQ(diag.getSigNum(), 0);
+
+        diag>>10;
+        ASSERT_EQ(diag.getLength(), diag.getMaxLen());
+        ASSERT_EQ(diag.getSigNum(), 0);
+        ASSERT_EQ(diag.getScale(), 1);
+
+    }
+}
+
+
+TEST (intfTest, ShiftLeft) {
     timeD::Diagram diag1;
 
     diag1.addSignal('0', 5, 7);
@@ -848,52 +1063,44 @@ TEST (ShiftLeft, intfTest) {
 
     diag1>>140;
 
-    ASSERT_EQ(diag1.getLength(), 100);
+    ASSERT_EQ(diag1.getLength(), 140);
     ASSERT_EQ(diag1.getSigNum(), 0);
 }
 
-TEST (noShiftTest, intfTest) {
-    timeD::Diagram diag1;
-    timeD::Diagram diag2;
-    diag1.addSignal('0', 5, 7);
-    diag1.addSignal('1', 12, 14);
+TEST(intfTest, shiftLefttBoundary) {
+    timeD::Diagram diag("010101010101010101010101111");
+    ASSERT_EQ(diag.getLength(), 27);
+    ASSERT_EQ(diag.getSigNum(), 24);
+    ASSERT_EQ(diag.getScale(), 3);
 
-    diag2.addSignal('0', 3, 1);
-    diag2.addSignal('1', 4, 8);
-    diag2.addSignal('0', 12, 5);
+    diag<<5;
+    ASSERT_EQ(diag.getLength(), 22);
+    ASSERT_EQ(diag.getSigNum(), 19);
+    ASSERT_EQ(diag.getScale(), 2);
 
-    ASSERT_NO_THROW(diag1 += diag2);
+    diag<<10;
+    ASSERT_EQ(diag.getLength(), 12);
+    ASSERT_EQ(diag.getSigNum(), 9);
+    ASSERT_EQ(diag.getScale(), 1);
 
-    diag1<<0;
+    diag<<5;
+    ASSERT_EQ(diag.getLength(), 7);
+    ASSERT_EQ(diag.getSigNum(), 4);
+    ASSERT_EQ(diag.getScale(), 1);
 
-    ASSERT_THROW(diag1<<(-5), std::invalid_argument);
-    ASSERT_THROW(diag1>>(-900), std::invalid_argument);
+    diag<<7;
+    ASSERT_EQ(diag.getLength(), 0);
+    ASSERT_EQ(diag.getSigNum(), 0);
+    ASSERT_EQ(diag.getScale(), 1);
 
-    ASSERT_EQ(diag1.getLength(), 43);
-    ASSERT_EQ(diag1.getSigNum(), 5);
+    diag<<7;
+    ASSERT_EQ(diag.getLength(), 0);
+    ASSERT_EQ(diag.getSigNum(), 0);
+    ASSERT_EQ(diag.getScale(), 1);
 
-    ASSERT_EQ(diag1.getSig(0), 0);
-    ASSERT_EQ(diag1.getSigStart(0), 5);
-    ASSERT_EQ(diag1.getSigLen(0), 7);
-
-    ASSERT_EQ(diag1.getSig(1), 1);
-    ASSERT_EQ(diag1.getSigStart(1), 12);
-    ASSERT_EQ(diag1.getSigLen(1), 14);
-
-    ASSERT_EQ(diag1.getSig(2), 0);
-    ASSERT_EQ(diag1.getSigStart(2), 29);
-    ASSERT_EQ(diag1.getSigLen(2), 1);
-
-    ASSERT_EQ(diag1.getSig(3), 1);
-    ASSERT_EQ(diag1.getSigStart(3), 30);
-    ASSERT_EQ(diag1.getSigLen(3), 8);
-
-    ASSERT_EQ(diag1.getSig(4), 0);
-    ASSERT_EQ(diag1.getSigStart(4), 38);
-    ASSERT_EQ(diag1.getSigLen(4), 5);
 }
 
-TEST (replaceTest, intfTest) {
+TEST (intfTest, replaceTest) {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
     timeD::Diagram diag3('0');
@@ -908,7 +1115,7 @@ TEST (replaceTest, intfTest) {
     ASSERT_THROW(diag2.replace(20, diag1), std::invalid_argument);
 
     diag1.replace(14, diag2);
-
+    ASSERT_EQ(diag1.getScale(), 1);
     ASSERT_EQ(diag1.getLength(), 19);
     ASSERT_EQ(diag1.getSigNum(), 2);
 
@@ -921,7 +1128,8 @@ TEST (replaceTest, intfTest) {
     ASSERT_EQ(diag1.getSigLen(1), 7);
 
     diag2.replace(17, diag3);
-    ASSERT_EQ(diag2.getLength(), 100);
+    ASSERT_EQ(diag2.getScale(), 1);
+    ASSERT_EQ(diag2.getLength(), diag2.getMaxLen());
     ASSERT_EQ(diag2.getSigNum(), 4);
 
     ASSERT_EQ(diag2.getSig(0), 1);
@@ -938,9 +1146,10 @@ TEST (replaceTest, intfTest) {
 
     ASSERT_EQ(diag2.getSig(3), 0);
     ASSERT_EQ(diag2.getSigStart(3), 17);
-    ASSERT_EQ(diag2.getSigLen(3), 83);
+    ASSERT_EQ(diag2.getSigLen(3), diag2.getMaxLen() - 17);
 
     diag2.replace(4, diag1);
+    ASSERT_EQ(diag1.getScale(), 1);
     ASSERT_EQ(diag2.getLength(), 19);
     ASSERT_EQ(diag2.getSigNum(), 3);
 
@@ -956,6 +1165,43 @@ TEST (replaceTest, intfTest) {
     ASSERT_EQ(diag2.getSigStart(2), 12);
     ASSERT_EQ(diag2.getSigLen(2), 7);
 }
+
+TEST (intfTest, replaceTestDecScale) {
+    timeD::Diagram diag1("111111111111111111110101010101010101010");
+    timeD::Diagram diag2("11111111111111111111111");
+
+    diag1.replace(15, diag2);
+    ASSERT_EQ(diag1.getScale(), 1);
+    ASSERT_EQ(diag1.getSigNum(), 1);
+    ASSERT_EQ(diag1.getLength(), 23);
+
+    ASSERT_EQ(diag1.getSig(0), 1);
+    ASSERT_EQ(diag1.getSigStart(0), 0);
+    ASSERT_EQ(diag1.getSigLen(0), 23);
+}
+
+TEST (intfTest, replaceTestIncScale) {
+    timeD::Diagram diag1("10101010101010101010111111111111111111111110");
+    timeD::Diagram diag2("11111111111111111111111");
+
+    timeD::signal checker[] = {{1, 0, 3}, {0, 3, 1}, {1, 4, 1}, {0, 5, 1}, {1, 6, 1}, {0, 7, 1}, {1, 8, 1},
+                               {0, 9, 1}, {1, 10, 1}, {0, 11, 1}, {1, 12, 1}, {0, 13, 1}, {1, 14, 1}, {0, 15, 1},
+                               {1, 16, 1}, {0, 17, 1}, {1, 18, 1}, {0, 19, 1}, {1, 20, 23}, {0, 43, 1}};
+
+    diag2.replace(3, diag1);
+    ASSERT_EQ(diag2.getScale(), 2);
+    ASSERT_EQ(diag2.getSigNum(), 20);
+    ASSERT_EQ(diag2.getLength(), 44);
+
+    for (int i = 0; i < 20; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
+
+}
+
 
 TEST (intfTest, Segment) {
     timeD::Diagram diag1;
@@ -1085,6 +1331,22 @@ TEST (intfTest, Segment) {
     ASSERT_EQ(diag1.getSigStart(4), 27);
     ASSERT_EQ(diag1.getSigLen(4), 2);
 
+}
+
+TEST (intfTest, SegmentBig) {
+    timeD::Diagram diag1("10101010101010101010111111111111111111111110");
+    timeD::Diagram diag2;
+    timeD::signal checker[] = {{0, 0, 1}, {1, 1, 1}, {0, 2, 1}, {1, 3, 1}, {0, 4, 1}, {1, 5, 1}, {0, 6, 1},
+                               {1, 7, 1}, {0, 8, 1}, {1, 9, 1}, {0, 10, 1}, {1, 11, 1}, {0, 12, 1}, {1, 13, 1},
+                               {0, 14, 1}, {1, 15, 5}};
+    diag1(5, 25, diag2); //01010101010101011111 - diag2
+
+    for (int i = 0; i < 16; ++i) {
+        //std:: cout << i <<" - " << diag2.getSig(i) << " - " << checker[i].val << std::endl;
+        ASSERT_EQ(diag2.getSig(i), checker[i].val);
+        ASSERT_EQ(diag2.getSigStart(i), checker[i].start);
+        ASSERT_EQ(diag2.getSigLen(i), checker[i].length);
+    }
 }
 
 int main(int argc, char **argv) {

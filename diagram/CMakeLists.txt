@@ -3,7 +3,7 @@ project(diagram)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-add_executable(diagram src/main.cpp src/diagram.h src/diagram.cpp)
+add_executable(diagram src/main.cpp src/diagram.h src/diagram.cpp src/diagfile.h src/diagfile.cpp)
 
 enable_testing()
 find_package(GTest REQUIRED)
