@@ -257,7 +257,7 @@ namespace fileD {
 
         diag = new_diag;
 
-        stream << "Correct import" << str::endl;
+        stream << "Correct import" << std::endl;
         return 0;
     }
 }
