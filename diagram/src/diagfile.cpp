@@ -48,28 +48,29 @@ namespace fileD {
         return 0;
     }
 
-    /*int writeTextDiag(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
+    int writeTextDiag(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
         std::ofstream os;
         os.open(filename);
 
         int pos = 0;
         int signalEl = 0;
-        stream << "Time\t0\t1" << std::endl;
-        while (pos < length) {
-            if (signalEl >= sigNum || pos < interval[signalEl].start) {
-                stream << pos << std::endl;
+        while (pos < diag.getLength()) {
+            if (signalEl >= diag.getSigNum() || pos < diag.getSigStart(signalEl)) {
+                os << ' ';
                 pos++;
             } else {
-                for(; pos < interval[signalEl].start + interval[signalEl].length; pos++) {
-                    if (interval[signalEl].val == 1)
-                        stream << pos << "\t\t|" << std::endl;
+                for(; pos < diag.getSigStart(signalEl) + diag.getSigLen(signalEl); pos++) {
+                    if (diag.getSig(signalEl) == 1)
+                        os << '_';
                     else {
-                        stream << pos << "\t|\t" << std::endl;
+                        os << '-';
                     }
                 }
                 signalEl++;
             }
-
         }
-    }*/
+        os << std::endl;
+
+        return 0;
+    }
 }
