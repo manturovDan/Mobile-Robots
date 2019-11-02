@@ -327,10 +327,10 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
     }
     else if (act == 13) {
         std::string filename;
-        char welcome[] = "Choose diagram for export";
+        char welcome[] = "Choose diagram for import";
         timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
 
-        fileD::writeBinary(filename, *diag);
+        fileD::readXML(filename, *diag);
     }
     else if (act == 14) {
         std::string filename;

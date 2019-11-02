@@ -63,7 +63,7 @@ namespace timeD {
         int getScale() const { return scale; }
         int getMaxLen() const { return maxLen; }
         int getMaxSig() const { return maxSig; }
-        int getSig(int num) { return interval[num].val; } //сделать проверку и char TODO
+        int getSig(int num) { return interval[num].val; }
         int getSigStart(int num) { return interval[num].start; }
         int getSigLen(int num) { return interval[num].length; }	};
 }

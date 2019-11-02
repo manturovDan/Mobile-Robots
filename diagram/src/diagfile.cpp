@@ -163,4 +163,38 @@ namespace fileD {
         stream << "Correct writing" << std::endl;
         return 0;
     }
+
+    int fileDamaged(std::ostream &stream) {
+        stream << "Error. File was damaged!" << std::endl;
+        return 1;
+    }
+
+    int readXML(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
+        tinyxml2::XMLDocument doc;
+        tinyxml2::XMLError eResult = doc.LoadFile(&filename[0]);
+        if (eResult != 0) {
+            stream << "Error of file access!" << std::endl;
+            return 1;
+        }
+
+        tinyxml2::XMLNode * pDiag = doc.FirstChild();
+        if (pDiag == nullptr) { stream << "ERROR1" <<std::endl; return fileDamaged(stream); }
+
+        tinyxml2::XMLElement * pLength = pDiag->FirstChildElement("Length");
+        if (pLength == nullptr) { stream << "ERROR2" <<std::endl; return fileDamaged(stream); }
+
+        int length;
+        eResult = pLength->QueryIntText(&length);
+        if (eResult != 0) { stream << "ERROR3" <<std::endl; return fileDamaged(stream); }
+
+        int sigNum;
+        eResult = pLength->QueryIntText(&sigNum);
+        if (eResult != 0) { stream << "ERROR4" <<std::endl; return fileDamaged(stream); }
+
+
+
+        stream << length << std::endl;
+
+        return 0;
+    }
 }

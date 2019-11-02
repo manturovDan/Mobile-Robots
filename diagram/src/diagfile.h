@@ -17,5 +17,6 @@ namespace fileD {
     int writeBinary(std::string & , timeD::Diagram &, std::ostream &stream = std::cout);
     int readBinary(std::string & , timeD::Diagram &, std::ostream &stream = std::cout);
     int writeXML(std::string & , timeD::Diagram &, std::ostream &stream = std::cout);
+    int readXML(std::string & , timeD::Diagram &, std::ostream &stream = std::cout);
 }
 #endif //DIAGRAM_DIAGFILE_H
