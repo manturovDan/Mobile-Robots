@@ -313,7 +313,7 @@ int main() {
     timeD::Diagram diag1;
     timeD::Diagram diag2;
 
-    std::cout << "Bonus - true branch Realisation\nTwo diagrams were created (Empty)." << std::endl;
+    std::cout << "Bonus - new branch Realisation\nTwo diagrams were created (Empty)." << std::endl;
 
     int choise;
     while (1) {
