@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/danila/source/labs3sem/diagram/src/diagfile.cpp" "/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/src/diagfile.cpp.o"
   "/home/danila/source/labs3sem/diagram/src/diagram.cpp" "/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/src/diagram.cpp.o"
   "/home/danila/source/labs3sem/diagram/src/main.cpp" "/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/src/main.cpp.o"
+  "/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.cpp" "/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir/tinyxml2-lib/tinyxml2.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

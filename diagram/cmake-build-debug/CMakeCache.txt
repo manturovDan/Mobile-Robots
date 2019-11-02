@@ -232,6 +232,9 @@ ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/sbin/sysctl
 
+//The directory containing a CMake configuration file for TinyXML2.
+TinyXML2_DIR:PATH=TinyXML2_DIR-NOTFOUND
+
 //Value Computed by CMake
 diagram_BINARY_DIR:STATIC=/home/danila/source/labs3sem/diagram/cmake-build-debug
 

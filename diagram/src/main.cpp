@@ -36,11 +36,16 @@ int chooseAct() {
 	7. Make one diagram as the segment of another one\n\
 	8. Create diagram from ASCII\n\
 	9. Read diagram from .txt file\n\
-	10. Write to .txt file\n\
+	10. Write in .txt file\n\
+	11. Read from binary file\n\
+	12. Write in binary file\n\
+	13. Read from xml-file\n\
+	14. Write in xml-file\n\
+	15. Export in bmp-file\n\
 	0. Exit" << std:: endl;
 
         inpSmt(choise);
-        if(choise >= 0 && choise <= 10)
+        if(choise >= 0 && choise <= 15)
             return choise;
 
         std::cout << "Incorrect value!" << std::endl;
@@ -294,17 +299,45 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
     }
     else if (act == 9) {
         std::string filename;
-        char welcome[] = "Choose diagram to input";
+        char welcome[] = "Choose diagram for import";
         timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
 
         return fileD::readTextDiag(filename, *diag);
     }
     else if (act == 10) {
         std::string filename;
-        char welcome[] = "Choose diagram to input";
+        char welcome[] = "Choose diagram for export";
         timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
 
         return fileD::writeTextDiag(filename, *diag);
+    }
+    else if (act == 11) {
+        std::string filename;
+        char welcome[] = "Choose diagram for import";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        fileD::readBinary(filename, *diag);
+    }
+    else if (act == 12) {
+        std::string filename;
+        char welcome[] = "Choose diagram for export";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        fileD::writeBinary(filename, *diag);
+    }
+    else if (act == 13) {
+        std::string filename;
+        char welcome[] = "Choose diagram for export";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        fileD::writeBinary(filename, *diag);
+    }
+    else if (act == 14) {
+        std::string filename;
+        char welcome[] = "Choose diagram for export in XML";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        fileD::writeXML(filename, *diag);
     }
 
     return -1;

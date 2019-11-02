@@ -9,16 +9,22 @@
 /home/danila/source/labs3sem/diagram/src/diagfile.cpp
 iostream
 -
+jmorecfg.h
+-
 diagfile.h
 /home/danila/source/labs3sem/diagram/src/diagfile.h
 
 /home/danila/source/labs3sem/diagram/src/diagfile.h
+iostream
+-
 fstream
 -
 string
 -
 algorithm
 -
+../tinyxml2-lib/tinyxml2.h
+/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.h
 diagram.h
 /home/danila/source/labs3sem/diagram/src/diagram.h
 
@@ -39,4 +45,34 @@ diagram.h
 /home/danila/source/labs3sem/diagram/src/diagram.h
 diagfile.h
 /home/danila/source/labs3sem/diagram/src/diagfile.h
+
+/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.h
+ctype.h
+-
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stddef.h
+-
+cctype
+-
+climits
+-
+cstdio
+-
+cstdlib
+-
+cstring
+-
+stdint.h
+-
+android/log.h
+-
+assert.h
+-
 

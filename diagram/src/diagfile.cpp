@@ -1,4 +1,5 @@
 #include <iostream>
+#include <jmorecfg.h>
 
 #include "diagfile.h"
 
@@ -73,5 +74,57 @@ namespace fileD {
 
         stream << "The diagram has wrote" << std::endl;
         return 0;
+    }
+
+    int writeBinary(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
+        std::ofstream os(filename, std::ios::binary | std::ios::out);
+        if (!os) {
+            stream << "Cannot open file!" << std::endl;
+            return 1;
+        }
+
+        timeD::signal *sgns = new timeD::signal[diag.getSigNum()];
+        for (int i = 0; i < diag.getSigNum(); ++i) {
+            sgns[i] = { bool(diag.getSig(i)), diag.getSigStart(i), diag.getSigLen(i) };
+        }
+
+        int length = diag.getLength();
+        int sigNums = diag.getSigNum();
+
+        //os.write((char *) &length, sizeof(length));
+        //os.write((char *) &sigNums, sizeof(length));
+        os << length << sigNums <<std::endl;
+
+        os << std::endl;
+        delete[] sgns;
+    }
+
+    int readBinary(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
+        std::ifstream is(filename, std::ios::binary | std::ios::out);
+        if (!is) {
+            stream << "Cannot open file!" << std::endl;
+            return 1;
+        }
+
+        int length;
+        int sigNums;
+        is >> length >> sigNums;
+        stream << length << ' ' << sigNums << std::endl;
+
+        return 0;
+    }
+
+    int writeXML(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
+        tinyxml2::XMLDocument doc;
+
+        tinyxml2::XMLNode * pRoot = doc.NewElement("Root");
+        doc.InsertFirstChild(pRoot);
+
+        tinyxml2::XMLElement * pElement = doc.NewElement("IntValue");
+        pElement->SetText(10);
+
+        pRoot->InsertEndChild(pElement);
+
+        doc.SaveFile(&filename[0]);
     }
 }

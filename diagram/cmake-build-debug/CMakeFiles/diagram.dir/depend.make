@@ -4,6 +4,7 @@
 CMakeFiles/diagram.dir/src/diagfile.cpp.o: ../src/diagfile.cpp
 CMakeFiles/diagram.dir/src/diagfile.cpp.o: ../src/diagfile.h
 CMakeFiles/diagram.dir/src/diagfile.cpp.o: ../src/diagram.h
+CMakeFiles/diagram.dir/src/diagfile.cpp.o: ../tinyxml2-lib/tinyxml2.h
 
 CMakeFiles/diagram.dir/src/diagram.cpp.o: ../src/diagram.cpp
 CMakeFiles/diagram.dir/src/diagram.cpp.o: ../src/diagram.h
@@ -11,4 +12,8 @@ CMakeFiles/diagram.dir/src/diagram.cpp.o: ../src/diagram.h
 CMakeFiles/diagram.dir/src/main.cpp.o: ../src/diagfile.h
 CMakeFiles/diagram.dir/src/main.cpp.o: ../src/diagram.h
 CMakeFiles/diagram.dir/src/main.cpp.o: ../src/main.cpp
+CMakeFiles/diagram.dir/src/main.cpp.o: ../tinyxml2-lib/tinyxml2.h
+
+CMakeFiles/diagram.dir/tinyxml2-lib/tinyxml2.cpp.o: ../tinyxml2-lib/tinyxml2.cpp
+CMakeFiles/diagram.dir/tinyxml2-lib/tinyxml2.cpp.o: ../tinyxml2-lib/tinyxml2.h
 

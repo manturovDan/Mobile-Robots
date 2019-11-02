@@ -160,6 +160,12 @@
 		<Unit filename="/home/danila/source/labs3sem/diagram/src/test.cpp">
 			<Option target="u_test"/>
 		</Unit>
+		<Unit filename="/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.cpp">
+			<Option target="diagram"/>
+		</Unit>
+		<Unit filename="/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.h">
+			<Option target="diagram"/>
+		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
