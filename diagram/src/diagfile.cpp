@@ -71,6 +71,7 @@ namespace fileD {
         }
         os << std::endl;
 
+        stream << "The diagram has wrote" << std::endl;
         return 0;
     }
 }

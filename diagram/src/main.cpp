@@ -72,6 +72,7 @@ timeD::Diagram * getFileAndDiag(char* welcome, timeD::Diagram & diag1, timeD::Di
 
     std::cout << "Input path to file" << std::endl;
     fileD::inpString(filename);
+    filename.erase(std::remove(filename.begin(), filename.end(), '\''), filename.end());
     return diag;
 
 }
