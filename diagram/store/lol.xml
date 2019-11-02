@@ -1,24 +1,5 @@
 <Diagram>
-    <Length>24</Length>
-    <Signals>6</Signals>
-    <Succession>
-        <Sig>
-            <Val>0</Val>
-        </Sig>
-        <Sig>
-            <Val>0</Val>
-        </Sig>
-        <Sig>
-            <Val>1</Val>
-        </Sig>
-        <Sig>
-            <Val>0</Val>
-        </Sig>
-        <Sig>
-            <Val>1</Val>
-        </Sig>
-        <Sig>
-            <Val>0</Val>
-        </Sig>
-    </Succession>
+    <Length>0</Length>
+    <Signals>0</Signals>
+    <Succession/>
 </Diagram>

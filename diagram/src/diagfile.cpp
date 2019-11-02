@@ -127,31 +127,40 @@ namespace fileD {
         tinyxml2::XMLElement * pSignals = doc.NewElement("Signals");
         pSignals->SetText(diag.getSigNum());
         pRoot->InsertEndChild(pSignals);
+        if (diag.getSigNum() > 0) {
+            tinyxml2::XMLElement *pSuccession = doc.NewElement("Succession");
 
-        tinyxml2::XMLElement * pSuccession = doc.NewElement("Succession");
+            doc.InsertFirstChild(pSuccession);
+            for (int i = 0; i < diag.getSigNum(); ++i) {
+                tinyxml2::XMLElement *pSig = doc.NewElement("Sig");
+                doc.InsertFirstChild(pSig);
 
-        doc.InsertFirstChild(pSuccession);
-        for(int i = 0; i < diag.getSigNum(); ++i) {
-            tinyxml2::XMLElement * pSig = doc.NewElement("Sig");
-            doc.InsertFirstChild(pSig);
+                tinyxml2::XMLElement *pVal = doc.NewElement("Val");
+                pVal->SetText(diag.getSig(i));
+                pSig->InsertEndChild(pVal);
 
-            tinyxml2::XMLElement * pVal = doc.NewElement("Val");
-            pVal->SetText(diag.getSig(i));
-            pSig->InsertEndChild(pVal);
+                tinyxml2::XMLElement *pStart = doc.NewElement("Start");
+                pStart->SetText(diag.getSigStart(i));
+                pSig->InsertEndChild(pStart);
 
-            tinyxml2::XMLElement * pStart = doc.NewElement("Start");
-            pStart->SetText(diag.getSigStart(i));
-            pSig->InsertEndChild(pStart);
+                tinyxml2::XMLElement *pLen = doc.NewElement("Len");
+                pLen->SetText(diag.getSigLen(i));
+                pSig->InsertEndChild(pLen);
 
-            tinyxml2::XMLElement * pLen = doc.NewElement("Len");
-            pLen->SetText(diag.getSigLen(i));
-            pSig->InsertEndChild(pLen);
+                pSuccession->InsertEndChild(pSig);
+            }
 
-            pSuccession->InsertEndChild(pSig);
+            pRoot->InsertEndChild(pSuccession);
         }
 
-        pRoot->InsertEndChild(pSuccession);
+        tinyxml2::XMLError eResult = doc.SaveFile(&filename[0]);
+        if (eResult != 1 && eResult != 0)
+        {
+            stream << "File writing error!" << std::endl;
+            return 1;
+        }
 
-        doc.SaveFile(&filename[0]);
+        stream << "Correct writing" << std::endl;
+        return 0;
     }
 }
