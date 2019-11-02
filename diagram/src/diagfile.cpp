@@ -178,22 +178,58 @@ namespace fileD {
         }
 
         tinyxml2::XMLNode * pDiag = doc.FirstChild();
-        if (pDiag == nullptr) { stream << "ERROR1" <<std::endl; return fileDamaged(stream); }
+        if (pDiag == nullptr) return fileDamaged(stream);
 
         tinyxml2::XMLElement * pLength = pDiag->FirstChildElement("Length");
-        if (pLength == nullptr) { stream << "ERROR2" <<std::endl; return fileDamaged(stream); }
-
+        if (pLength == nullptr) return fileDamaged(stream);
         int length;
         eResult = pLength->QueryIntText(&length);
-        if (eResult != 0) { stream << "ERROR3" <<std::endl; return fileDamaged(stream); }
+        if (eResult != 0) return fileDamaged(stream);
 
+        tinyxml2::XMLElement * pSigNum = pDiag->FirstChildElement("Signals");
+        if (pSigNum == nullptr) return fileDamaged(stream);
         int sigNum;
-        eResult = pLength->QueryIntText(&sigNum);
-        if (eResult != 0) { stream << "ERROR4" <<std::endl; return fileDamaged(stream); }
+        eResult = pSigNum->QueryIntText(&sigNum);
+        if (eResult != 0) return fileDamaged(stream);
+
+        tinyxml2::XMLElement * pSuc = pDiag->FirstChildElement("Succession");
+        if (pSuc == nullptr) return fileDamaged(stream);
+
+        tinyxml2::XMLElement * pSigElem = pSuc->FirstChildElement("Sig");
+        if (pSigElem == nullptr) return fileDamaged(stream);
+        tinyxml2::XMLElement * pSigVal = pSigElem->FirstChildElement("Val");
+        tinyxml2::XMLElement * pSigStart = pSigElem->FirstChildElement("Start");
+        tinyxml2::XMLElement * pSigLen = pSigElem->FirstChildElement("Len");
 
 
+        for (int i = 0; i < sigNum; ++i) {
+            int val, start, len;
+            if (i != 0) {
+                pSigElem = pSigElem->NextSiblingElement("Sig");
+                if (pSigElem == nullptr) {
+                    return fileDamaged(stream);
+                }
+                pSigVal = pSigElem->FirstChildElement("Val");
+                pSigStart = pSigElem->FirstChildElement("Start");
+                pSigLen = pSigElem->FirstChildElement("Len");
+            }
 
-        stream << length << std::endl;
+            if (pSigVal == nullptr) return fileDamaged(stream);
+            eResult = pSigVal->QueryIntText(&val);
+            if (eResult != 0) return fileDamaged(stream);
+
+            if (pSigStart == nullptr) return fileDamaged(stream);
+            eResult = pSigStart->QueryIntText(&start);
+            if (eResult != 0) return fileDamaged(stream);
+
+            if (pSigLen == nullptr) return fileDamaged(stream);
+            eResult = pSigLen->QueryIntText(&len);
+            if (eResult != 0) return fileDamaged(stream);
+
+            stream << val << ' ' << start << ' ' << len << std::endl;
+        }
+
+        stream << length << ' ' << sigNum << std::endl;
 
         return 0;
     }
