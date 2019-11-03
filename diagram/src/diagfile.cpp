@@ -260,4 +260,104 @@ namespace fileD {
         stream << "Correct import" << std::endl;
         return 0;
     }
+
+    int exportPicture(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
+        std::ofstream image (&filename[0]);
+        image << "P3" << std::endl;
+        const int width = 128 * diag.getLength();
+        image << width << " " << 256 << std::endl;
+        image << 255 << std::endl;
+
+        /*for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                image << x % 255 << " " << y % 255 << " " << x * y % 255 << std::endl;
+            }
+        }*/
+        for (int y = 0; y < 64; ++y) {
+            for (int x = 0; x < width; ++x) {
+                image << 255 << " " << 255 << " " << 255 << std::endl;
+            }
+        }
+        for (int y = 64; y < 70; ++y) {
+            int pos = 0;
+            int signalEl = 0;
+            while (pos < diag.getLength()) {
+                if (signalEl >= diag.getSigNum() || pos < diag.getSigStart(signalEl)) {
+                    for (int x = 0; x < 128; ++x) {
+                        image << 255 << " " << 255 << " " << 255 << std::endl;
+                    }
+                    pos++;
+                }
+                else {
+                    for (; pos < diag.getSigStart(signalEl) + diag.getSigLen(signalEl); ++pos) {
+                        if (diag.getSig(signalEl) == 1) {
+                            for (int x = 0; x < 4; ++x) {
+                                image << 255 << " " << 255 << " " << 255 << std::endl;
+                            }
+                            for (int x = 0; x < 120; ++x) {
+                                image << 0 << " " << 0 << " " << 0 << std::endl;
+                            }
+                            for (int x = 0; x < 4; ++x) {
+                                image << 255 << " " << 255 << " " << 255 << std::endl;
+                            }
+                        }
+                        else {
+                            for (int x = 0; x < 128; ++x) {
+                                image << 255 << " " << 255 << " " << 255 << std::endl;
+                            }
+                        }
+                    }
+                    signalEl++;
+                }
+            }
+        }
+
+        for (int y = 70; y < 192; ++y) {
+            for (int x = 0; x < width; ++x) {
+                image << 255 << " " << 255 << " " << 255 << std::endl;
+            }
+        }
+
+        for (int y = 192; y < 198; ++y) {
+            int pos = 0;
+            int signalEl = 0;
+            while (pos < diag.getLength()) {
+                if (signalEl >= diag.getSigNum() || pos < diag.getSigStart(signalEl)) {
+                    for (int x = 0; x < 128; ++x) {
+                        image << 255 << " " << 255 << " " << 255 << std::endl;
+                    }
+                    pos++;
+                }
+                else {
+                    for (; pos < diag.getSigStart(signalEl) + diag.getSigLen(signalEl); ++pos) {
+                        if (diag.getSig(signalEl) == 1) {
+                            for (int x = 0; x < 128; ++x) {
+                                image << 255 << " " << 255 << " " << 255 << std::endl;
+                            }
+                        }
+                        else {
+                            for (int x = 0; x < 4; ++x) {
+                                image << 255 << " " << 255 << " " << 255 << std::endl;
+                            }
+                            for (int x = 0; x < 120; ++x) {
+                                image << 0 << " " << 0 << " " << 0 << std::endl;
+                            }
+                            for (int x = 0; x < 4; ++x) {
+                                image << 255 << " " << 255 << " " << 255 << std::endl;
+                            }
+                        }
+                    }
+                    signalEl++;
+                }
+            }
+        }
+
+        for (int y = 198; y < 256; ++y) {
+            for (int x = 0; x < width; ++x) {
+                image << 255 << " " << 255 << " " << 255 << std::endl;
+            }
+        }
+
+    }
+    
 }

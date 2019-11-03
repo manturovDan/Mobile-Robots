@@ -339,6 +339,13 @@ int launchFunc(timeD::Diagram &diag1, timeD::Diagram &diag2, int act) {
 
         fileD::writeXML(filename, *diag);
     }
+    else if (act == 15) {
+        std::string filename;
+        char welcome[] = "Choose diagram for export in PPM";
+        timeD::Diagram *diag = getFileAndDiag(welcome, diag1, diag2, filename);
+
+        fileD::exportPicture(filename, *diag);
+    }
 
     return -1;
 }
