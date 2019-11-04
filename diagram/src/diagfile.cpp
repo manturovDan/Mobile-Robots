@@ -79,6 +79,11 @@ namespace fileD {
         return 0;
     }
 
+    int fileDamaged(std::ostream &stream) {
+        stream << "Error. File was damaged!" << std::endl;
+        return 1;
+    }
+
     int writeBinary(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
         std::ofstream os(filename, std::ios::binary | std::ios::out);
         if (!os) {
@@ -86,7 +91,7 @@ namespace fileD {
             return 1;
         }
 
-        timeD::signal *sgns = new timeD::signal[diag.getSigNum()];
+        auto *sgns = new timeD::signal[diag.getSigNum()];
         for (int i = 0; i < diag.getSigNum(); ++i) {
             sgns[i] = { bool(diag.getSig(i)), diag.getSigStart(i), diag.getSigLen(i) };
         }
@@ -94,19 +99,21 @@ namespace fileD {
         int length = diag.getLength();
         int sigNums = diag.getSigNum();
 
-        //os.write((char *) &length, sizeof(length));
-        //os.write((char *) &sigNums, sizeof(length));
-        os << length << sigNums <<std::endl;
+        os.write((char *) &length, sizeof(int));
+        os.write((char *) &sigNums, sizeof(int));
+        os.write((char *) sgns, sizeof(sgns[0]) * sigNums);
 
         os << std::endl;
         delete[] sgns;
 
         os.close();
+
+        stream << "Correct export" << std::endl;
         return 0;
     }
 
     int readBinary(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
-        std::ifstream is(filename, std::ios::binary | std::ios::out);
+        std::ifstream is(filename, std::ios::binary | std::ios::in);
         if (!is) {
             stream << "Cannot open file!" << std::endl;
             return 1;
@@ -114,8 +121,34 @@ namespace fileD {
 
         int length;
         int sigNums;
-        is >> length >> sigNums;
-        stream << length << ' ' << sigNums << std::endl;
+        timeD::signal sigg;
+        timeD::Diagram new_diagram;
+        is.read((char*)&length, sizeof(int));
+        is.read((char*)&sigNums, sizeof(int));
+
+        char signalCh;
+        try {
+            for (int i = 0; i < sigNums; ++i) {
+                is.read((char *) &sigg, sizeof(sigg));
+                if (sigg.val == 1)
+                    signalCh = '1';
+                else if (sigg.val == 0)
+                    signalCh = '0';
+                else
+                    throw std::length_error("Error");
+                new_diagram.addSignal(signalCh, sigg.start, sigg.length);
+            }
+
+            if (new_diagram.getLength() < length)
+                new_diagram.addSignal('X', length-1, 1);
+
+        } catch (std::exception &ex) {
+            return fileDamaged(stream);
+        }
+
+        diag = new_diagram;
+
+        stream << "Correct import" << std::endl;
 
         return 0;
     }
@@ -168,11 +201,6 @@ namespace fileD {
 
         stream << "Correct writing" << std::endl;
         return 0;
-    }
-
-    int fileDamaged(std::ostream &stream) {
-        stream << "Error. File was damaged!" << std::endl;
-        return 1;
     }
 
     int readXML(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
