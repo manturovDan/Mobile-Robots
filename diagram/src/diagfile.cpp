@@ -263,16 +263,15 @@ namespace fileD {
 
     int exportPicture(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
         std::ofstream image (&filename[0]);
+        if (!image) {
+            stream << "Cannot open file!" << std::endl;
+            return 1;
+        }
         image << "P3" << std::endl;
         const int width = 128 * diag.getLength();
         image << width << " " << 256 << std::endl;
         image << 255 << std::endl;
 
-        /*for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {
-                image << x % 255 << " " << y % 255 << " " << x * y % 255 << std::endl;
-            }
-        }*/
         for (int y = 0; y < 64; ++y) {
             for (int x = 0; x < width; ++x) {
                 image << 255 << " " << 255 << " " << 255 << std::endl;
@@ -357,6 +356,8 @@ namespace fileD {
                 image << 255 << " " << 255 << " " << 255 << std::endl;
             }
         }
+
+        image.close();
 
     }
     
