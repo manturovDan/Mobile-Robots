@@ -46,6 +46,7 @@ namespace fileD {
 
         stream << "The diagram has read" << std::endl;
 
+        is.close();
         return 0;
     }
 
@@ -73,6 +74,8 @@ namespace fileD {
         os << std::endl;
 
         stream << "The diagram has wrote" << std::endl;
+
+        os.close();
         return 0;
     }
 
@@ -97,6 +100,9 @@ namespace fileD {
 
         os << std::endl;
         delete[] sgns;
+
+        os.close();
+        return 0;
     }
 
     int readBinary(std::string & filename, timeD::Diagram &diag, std::ostream &stream) {
