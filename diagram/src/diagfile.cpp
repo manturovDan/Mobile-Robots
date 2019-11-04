@@ -54,6 +54,11 @@ namespace fileD {
         std::ofstream os;
         os.open(filename);
 
+        if (!os.is_open()) {
+            stream << "File error" << std::endl;
+            return 1;
+        }
+
         int pos = 0;
         int signalEl = 0;
         while (pos < diag.getLength()) {
@@ -63,9 +68,9 @@ namespace fileD {
             } else {
                 for(; pos < diag.getSigStart(signalEl) + diag.getSigLen(signalEl); pos++) {
                     if (diag.getSig(signalEl) == 1)
-                        os << '_';
-                    else {
                         os << '-';
+                    else {
+                        os << '_';
                     }
                 }
                 signalEl++;

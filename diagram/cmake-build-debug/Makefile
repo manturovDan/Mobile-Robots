@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/danila/source/labs3sem/diagram/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -88,6 +77,17 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -122,6 +122,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named a_test
+
+# Build rule for target.
+a_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 a_test
+.PHONY : a_test
+
+# fast build rule for target.
+a_test/fast:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/build
+.PHONY : a_test/fast
+
+#=============================================================================
 # Target rules for targets named diagram
 
 # Build rule for target.
@@ -147,12 +160,40 @@ u_test/fast:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
 .PHONY : u_test/fast
 
+app_test/test.o: app_test/test.cpp.o
+
+.PHONY : app_test/test.o
+
+# target to build an object file
+app_test/test.cpp.o:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/app_test/test.cpp.o
+.PHONY : app_test/test.cpp.o
+
+app_test/test.i: app_test/test.cpp.i
+
+.PHONY : app_test/test.i
+
+# target to preprocess a source file
+app_test/test.cpp.i:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/app_test/test.cpp.i
+.PHONY : app_test/test.cpp.i
+
+app_test/test.s: app_test/test.cpp.s
+
+.PHONY : app_test/test.s
+
+# target to generate assembly for a file
+app_test/test.cpp.s:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/app_test/test.cpp.s
+.PHONY : app_test/test.cpp.s
+
 src/diagfile.o: src/diagfile.cpp.o
 
 .PHONY : src/diagfile.o
 
 # target to build an object file
 src/diagfile.cpp.o:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/src/diagfile.cpp.o
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagfile.cpp.o
 .PHONY : src/diagfile.cpp.o
 
@@ -162,6 +203,7 @@ src/diagfile.i: src/diagfile.cpp.i
 
 # target to preprocess a source file
 src/diagfile.cpp.i:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/src/diagfile.cpp.i
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagfile.cpp.i
 .PHONY : src/diagfile.cpp.i
 
@@ -171,6 +213,7 @@ src/diagfile.s: src/diagfile.cpp.s
 
 # target to generate assembly for a file
 src/diagfile.cpp.s:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/src/diagfile.cpp.s
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagfile.cpp.s
 .PHONY : src/diagfile.cpp.s
 
@@ -180,6 +223,7 @@ src/diagram.o: src/diagram.cpp.o
 
 # target to build an object file
 src/diagram.cpp.o:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/src/diagram.cpp.o
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagram.cpp.o
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/diagram.cpp.o
 .PHONY : src/diagram.cpp.o
@@ -190,6 +234,7 @@ src/diagram.i: src/diagram.cpp.i
 
 # target to preprocess a source file
 src/diagram.cpp.i:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/src/diagram.cpp.i
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagram.cpp.i
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/diagram.cpp.i
 .PHONY : src/diagram.cpp.i
@@ -200,6 +245,7 @@ src/diagram.s: src/diagram.cpp.s
 
 # target to generate assembly for a file
 src/diagram.cpp.s:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/src/diagram.cpp.s
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/src/diagram.cpp.s
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/src/diagram.cpp.s
 .PHONY : src/diagram.cpp.s
@@ -264,6 +310,7 @@ tinyxml2-lib/tinyxml2.o: tinyxml2-lib/tinyxml2.cpp.o
 
 # target to build an object file
 tinyxml2-lib/tinyxml2.cpp.o:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/tinyxml2-lib/tinyxml2.cpp.o
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/tinyxml2-lib/tinyxml2.cpp.o
 .PHONY : tinyxml2-lib/tinyxml2.cpp.o
 
@@ -273,6 +320,7 @@ tinyxml2-lib/tinyxml2.i: tinyxml2-lib/tinyxml2.cpp.i
 
 # target to preprocess a source file
 tinyxml2-lib/tinyxml2.cpp.i:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/tinyxml2-lib/tinyxml2.cpp.i
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/tinyxml2-lib/tinyxml2.cpp.i
 .PHONY : tinyxml2-lib/tinyxml2.cpp.i
 
@@ -282,6 +330,7 @@ tinyxml2-lib/tinyxml2.s: tinyxml2-lib/tinyxml2.cpp.s
 
 # target to generate assembly for a file
 tinyxml2-lib/tinyxml2.cpp.s:
+	$(MAKE) -f CMakeFiles/a_test.dir/build.make CMakeFiles/a_test.dir/tinyxml2-lib/tinyxml2.cpp.s
 	$(MAKE) -f CMakeFiles/diagram.dir/build.make CMakeFiles/diagram.dir/tinyxml2-lib/tinyxml2.cpp.s
 .PHONY : tinyxml2-lib/tinyxml2.cpp.s
 
@@ -291,11 +340,15 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
+	@echo "... rebuild_cache"
+	@echo "... a_test"
 	@echo "... diagram"
 	@echo "... u_test"
+	@echo "... app_test/test.o"
+	@echo "... app_test/test.i"
+	@echo "... app_test/test.s"
 	@echo "... src/diagfile.o"
 	@echo "... src/diagfile.i"
 	@echo "... src/diagfile.s"

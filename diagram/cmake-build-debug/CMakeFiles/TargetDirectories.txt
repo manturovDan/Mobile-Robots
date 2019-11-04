@@ -1,5 +1,6 @@
-/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/test.dir
+/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/a_test.dir
 /home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/diagram.dir
 /home/danila/source/labs3sem/diagram/cmake-build-debug/CMakeFiles/u_test.dir

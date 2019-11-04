@@ -17,16 +17,6 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/danila/source/labs3sem/diagram/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="/home/danila/source/labs3sem/diagram/cmake-build-debug"/>
 				<Option type="4"/>
@@ -42,6 +32,62 @@
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/danila/source/labs3sem/diagram/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="a_test">
+				<Option output="/home/danila/source/labs3sem/diagram/cmake-build-debug/a_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/labs3sem/diagram/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 a_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="a_test/fast">
+				<Option output="/home/danila/source/labs3sem/diagram/cmake-build-debug/a_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/labs3sem/diagram/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 a_test/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/labs3sem/diagram/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -140,17 +186,24 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/danila/source/labs3sem/diagram/app_test/test.cpp">
+			<Option target="a_test"/>
+		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/src/diagfile.cpp">
+			<Option target="a_test"/>
 			<Option target="diagram"/>
 		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/src/diagfile.h">
+			<Option target="a_test"/>
 			<Option target="diagram"/>
 		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/src/diagram.cpp">
+			<Option target="a_test"/>
 			<Option target="diagram"/>
 			<Option target="u_test"/>
 		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/src/diagram.h">
+			<Option target="a_test"/>
 			<Option target="diagram"/>
 			<Option target="u_test"/>
 		</Unit>
@@ -161,9 +214,11 @@
 			<Option target="u_test"/>
 		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.cpp">
+			<Option target="a_test"/>
 			<Option target="diagram"/>
 		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/tinyxml2-lib/tinyxml2.h">
+			<Option target="a_test"/>
 			<Option target="diagram"/>
 		</Unit>
 		<Unit filename="/home/danila/source/labs3sem/diagram/CMakeLists.txt">

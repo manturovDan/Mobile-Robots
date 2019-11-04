@@ -41,7 +41,7 @@ int chooseAct() {
 	12. Write in binary file\n\
 	13. Read from xml-file\n\
 	14. Write in xml-file\n\
-	15. Export in bmp-file\n\
+	15. Export in ppm-file\n\
 	0. Exit" << std:: endl;
 
         inpSmt(choise);
