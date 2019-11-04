@@ -191,12 +191,20 @@ namespace fileD {
         int length;
         eResult = pLength->QueryIntText(&length);
         if (eResult != 0) return fileDamaged(stream);
+        if (length > diag.getMaxLen()) {
+            stream << "Diagram in the file is too long" << std::endl;
+            return 1;
+        }
 
         tinyxml2::XMLElement * pSigNum = pDiag->FirstChildElement("Signals");
         if (pSigNum == nullptr) return fileDamaged(stream);
         int sigNum;
         eResult = pSigNum->QueryIntText(&sigNum);
         if (eResult != 0) return fileDamaged(stream);
+        if (sigNum > diag.getMaxSig()) {
+            stream << "Diagram in the file is too big" << std::endl;
+            return 1;
+        }
 
         tinyxml2::XMLElement * pSuc = pDiag->FirstChildElement("Succession");
         if (pSuc == nullptr) return fileDamaged(stream);
