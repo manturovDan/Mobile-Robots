@@ -3,4 +3,4 @@ project(robotsCreate)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(robotsCreate main.cpp)
+add_executable(robotsCreate main.cpp robots/robot.h)
