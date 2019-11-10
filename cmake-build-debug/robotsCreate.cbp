@@ -5,7 +5,7 @@
 		<Option title="robotsCreate"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\libraries\;CMake Files\..\libraries\SFML-2.5.1\;CMake Files\..\libraries\SFML-2.5.1\lib\;CMake Files\..\libraries\SFML-2.5.1\lib\cmake\;CMake Files\..\libraries\SFML-2.5.1\lib\cmake\SFML\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
@@ -34,6 +34,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/danila/source/libraries/SFML-2.5.1/include"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -57,6 +58,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/danila/source/libraries/SFML-2.5.1/include"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -92,6 +94,21 @@
 		</Unit>
 		<Unit filename="/home/danila/source/robots/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/../libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\libraries\SFML-2.5.1\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/../libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\..\libraries\SFML-2.5.1\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/../libraries/SFML-2.5.1/lib/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\libraries\SFML-2.5.1\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/../libraries/SFML-2.5.1/lib/cmake/SFML/SFMLSharedTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\libraries\SFML-2.5.1\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/../libraries/SFML-2.5.1/lib/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\..\libraries\SFML-2.5.1\lib\cmake\SFML\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

@@ -2,6 +2,7 @@
 #define ROBOTSCREATE_ROBOT_H
 
 #include <vector>
+#include <map>
 
 #include <string>
 
@@ -12,19 +13,22 @@ namespace robo {
         int direction;
     };
 
+    class Map_Object;
+
     class Environment_describer {
     private:
         unsigned int width;
         unsigned int height;
-        //TODO matrix of map_objects
+        std::vector<map_position *> map_obj;
     public:
-        //TODO constructors
+        Environment_describer();
         int setWidth(unsigned int);
         int setHeight(unsigned int);
         unsigned int getWidth();
         unsigned int getHeight();
-        //TODO setObject
-        //TODO getObject
+        map_position getObject(Map_Object &);
+        Map_Object * getObject(map_position);
+        Map_Object * setObject(map_position, char *);
     };
 
     class Map_Object {
@@ -138,6 +142,14 @@ namespace robo {
         int radius;
         int direction;
         int angle;
+
+    };
+
+    class AI_Dict {
+
+    };
+
+    class AI {
 
     };
 }

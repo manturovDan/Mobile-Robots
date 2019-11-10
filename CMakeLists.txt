@@ -3,4 +3,12 @@ project(robotsCreate)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(SFML_INCLUDE_DIR "~/source/libraries/SFML-2.5.1/include")
+set(SFML_LIBRARY_DIR "~/source/libraries/SFML-2.5.1/lib")
+set(SFML_DIR "~/source/libraries/SFML-2.5.1/lib/cmake/SFML")
+
+find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
+
 add_executable(robotsCreate main.cpp robots/robot.h)
+
+target_link_libraries(robotsCreate sfml-graphics sfml-window sfml-audio)

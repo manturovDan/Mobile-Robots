@@ -79,6 +79,10 @@ robotsCreate_EXTERNAL_OBJECTS =
 
 robotsCreate: CMakeFiles/robotsCreate.dir/main.cpp.o
 robotsCreate: CMakeFiles/robotsCreate.dir/build.make
+robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-graphics.so.2.5.1
+robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-window.so.2.5.1
+robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-audio.so.2.5.1
+robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-system.so.2.5.1
 robotsCreate: CMakeFiles/robotsCreate.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable robotsCreate"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/robotsCreate.dir/link.txt --verbose=$(VERBOSE)
