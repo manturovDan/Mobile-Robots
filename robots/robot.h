@@ -19,42 +19,46 @@ namespace robo {
     private:
         unsigned int width;
         unsigned int height;
-        std::vector<map_position *> map_obj;
+        std::vector<Map_Object *> map_obj;
     public:
-        Environment_describer();
+        Environment_describer() = delete;
+        Environment_describer(int, int);
         int setWidth(unsigned int);
         int setHeight(unsigned int);
         unsigned int getWidth();
         unsigned int getHeight();
         map_position getObject(Map_Object &);
         Map_Object * getObject(map_position);
-        Map_Object * setObject(map_position, char *);
+        Map_Object * setObject(map_position, std::string, std::string description = "");
     };
 
     class Map_Object {
-    private:
-        map_position position;
     protected:
-        Map_Object() {}
+        Map_Object() {};
+        Map_Object(map_position);
+        map_position position;
     public:
         map_position getPosition();
     };
 
-    class Obstacle : public Map_Object {
-    public:
-        Obstacle() {}
-    };
-
     class Interest_Point : public Map_Object {
     public:
-        Interest_Point() {}
+        Interest_Point() = delete;
+        Interest_Point(map_position pos) : Map_Object(pos) {};
+    };
+
+    class Obstacle : public Map_Object {
+    public:
+        Obstacle() = delete;
+        Obstacle(map_position pos) : Map_Object(pos) {};
     };
 
     class Module;
 
     class Robo_Component : public Map_Object {
     protected:
-        Robo_Component() {}
+        Robo_Component() = delete;
+        Robo_Component(map_position) {}
 
         map_position position;
         std::string description;

@@ -3,3 +3,7 @@
 
 CMakeFiles/robotsCreate.dir/main.cpp.o
  /home/danila/source/robots/main.cpp
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/environment.cpp.o
+ /home/danila/source/robots/robots/environment.cpp
+ /home/danila/source/robots/robots/robot.h

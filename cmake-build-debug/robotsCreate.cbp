@@ -89,6 +89,9 @@
 		<Unit filename="/home/danila/source/robots/main.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/environment.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/robot.h">
 			<Option target="robotsCreate"/>
 		</Unit>
