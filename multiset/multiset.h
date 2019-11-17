@@ -5,8 +5,12 @@ namespace std {
     template <class key>
     class less;
 
+    class set_iterator {
+
+    };
+
     template <class elemType, class compare = std::less<elemType> >
-    class multimap {
+    class multiset {
     private:
         class Vertex {
         private:
@@ -19,6 +23,20 @@ namespace std {
         };
 
         Vertex * top; //vertex
+        int elCount;
+
+
+    public:
+        multiset() : top(nullptr), elCount(0) {}
+
+        bool empty () const { return !elCount; }
+        size_t count() const { return elCount; }
+        size_t max_size() const { /* I DONT KNOW */}
+
+        typedef set_iterator iterator;
+
     };
+
+
 }
 #endif //MY_MULTIMAP_H

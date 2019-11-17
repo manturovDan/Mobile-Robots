@@ -48,10 +48,10 @@ RM = /home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -E remove
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/danila/source/robots/multimap
+CMAKE_SOURCE_DIR = /home/danila/source/robots/multiset
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/danila/source/robots/multimap/cmake-build-debug
+CMAKE_BINARY_DIR = /home/danila/source/robots/multiset/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/multimap/cmake-build-debug/CMakeFiles /home/danila/source/robots/multimap/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/multiset/cmake-build-debug/CMakeFiles /home/danila/source/robots/multiset/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/multimap/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/multiset/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named multimapTest
+# Target rules for targets named multisetTest
 
 # Build rule for target.
-multimapTest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 multimapTest
-.PHONY : multimapTest
+multisetTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multisetTest
+.PHONY : multisetTest
 
 # fast build rule for target.
-multimapTest/fast:
-	$(MAKE) -f CMakeFiles/multimapTest.dir/build.make CMakeFiles/multimapTest.dir/build
-.PHONY : multimapTest/fast
+multisetTest/fast:
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/build
+.PHONY : multisetTest/fast
 
 main.o: main.cpp.o
 
@@ -129,7 +129,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/multimapTest.dir/build.make CMakeFiles/multimapTest.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +138,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/multimapTest.dir/build.make CMakeFiles/multimapTest.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +147,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/multimapTest.dir/build.make CMakeFiles/multimapTest.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -157,7 +157,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... multimapTest"
+	@echo "... multisetTest"
 	@echo "... edit_cache"
 	@echo "... main.o"
 	@echo "... main.i"

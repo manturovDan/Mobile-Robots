@@ -1,3 +1,0 @@
-/home/danila/source/robots/multimap/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/danila/source/robots/multimap/cmake-build-debug/CMakeFiles/multimapTest.dir
-/home/danila/source/robots/multimap/cmake-build-debug/CMakeFiles/edit_cache.dir
