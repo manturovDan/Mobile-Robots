@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/danila/source/robots/main.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/main.cpp.o"
   "/home/danila/source/robots/robots/environment.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/environment.cpp.o"
+  "/home/danila/source/robots/robots/interface.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/interface.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

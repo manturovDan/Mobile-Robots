@@ -177,6 +177,33 @@ robots/environment.cpp.s:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/environment.cpp.s
 .PHONY : robots/environment.cpp.s
 
+robots/interface.o: robots/interface.cpp.o
+
+.PHONY : robots/interface.o
+
+# target to build an object file
+robots/interface.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/interface.cpp.o
+.PHONY : robots/interface.cpp.o
+
+robots/interface.i: robots/interface.cpp.i
+
+.PHONY : robots/interface.i
+
+# target to preprocess a source file
+robots/interface.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/interface.cpp.i
+.PHONY : robots/interface.cpp.i
+
+robots/interface.s: robots/interface.cpp.s
+
+.PHONY : robots/interface.s
+
+# target to generate assembly for a file
+robots/interface.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/interface.cpp.s
+.PHONY : robots/interface.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +219,9 @@ help:
 	@echo "... robots/environment.o"
 	@echo "... robots/environment.i"
 	@echo "... robots/environment.s"
+	@echo "... robots/interface.o"
+	@echo "... robots/interface.i"
+	@echo "... robots/interface.s"
 .PHONY : help
 
 

@@ -17,28 +17,32 @@ namespace robo {
 
     class Environment_describer {
     private:
-        unsigned int width;
-        unsigned int height;
+        int width;
+        int height;
         std::vector<Map_Object *> map_obj;
     public:
-        Environment_describer() = delete;
+        Environment_describer() {};
         Environment_describer(int, int);
-        int setWidth(unsigned int);
-        int setHeight(unsigned int);
-        unsigned int getWidth();
-        unsigned int getHeight();
+        int setWidthHeight(int, bool);
+        int setWidth(int nval) { return setWidthHeight(nval, true); }
+        int setHeight(int nval) { return setWidthHeight(nval, true); }
+        int getWidth() { return width; };
+        int getHeight() { return height; };
         map_position getObject(Map_Object &);
         Map_Object * getObject(map_position);
-        Map_Object * setObject(map_position, std::string, std::string description = "");
+        Map_Object * setObject(map_position, std::string &, std::string description = "");
     };
 
     class Map_Object {
     protected:
-        Map_Object() {};
+        Map_Object() = delete;
         Map_Object(map_position);
-        map_position position;
+        map_position position{};
+        bool appeared{};
     public:
         map_position getPosition();
+        int getX() { return position.x; };
+        int getY() { return position.y; };
     };
 
     class Interest_Point : public Map_Object {
@@ -58,13 +62,14 @@ namespace robo {
     class Robo_Component : public Map_Object {
     protected:
         Robo_Component() = delete;
-        Robo_Component(map_position) {}
+        Robo_Component(map_position);
 
         map_position position;
         std::string description;
         int energyConsumption;
         int cost;
         int countPorts;
+        bool appeared;
         std::vector<Module *> modules;
     public:
         std::string getDescription();
