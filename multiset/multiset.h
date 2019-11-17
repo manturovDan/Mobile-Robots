@@ -7,20 +7,29 @@ namespace std {
 
     template <class VertexType>
     class forward_iterator {
+    private:
+        VertexType * pointer;
     public:
         forward_iterator() = default;
         forward_iterator(VertexType *pntr) { pointer = pntr; }
         forward_iterator(const forward_iterator &) = default;
         forward_iterator(forward_iterator &&) noexcept = default;
 
-        forward_iterator minElem () {
+        forward_iterator & minElem () {
             while(pointer->leftChild != nullptr)
                 pointer = pointer->leftChild;
             return *this;
         }
 
-    private:
-        VertexType * pointer;
+        forward_iterator & maxElem () {
+            pointer = nullptr;
+            return *this;
+        }
+
+        forward_iterator & operator++() {}
+        forward_iterator & operator++(int) {}
+        //and *, +, -, =
+
     };
 
     template <class elemType, class compare = std::less<elemType> >
@@ -52,6 +61,11 @@ namespace std {
         iterator begin() {
             auto iter(top);
             return iter.minElem();
+        }
+
+        iterator end() {
+            auto iter(top);
+            return iter.maxElem();
         }
     };
 
