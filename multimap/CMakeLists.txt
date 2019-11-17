@@ -3,4 +3,4 @@ project(multimapTest)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(multimapTest main.cpp)
+add_executable(multimapTest main.cpp multimap.h)

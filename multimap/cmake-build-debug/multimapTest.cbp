@@ -87,6 +87,9 @@
 		<Unit filename="/home/danila/source/robots/multimap/main.cpp">
 			<Option target="multimapTest"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/multimap/multimap.h">
+			<Option target="multimapTest"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/multimap/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
