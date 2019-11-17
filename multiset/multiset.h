@@ -5,8 +5,22 @@ namespace std {
     template <class key>
     class less;
 
-    class set_iterator {
+    template <class VertexType>
+    class forward_iterator {
+    public:
+        forward_iterator() = default;
+        forward_iterator(VertexType *pntr) { pointer = pntr; }
+        forward_iterator(const forward_iterator &) = default;
+        forward_iterator(forward_iterator &&) noexcept = default;
 
+        forward_iterator minElem () {
+            while(pointer->leftChild != nullptr)
+                pointer = pointer->leftChild;
+            return *this;
+        }
+
+    private:
+        VertexType * pointer;
     };
 
     template <class elemType, class compare = std::less<elemType> >
@@ -33,8 +47,12 @@ namespace std {
         size_t count() const { return elCount; }
         size_t max_size() const { /* I DONT KNOW */}
 
-        typedef set_iterator iterator;
+        typedef forward_iterator<Vertex> iterator;
 
+        iterator begin() {
+            auto iter(top);
+            return iter.minElem();
+        }
     };
 
 
