@@ -81,7 +81,7 @@ namespace std {
         };
 
         Vertex * top; //vertex
-        int elCount;
+        size_t elCount;
 
 
     public:
@@ -131,6 +131,7 @@ namespace std {
             else
                 parent->rightChild = newVer;
 
+            elCount++;
             return iter;
         }
 
