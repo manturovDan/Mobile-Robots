@@ -4,3 +4,6 @@
 CMakeFiles/multisetTest.dir/main.cpp.o: ../main.cpp
 CMakeFiles/multisetTest.dir/main.cpp.o: ../multiset.h
 
+CMakeFiles/multisetTest.dir/test.cpp.o: ../multiset.h
+CMakeFiles/multisetTest.dir/test.cpp.o: ../test.cpp
+

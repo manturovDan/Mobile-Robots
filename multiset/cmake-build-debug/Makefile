@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/danila/source/robots/multiset/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,28 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -123,6 +134,19 @@ multisetTest/fast:
 	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/build
 .PHONY : multisetTest/fast
 
+#=============================================================================
+# Target rules for targets named u_test
+
+# Build rule for target.
+u_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 u_test
+.PHONY : u_test
+
+# fast build rule for target.
+u_test/fast:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
+.PHONY : u_test/fast
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -150,18 +174,53 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test.o: test.cpp.o
+
+.PHONY : test.o
+
+# target to build an object file
+test.cpp.o:
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/test.cpp.o
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/test.cpp.o
+.PHONY : test.cpp.o
+
+test.i: test.cpp.i
+
+.PHONY : test.i
+
+# target to preprocess a source file
+test.cpp.i:
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/test.cpp.i
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/test.cpp.i
+.PHONY : test.cpp.i
+
+test.s: test.cpp.s
+
+.PHONY : test.s
+
+# target to generate assembly for a file
+test.cpp.s:
+	$(MAKE) -f CMakeFiles/multisetTest.dir/build.make CMakeFiles/multisetTest.dir/test.cpp.s
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/test.cpp.s
+.PHONY : test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... rebuild_cache"
 	@echo "... multisetTest"
-	@echo "... edit_cache"
+	@echo "... u_test"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
 .PHONY : help
 
 

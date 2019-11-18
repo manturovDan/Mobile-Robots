@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/multisetTest.dir/main.cpp.o"
+  "CMakeFiles/multisetTest.dir/test.cpp.o"
   "multisetTest"
   "multisetTest.pdb"
 )
