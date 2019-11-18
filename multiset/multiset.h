@@ -7,7 +7,7 @@ namespace std {
     template <class key>
     class less;
 
-    template <class VertexType>
+    template <class VertexType, class elemType>
     class forward_iterator {
     private:
         VertexType * pointer;
@@ -31,63 +31,34 @@ namespace std {
 
     public:
         forward_iterator() = default;
-        forward_iterator(VertexType *pntr) { pointer = pntr; }
-        forward_iterator(const forward_iterator &) = default;
-        forward_iterator(forward_iterator &&) noexcept = default;
+        explicit forward_iterator(VertexType *pntr) { pointer = pntr; }
 
-        forward_iterator & minElem () {
-            while(pointer->leftChild != nullptr)
-                pointer = pointer->leftChild;
-            return *this;
-        }
-
-        forward_iterator & maxElem () {
-            pointer = nullptr;
-            return *this;
-        }
-
-        VertexType * findParentForNew(VertexType *newVer) {
-            VertexType * y = nullptr;
-            VertexType * x = pointer;
-            while (x != nullptr) {
-                y = x;
-                if (newVer->elem < x->elem) {
-                    x = x->leftChild;
-                }
-                else {
-                    x = x->rightChild;
-                }
-            }
-            return y;
-        }
-
-        void walkVertexOUT(VertexType * ver, std::ostream & stream = std::cout) { //DEBUG METHOD
-            if (ver != nullptr) {
-                walkVertexOUT(ver->leftChild);
-
-                std::cout << "Element: " << ver->elem << std::endl;
-                std::cout << "Address: " << ver << std::endl;
-                std::cout << "Left: " << ver->leftChild << std::endl;
-                std::cout << "Right: " << ver->rightChild << std::endl;
-                std::cout << "Parent: " << ver->parent << std::endl << std::endl;
-
-                walkVertexOUT(ver->rightChild);
-            }
-        }
-
-        forward_iterator & operator++() {
-            VertexType * next = successor(pointer);
+        forward_iterator & operator++() { //prefix
+            VertexType * next = successor();
             pointer = next;
             return *this;
         }
 
         forward_iterator operator++(int) const { //postfix
-            forward_iterator retIt(pointer);
+            forward_iterator retIt();
             VertexType * suc = retIt.successor(pointer);
             retIt.pointer = suc;
             return retIt;
         }
-        //and *, +, -, =
+
+        elemType operator * () {
+            return pointer->elem;
+        }
+
+        friend bool operator==(const forward_iterator &lft, const forward_iterator &rgh) {
+            if (lft.pointer == rgh.pointer)
+                return true;
+        }
+
+        friend bool operator!=(const forward_iterator &lft, const forward_iterator &rgh) {
+            if (lft.pointer != rgh.pointer)
+                return true;
+        }
 
     };
 
@@ -118,24 +89,38 @@ namespace std {
 
         bool empty () const { return !elCount; }
         size_t count() const { return elCount; }
-        size_t max_size() const { /* I DONT KNOW */}
+        size_t max_size() const { /* I DONT KNOW HOW TO DO IT */}
 
-        typedef forward_iterator<Vertex> iterator;
+        typedef forward_iterator<Vertex, elemType> iterator;
 
         iterator begin() {
-            auto iter(top);
-            return iter.minElem();
+            Vertex * pntr = top;
+            while(pntr->leftChild != nullptr)
+                pntr = pntr->leftChild;
+            iterator iter(pntr);
+            return iter;
         }
 
         iterator end() {
-            auto iter(top);
-            return iter.maxElem();
+            return nullptr;
         }
 
         iterator insert(elemType newVal) {
-            forward_iterator iter(top);
+            iterator iter(top);
             Vertex * newVer = new Vertex(newVal);
-            Vertex * parent = iter.findParentForNew(newVer);
+
+            Vertex * parent = nullptr;
+            Vertex* x = top;
+            while (x != nullptr) {
+                parent = x;
+                if (newVer->elem < x->elem) {
+                    x = x->leftChild;
+                }
+                else {
+                    x = x->rightChild;
+                }
+            }
+
             newVer->parent = parent;
 
             if (parent == nullptr) {
@@ -150,8 +135,21 @@ namespace std {
         }
 
         void printTree() {
-            forward_iterator iter(top);
-            iter.walkVertexOUT(top);
+            walkVertexOUT(top);
+        }
+
+        void walkVertexOUT(Vertex * ver) {
+            if (ver != nullptr) {
+                walkVertexOUT(ver->leftChild);
+
+                std::cout << "Element: " << ver->elem << std::endl;
+                std::cout << "Address: " << ver << std::endl;
+                std::cout << "Left: " << ver->leftChild << std::endl;
+                std::cout << "Right: " << ver->rightChild << std::endl;
+                std::cout << "Parent: " << ver->parent << std::endl << std::endl;
+
+                walkVertexOUT(ver->rightChild);
+            }
         }
     };
 

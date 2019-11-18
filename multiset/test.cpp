@@ -14,6 +14,8 @@ TEST (iterTest, BeginEndTest) {
 
     mset.printTree();
 
+    std::dmultiset<int>::iterator iterrr;
+
 }
 
 int main(int argc, char **argv) {
