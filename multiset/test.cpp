@@ -12,7 +12,6 @@ TEST (iterTest, startingTest) {
     mset.insert(2);
     mset.insert(-50);
 
-    //mset.printTree();
 
     std::dmultiset<int>::iterator iterrr;
 
@@ -23,22 +22,11 @@ TEST (iterTest, forwardIteratorTest) {
     std::dmultiset<int> m_set_i;
     std::dmultiset<int>::iterator fw_iter;
 
-    m_set_i.insert(1);
-    m_set_i.insert(2);
     m_set_i.insert(-50);
     m_set_i.insert(1);
     m_set_i.insert(675);
-    m_set_i.insert(75);
     m_set_i.insert(0);
-    m_set_i.insert(755);
     m_set_i.insert(-657);
-    m_set_i.insert(879);
-    m_set_i.insert(54);
-    m_set_i.insert(44);
-    m_set_i.insert(234);
-    m_set_i.insert(503);
-    m_set_i.insert(54320);
-    m_set_i.insert(450);
 
 
     fw_iter = m_set_i.begin();
@@ -51,6 +39,12 @@ TEST (iterTest, forwardIteratorTest) {
     ASSERT_EQ(*(m_set_i.begin()), -657);
     ASSERT_EQ(*(++m_set_i.begin()), -50);
     ASSERT_EQ(*(m_set_i.begin()), -657);
+
+    ASSERT_EQ(*(++ ++fw_iter), 675);
+    ASSERT_EQ(*fw_iter, 675);
+
+    ++fw_iter;
+    ASSERT_THROW(*fw_iter, std::invalid_argument);
 }
 
 int main(int argc, char **argv) {

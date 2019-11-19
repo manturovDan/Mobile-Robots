@@ -33,6 +33,27 @@ namespace std {
             return verPrt;
         }
 
+        VertexType * predecessor() {
+            return predecessor(pointer);
+        }
+
+        VertexType * predecessor(VertexType * target) {
+            if (target->getLeftChild() != nullptr)
+                return findMaxElem(target->getLeftChild());
+            VertexType * y = target->getParent();
+            while (y != nullptr && target == y->getLeftChild()) {
+                target = y;
+                y = y->getParent();
+            }
+            return y;
+        }
+
+        VertexType * findMaxElem(VertexType * verPrt) {
+            while(verPrt->getRightChild() != nullptr)
+                verPrt = verPrt->getRightChild();
+            return verPrt;
+        }
+
     public:
         friend bool operator==(const tree_iterator &lft, const tree_iterator &rgh) {
             if (lft.pointer == rgh.pointer)
@@ -45,6 +66,9 @@ namespace std {
         }
 
         elemType operator * () {
+            if (pointer == nullptr) {
+                throw std::invalid_argument("input of non-exist iterator"); //WHAT TO DO THERE????
+            }
             return pointer->getElem();
         }
 
@@ -65,6 +89,26 @@ namespace std {
 
         forward_iterator operator++(int) const { //postfix
             forward_iterator retIt(pointer);
+            pointer = retIt.successor();
+            return retIt;
+        }
+    };
+
+    template <class VertexType, class elemType>
+    class back_iterator : public tree_iterator<VertexType, elemType> {
+        using tree_iterator<VertexType, elemType>::pointer;
+        using tree_iterator<VertexType, elemType>::successor;
+    public:
+        explicit back_iterator(VertexType *pntr = nullptr) : tree_iterator<VertexType, elemType>() { pointer = pntr; } // HOW TO DO NICE???
+
+        back_iterator & operator++() { //prefix
+            VertexType * next = successor();
+            pointer = next;
+            return *this;
+        }
+
+        back_iterator operator++(int) const { //postfix
+            reverse_iterator retIt(pointer);
             pointer = retIt.successor();
             return retIt;
         }

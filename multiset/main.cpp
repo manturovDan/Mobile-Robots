@@ -12,6 +12,6 @@ int main() {
     m_set.insert(-50);
 
 
-    std::cout << *m_set.end() << std::endl;
+    std::cout << *(++m_set.end()) << std::endl;
     return 0;
 }
