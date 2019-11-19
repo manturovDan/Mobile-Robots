@@ -46,7 +46,7 @@ namespace std {
         VertexType const * pointer;
 
         elemType operator * () {
-            return pointer->elem;
+            return pointer->getElem();
         }
     };
 
@@ -57,7 +57,7 @@ namespace std {
 
         VertexType * pointer;
         elemType & operator * () {
-            return pointer->elem;
+            return pointer->getElemLink();
         }
     };
 
@@ -97,6 +97,7 @@ namespace std {
         public:
             Vertex(elemType &newEl) : elem(newEl), leftChild(nullptr), rightChild(nullptr), parent(nullptr) {}
             elemType getElem() { return elem; }
+            elemType & getElemLink() { return elem; }
             Vertex * getLeftChild() { return leftChild; }
             Vertex * getRightChild() { return rightChild; }
             Vertex * getParent() { return parent; }
@@ -121,8 +122,8 @@ namespace std {
 
         iterator begin() {
             Vertex * pntr = top;
-            while(pntr->leftChild != nullptr)
-                pntr = pntr->leftChild;
+            while(pntr->getLeftChild() != nullptr)
+                pntr = pntr->getLeftChild();
             iterator iter(pntr);
             return iter;
         }
