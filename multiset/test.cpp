@@ -45,8 +45,12 @@ TEST (iterTest, forwardIteratorTest) {
     ASSERT_EQ(*(m_set_i.begin()), -657);
     ASSERT_EQ(*(fw_iter++), -657);
     ASSERT_EQ(*fw_iter, -50);
+    ASSERT_EQ(*(++fw_iter), 0);
 
-
+    ASSERT_EQ(*(m_set_i.begin()++), -657);
+    ASSERT_EQ(*(m_set_i.begin()), -657);
+    ASSERT_EQ(*(++m_set_i.begin()), -50);
+    ASSERT_EQ(*(m_set_i.begin()), -657);
 }
 
 int main(int argc, char **argv) {

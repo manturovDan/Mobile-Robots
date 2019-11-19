@@ -53,14 +53,15 @@ namespace std {
     template <class VertexType, class elemType>
     class forward_iterator : public tree_iterator<VertexType, elemType> {
         using tree_iterator<VertexType, elemType>::pointer;
+        using tree_iterator<VertexType, elemType>::successor;
     public:
         explicit forward_iterator(VertexType *pntr = nullptr) : tree_iterator<VertexType, elemType>() { pointer = pntr; } // HOW TO DO NICE???
 
-        /*const_forward_iterator & operator++() { //prefix
+        forward_iterator & operator++() { //prefix
             VertexType * next = successor();
             pointer = next;
             return *this;
-        }*/
+        }
 
         forward_iterator operator++(int) const { //postfix
             forward_iterator retIt(pointer);
