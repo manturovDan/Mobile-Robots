@@ -40,10 +40,12 @@ TEST (iterTest, forwardIteratorTest) {
     m_set_i.insert(54320);
     m_set_i.insert(450);
 
-    //std::cout << "NEXT" << std::endl;
-    //m_set_i.printTree();
 
+    fw_iter = m_set_i.begin();
     ASSERT_EQ(*(m_set_i.begin()), -657);
+    ASSERT_EQ(*(fw_iter++), -657);
+    ASSERT_EQ(*fw_iter, -50);
+
 
 }
 

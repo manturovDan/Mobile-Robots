@@ -10,20 +10,26 @@ namespace std {
     template <class VertexType, class elemType>
     class tree_iterator {
     protected:
+        mutable VertexType * pointer;
+
+        VertexType * successor() {
+            return successor(pointer);
+        }
+
         VertexType * successor(VertexType * target) {
-            if (target->rightChild != nullptr)
-                return findMinElem(target->rightChild);
-            VertexType * y = target->parent;
-            while (y != nullptr && target == y->rightChild) {
+            if (target->getRightChild() != nullptr)
+                return findMinElem(target->getRightChild());
+            VertexType * y = target->getParent();
+            while (y != nullptr && target == y->getRightChild()) {
                 target = y;
-                y = y->parent;
+                y = y->getParent();
             }
             return y;
         }
 
         VertexType * findMinElem(VertexType * verPrt) {
-            while(verPrt->leftChild != nullptr)
-                verPrt = verPrt->leftChild;
+            while(verPrt->getLeftChild() != nullptr)
+                verPrt = verPrt->getLeftChild();
             return verPrt;
         }
 
@@ -38,46 +44,27 @@ namespace std {
                 return true;
         }
 
-    };
-
-    template <class VertexType, class elemType>
-    class const_iterator : public tree_iterator<VertexType, elemType> {
-    public:
-        VertexType const * pointer;
-
         elemType operator * () {
             return pointer->getElem();
         }
+
     };
 
     template <class VertexType, class elemType>
-    class non_const_iterator : public tree_iterator<VertexType, elemType> {
+    class forward_iterator : public tree_iterator<VertexType, elemType> {
+        using tree_iterator<VertexType, elemType>::pointer;
     public:
-        non_const_iterator() : tree_iterator<VertexType, elemType>() {}
+        explicit forward_iterator(VertexType *pntr = nullptr) : tree_iterator<VertexType, elemType>() { pointer = pntr; } // HOW TO DO NICE???
 
-        VertexType * pointer;
-        elemType & operator * () {
-            return pointer->getElemLink();
-        }
-    };
-
-    template <class VertexType, class elemType>
-    class forward_iterator : public non_const_iterator<VertexType, elemType> {
-        using non_const_iterator<VertexType, elemType>::pointer;
-        using tree_iterator<VertexType, elemType>::successor;
-    public:
-        forward_iterator() : non_const_iterator<VertexType, elemType> () {}
-        explicit forward_iterator(VertexType *pntr) : non_const_iterator<VertexType, elemType>() { pointer = pntr; }
-
-        forward_iterator & operator++() { //prefix
+        /*const_forward_iterator & operator++() { //prefix
             VertexType * next = successor();
             pointer = next;
             return *this;
-        }
+        }*/
 
         forward_iterator operator++(int) const { //postfix
             forward_iterator retIt(pointer);
-            pointer = retIt.successor(pointer);
+            pointer = retIt.successor();
             return retIt;
         }
     };
@@ -129,7 +116,8 @@ namespace std {
         }
 
         iterator end() {
-            return nullptr;
+            iterator iter;
+            return iter;
         }
 
         iterator insert(elemType newVal) {
@@ -137,7 +125,7 @@ namespace std {
             Vertex * newVer = new Vertex(newVal);
 
             Vertex * parent = nullptr;
-            Vertex* x = top;
+            Vertex * x = top;
             while (x != nullptr) {
                 parent = x;
                 if (newVer->getElem() < x->getElem()) {

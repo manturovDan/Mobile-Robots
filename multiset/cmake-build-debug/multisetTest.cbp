@@ -148,7 +148,6 @@
 			<Option target="u_test"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/multiset/test.cpp">
-			<Option target="multisetTest"/>
 			<Option target="u_test"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/multiset/CMakeLists.txt">

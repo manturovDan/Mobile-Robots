@@ -3,7 +3,7 @@ project(multisetTest)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(multisetTest main.cpp multiset.h test.cpp)
+add_executable(multisetTest main.cpp multiset.h)
 
 enable_testing()
 find_package(GTest REQUIRED)
