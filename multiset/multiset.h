@@ -8,10 +8,8 @@ namespace std {
     class less;
 
     template <class VertexType, class elemType>
-    class forward_iterator {
-    private:
-        VertexType * pointer;
-
+    class tree_iterator {
+    protected:
         VertexType * successor(VertexType * target) {
             if (target->rightChild != nullptr)
                 return findMinElem(target->rightChild);
@@ -30,8 +28,46 @@ namespace std {
         }
 
     public:
-        forward_iterator() = default;
-        explicit forward_iterator(VertexType *pntr) { pointer = pntr; }
+        friend bool operator==(const tree_iterator &lft, const tree_iterator &rgh) {
+            if (lft.pointer == rgh.pointer)
+                return true;
+        }
+
+        friend bool operator!=(const tree_iterator &lft, const tree_iterator &rgh) {
+            if (lft.pointer != rgh.pointer)
+                return true;
+        }
+
+    };
+
+    template <class VertexType, class elemType>
+    class const_iterator : public tree_iterator<VertexType, elemType> {
+    public:
+        VertexType const * pointer;
+
+        elemType operator * () {
+            return pointer->elem;
+        }
+    };
+
+    template <class VertexType, class elemType>
+    class non_const_iterator : public tree_iterator<VertexType, elemType> {
+    public:
+        non_const_iterator() : tree_iterator<VertexType, elemType>() {}
+
+        VertexType * pointer;
+        elemType & operator * () {
+            return pointer->elem;
+        }
+    };
+
+    template <class VertexType, class elemType>
+    class forward_iterator : public non_const_iterator<VertexType, elemType> {
+        using non_const_iterator<VertexType, elemType>::pointer;
+        using tree_iterator<VertexType, elemType>::successor;
+    public:
+        forward_iterator() : non_const_iterator<VertexType, elemType> () {}
+        explicit forward_iterator(VertexType *pntr) : non_const_iterator<VertexType, elemType>() { pointer = pntr; }
 
         forward_iterator & operator++() { //prefix
             VertexType * next = successor();
@@ -40,26 +76,10 @@ namespace std {
         }
 
         forward_iterator operator++(int) const { //postfix
-            forward_iterator retIt();
-            VertexType * suc = retIt.successor(pointer);
-            retIt.pointer = suc;
+            forward_iterator retIt(pointer);
+            pointer = retIt.successor(pointer);
             return retIt;
         }
-
-        elemType operator * () {
-            return pointer->elem;
-        }
-
-        friend bool operator==(const forward_iterator &lft, const forward_iterator &rgh) {
-            if (lft.pointer == rgh.pointer)
-                return true;
-        }
-
-        friend bool operator!=(const forward_iterator &lft, const forward_iterator &rgh) {
-            if (lft.pointer != rgh.pointer)
-                return true;
-        }
-
     };
 
     template <class elemType, class compare = std::less<elemType> >
@@ -68,16 +88,22 @@ namespace std {
         class Vertex {
         private:
             Vertex() = default;
-
-            bool color; //red - true, black - false
-
-        public:
-            Vertex(elemType &newEl) : elem(newEl), leftChild(nullptr), rightChild(nullptr), parent(nullptr) {}
-            //go to public
             elemType elem;
             Vertex *leftChild;
             Vertex *rightChild;
             Vertex *parent;
+            //bool color; //red - true, black - false
+
+        public:
+            Vertex(elemType &newEl) : elem(newEl), leftChild(nullptr), rightChild(nullptr), parent(nullptr) {}
+            elemType getElem() { return elem; }
+            Vertex * getLeftChild() { return leftChild; }
+            Vertex * getRightChild() { return rightChild; }
+            Vertex * getParent() { return parent; }
+
+            void setLeftChild(Vertex * lc) { leftChild = lc; }
+            void setRightChild(Vertex * rc) { rightChild = rc; }
+            void setParent(Vertex * pp) { parent = pp; }
         };
 
         Vertex * top; //vertex
@@ -113,23 +139,23 @@ namespace std {
             Vertex* x = top;
             while (x != nullptr) {
                 parent = x;
-                if (newVer->elem < x->elem) {
-                    x = x->leftChild;
+                if (newVer->getElem() < x->getElem()) {
+                    x = x->getLeftChild();
                 }
                 else {
-                    x = x->rightChild;
+                    x = x->getRightChild();
                 }
             }
 
-            newVer->parent = parent;
+            newVer->setParent(parent);
 
             if (parent == nullptr) {
                 top = newVer;
             }
-            else if (newVer->elem < parent->elem)
-                parent->leftChild = newVer;
+            else if (newVer->getElem() < parent->getElem())
+                parent->setLeftChild(newVer);
             else
-                parent->rightChild = newVer;
+                parent->setRightChild(newVer);
 
             elCount++;
             return iter;
@@ -141,15 +167,15 @@ namespace std {
 
         void walkVertexOUT(Vertex * ver) {
             if (ver != nullptr) {
-                walkVertexOUT(ver->leftChild);
+                walkVertexOUT(ver->getLeftChild());
 
-                std::cout << "Element: " << ver->elem << std::endl;
+                std::cout << "Element: " << ver->getElem() << std::endl;
                 std::cout << "Address: " << ver << std::endl;
-                std::cout << "Left: " << ver->leftChild << std::endl;
-                std::cout << "Right: " << ver->rightChild << std::endl;
-                std::cout << "Parent: " << ver->parent << std::endl << std::endl;
+                std::cout << "Left: " << ver->getLeftChild() << std::endl;
+                std::cout << "Right: " << ver->getRightChild() << std::endl;
+                std::cout << "Parent: " << ver->getParent() << std::endl << std::endl;
 
-                walkVertexOUT(ver->rightChild);
+                walkVertexOUT(ver->getRightChild());
             }
         }
     };
