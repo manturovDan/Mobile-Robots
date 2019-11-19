@@ -97,19 +97,19 @@ namespace std {
     template <class VertexType, class elemType>
     class back_iterator : public tree_iterator<VertexType, elemType> {
         using tree_iterator<VertexType, elemType>::pointer;
-        using tree_iterator<VertexType, elemType>::successor;
+        using tree_iterator<VertexType, elemType>::predecessor;
     public:
         explicit back_iterator(VertexType *pntr = nullptr) : tree_iterator<VertexType, elemType>() { pointer = pntr; } // HOW TO DO NICE???
 
         back_iterator & operator++() { //prefix
-            VertexType * next = successor();
+            VertexType * next = predecessor();
             pointer = next;
             return *this;
         }
 
         back_iterator operator++(int) const { //postfix
-            reverse_iterator retIt(pointer);
-            pointer = retIt.successor();
+            back_iterator retIt(pointer);
+            pointer = retIt.predecessor();
             return retIt;
         }
     };
@@ -151,18 +151,64 @@ namespace std {
         size_t max_size() const { /* I DONT KNOW HOW TO DO IT */}
 
         typedef forward_iterator<Vertex, elemType> iterator;
+        typedef forward_iterator<Vertex, elemType> const_iterator;
+        typedef back_iterator<Vertex, elemType> reverse_iterator;
+        typedef back_iterator<Vertex, elemType> const_reverse_iterator;
 
-        iterator begin() {
+        template <class IterType>
+        IterType begin() {
             Vertex * pntr = top;
             while(pntr->getLeftChild() != nullptr)
                 pntr = pntr->getLeftChild();
-            iterator iter(pntr);
+            IterType iter(pntr);
             return iter;
         }
 
-        iterator end() {
-            iterator iter;
+        template <class IterType>
+        IterType end() {
+            IterType iter;
             return iter;
+        }
+
+        template <class IterType>
+        IterType rbegin() {
+            Vertex * pntr = top;
+            while(pntr->getRightChild() != nullptr)
+                pntr = pntr->getRightChild();
+            IterType iter(pntr);
+            return iter;
+        }
+
+        iterator begin() {
+            return begin<iterator>();
+        }
+
+        iterator end() {
+            return end<iterator>();
+        }
+
+        reverse_iterator rbegin() {
+            return rbegin<reverse_iterator>();
+        }
+
+        reverse_iterator rend() {
+            return end<reverse_iterator>();
+        }
+
+        const_iterator cbegin() {
+            return begin<const_iterator>();
+        }
+
+        const_iterator cend() {
+            return end<const_iterator>();
+        }
+
+        const_reverse_iterator crbegin() {
+            return rbegin<const_reverse_iterator>();
+        }
+
+        const_reverse_iterator crend() {
+            return end<const_reverse_iterator>();
         }
 
         iterator insert(elemType newVal) {

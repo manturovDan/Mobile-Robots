@@ -2,6 +2,7 @@
 
 #include "multiset.h"
 
+//TODO ZERO CONTAINER
 TEST (commonTest, valTest) {
     ASSERT_EQ(1, 1);
 }
@@ -45,6 +46,80 @@ TEST (iterTest, forwardIteratorTest) {
 
     ++fw_iter;
     ASSERT_THROW(*fw_iter, std::invalid_argument);
+}
+
+TEST (iterTest, fwIter) {
+    std::dmultiset<float> m_set_i;
+
+    float addVals[] = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
+
+    int cntEls = sizeof(addVals)/sizeof(addVals[0]);;
+    for (int i = 0; i < cntEls; i++)
+        m_set_i.insert(addVals[i]);
+
+    std::sort(addVals, addVals+cntEls);
+
+    int it = 0;
+    for(std::dmultiset<float>::iterator i = m_set_i.begin(); i != m_set_i.end(); i++) {
+        ASSERT_FLOAT_EQ(*i, addVals[it]);
+        it++;
+    }
+}
+
+TEST (iterTest, constFwIter) {
+    std::dmultiset<float> m_set_i;
+
+    float addVals[] = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
+
+    int cntEls = sizeof(addVals)/sizeof(addVals[0]);;
+    for (int i = 0; i < cntEls; i++)
+        m_set_i.insert(addVals[i]);
+
+    std::sort(addVals, addVals+cntEls);
+
+    int it = 0;
+    for(std::dmultiset<float>::const_iterator i = m_set_i.cbegin(); i != m_set_i.cend(); i++) {
+        ASSERT_FLOAT_EQ(*i, addVals[it]);
+        it++;
+    }
+}
+
+TEST (iterTest, backIter) {
+    std::dmultiset<float> m_set_i;
+
+    float addVals[] = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
+
+    int cntEls = sizeof(addVals)/sizeof(addVals[0]);;
+    for (int i = 0; i < cntEls; i++)
+        m_set_i.insert(addVals[i]);
+
+    std::sort(addVals, addVals+cntEls);
+    std::reverse(addVals, addVals+cntEls);
+
+    int it = 0;
+    for(std::dmultiset<float>::reverse_iterator i = m_set_i.rbegin(); i != m_set_i.rend(); i++) {
+        ASSERT_FLOAT_EQ(*i, addVals[it]);
+        it++;
+    }
+}
+
+TEST (iterTest, constBackIter) {
+    std::dmultiset<float> m_set_i;
+
+    float addVals[] = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
+
+    int cntEls = sizeof(addVals)/sizeof(addVals[0]);;
+    for (int i = 0; i < cntEls; i++)
+        m_set_i.insert(addVals[i]);
+
+    std::sort(addVals, addVals+cntEls);
+    std::reverse(addVals, addVals+cntEls);
+
+    int it = 0;
+    for(std::dmultiset<float>::reverse_iterator i = m_set_i.crbegin(); i != m_set_i.crend(); i++) {
+        ASSERT_FLOAT_EQ(*i, addVals[it]);
+        it++;
+    }
 }
 
 int main(int argc, char **argv) {
