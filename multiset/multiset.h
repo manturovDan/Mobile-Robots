@@ -162,10 +162,17 @@ namespace std {
             clear();
             top = clone(copy_st.top, nullptr);
             elCount = copy_st.count();
+
+            return *this;
         }
 
         dmultiset &operator=(dmultiset && move_st) {
-            //I AM THERE
+            clear();
+            top = move_st.top;
+            elCount = move_st.count();
+            move_st.top = nullptr;
+
+            return *this;
         }
 
         Vertex * clone(Vertex * root, Vertex * parent) {
