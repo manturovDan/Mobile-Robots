@@ -152,13 +152,20 @@ namespace std {
             top = clone(copy_st.top, nullptr);
             elCount = copy_st.count();
         }
+        dmultiset(dmultiset && move_st) : elCount(move_st.count()), top(move_st.top) {
+            move_st.top = nullptr;
+        }
 
         ~dmultiset() {} //FREE DYNAMIC MEMORY HANDLY
 
-        dmultiset &operator=(const dmultiset * copy_st) {
+        dmultiset &operator=(const dmultiset & copy_st) {
             clear();
             top = clone(copy_st.top, nullptr);
             elCount = copy_st.count();
+        }
+
+        dmultiset &operator=(dmultiset && move_st) {
+
         }
 
         Vertex * clone(Vertex * root, Vertex * parent) {
