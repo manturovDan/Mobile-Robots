@@ -326,9 +326,21 @@ namespace std {
             return iterator(target);
         }
 
-        template< class K >
-        iterator find( const K& x ) {
-            
+        iterator find(const elemType & x) {
+            return search(x, top);
+        }
+
+        iterator search(const elemType& x, Vertex * goer) {
+            if (goer == nullptr || x == goer->getElem())
+                return iterator(goer);
+            if (x < goer->getElem())
+                return search(x, goer->getLeftChild());
+            else
+                return search(x, goer->getRightChild());
+        }
+
+        void clear() noexcept {
+
         }
 
         /*

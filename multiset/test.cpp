@@ -198,6 +198,29 @@ TEST (modifierTest, eraseTop) {
     i++;
     ASSERT_EQ(i, m_set_i.end());
 }
+
+TEST (lookupTest, search) {
+    std::dmultiset<float> m_set_i;
+    m_set_i.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
+
+    std::dmultiset<float>::const_iterator found = m_set_i.find(9);
+    ASSERT_EQ(*found, 9);
+}
+
+
+TEST (lookupTest, multiSearch) {
+    std::dmultiset<float> m_set_i;
+    m_set_i.insert({.1, 5.28, 19, -64.1, 12, 53, 19, 81, 33, 9, 19});
+
+    std::dmultiset<float>::const_iterator found = m_set_i.find(19);
+    ASSERT_EQ(*found, 19);
+    found++;
+    ASSERT_FLOAT_EQ(*found, 19);
+    found++;
+    ASSERT_FLOAT_EQ(*found, 19);
+    found++;
+    ASSERT_NE(*found, 19);
+}
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
