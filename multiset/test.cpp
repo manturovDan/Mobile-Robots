@@ -168,11 +168,13 @@ TEST (modifierTest, initInsert) {
     ASSERT_EQ(i, m_set_i.end());
 }
 
-TEST (modifiersTest, moveInsert) {
-    std::dmultiset<std::string> m_set_i;
-    //m_set_i.insert("hello");
-}
+TEST (modifierTest, eraseInsert) {
+    std::dmultiset<float> m_set_i;
+    m_set_i.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
 
+    m_set_i.erase(++m_set_i.begin());
+
+}
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

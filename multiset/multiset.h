@@ -4,13 +4,11 @@
 #include <iostream>
 
 namespace std {
-    template <class key>
-    class less;
 
     template <class VertexType, class elemType>
     class tree_iterator {
     protected:
-        mutable VertexType * pointer;
+        mutable VertexType * pointer; //not work without mutable
 
         VertexType * successor() {
             return successor(pointer);
@@ -155,6 +153,22 @@ namespace std {
         typedef back_iterator<Vertex, elemType> reverse_iterator;
         typedef back_iterator<Vertex, elemType> const_reverse_iterator;
 
+    private:
+        void findElByIter(Vertex * ver, iterator & it, Vertex *& target) {
+            if (ver != nullptr) {
+                if (target != nullptr)
+                    return;
+
+                findElByIter(ver->getLeftChild(), it, target);
+                if (ver->getElem() == *it) {
+                    target = ver;
+                    return;
+                }
+                findElByIter(ver->getRightChild(), it, target);
+            }
+        }
+
+    public:
         template <class IterType>
         IterType begin() {
             Vertex * pntr = top;
@@ -257,6 +271,56 @@ namespace std {
                 insert(x);
             }
         }
+
+        iterator erase(iterator pos) {
+            iterator retIt = pos;
+            retIt++;
+
+            iterator del;
+            iterator vic;
+
+
+            Vertex * target = nullptr;
+
+            findElByIter(top, pos, target);
+
+            Vertex * y = nullptr;
+            Vertex * x = nullptr;
+            if (target->getLeftChild() == nullptr || target->getRightChild() == nullptr) {
+                y = target;
+            }
+            else {
+                y = tree_successor(target); //make method
+            }
+
+            if (y->getLeftChild() != nullptr) {
+                x = y->getLeftChild();
+            }
+            else {
+                x = y->getRightChild();
+            }
+
+            if (x != nullptr) {
+                x->setParent(y->getParent());
+            }
+            if(y->getParent() == nullptr) {
+                top = x;
+            }
+            else if (y == y->getParent()->getLeftChild()) {
+                y->getParent()->setLeftChild(x);
+            }
+            else {
+                y->getParent()->setRightChild(x);
+            }
+
+            if (y != target) {
+                target->setElem(y);// make private method
+            }
+
+            return retIt;
+        }
+
+
 
 
         /*
