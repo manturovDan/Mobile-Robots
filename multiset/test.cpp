@@ -122,6 +122,57 @@ TEST (iterTest, constBackIter) {
     }
 }
 
+TEST (modifierTest, iterInsert) {
+    std::dmultiset<float> m_set_i;
+    std::vector<float> vect = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
+
+    m_set_i.insert(vect.begin()+1, vect.begin()+5);
+
+    ASSERT_EQ(m_set_i.count(), 4);
+    std::dmultiset<float>::const_iterator i = m_set_i.begin();
+    ASSERT_FLOAT_EQ(*i, -64.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 5.28);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 12);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 53);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
+}
+
+TEST (modifierTest, initInsert) {
+    std::dmultiset<float> m_set_i;
+    m_set_i.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
+
+    ASSERT_EQ(m_set_i.count(), 9);
+    std::dmultiset<float>::const_iterator i = m_set_i.begin();
+    ASSERT_FLOAT_EQ(*i, -64.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 0.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 5.28);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 9);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 12);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 19);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 33);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 53);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 81);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
+}
+
+TEST (modifiersTest, moveInsert) {
+    std::dmultiset<std::string> m_set_i;
+    //m_set_i.insert("hello");
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

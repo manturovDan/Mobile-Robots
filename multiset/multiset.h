@@ -211,8 +211,9 @@ namespace std {
             return end<const_reverse_iterator>();
         }
 
-        iterator insert(elemType newVal) {
+        iterator insert(const elemType & val) {
             iterator iter(top);
+            elemType newVal = val; //copy
             Vertex * newVer = new Vertex(newVal);
 
             Vertex * parent = nullptr;
@@ -241,6 +242,24 @@ namespace std {
             return iter;
         }
 
+        template<class InputIt>
+        void insert(InputIt first, InputIt last) {
+            InputIt current = first;
+            while (current != last) {
+                insert(*current);
+
+                current++;
+            }
+        }
+
+        void insert(std::initializer_list<elemType> ilist) {
+            for (auto x : ilist) {
+                insert(x);
+            }
+        }
+
+
+        /*
         void printTree() {
             walkVertexOUT(top);
         }
@@ -257,7 +276,7 @@ namespace std {
 
                 walkVertexOUT(ver->getRightChild());
             }
-        }
+        }*/
     };
 
 
