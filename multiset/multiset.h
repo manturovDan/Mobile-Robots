@@ -360,13 +360,17 @@ namespace std {
 
         void clear() noexcept {
             delVer(top);
+            top = nullptr;
         }
 
-        void delVer(Vertex *dv) {
+        void delVer(Vertex * dv) {
             if (dv != nullptr) {
                 delVer(dv->getLeftChild());
                 delVer(dv->getRightChild());
 
+                dv->setLeftChild(nullptr);
+                dv->setRightChild(nullptr);
+                dv->setParent(nullptr);
                 delete dv;
 
                 elCount--;
