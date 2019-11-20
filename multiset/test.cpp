@@ -168,12 +168,35 @@ TEST (modifierTest, initInsert) {
     ASSERT_EQ(i, m_set_i.end());
 }
 
-TEST (modifierTest, eraseInsert) {
+TEST (modifierTest, eraseTop) {
     std::dmultiset<float> m_set_i;
     m_set_i.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
 
-    m_set_i.erase(++m_set_i.begin());
+    std::dmultiset<float>::const_iterator delt = m_set_i.erase(++m_set_i.begin());
 
+    ASSERT_EQ(m_set_i.count(), 8);
+
+    std::dmultiset<float>::const_iterator i = m_set_i.begin();
+
+    ASSERT_FLOAT_EQ(*delt, 5.28);
+
+    ASSERT_FLOAT_EQ(*i, -64.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 5.28);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 9);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 12);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 19);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 33);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 53);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 81);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
 }
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

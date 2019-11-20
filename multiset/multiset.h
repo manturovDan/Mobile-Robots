@@ -8,7 +8,7 @@ namespace std {
     template <class VertexType, class elemType>
     class tree_iterator {
     protected:
-        mutable VertexType * pointer; //not work without mutable
+        VertexType * pointer; //not work without mutable
 
         VertexType * successor() {
             return successor(pointer);
@@ -70,6 +70,10 @@ namespace std {
             return pointer->getElem();
         }
 
+        VertexType * getVerPointer() {
+            return pointer;
+        }
+
     };
 
     template <class VertexType, class elemType>
@@ -85,7 +89,7 @@ namespace std {
             return *this;
         }
 
-        forward_iterator operator++(int) const { //postfix
+        forward_iterator operator++(int) { //postfix
             forward_iterator retIt(pointer);
             pointer = retIt.successor();
             return retIt;
@@ -105,7 +109,7 @@ namespace std {
             return *this;
         }
 
-        back_iterator operator++(int) const { //postfix
+        back_iterator operator++(int) { //postfix
             back_iterator retIt(pointer);
             pointer = retIt.predecessor();
             return retIt;
@@ -135,6 +139,7 @@ namespace std {
             void setLeftChild(Vertex * lc) { leftChild = lc; }
             void setRightChild(Vertex * rc) { rightChild = rc; }
             void setParent(Vertex * pp) { parent = pp; }
+            void setElem(Vertex * y) { elem = y->getElem(); }
         };
 
         Vertex * top; //vertex
@@ -273,16 +278,10 @@ namespace std {
         }
 
         iterator erase(iterator pos) {
+            Vertex * target = pos.getVerPointer();
+
             iterator retIt = pos;
             retIt++;
-
-            iterator del;
-            iterator vic;
-
-
-            Vertex * target = nullptr;
-
-            findElByIter(top, pos, target);
 
             Vertex * y = nullptr;
             Vertex * x = nullptr;
@@ -290,7 +289,9 @@ namespace std {
                 y = target;
             }
             else {
-                y = tree_successor(target); //make method
+                iterator retIt = pos;
+                retIt++;
+                y = retIt.getVerPointer();
             }
 
             if (y->getLeftChild() != nullptr) {
@@ -303,6 +304,7 @@ namespace std {
             if (x != nullptr) {
                 x->setParent(y->getParent());
             }
+
             if(y->getParent() == nullptr) {
                 top = x;
             }
@@ -317,11 +319,17 @@ namespace std {
                 target->setElem(y);// make private method
             }
 
-            return retIt;
+            delete y;
+
+            elCount--;
+
+            return iterator(target);
         }
 
-
-
+        template< class K >
+        iterator find( const K& x ) {
+            
+        }
 
         /*
         void printTree() {
