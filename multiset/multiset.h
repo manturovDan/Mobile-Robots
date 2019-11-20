@@ -148,6 +148,7 @@ namespace std {
 
     public:
         dmultiset() : top(nullptr), elCount(0) {}
+        ~dmultiset() { clear(); }
 
         bool empty () const { return !elCount; }
         size_t count() const { return elCount; }
@@ -340,7 +341,18 @@ namespace std {
         }
 
         void clear() noexcept {
+            delVer(top);
+        }
 
+        void delVer(Vertex *dv) {
+            if (dv != nullptr) {
+                delVer(dv->getLeftChild());
+                delVer(dv->getRightChild());
+
+                delete dv;
+
+                elCount--;
+            }
         }
 
         /*

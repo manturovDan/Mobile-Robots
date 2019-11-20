@@ -221,6 +221,17 @@ TEST (lookupTest, multiSearch) {
     found++;
     ASSERT_NE(*found, 19);
 }
+
+TEST(modifierTest, clearTree) {
+    std::dmultiset<float> m_set_i;
+    m_set_i.insert({.1, 5.28, 19, -64.1, 12, 53, 19, 81, 33, 9, 19});
+    m_set_i.clear();
+
+    std::cout << *m_set_i.begin() << std::endl;
+
+    ASSERT_EQ(m_set_i.count(), 0);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
