@@ -148,7 +148,25 @@ namespace std {
 
     public:
         dmultiset() : top(nullptr), elCount(0) {}
+        dmultiset(const dmultiset & copy_st) {
+            top = clone(copy_st.top, nullptr);
+            elCount = copy_st.count();
+        }
+
         ~dmultiset() { clear(); }
+
+        Vertex * clone(Vertex * root, Vertex * parent) {
+            if (root == nullptr)
+                return nullptr;
+
+            elemType newVal = root->getElem(); //copy
+            Vertex * tmp = new Vertex(newVal);
+            tmp->setParent(parent);
+            tmp->setLeftChild(clone(root->getLeftChild(), tmp));
+            tmp->setRightChild(clone(root->getRightChild(), tmp));
+
+            return tmp;
+        }
 
         bool empty () const { return !elCount; }
         size_t count() const { return elCount; }
@@ -355,7 +373,7 @@ namespace std {
             }
         }
 
-        /*
+
         void printTree() {
             walkVertexOUT(top);
         }
@@ -372,7 +390,7 @@ namespace std {
 
                 walkVertexOUT(ver->getRightChild());
             }
-        }*/
+        }
     };
 
 

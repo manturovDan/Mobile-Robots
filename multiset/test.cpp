@@ -14,9 +14,39 @@ TEST (iterTest, startingTest) {
     mset.insert(-50);
 
 
-    std::dmultiset<int>::iterator iterrr;
+    ASSERT_NO_THROW(std::dmultiset<int>::iterator iterrr);
 
     ASSERT_EQ(*(mset.begin()), -50);
+}
+
+TEST(constTest, copyConstr) {
+    std::dmultiset<float> m_set_1;
+    m_set_1.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
+
+    std::dmultiset<float> m_set_2(m_set_1);
+
+    ASSERT_EQ(m_set_1.count(), m_set_2.count());
+    m_set_2.printTree();
+    std::dmultiset<float>::const_iterator i = m_set_2.begin();
+    ASSERT_FLOAT_EQ(*i, -64.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 0.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 5.28);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 9);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 12);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 19);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 33);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 53);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 81);
+    i++;
+    ASSERT_EQ(i, m_set_2.end());
 }
 
 TEST (iterTest, forwardIteratorTest) {
@@ -222,7 +252,7 @@ TEST (lookupTest, multiSearch) {
     ASSERT_NE(*found, 19);
 }
 
-TEST(modifierTest, clearTree) {
+/*TEST(modifierTest, clearTree) {
     std::dmultiset<float> m_set_i;
     m_set_i.insert({.1, 5.28, 19, -64.1, 12, 53, 19, 81, 33, 9, 19});
     m_set_i.clear();
@@ -230,7 +260,7 @@ TEST(modifierTest, clearTree) {
     std::cout << *m_set_i.begin() << std::endl;
 
     ASSERT_EQ(m_set_i.count(), 0);
-}
+}*/
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
