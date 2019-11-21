@@ -84,10 +84,30 @@ std::dmultiset<std::string> retDms() {
     return stSet;
 }
 
-TEST(constTest, moveConst) { // I DONT KNOW HOW TO CALL
-    std::cout<<"must be moving" << std::endl;
-    std::dmultiset<std::string> nwc = retDms();
-    std::cout << *nwc.begin() << std::endl;
+std::dmultiset<std::string> retDmsa (std::dmultiset<std::string> stSet) {
+    return stSet;
+}
+
+TEST(constTest, moveConst) {
+    std::dmultiset<std::string> nwca {"star", "wars", "the", "rise", "of", "Skywalker"};
+    std::dmultiset<std::string> nwc = retDmsa(nwca);
+
+    ASSERT_EQ(nwc.count(), 6);
+    std::dmultiset<std::string>::iterator i = nwc.begin();
+
+    ASSERT_EQ(*i, "Skywalker");
+    i++;
+    ASSERT_EQ(*i, "of");
+    i++;
+    ASSERT_EQ(*i, "rise");
+    i++;
+    ASSERT_EQ(*i, "star");
+    i++;
+    ASSERT_EQ(*i, "the");
+    i++;
+    ASSERT_EQ(*i, "wars");
+    i++;
+    ASSERT_EQ(i, nwc.end());
 }
 
 TEST(assignTest, moveAssign) {
