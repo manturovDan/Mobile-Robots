@@ -404,25 +404,6 @@ namespace std {
                 elCount--;
             }
         }
-
-
-        void printTree() {
-            walkVertexOUT(top);
-        }
-
-        void walkVertexOUT(Vertex * ver) {
-            if (ver != nullptr) {
-                walkVertexOUT(ver->getLeftChild());
-
-                std::cout << "Element: " << ver->getElem() << std::endl;
-                std::cout << "Address: " << ver << std::endl;
-                std::cout << "Left: " << ver->getLeftChild() << std::endl;
-                std::cout << "Right: " << ver->getRightChild() << std::endl;
-                std::cout << "Parent: " << ver->getParent() << std::endl << std::endl;
-
-                walkVertexOUT(ver->getRightChild());
-            }
-        }
     };
 
 
