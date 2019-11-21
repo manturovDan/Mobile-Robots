@@ -158,7 +158,7 @@ namespace std {
             elCount = copy_st.count();
         }
 
-        dmultiset(dmultiset && move_st) : elCount(move_st.count()), top(move_st.top) {
+        dmultiset(dmultiset && move_st) noexcept : elCount(move_st.count()), top(move_st.top) {
             move_st.top = nullptr;
         }
 

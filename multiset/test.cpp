@@ -79,10 +79,38 @@ TEST(assignTest, copyAssign) {
 }
 
 std::dmultiset<std::string> retDms() {
-    std::dmultiset<std::string> stSet {"star", "wars", "the", "rise", "of", "Skywalker"};
+    std::dmultiset<std::string> stSet;
+    stSet.insert({"star", "wars", "the", "rise", "of", "Skywalker"});
     return stSet;
 }
 
+TEST(constTest, moveConst) { // I DONT KNOW HOW TO CALL
+    std::cout<<"must be moving" << std::endl;
+    std::dmultiset<std::string> nwc = retDms();
+    std::cout << *nwc.begin() << std::endl;
+}
+
+TEST(assignTest, moveAssign) {
+    std::dmultiset<std::string> nwc;
+    nwc = retDms();
+
+    ASSERT_EQ(nwc.count(), 6);
+    std::dmultiset<std::string>::iterator i = nwc.begin();
+
+    ASSERT_EQ(*i, "Skywalker");
+    i++;
+    ASSERT_EQ(*i, "of");
+    i++;
+    ASSERT_EQ(*i, "rise");
+    i++;
+    ASSERT_EQ(*i, "star");
+    i++;
+    ASSERT_EQ(*i, "the");
+    i++;
+    ASSERT_EQ(*i, "wars");
+    i++;
+    ASSERT_EQ(i, nwc.end());
+}
 
 TEST(constTest, initConst) {
     std::dmultiset<float> m_set_i = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
