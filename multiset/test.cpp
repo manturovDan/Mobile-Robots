@@ -78,6 +78,67 @@ TEST(assignTest, copyAssign) {
     ASSERT_EQ(i, m_set_2.end());
 }
 
+std::dmultiset<std::string> retDms() {
+    std::dmultiset<std::string> stSet {"star", "wars", "the", "rise", "of", "Skywalker"};
+    return stSet;
+}
+
+
+TEST(constTest, initConst) {
+    std::dmultiset<float> m_set_i = {.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9};
+
+    ASSERT_EQ(m_set_i.count(), 9);
+    std::dmultiset<float>::const_iterator i = m_set_i.begin();
+    ASSERT_FLOAT_EQ(*i, -64.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 0.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 5.28);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 9);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 12);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 19);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 33);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 53);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 81);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
+}
+
+TEST(constTest, moveConstr) {
+    std::dmultiset<float> m_set_1;
+    m_set_1.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
+
+    std::dmultiset<float> m_set_2(m_set_1);
+
+    ASSERT_EQ(m_set_1.count(), m_set_2.count());
+    std::dmultiset<float>::const_iterator i = m_set_2.begin();
+    ASSERT_FLOAT_EQ(*i, -64.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 0.1);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 5.28);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 9);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 12);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 19);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 33);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 53);
+    i++;
+    ASSERT_FLOAT_EQ(*i, 81);
+    i++;
+    ASSERT_EQ(i, m_set_2.end());
+}
+
 TEST (iterTest, forwardIteratorTest) {
     std::dmultiset<int> m_set_i;
     std::dmultiset<int>::iterator fw_iter;

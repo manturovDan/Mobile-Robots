@@ -148,10 +148,16 @@ namespace std {
 
     public:
         dmultiset() : top(nullptr), elCount(0) {}
+
+        dmultiset(std::initializer_list<elemType> ilist) : top(nullptr), elCount(0) {
+            insert(ilist);
+        }
+
         dmultiset(const dmultiset & copy_st) {
             top = clone(copy_st.top, nullptr);
             elCount = copy_st.count();
         }
+
         dmultiset(dmultiset && move_st) : elCount(move_st.count()), top(move_st.top) {
             move_st.top = nullptr;
         }
