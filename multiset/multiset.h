@@ -162,7 +162,10 @@ namespace std {
             move_st.top = nullptr;
         }
 
-        ~dmultiset() {} //FREE DYNAMIC MEMORY HANDLY
+        ~dmultiset() {
+            clear();
+            top = nullptr;
+        }
 
         dmultiset &operator=(const dmultiset & copy_st) {
             clear();
