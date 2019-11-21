@@ -199,7 +199,6 @@ namespace std {
 
         bool empty () const { return !elCount; }
         size_t count() const { return elCount; }
-        size_t max_size() const { /* I DONT KNOW HOW TO DO IT */}
 
         typedef forward_iterator<Vertex, elemType> iterator;
         typedef forward_iterator<Vertex, elemType> const_iterator;
