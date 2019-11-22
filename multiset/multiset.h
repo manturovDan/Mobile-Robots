@@ -1,7 +1,7 @@
 #ifndef D_MULTISET_H
 #define D_MULTISET_H
 
-#include <iostream>
+#include <stdlib.h>
 
 namespace std {
 
@@ -154,7 +154,13 @@ namespace std {
         }
 
         dmultiset(const dmultiset & copy_st) {
-            top = clone(copy_st.top, nullptr);
+            try {
+                top = clone(copy_st.top, nullptr);
+            } catch (std::bad_alloc &ba) {
+                std::cerr << "No memory" << std::endl;
+                exit(EXIT_FAILURE);
+            }
+
             elCount = copy_st.count();
         }
 
@@ -169,7 +175,12 @@ namespace std {
 
         dmultiset &operator=(const dmultiset & copy_st) {
             clear();
-            top = clone(copy_st.top, nullptr);
+            try {
+                top = clone(copy_st.top, nullptr);
+            } catch (std::bad_alloc &ba) {
+                std::cerr << "No memory" << std::endl;
+                exit(EXIT_FAILURE);
+            }
             elCount = copy_st.count();
 
             return *this;
@@ -189,10 +200,21 @@ namespace std {
                 return nullptr;
 
             elemType newVal = root->getElem(); //copy
-            Vertex * tmp = new Vertex(newVal);
+            Vertex *tmp;
+
+            try {
+                tmp = new Vertex(newVal);
+            } catch (std::bad_alloc &ba) {
+                throw ba;
+            }
+
             tmp->setParent(parent);
-            tmp->setLeftChild(clone(root->getLeftChild(), tmp));
-            tmp->setRightChild(clone(root->getRightChild(), tmp));
+            try {
+                tmp->setLeftChild(clone(root->getLeftChild(), tmp));
+                tmp->setRightChild(clone(root->getRightChild(), tmp));
+            } catch (std::bad_alloc &ba) {
+                throw ba;
+            }
 
             return tmp;
         }
@@ -280,7 +302,14 @@ namespace std {
         iterator insert(const elemType & val) {
             iterator iter(top);
             elemType newVal = val; //copy
-            Vertex * newVer = new Vertex(newVal);
+            Vertex * newVer;
+
+            try {
+                newVer = new Vertex(newVal);
+            } catch (std::bad_alloc &ba) {
+                std::cerr << "No memory" << std::endl;
+                exit(EXIT_FAILURE);
+            }
 
             Vertex * parent = nullptr;
             Vertex * x = top;
