@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <cstring>
 
 namespace robo {
     struct coordinates {
@@ -18,6 +19,16 @@ namespace robo {
 
     class Map_Object;
 
+    /////////////////////////////////////////////////////
+    class Quick_Navigator {
+    private:
+        std::multimap<robo::coordinates, robo::Map_Object *> objectTree;
+    public:
+        Quick_Navigator() = default;
+        Map_Object * check(coordinates position) { return (*objectTree.find(position)).second; };
+        void add(Map_Object *);
+        int replace(coordinates);
+    };
 
     /////////////////////////////////////////////////////////////////
     class Environment_describer {
@@ -25,7 +36,7 @@ namespace robo {
         unsigned int width;
         unsigned int height;
         unsigned int time;
-        std::vector<Map_Object> map_obj;
+        std::vector<Map_Object *> map_obj;
 
         /// @param bool coord : x - true, y - false
         int setWidthHeight(int, bool);
@@ -40,6 +51,9 @@ namespace robo {
         coordinates getObject(Map_Object &);
         Map_Object * getObject(coordinates);
         Map_Object * setObject(coordinates, Characters, std::string description = "undefined");
+        Quick_Navigator qTree;
+
+        ~Environment_describer(); // clear vector
     };
 
 
@@ -52,31 +66,36 @@ namespace robo {
         coordinates position;
     public:
         Map_Object(coordinates);
-        unsigned int getX() { return position.x; };
-        unsigned int getY() { return position.y; };
+        unsigned int getX() { return position.x; }
+        unsigned int getY() { return position.y; }
+        coordinates getPosition() { return position; }
 
         friend bool operator<(const Map_Object &, const Map_Object &);
         friend bool operator==(const Map_Object &left, const Map_Object &right) { return ((left.position.x == right.position.x) && (left.position.y == right.position.y)); }
+
+        virtual Map_Object * clone() const = 0;
     };
 
     class Interest_Point : public Map_Object {
     public:
         Interest_Point() = delete;
         Interest_Point(coordinates pos) : Map_Object(pos) {};
+        Interest_Point * clone() const;
     };
 
     class Obstacle : public Map_Object {
     public:
         Obstacle() = delete;
         Obstacle(coordinates pos) : Map_Object(pos) {};
+        Obstacle * clone() const;
     };
 
     class Module;
 
-    class Robo_Component : public Map_Object {
+    class Observation_Center : public Map_Object {
     protected:
-        Robo_Component() = delete;
-        Robo_Component(coordinates);
+        Observation_Center() = delete;
+        Observation_Center(coordinates);
 
         coordinates position;
         std::string description;
@@ -91,9 +110,10 @@ namespace robo {
         int getCost();
         int getCountPorts();
         coordinates getPosition();
+        Observation_Center * clone() const;
     };
 
-    class Mobile : Robo_Component {
+    class Mobile : Observation_Center {
     protected:
         Mobile ();
         int speed;
@@ -103,7 +123,7 @@ namespace robo {
         int turn(int);
     };
 
-    class Manager : public Robo_Component {
+    class Manager : public Observation_Center {
     protected:
         Manager ();
     };
@@ -116,11 +136,6 @@ namespace robo {
     class Robot_Commander : public Robot_Scout, public Manager { //make virtual
     public:
         Robot_Commander();
-    };
-
-    class Observation_Center : public Robo_Component {
-    public:
-        Observation_Center();
     };
 
     class Command_Center : public Observation_Center, public Manager {
@@ -155,7 +170,7 @@ namespace robo {
     public:
         Managing();
     protected:
-        std::vector<Robo_Component *> subordinate;
+        //std::vector<Robo_Component *> subordinate;
     };
 
     class Sensor : public Energy_Consumer {
@@ -166,15 +181,6 @@ namespace robo {
         int direction;
         int angle;
 
-    };
-
-    class QuickNavigator {
-    private:
-        std::multimap<robo::coordinates, robo::Map_Object *> objectTree;
-    public:
-        Map_Object * check(coordinates);
-        int add(Map_Object *);
-        int replace(coordinates);
     };
 
     class AI_Dict {

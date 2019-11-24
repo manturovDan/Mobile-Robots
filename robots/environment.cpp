@@ -38,6 +38,11 @@ namespace robo {
     Map_Object * Environment_describer::setObject(robo::coordinates position, Characters objType, std::string description) {
         if (position.x >= width || position.y >= height)
             throw std::invalid_argument("Incorrect object coordinates!");
+        Map_Object * is_there = qTree.check(position);
+
+        if (is_there != nullptr && strcmp(typeid(*is_there).name(), "Interest_Point") != 0)
+            return nullptr;
+
         Map_Object * nw_obj = nullptr;
         if (objType == Obstacle_t) {
             nw_obj = new Obstacle(position);
@@ -45,7 +50,9 @@ namespace robo {
             nw_obj = new Interest_Point(position);
         }
 
-        //map_obj.push_back(nw_obj);//copy and delete???
+        map_obj.push_back(nw_obj); // OR COPY????
+        qTree.add(nw_obj);
+
         return nw_obj;
     }
 
@@ -64,8 +71,7 @@ namespace robo {
             return false;
     }
 
-    Map_Object * QuickNavigator::check(coordinates position) {
-        robo::Map_Object justObj(position);
-
+    void Quick_Navigator::add(Map_Object * qObj) {
+        objectTree.insert(std::pair<coordinates, Map_Object*>(qObj->getPosition(), qObj));
     }
 }
