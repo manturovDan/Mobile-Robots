@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include <set>
+#include <map>
 
 namespace robo {
     struct coordinates {
@@ -18,12 +18,14 @@ namespace robo {
 
     class Map_Object;
 
+
+    /////////////////////////////////////////////////////////////////
     class Environment_describer {
     private:
         unsigned int width;
         unsigned int height;
         unsigned int time;
-        std::multiset<Map_Object *> map_obj;
+        std::vector<Map_Object> map_obj;
 
         /// @param bool coord : x - true, y - false
         int setWidthHeight(int, bool);
@@ -40,13 +42,16 @@ namespace robo {
         Map_Object * setObject(coordinates, Characters, std::string description = "undefined");
     };
 
+
+    ///////////////////////////////////////////////////////////////
     class Map_Object {
     protected:
         Map_Object() = delete;
-        Map_Object(coordinates);
         bool appeared;
+        bool blocked;
         coordinates position;
     public:
+        Map_Object(coordinates);
         unsigned int getX() { return position.x; };
         unsigned int getY() { return position.y; };
 
@@ -161,6 +166,15 @@ namespace robo {
         int direction;
         int angle;
 
+    };
+
+    class QuickNavigator {
+    private:
+        std::multimap<robo::coordinates, robo::Map_Object *> objectTree;
+    public:
+        Map_Object * check(coordinates);
+        int add(Map_Object *);
+        int replace(coordinates);
     };
 
     class AI_Dict {

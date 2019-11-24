@@ -20,20 +20,20 @@ namespace robo {
             height = newVal;
 
         auto map_resident = map_obj.begin();
-        while (map_resident != map_obj.end()) {
-            if (((*map_resident)->getX() <= newVal && coord) || ((*map_resident)->getY() <= newVal && coord)) { //delete this
-                delete (*map_resident);
-                //*map_resident = nullptr;
+        /*while (map_resident != map_obj.end()) {
+            if ((map_resident->getX() <= newVal && coord) || ((*map_resident)->getY() <= newVal && coord)) { //delete this
+                th
             }
 
             ++map_resident;
-        }
+        }*/
 
         //map_obj.erase(std::remove(map_obj.begin(), map_obj.end(), nullptr), map_obj.end()); // or error
         //TODO Dont forget about robots
 
         return 0;
     }
+
 
     Map_Object * Environment_describer::setObject(robo::coordinates position, Characters objType, std::string description) {
         if (position.x >= width || position.y >= height)
@@ -49,6 +49,7 @@ namespace robo {
         return nw_obj;
     }
 
+
     Map_Object::Map_Object(robo::coordinates pos) {
         position = pos;
         //Continue
@@ -61,5 +62,10 @@ namespace robo {
             return left.position.y < right.position.y;
         else
             return false;
+    }
+
+    Map_Object * QuickNavigator::check(coordinates position) {
+        robo::Map_Object justObj(position);
+
     }
 }
