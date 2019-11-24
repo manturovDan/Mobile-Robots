@@ -7,9 +7,13 @@
 #include <string>
 
 namespace robo {
-    struct map_position {
+    struct coordinates {
         unsigned int x;
         unsigned int y;
+    };
+
+    struct map_position {
+        coordinates location;
         int direction;
     };
 
