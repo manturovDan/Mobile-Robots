@@ -2,9 +2,8 @@
 #define ROBOTSCREATE_ROBOT_H
 
 #include <vector>
-#include <map>
-
 #include <string>
+#include <set>
 
 namespace robo {
     struct coordinates {
@@ -12,53 +11,59 @@ namespace robo {
         unsigned int y;
     };
 
-    struct map_position {
-        coordinates location;
-        int direction;
+    enum Characters {
+        Obstacle_t,
+        Interest_t
     };
 
     class Map_Object;
 
     class Environment_describer {
     private:
-        int width;
-        int height;
-        std::vector<Map_Object *> map_obj;
-    public:
-        Environment_describer() {};
-        Environment_describer(int, int);
+        unsigned int width;
+        unsigned int height;
+        unsigned int time;
+        std::multiset<Map_Object *> map_obj;
+
+        /// @param bool coord : x - true, y - false
         int setWidthHeight(int, bool);
-        int setWidth(int nval) { return setWidthHeight(nval, true); }
-        int setHeight(int nval) { return setWidthHeight(nval, true); }
-        int getWidth() { return width; };
-        int getHeight() { return height; };
-        map_position getObject(Map_Object &);
-        Map_Object * getObject(map_position);
-        Map_Object * setObject(map_position, std::string &, std::string description = "");
+    public:
+        Environment_describer() : time(0), width(0), height(0) {};
+        Environment_describer(int, int);
+
+        void setWidth(unsigned int nval) { setWidthHeight(nval, true); }
+        void setHeight(unsigned nval) { setWidthHeight(nval, false); }
+        unsigned int getWidth() { return width; };
+        unsigned int getHeight() { return height; };
+        coordinates getObject(Map_Object &);
+        Map_Object * getObject(coordinates);
+        Map_Object * setObject(coordinates, Characters, std::string description = "undefined");
     };
 
     class Map_Object {
     protected:
         Map_Object() = delete;
-        Map_Object(map_position);
-        map_position position{};
-        bool appeared{};
+        Map_Object(coordinates);
+        bool appeared;
+        coordinates position;
     public:
-        map_position getPosition();
-        int getX() { return position.x; };
-        int getY() { return position.y; };
+        unsigned int getX() { return position.x; };
+        unsigned int getY() { return position.y; };
+
+        friend bool operator<(const Map_Object &, const Map_Object &);
+        friend bool operator==(const Map_Object &left, const Map_Object &right) { return ((left.position.x == right.position.x) && (left.position.y == right.position.y)); }
     };
 
     class Interest_Point : public Map_Object {
     public:
         Interest_Point() = delete;
-        Interest_Point(map_position pos) : Map_Object(pos) {};
+        Interest_Point(coordinates pos) : Map_Object(pos) {};
     };
 
     class Obstacle : public Map_Object {
     public:
         Obstacle() = delete;
-        Obstacle(map_position pos) : Map_Object(pos) {};
+        Obstacle(coordinates pos) : Map_Object(pos) {};
     };
 
     class Module;
@@ -66,9 +71,9 @@ namespace robo {
     class Robo_Component : public Map_Object {
     protected:
         Robo_Component() = delete;
-        Robo_Component(map_position);
+        Robo_Component(coordinates);
 
-        map_position position;
+        coordinates position;
         std::string description;
         int energyConsumption;
         int cost;
@@ -80,7 +85,7 @@ namespace robo {
         int getEnergyConsumption();
         int getCost();
         int getCountPorts();
-        map_position getPosition();
+        coordinates getPosition();
     };
 
     class Mobile : Robo_Component {

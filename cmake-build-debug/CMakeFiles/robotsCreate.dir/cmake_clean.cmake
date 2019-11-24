@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.o"
   "CMakeFiles/robotsCreate.dir/main.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/environment.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/interface.cpp.o"

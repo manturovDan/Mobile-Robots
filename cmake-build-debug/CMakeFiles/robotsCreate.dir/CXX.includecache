@@ -676,21 +676,35 @@ SFML/Config.hpp
 
 /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 
-/home/danila/source/robots/main.cpp
-iostream
+/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h
+ctype.h
 -
-robots/robot.h
-/home/danila/source/robots/robots/robot.h
-robots/interface.h
-/home/danila/source/robots/robots/interface.h
-
-/home/danila/source/robots/robots/environment.cpp
-iostream
+limits.h
 -
-algorithm
+stdio.h
 -
-robot.h
-/home/danila/source/robots/robots/robot.h
+stdlib.h
+-
+string.h
+-
+stddef.h
+-
+cctype
+-
+climits
+-
+cstdio
+-
+cstdlib
+-
+cstring
+-
+stdint.h
+-
+android/log.h
+-
+assert.h
+-
 
 /home/danila/source/robots/robots/interface.cpp
 interface.h
@@ -699,16 +713,20 @@ interface.h
 /home/danila/source/robots/robots/interface.h
 iostream
 -
+string
+-
 SFML/Graphics.hpp
 -
+../libraries/tinyxml2-lib/tinyxml2.h
+/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h
 robot.h
 /home/danila/source/robots/robots/robot.h
 
 /home/danila/source/robots/robots/robot.h
 vector
 -
-map
--
 string
+-
+set
 -
 

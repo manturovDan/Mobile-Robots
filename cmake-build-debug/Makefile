@@ -123,6 +123,33 @@ robotsCreate/fast:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/build
 .PHONY : robotsCreate/fast
 
+libraries/tinyxml2-lib/tinyxml2.o: libraries/tinyxml2-lib/tinyxml2.cpp.o
+
+.PHONY : libraries/tinyxml2-lib/tinyxml2.o
+
+# target to build an object file
+libraries/tinyxml2-lib/tinyxml2.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.o
+.PHONY : libraries/tinyxml2-lib/tinyxml2.cpp.o
+
+libraries/tinyxml2-lib/tinyxml2.i: libraries/tinyxml2-lib/tinyxml2.cpp.i
+
+.PHONY : libraries/tinyxml2-lib/tinyxml2.i
+
+# target to preprocess a source file
+libraries/tinyxml2-lib/tinyxml2.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.i
+.PHONY : libraries/tinyxml2-lib/tinyxml2.cpp.i
+
+libraries/tinyxml2-lib/tinyxml2.s: libraries/tinyxml2-lib/tinyxml2.cpp.s
+
+.PHONY : libraries/tinyxml2-lib/tinyxml2.s
+
+# target to generate assembly for a file
+libraries/tinyxml2-lib/tinyxml2.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.s
+.PHONY : libraries/tinyxml2-lib/tinyxml2.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -213,6 +240,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... robotsCreate"
 	@echo "... edit_cache"
+	@echo "... libraries/tinyxml2-lib/tinyxml2.o"
+	@echo "... libraries/tinyxml2-lib/tinyxml2.i"
+	@echo "... libraries/tinyxml2-lib/tinyxml2.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,10 +1,10 @@
 <Environment width = "100" height = "100">
-    <obstacle x = "1" y = "1"/>
-    <obstacle x = "1" y = "2"/>
-    <obstacle x = "50" y = "20"/>
+    <Obstacle x = "1" y = "1"/>
+    <Obstacle x = "1" y = "2"/>
+    <Obstacle x = "50" y = "20"/>
 
-    <interest x = "50" y = "22"/>
-    <interest x = "10" y = "14"/>
+    <Interest x = "50" y = "22"/>
+    <Interest x = "10" y = "14"/>
 
 
 </Environment>
