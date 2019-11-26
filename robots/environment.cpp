@@ -96,7 +96,7 @@ namespace robo {
 
     }
 
-    Map_Object::Map_Object(robo::coordinates pos) : position(pos) {
+    Map_Object::Map_Object(robo::coordinates pos) : position(pos), appeared(true) {
         //check collision
     }
 

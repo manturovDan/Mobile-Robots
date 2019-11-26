@@ -67,12 +67,11 @@ namespace robo {
     ///////////////////////////////////////////////////////////////
     class Map_Object {
     protected:
-        Map_Object() = delete;
         bool appeared;
-        bool blocked;
         coordinates position;
     public:
         Map_Object(coordinates);
+        Map_Object() : appeared(false) {}
         unsigned int getX() { return position.x; }
         unsigned int getY() { return position.y; }
         coordinates getPosition() { return position; }
@@ -120,9 +119,9 @@ namespace robo {
         Observation_Center() = delete;
         Observation_Center(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         std::string getDescription() {  return description; }
-        int getEnergyConsumption() {return energyConsumption; }
+        unsigned int getEnergyConsumption() {return energyConsumption; }
         int getCost() { return cost; }
-        int getCountPorts() { return countPorts; }
+        unsigned int getCountPorts() { return countPorts; }
         int getCountModules() { return modules.size(); }
 
         Observation_Center * clone() const;
