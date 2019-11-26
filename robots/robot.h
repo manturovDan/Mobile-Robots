@@ -81,6 +81,8 @@ namespace robo {
         void print() { std::cout << position.x << " " << position.y <<  std::endl; }
 
         //virtual Map_Object * clone() const = 0; //НУЖНО ЛИ??? ASK
+
+        virtual void setGenerator(unsigned int prod) = 0;
     };
 
 
@@ -90,6 +92,8 @@ namespace robo {
         Interest_Point() = delete;
         Interest_Point(coordinates pos) : Map_Object(pos) {};
         Interest_Point * clone() const;
+
+        void setGenerator(unsigned int prod) { throw std::invalid_argument("Incorrect object for generator"); } // IS IT GOOD?
     };
 
     class Obstacle : public Map_Object {
@@ -97,6 +101,7 @@ namespace robo {
         Obstacle() = delete;
         Obstacle(coordinates pos) : Map_Object(pos) {};
         Obstacle * clone() const;
+        void setGenerator(unsigned int prod) { throw std::invalid_argument("Incorrect object for generator"); } // IS IT GOOD?
     };
 
     class Module;
@@ -117,7 +122,9 @@ namespace robo {
         int getEnergyConsumption();
         int getCost();
         int getCountPorts();
+        int getCountModules() { return modules.size(); }
         Observation_Center * clone() const;
+        void setGenerator(unsigned int);
     };
 
     class Robot_Scout : virtual public Observation_Center {
@@ -149,17 +156,17 @@ namespace robo {
         int setActive();
     };
 
+    class Power_Generator: public Module {
+    public:
+        Power_Generator() : Module() {}
+    protected:
+        int energyProduction;
+    };
+
     class Energy_Consumer {
     protected:
         Energy_Consumer();
         int powerConsumption;
-    };
-
-    class Power_Generator {
-    public:
-        Power_Generator();
-    protected:
-        int energyProduction;
     };
 
     class Managing : public Energy_Consumer {

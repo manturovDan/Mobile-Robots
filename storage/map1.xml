@@ -7,8 +7,8 @@
     <Interest x = "10" y = "14"/>
 
     <Command_Center x = "50" y = "21" description = "general" ports = "5">
-            <Power_Generator production = "25"/>
-            <Managing consumption = "12" radius = "50"/>
+        <Power_Generator production = "25"/>
+        <Managing consumption = "12" radius = "50"/>
     </Command_Center>
 
     <Observation_Center x = "80" y = "21" description = "subord" ports = "15">

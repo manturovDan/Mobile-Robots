@@ -40,32 +40,41 @@ namespace interf {
 
             bool is_robo = true;
             bool is_commander = false;
+            robo::Map_Object *prod;
 
             if (!strcmp(mapEl->Name(), "Obstacle")) {
-                env.setObject(pos, robo::Obstacle_t);
+                prod = env.setObject(pos, robo::Obstacle_t);
                 is_robo = false;
             } else if (!strcmp(mapEl->Name(), "Interest")) {
-                env.setObject(pos, robo::Interest_t);
+                prod = env.setObject(pos, robo::Interest_t);
                 is_robo = false;
             } else if (!strcmp(mapEl->Name(), "Command_Center")) {
-                env.setObject(pos, robo::Command_Center_t);
+                prod = env.setObject(pos, robo::Command_Center_t);
                 is_commander = true;
             } else if (!strcmp(mapEl->Name(), "Robot_Commander")) {
+                prod = env.setObject(pos, robo::Robot_Commander_t);
                 is_commander = true;
-                env.setObject(pos, robo::Robot_Commander_t);
             } else if (!strcmp(mapEl->Name(), "Observation_Center")) {
-                env.setObject(pos, robo::Observation_Center_t);
+                prod = env.setObject(pos, robo::Observation_Center_t);
             } else if (!strcmp(mapEl->Name(), "Robot_Scout")) {
-                env.setObject(pos, robo::Robot_Scout_t);
+                prod = env.setObject(pos, robo::Robot_Scout_t);
+            }
+            else {
+                throw std::invalid_argument("Unknown object on the map");
             }
 
 
             if (is_robo) {
+                std::cout << "ROBO" << std::endl;
                 tinyxml2::XMLElement * module = mapEl->FirstChildElement();
 
                 while (module != nullptr) {
-                    if (!strcmp(mapEl->Name(), "Power_Generator")) {
+                    if (!strcmp(module->Name(), "Power_Generator")) {
+                        std::cout << "POWER" << std::endl;
+                        unsigned int production;
+                        if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
 
+                        prod->setGenerator(production);
                     }
 
                     module = module->NextSiblingElement();

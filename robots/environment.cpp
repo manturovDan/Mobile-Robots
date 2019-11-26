@@ -70,11 +70,22 @@ namespace robo {
         }
     }
 
+    ///////////////////////////////
 
     Map_Object::Map_Object(robo::coordinates pos) {
         position = pos;
         //Continue
     }
+
+    void Observation_Center::setGenerator(unsigned int prod) {
+        //if (getCountModules() >= getCountPorts())
+        //    throw std::invalid_argument("Count of modules exceeds count of ports");
+
+        std::cout << "Setting generator" << std::endl;
+
+    }
+
+    ///////////////////////////////
 
     bool operator<(const Map_Object &left, const Map_Object &right){
         if (left.position.x < right.position.x)
@@ -86,6 +97,6 @@ namespace robo {
     }
 
     void Quick_Navigator::add(Map_Object * qObj) {
-        objectTree.insert(std::pair<coordinates, Map_Object*>(qObj->getPosition(), qObj));
+//        objectTree.insert(std::pair<coordinates, Map_Object*>(qObj->getPosition(), qObj));
     }
 }
