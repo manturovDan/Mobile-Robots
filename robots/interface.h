@@ -41,11 +41,11 @@ namespace interf {
          *          All objects besides 3,6 MUST have attributes x and y with X_POS, Y_POS in half-interval [0, width/height of Environment)
          *
          *              a)
-         *              <Power_Generator production = NUM_PRODUCTION />
+         *              <Power_Generator production = NUM_PRODUCTION priority = PRIORITY />
          *              b)
-         *              <Managing consumption = NUM_CONSUMPTION radius = RADIUS_OF_THE_POWER /  >
+         *              <Managing consumption = NUM_CONSUMPTION radius = RADIUS_OF_THE_POWER  priority = PRIORITY />
          *              c)
-         *              <Sensor consumption = NUM_CONSUMPTION radius = NUM_RADIUS direction = NUM_DIRECTION angle = ANGLE>
+         *              <Sensor consumption = NUM_CONSUMPTION radius = NUM_RADIUS direction = NUM_DIRECTION angle = ANGLE priority = PRIORITY />
          *
          *          NUM_DIRECTION as Mobile-class field "direction" must be one of 0 (top), 1 (left), 2 (bottom), 3(right)
          *

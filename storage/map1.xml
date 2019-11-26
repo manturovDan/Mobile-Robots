@@ -7,18 +7,17 @@
     <Interest x = "10" y = "14"/>
 
     <Command_Center x = "50" y = "21" description = "general" ports = "5">
-        <Power_Generator production = "25"/>
-        <Power_Generator production = "25"/>
-        <Power_Generator production = "25"/>
-        <Power_Generator production = "25"/>
-        <Power_Generator production = "25"/>
-        <Managing consumption = "12" radius = "50"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Managing consumption = "12" priority = "1" radius = "50"/>
     </Command_Center>
 
     <Observation_Center x = "80" y = "21" description = "subord" ports = "15">
-        <Power_Generator production = "100"/>
-        <Sensor consumption = "8" radius = "8" direction = "0" angle = "3"/>
-        <Sensor consumption = "8" radius = "25" direction="1"/>
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
+        <Sensor consumption = "8" radius = "25" priority = "1" direction="1"/>
     </Observation_Center>
 
 

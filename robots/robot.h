@@ -165,7 +165,7 @@ namespace robo {
     class Module {
     protected:
         Module() = delete;
-        Module(int prior) : priority(prior) {}
+        Module(int prior) : priority(prior), active(true) {}
         int priority;
         bool active;
     public:
@@ -178,7 +178,7 @@ namespace robo {
 
     class Power_Generator: public Module {
     public:
-        Power_Generator(unsigned int prod) : Module() {}
+        Power_Generator(int prior, unsigned int prod) : Module(prior), energyProduction(prod) {}
     protected:
         int energyProduction;
     };

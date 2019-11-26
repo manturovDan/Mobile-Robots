@@ -38,10 +38,14 @@ namespace interf {
                 if (!strcmp(module->Name(), "Power_Generator")) {
                     std::cout << "POWER" << std::endl;
                     unsigned int production;
-                    if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
+                    int priority;
 
-                    auto prodm = new robo::Power_Generator()
-                }
+                    if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
+                    if (pEnv->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
+
+                    auto prodm = new robo::Power_Generator(priority, production);
+                    modl.push_back(prodm);
+                }///Continue from these place
 
                 module = module->NextSiblingElement();
             }
