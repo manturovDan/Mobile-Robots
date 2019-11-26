@@ -97,6 +97,8 @@ namespace interf {
          *
          *          Objects 3-4 MUST have one or more Managing module (PORTS_COUNT > 0)
          *
+         *          At the beginning generators and managing modules are active, sensors are inactive
+         *
          * </Environment>
          *
          * Excample:

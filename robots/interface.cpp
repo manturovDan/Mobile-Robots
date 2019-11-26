@@ -27,14 +27,24 @@ namespace interf {
         tinyxml2::XMLElement * mapEl = pEnv->FirstChildElement();
 
         while (mapEl != nullptr) {
-            unsigned int x;
-            unsigned int y;
-
-            if (mapEl->QueryUnsignedAttribute("x", &x) != 0) fileDamaged(stream, "getting x"); //must be absented in robots
-            if (mapEl->QueryUnsignedAttribute("y", &y) != 0) fileDamaged(stream, "getting y");
-            if (x >= width || y >= height) fileDamaged(stream, "incorrect x y");
 
             stream << mapEl->Name() << std::endl;
+
+            tinyxml2::XMLElement * module = mapEl->FirstChildElement();
+
+            std::vector<robo::Module *> modl;
+
+            while (module != nullptr) {
+                if (!strcmp(module->Name(), "Power_Generator")) {
+                    std::cout << "POWER" << std::endl;
+                    unsigned int production;
+                    if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
+
+                    auto prodm = new robo::Power_Generator()
+                }
+
+                module = module->NextSiblingElement();
+            }
 
             robo::coordinates pos = {x, y};
 
@@ -66,19 +76,7 @@ namespace interf {
 
             if (is_robo) {
                 std::cout << "ROBO" << std::endl;
-                tinyxml2::XMLElement * module = mapEl->FirstChildElement();
 
-                while (module != nullptr) {
-                    if (!strcmp(module->Name(), "Power_Generator")) {
-                        std::cout << "POWER" << std::endl;
-                        unsigned int production;
-                        if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
-
-                        prod->setGenerator(production);
-                    }
-
-                    module = module->NextSiblingElement();
-                }
             }
 
             mapEl = mapEl->NextSiblingElement();

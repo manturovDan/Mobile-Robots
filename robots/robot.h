@@ -23,6 +23,7 @@ namespace robo {
 
     class Map_Object;
     class Module;
+    class Environment_describer;
 
     /////////////////////////////////////////////////////
     class Quick_Navigator {
@@ -33,6 +34,29 @@ namespace robo {
         //Map_Object * check(coordinates position) { return (*objectTree.find(position)).second; };
         void add(Map_Object *);
         int replace(coordinates);
+    };
+
+    ///////////////////////////////////////////////////////////////
+    class Map_Object {
+    protected:
+        bool appeared;
+        coordinates position;
+        static Environment_describer *env;
+    public:
+        Map_Object(coordinates);
+        Map_Object() : appeared(false), position({0, 0}) {}
+        static void setEnv(Environment_describer *envir) { env = envir; }
+        unsigned int getX() { return position.x; }
+        unsigned int getY() { return position.y; }
+        coordinates getPosition() { return position; }
+
+        friend bool operator<(const Map_Object &, const Map_Object &);
+        friend bool operator==(const Map_Object &left, const Map_Object &right) { return ((left.position.x == right.position.x) && (left.position.y == right.position.y)); }
+
+        void print() { std::cout << position.x << " " << position.y <<  std::endl; }
+
+        //virtual Map_Object * clone() const = 0; //НУЖНО ЛИ??? ASK
+
     };
 
     /////////////////////////////////////////////////////////////////
@@ -46,7 +70,10 @@ namespace robo {
         /// @param bool coord : x - true, y - false
         int setWidthHeight(int, bool);
     public:
-        Environment_describer() : time(0), width(0), height(0) {};
+        Environment_describer() : time(0), width(0), height(0) {
+            Map_Object::setEnv(this);
+        };
+
         Environment_describer(int, int);
 
         void setWidth(unsigned int nval) { setWidthHeight(nval, true); }
@@ -65,29 +92,6 @@ namespace robo {
     };
 
 
-    ///////////////////////////////////////////////////////////////
-    class Map_Object {
-    protected:
-        bool appeared;
-        coordinates position;
-    public:
-        Map_Object(coordinates);
-        Map_Object() : appeared(false), position({0, 0}) {}
-        unsigned int getX() { return position.x; }
-        unsigned int getY() { return position.y; }
-        coordinates getPosition() { return position; }
-
-        friend bool operator<(const Map_Object &, const Map_Object &);
-        friend bool operator==(const Map_Object &left, const Map_Object &right) { return ((left.position.x == right.position.x) && (left.position.y == right.position.y)); }
-
-        void print() { std::cout << position.x << " " << position.y <<  std::endl; }
-
-        //virtual Map_Object * clone() const = 0; //НУЖНО ЛИ??? ASK
-
-        virtual void setGenerator(unsigned int prod) = 0;
-    };
-
-
     /////////////////////////////////////////////////////////////////
     class Interest_Point : public Map_Object {
     public:
@@ -95,7 +99,6 @@ namespace robo {
         Interest_Point(coordinates pos) : Map_Object(pos) {};
         //Interest_Point * clone() const;
 
-        void setGenerator(unsigned int prod) { throw std::invalid_argument("Incorrect object for generator"); } // IS IT GOOD?
     };
 
     /////////////////////////////////////////////////////////////
@@ -104,7 +107,6 @@ namespace robo {
         Obstacle() = delete;
         Obstacle(coordinates pos) : Map_Object(pos) {};
         //Obstacle * clone() const;
-        void setGenerator(unsigned int prod) { throw std::invalid_argument("Incorrect object for generator"); } // IS IT GOOD?
     };
 
     /////////////////////////////////////////////////////////////
@@ -128,7 +130,6 @@ namespace robo {
         int getCountModules() { return modules.size(); }
 
         //Observation_Center * clone() const;
-        void setGenerator(unsigned int);
         void checkFree();
     };
 
@@ -163,7 +164,8 @@ namespace robo {
 
     class Module {
     protected:
-        Module();
+        Module() = delete;
+        Module(int prior) : priority(prior) {}
         int priority;
         bool active;
     public:
@@ -171,12 +173,12 @@ namespace robo {
         bool getActive();
         int setActive();
 
-        virtual Module * copy() = 0; // TODO for children
+        //virtual Module * copy() = 0; // TODO for children?
     };
 
     class Power_Generator: public Module {
     public:
-        Power_Generator() : Module() {}
+        Power_Generator(unsigned int prod) : Module() {}
     protected:
         int energyProduction;
     };

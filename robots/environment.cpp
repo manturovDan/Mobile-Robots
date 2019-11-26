@@ -111,19 +111,14 @@ namespace robo {
     }
 
     Map_Object::Map_Object(robo::coordinates pos) : position(pos), appeared(true) {
+        if (pos.x >= env->getWidth() || pos.y >= env->getHeight())
+            throw std::invalid_argument("x or y is over the Map");
         //check collision
     }
 
     void Observation_Center::checkFree() {
         if (getCountModules() >= getCountPorts())
             throw std::invalid_argument("Count of modules exceeds count of ports");
-    }
-
-    void Observation_Center::setGenerator(unsigned int prod) {
-        checkFree();
-
-        std::cout << "Setting generator" << std::endl;
-
     }
 
     ///////////////////////////////////
