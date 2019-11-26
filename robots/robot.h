@@ -55,8 +55,9 @@ namespace robo {
         unsigned int getHeight() { return height; };
         coordinates getObject(Map_Object &);
         Map_Object * getObject(coordinates);
-        Map_Object * setObject(coordinates, Characters, std::string description = "undefined");
-        Map_Object * setObject(unsigned int, std::vector<Module *>, Characters, std::string description = "undefined");
+        Map_Object * setObject(coordinates, Characters);
+        Map_Object * setObject(unsigned int, unsigned int, int, std::vector<Module *> &, Characters, std::string &);
+        Map_Object * setObject(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, Characters, std::string &);
         Quick_Navigator qTree;
 
         void print(std::ostream & stream = std::cout);

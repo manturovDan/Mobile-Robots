@@ -35,30 +35,17 @@ namespace robo {
     }
 
 
-    Map_Object * Environment_describer::setObject(robo::coordinates position, Characters objType, std::string description) {
+    Map_Object * Environment_describer::setObject(robo::coordinates position, Characters objType) {
         if (position.x >= width || position.y >= height)
             throw std::invalid_argument("Incorrect object coordinates!");
-        //Map_Object * is_there = qTree.check(position);
-
-        //if (is_there != nullptr && strcmp(typeid(*is_there).name(), "Interest_Point") != 0)
-        //    return nullptr;
-        // TODO check free ceil
 
         Map_Object * nw_obj = nullptr;
         if (objType == Obstacle_t) {
             nw_obj = new Obstacle(position);
         } else if (objType == Interest_t) {
             nw_obj = new Interest_Point(position);
-        } else if (objType == Command_Center_t) {
-            nw_obj = new Command_Center(position);
-        } else if (objType == Robot_Commander_t) {
-            nw_obj = new Robot_Commander(position);
-        } else if (objType == Observation_Center_t) {
-            nw_obj = new Observation_Center(position);
-        } else if (objType == Robot_Scout_t) {
-            nw_obj = new Robot_Scout(position);
         } else {
-            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work");
+            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (nature)");
         }
 
         map_obj.push_back(nw_obj); // OR COPY????
@@ -67,13 +54,33 @@ namespace robo {
         return nw_obj;
     }
 
-    Map_Object * Environment_describer::setObject(unsigned int ports, std::vector<robo::Module *> modules, Characters objType, std::string desc) {
+    Map_Object * Environment_describer::setObject(unsigned int ports, unsigned int consumption, int price, std::vector<robo::Module *> & modules, Characters objType, std::string & desc) {
         Map_Object * nw_obj = nullptr;
         if (objType == Robot_Commander_t) {
-            nw_obj = new Robot_Commander(position);
+            nw_obj = new Robot_Commander(ports, consumption, price, modules, desc);
         } else if (objType == Robot_Scout_t) {
-            nw_obj = new Robot_Scout(position);
+            nw_obj = new Robot_Scout(ports, consumption, price, modules, desc);
+        } else {
+            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (moving)");
         }
+
+        map_obj.push_back(nw_obj);
+
+        return nw_obj;
+    }
+
+    Map_Object * Environment_describer::setObject(coordinates pos, unsigned int ports, unsigned int consumption, int price, std::vector<robo::Module *> & modules, Characters objType, std::string & desc) {
+        Map_Object * nw_obj = nullptr;
+        if (objType == Command_Center_t) {
+            nw_obj = new Command_Center(pos, ports, consumption, price, modules, desc);
+        } else if (objType == Observation_Center_t) {
+            nw_obj = new Observation_Center(pos, ports, consumption, price, modules, desc);
+        } else {
+            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (static)");
+        }
+
+        map_obj.push_back(nw_obj);
+        return nw_obj;
     }
 
     void Environment_describer::print(std::ostream & stream) {
@@ -129,12 +136,16 @@ namespace robo {
     ///////////////////////////////
 
     Command_Center::Command_Center(robo::coordinates pos, unsigned int ports, unsigned int consumption, int price,
-            std::vector<Module *> & mods, std::string & desc) : Observation_Center(pos, ports, consumption, price, mods, desc) {}
+            std::vector<Module *> & mods, std::string & desc) : Observation_Center(pos, ports, consumption, price, mods, desc) {
+        //check if there is one or more managing modules
+    }
 
     ///////////////////////////////////
 
     Robot_Commander::Robot_Commander(unsigned int ports, unsigned int consumption, int price,
-                                    std::vector<Module *> & mods, std::string & desc) : Command_Center({0, 0}, ports, consumption, price, mods, desc), Robot_Scout(ports, consumption, price, mods, desc), Observation_Center(ports, consumption, price, mods, desc) {}
+                                    std::vector<Module *> & mods, std::string & desc) : Command_Center({0, 0},
+                                            ports, consumption, price, mods, desc), Robot_Scout(ports, consumption, price,
+                                                    mods, desc), Observation_Center(ports, consumption, price, mods, desc) {}
 
     ///////////////////////////
 
