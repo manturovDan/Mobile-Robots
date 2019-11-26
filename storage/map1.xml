@@ -1,0 +1,21 @@
+<Environment width = "100" height = "100">
+    <Obstacle x = "1" y = "1"/>
+    <Obstacle x = "1" y = "2"/>
+    <Obstacle x = "50" y = "20"/>
+
+    <Interest x = "50" y = "22"/>
+    <Interest x = "10" y = "14"/>
+
+    <Command_Center x = "50" y = "21" description = "general" ports = "5">
+            <Power_Generator production = "25"/>
+            <Managing consumption = "12" radius = "50"/>
+    </Command_Center>
+
+    <Observation_Center x = "80" y = "21" description = "subord" ports = "15">
+        <Power_Generator production = "100"/>
+        <Sensor consumption = "8" radius = "8" direction = "0" angle = "3"/>
+        <Sensor consumption = "8" radius = "25" direction="1"/>
+    </Observation_Center>
+
+
+</Environment>
