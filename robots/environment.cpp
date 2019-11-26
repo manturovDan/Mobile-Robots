@@ -42,6 +42,7 @@ namespace robo {
 
         //if (is_there != nullptr && strcmp(typeid(*is_there).name(), "Interest_Point") != 0)
         //    return nullptr;
+        // TODO check free ceil
 
         Map_Object * nw_obj = nullptr;
         if (objType == Obstacle_t) {
@@ -56,12 +57,23 @@ namespace robo {
             nw_obj = new Observation_Center(position);
         } else if (objType == Robot_Scout_t) {
             nw_obj = new Robot_Scout(position);
+        } else {
+            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work");
         }
 
         map_obj.push_back(nw_obj); // OR COPY????
         //qTree.add(nw_obj);
 
         return nw_obj;
+    }
+
+    Map_Object * Environment_describer::setObject(unsigned int ports, std::vector<robo::Module *> modules, Characters objType, std::string desc) {
+        Map_Object * nw_obj = nullptr;
+        if (objType == Robot_Commander_t) {
+            nw_obj = new Robot_Commander(position);
+        } else if (objType == Robot_Scout_t) {
+            nw_obj = new Robot_Scout(position);
+        }
     }
 
     void Environment_describer::print(std::ostream & stream) {
@@ -72,14 +84,29 @@ namespace robo {
 
     ///////////////////////////////
 
-    Map_Object::Map_Object(robo::coordinates pos) {
-        position = pos;
-        //Continue
+    Observation_Center::Observation_Center(coordinates pos, unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
+            std::string & desc) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
+
+        if (ports < mods.size())
+            throw std::invalid_argument("Robot has too many modules");
+
+        for (auto itm : mods) {
+            modules.push_back((*itm).copy());
+        }
+
+    }
+
+    Map_Object::Map_Object(robo::coordinates pos) : position(pos) {
+        //check collision
+    }
+
+    void Observation_Center::checkFree() {
+        if (getCountModules() >= getCountPorts())
+            throw std::invalid_argument("Count of modules exceeds count of ports");
     }
 
     void Observation_Center::setGenerator(unsigned int prod) {
-        //if (getCountModules() >= getCountPorts())
-        //    throw std::invalid_argument("Count of modules exceeds count of ports");
+        checkFree();
 
         std::cout << "Setting generator" << std::endl;
 

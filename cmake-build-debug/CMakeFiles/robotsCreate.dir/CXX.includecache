@@ -706,6 +706,22 @@ android/log.h
 assert.h
 -
 
+/home/danila/source/robots/main.cpp
+iostream
+-
+robots/robot.h
+/home/danila/source/robots/robots/robot.h
+robots/interface.h
+/home/danila/source/robots/robots/interface.h
+
+/home/danila/source/robots/robots/environment.cpp
+iostream
+-
+algorithm
+-
+robot.h
+/home/danila/source/robots/robots/robot.h
+
 /home/danila/source/robots/robots/interface.cpp
 interface.h
 /home/danila/source/robots/robots/interface.h

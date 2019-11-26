@@ -22,6 +22,7 @@ namespace robo {
     };
 
     class Map_Object;
+    class Module;
 
     /////////////////////////////////////////////////////
     class Quick_Navigator {
@@ -55,6 +56,7 @@ namespace robo {
         coordinates getObject(Map_Object &);
         Map_Object * getObject(coordinates);
         Map_Object * setObject(coordinates, Characters, std::string description = "undefined");
+        Map_Object * setObject(unsigned int, std::vector<Module *>, Characters, std::string description = "undefined");
         Quick_Navigator qTree;
 
         void print(std::ostream & stream = std::cout);
@@ -91,59 +93,66 @@ namespace robo {
     public:
         Interest_Point() = delete;
         Interest_Point(coordinates pos) : Map_Object(pos) {};
-        Interest_Point * clone() const;
+        //Interest_Point * clone() const;
 
         void setGenerator(unsigned int prod) { throw std::invalid_argument("Incorrect object for generator"); } // IS IT GOOD?
     };
 
+    /////////////////////////////////////////////////////////////
     class Obstacle : public Map_Object {
     public:
         Obstacle() = delete;
         Obstacle(coordinates pos) : Map_Object(pos) {};
-        Obstacle * clone() const;
+        //Obstacle * clone() const;
         void setGenerator(unsigned int prod) { throw std::invalid_argument("Incorrect object for generator"); } // IS IT GOOD?
     };
 
-    class Module;
-
+    /////////////////////////////////////////////////////////////
     class Observation_Center : public Map_Object {
     protected:
-        Observation_Center();
-        coordinates position;
         std::string description;
-        int energyConsumption;
+        unsigned int energyConsumption;
         int cost;
-        int countPorts;
+        unsigned int countPorts;
         bool appeared;
         std::vector<Module *> modules;
     public:
-        Observation_Center(coordinates pos) : Map_Object(pos) {}
-        std::string getDescription();
-        int getEnergyConsumption();
-        int getCost();
-        int getCountPorts();
+        Observation_Center() = delete;
+        Observation_Center(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
+        std::string getDescription() {  return description; }
+        int getEnergyConsumption() {return energyConsumption; }
+        int getCost() { return cost; }
+        int getCountPorts() { return countPorts; }
         int getCountModules() { return modules.size(); }
+
         Observation_Center * clone() const;
         void setGenerator(unsigned int);
+        void checkFree();
     };
 
+    ///////////////////////////////////////////////////
     class Robot_Scout : virtual public Observation_Center {
     public:
-        Robot_Scout(coordinates pos) : Observation_Center(pos) { }
+        Robot_Scout(unsigned int, std::vector<Module *>, Characters, std::string) : Observation_Center(pos) { }
         int getSpeed();
         int move(int);
         int turn(int);
     };
 
+    //////////////////////////////////////////
     class Command_Center : virtual public Observation_Center {
     public:
-        Command_Center(coordinates pos) : Observation_Center(pos) {}
+        Command_Center(coordinates, unsigned int, std::vector<Module *>, Characters, std::string) : Observation_Center(pos) {}
     };
 
+    ///////////////////////////////////////////////////
     class Robot_Commander : public Robot_Scout, Command_Center {
     public:
-        Robot_Commander(coordinates pos) : Robot_Scout(pos), Command_Center(pos), Observation_Center(pos) {}
+        Robot_Commander(unsigned int, std::vector<Module *>, Characters, std::string) : Robot_Scout(pos), Command_Center(pos), Observation_Center(pos) {}
     };
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
 
     class Module {
     protected:
@@ -154,6 +163,8 @@ namespace robo {
         int getPriority();
         bool getActive();
         int setActive();
+
+        virtual Module * copy() = 0; // TODO for children
     };
 
     class Power_Generator: public Module {
