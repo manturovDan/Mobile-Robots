@@ -71,7 +71,7 @@ namespace robo {
         coordinates position;
     public:
         Map_Object(coordinates);
-        Map_Object() : appeared(false) {}
+        Map_Object() : appeared(false), position({0, 0}) {}
         unsigned int getX() { return position.x; }
         unsigned int getY() { return position.y; }
         coordinates getPosition() { return position; }
@@ -115,25 +115,32 @@ namespace robo {
         unsigned int countPorts;
         bool appeared;
         std::vector<Module *> modules;
+        void initModules(std::vector<Module *> &);
     public:
         Observation_Center() = delete;
         Observation_Center(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
+        Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         std::string getDescription() {  return description; }
         unsigned int getEnergyConsumption() {return energyConsumption; }
         int getCost() { return cost; }
         unsigned int getCountPorts() { return countPorts; }
         int getCountModules() { return modules.size(); }
 
-        Observation_Center * clone() const;
+        //Observation_Center * clone() const;
         void setGenerator(unsigned int);
         void checkFree();
     };
 
     ///////////////////////////////////////////////////
+    /// @bloced - true if object is moving and we cant check it in the tree
     class Robot_Scout : virtual public Observation_Center {
+    protected:
+        bool blocked;
+        unsigned int speed;
     public:
-        Robot_Scout(unsigned int, std::vector<Module *>, Characters, std::string) : Observation_Center(pos) { }
-        int getSpeed();
+        Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
+        unsigned int getSpeed() { return speed; }
+        bool getBlocked() { return blocked; }
         int move(int);
         int turn(int);
     };
@@ -141,13 +148,13 @@ namespace robo {
     //////////////////////////////////////////
     class Command_Center : virtual public Observation_Center {
     public:
-        Command_Center(coordinates, unsigned int, std::vector<Module *>, Characters, std::string) : Observation_Center(pos) {}
+        Command_Center(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
     };
 
     ///////////////////////////////////////////////////
     class Robot_Commander : public Robot_Scout, Command_Center {
     public:
-        Robot_Commander(unsigned int, std::vector<Module *>, Characters, std::string) : Robot_Scout(pos), Command_Center(pos), Observation_Center(pos) {}
+        Robot_Commander(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
     };
 
     ///////////////////////////////////////

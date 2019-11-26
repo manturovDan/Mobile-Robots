@@ -84,16 +84,23 @@ namespace robo {
 
     ///////////////////////////////
 
-    Observation_Center::Observation_Center(coordinates pos, unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-            std::string & desc) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
-
-        if (ports < mods.size())
+    void Observation_Center::initModules(std::vector<Module *> & modul) {
+        if (countPorts < modul.size())
             throw std::invalid_argument("Robot has too many modules");
 
-        for (auto itm : mods) {
+        for (auto itm : modul) {
             modules.push_back((*itm).copy());
         }
+    }
 
+    Observation_Center::Observation_Center(coordinates pos, unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
+                                           std::string & desc) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
+        initModules(mods);
+    }
+
+    Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
+            std::string & desc) : Map_Object(), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
+        initModules(mods);
     }
 
     Map_Object::Map_Object(robo::coordinates pos) : position(pos), appeared(true) {
@@ -112,7 +119,24 @@ namespace robo {
 
     }
 
+    ///////////////////////////////////
+
+    Robot_Scout::Robot_Scout(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
+            std::string & desc) : Observation_Center(ports, consumption, price, mods, desc) {
+
+    }
+
     ///////////////////////////////
+
+    Command_Center::Command_Center(robo::coordinates pos, unsigned int ports, unsigned int consumption, int price,
+            std::vector<Module *> & mods, std::string & desc) : Observation_Center(pos, ports, consumption, price, mods, desc) {}
+
+    ///////////////////////////////////
+
+    Robot_Commander::Robot_Commander(unsigned int ports, unsigned int consumption, int price,
+                                    std::vector<Module *> & mods, std::string & desc) : Command_Center({0, 0}, ports, consumption, price, mods, desc), Robot_Scout(ports, consumption, price, mods, desc), Observation_Center(ports, consumption, price, mods, desc) {}
+
+    ///////////////////////////
 
     bool operator<(const Map_Object &left, const Map_Object &right){
         if (left.position.x < right.position.x)

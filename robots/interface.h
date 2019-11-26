@@ -35,6 +35,7 @@ namespace interf {
          *
          *          Objects 3-6 must have attribute description = DESC (max 256 symbols),
          *                                          ports = PORTS_COUNT,
+         *                                          consumption = ROBOT_CONSUMPTION
          *          these objects may have child elements - modules (not more than PORTS_COUNT)
          *
          *          All objects besides 3,6 MUST have attributes x and y with X_POS, Y_POS in half-interval [0, width/height of Environment)
