@@ -9,6 +9,6 @@ set(SFML_DIR "~/source/libraries/SFML-2.5.1/lib/cmake/SFML")
 
 find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
 
-add_executable(robotsCreate main.cpp robots/robot.h robots/environment.cpp robots/interface.h robots/interface.cpp libraries/tinyxml2-lib/tinyxml2.h libraries/tinyxml2-lib/tinyxml2.cpp)
+add_executable(robotsCreate main.cpp robots/robot.h robots/environment.cpp robots/interface.h robots/interface.cpp libraries/tinyxml2-lib/tinyxml2.h libraries/tinyxml2-lib/tinyxml2.cpp libraries/pprint.hpp)
 
 target_link_libraries(robotsCreate sfml-graphics sfml-window sfml-audio)

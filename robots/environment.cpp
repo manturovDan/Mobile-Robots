@@ -38,22 +38,36 @@ namespace robo {
     Map_Object * Environment_describer::setObject(robo::coordinates position, Characters objType, std::string description) {
         if (position.x >= width || position.y >= height)
             throw std::invalid_argument("Incorrect object coordinates!");
-        Map_Object * is_there = qTree.check(position);
+        //Map_Object * is_there = qTree.check(position);
 
-        if (is_there != nullptr && strcmp(typeid(*is_there).name(), "Interest_Point") != 0)
-            return nullptr;
+        //if (is_there != nullptr && strcmp(typeid(*is_there).name(), "Interest_Point") != 0)
+        //    return nullptr;
 
         Map_Object * nw_obj = nullptr;
         if (objType == Obstacle_t) {
             nw_obj = new Obstacle(position);
         } else if (objType == Interest_t) {
             nw_obj = new Interest_Point(position);
+        } else if (objType == Command_Center_t) {
+            nw_obj = new Command_Center(position);
+        } else if (objType == Robot_Commander_t) {
+            nw_obj = new Robot_Commander(position);
+        } else if (objType == Observation_Center_t) {
+            nw_obj = new Observation_Center(position);
+        } else if (objType == Robot_Scout_t) {
+            nw_obj = new Robot_Scout(position);
         }
 
         map_obj.push_back(nw_obj); // OR COPY????
-        qTree.add(nw_obj);
+        //qTree.add(nw_obj);
 
         return nw_obj;
+    }
+
+    void Environment_describer::print(std::ostream & stream) {
+        for (auto & it : map_obj) {
+            it->print();
+        }
     }
 
 

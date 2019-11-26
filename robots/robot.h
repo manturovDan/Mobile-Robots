@@ -14,7 +14,11 @@ namespace robo {
 
     enum Characters {
         Obstacle_t,
-        Interest_t
+        Interest_t,
+        Command_Center_t,
+        Robot_Commander_t,
+        Observation_Center_t,
+        Robot_Scout_t
     };
 
     class Map_Object;
@@ -25,7 +29,7 @@ namespace robo {
         std::multimap<robo::coordinates, robo::Map_Object *> objectTree;
     public:
         Quick_Navigator() = default;
-        Map_Object * check(coordinates position) { return (*objectTree.find(position)).second; };
+        //Map_Object * check(coordinates position) { return (*objectTree.find(position)).second; };
         void add(Map_Object *);
         int replace(coordinates);
     };
@@ -53,7 +57,8 @@ namespace robo {
         Map_Object * setObject(coordinates, Characters, std::string description = "undefined");
         Quick_Navigator qTree;
 
-        ~Environment_describer(); // clear vector
+        void print(std::ostream & stream = std::cout);
+        ~Environment_describer() = default; // clear vector
     };
 
 
@@ -73,9 +78,13 @@ namespace robo {
         friend bool operator<(const Map_Object &, const Map_Object &);
         friend bool operator==(const Map_Object &left, const Map_Object &right) { return ((left.position.x == right.position.x) && (left.position.y == right.position.y)); }
 
-        virtual Map_Object * clone() const = 0;
+        void print() { std::cout << position.x << " " << position.y <<  std::endl; }
+
+        //virtual Map_Object * clone() const = 0; //НУЖНО ЛИ??? ASK
     };
 
+
+    /////////////////////////////////////////////////////////////////
     class Interest_Point : public Map_Object {
     public:
         Interest_Point() = delete;
@@ -94,9 +103,7 @@ namespace robo {
 
     class Observation_Center : public Map_Object {
     protected:
-        Observation_Center() = delete;
-        Observation_Center(coordinates);
-
+        Observation_Center();
         coordinates position;
         std::string description;
         int energyConsumption;
@@ -105,41 +112,30 @@ namespace robo {
         bool appeared;
         std::vector<Module *> modules;
     public:
+        Observation_Center(coordinates pos) : Map_Object(pos) {}
         std::string getDescription();
         int getEnergyConsumption();
         int getCost();
         int getCountPorts();
-        coordinates getPosition();
         Observation_Center * clone() const;
     };
 
-    class Mobile : Observation_Center {
-    protected:
-        Mobile ();
-        int speed;
+    class Robot_Scout : virtual public Observation_Center {
     public:
+        Robot_Scout(coordinates pos) : Observation_Center(pos) { }
         int getSpeed();
         int move(int);
         int turn(int);
     };
 
-    class Manager : public Observation_Center {
-    protected:
-        Manager ();
-    };
-
-    class Robot_Scout : public Mobile {
+    class Command_Center : virtual public Observation_Center {
     public:
-        Robot_Scout();
+        Command_Center(coordinates pos) : Observation_Center(pos) {}
     };
 
-    class Robot_Commander : public Robot_Scout, public Manager { //make virtual
+    class Robot_Commander : public Robot_Scout, Command_Center {
     public:
-        Robot_Commander();
-    };
-
-    class Command_Center : public Observation_Center, public Manager {
-        Command_Center();
+        Robot_Commander(coordinates pos) : Robot_Scout(pos), Command_Center(pos), Observation_Center(pos) {}
     };
 
     class Module {

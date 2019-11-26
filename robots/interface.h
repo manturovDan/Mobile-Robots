@@ -28,7 +28,7 @@ namespace interf {
          *          OBJECT_TYPE must be the one of the following:
          *          1) Obstacle
          *          2) Interest
-         *          3) Command_center
+         *          3) Command_Center
          *          4) Robot_Commander
          *          5) Observation_Center
          *          6) Robot_Scout

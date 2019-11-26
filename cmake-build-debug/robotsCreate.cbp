@@ -86,6 +86,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/danila/source/robots/libraries/pprint.hpp">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
