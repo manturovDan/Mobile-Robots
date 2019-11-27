@@ -1,4 +1,5 @@
-/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/danila/source/robots/multiset
+/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/danila/CLionProjects/multiset
+-- Found GTest: /usr/lib/libgtest.a  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/danila/source/robots/multiset/cmake-build-debug
+-- Build files have been written to: /home/danila/CLionProjects/multiset/cmake-build-debug

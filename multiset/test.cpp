@@ -367,6 +367,90 @@ TEST (modifierTest, eraseTop) {
     ASSERT_EQ(i, m_set_i.end());
 }
 
+TEST (modifierTest, eraseCenter) {
+    std::dmultiset<unsigned int> m_set_i;
+    m_set_i.insert({1, 6, 4, 120, 99, 1000, 100});
+
+    ASSERT_EQ(m_set_i.count(), 7);
+
+    m_set_i.erase(m_set_i.find(120));
+
+    std::dmultiset<unsigned int>::iterator i = m_set_i.begin();
+
+    ASSERT_EQ(m_set_i.count(), 6);
+
+    ASSERT_EQ(*i, 1);
+    i++;
+    ASSERT_EQ(*i, 4);
+    i++;
+    ASSERT_EQ(*i, 6);
+    i++;
+    ASSERT_EQ(*i, 99);
+    i++;
+    ASSERT_EQ(*i, 100);
+    i++;
+    ASSERT_EQ(*i, 1000);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
+
+}
+
+TEST (modifierTest, eraseOneCh) {
+    std::dmultiset<unsigned int> m_set_i;
+    m_set_i.insert({1, 6, 4, 120, 99, 1000, 100});
+
+    ASSERT_EQ(m_set_i.count(), 7);
+
+    m_set_i.erase(m_set_i.find(99));
+
+    std::dmultiset<unsigned int>::iterator i = m_set_i.begin();
+
+    ASSERT_EQ(m_set_i.count(), 6);
+
+    ASSERT_EQ(*i, 1);
+    i++;
+    ASSERT_EQ(*i, 4);
+    i++;
+    ASSERT_EQ(*i, 6);
+    i++;
+    ASSERT_EQ(*i, 100);
+    i++;
+    ASSERT_EQ(*i, 120);
+    i++;
+    ASSERT_EQ(*i, 1000);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
+
+}
+
+TEST (modifierTest, eraseLief) {
+    std::dmultiset<unsigned int> m_set_i;
+    m_set_i.insert({1, 6, 4, 120, 99, 1000, 100});
+
+    ASSERT_EQ(m_set_i.count(), 7);
+
+    m_set_i.erase(m_set_i.find(1000));
+
+    std::dmultiset<unsigned int>::iterator i = m_set_i.begin();
+
+    ASSERT_EQ(m_set_i.count(), 6);
+
+    ASSERT_EQ(*i, 1);
+    i++;
+    ASSERT_EQ(*i, 4);
+    i++;
+    ASSERT_EQ(*i, 6);
+    i++;
+    ASSERT_EQ(*i, 99);
+    i++;
+    ASSERT_EQ(*i, 100);
+    i++;
+    ASSERT_EQ(*i, 120);
+    i++;
+    ASSERT_EQ(i, m_set_i.end());
+
+}
+
 TEST (lookupTest, search) {
     std::dmultiset<float> m_set_i;
     m_set_i.insert({.1, 5.28, -64.1, 12, 53, 19, 81, 33, 9});
@@ -387,7 +471,7 @@ TEST (lookupTest, multiSearch) {
     found++;
     ASSERT_FLOAT_EQ(*found, 19);
     found++;
-    ASSERT_NE(*found, 19);
+    ASSERT_FLOAT_EQ(*found, 33);
 }
 
 TEST(modifierTest, clearTree) {

@@ -158,7 +158,7 @@ namespace std {
                 top = clone(copy_st.top, nullptr);
             } catch (std::bad_alloc &ba) {
                 std::cerr << "No memory" << std::endl;
-                exit(EXIT_FAILURE);
+                throw &ba;
             }
 
             elCount = copy_st.count();
@@ -202,19 +202,13 @@ namespace std {
             elemType newVal = root->getElem(); //copy
             Vertex *tmp;
 
-            try {
-                tmp = new Vertex(newVal);
-            } catch (std::bad_alloc &ba) {
-                throw ba;
-            }
+            tmp = new Vertex(newVal);
 
             tmp->setParent(parent);
-            try {
-                tmp->setLeftChild(clone(root->getLeftChild(), tmp));
-                tmp->setRightChild(clone(root->getRightChild(), tmp));
-            } catch (std::bad_alloc &ba) {
-                throw ba;
-            }
+
+            tmp->setLeftChild(clone(root->getLeftChild(), tmp));
+            tmp->setRightChild(clone(root->getRightChild(), tmp));
+
 
             return tmp;
         }
@@ -308,7 +302,7 @@ namespace std {
                 newVer = new Vertex(newVal);
             } catch (std::bad_alloc &ba) {
                 std::cerr << "No memory" << std::endl;
-                exit(EXIT_FAILURE);
+                throw &ba;
             }
 
             Vertex * parent = nullptr;
