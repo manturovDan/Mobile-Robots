@@ -34,6 +34,8 @@ namespace interf {
 
             std::vector<robo::Module *> modl;
 
+            robo::Module * mod;
+
             while (module != nullptr) {
                 int priority;
                 if (pEnv->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
@@ -44,8 +46,8 @@ namespace interf {
 
                     if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
 
-                    auto prodm = new robo::Power_Generator(priority, production);
-                    modl.push_back(prodm);
+                    mod = new robo::Power_Generator(priority, production);
+
                 } else if (!strcmp(module->Name(), "Sensor")) {
                     std::cout << "SENSOR" << std::endl;
 
@@ -56,11 +58,26 @@ namespace interf {
                     if (module->QueryUnsignedAttribute("direction", &direction) != 0) fileDamaged(stream, "getting direction of sensor");
                     if (module->QueryUnsignedAttribute("angle", &angle) != 0) fileDamaged(stream, "getting angle of sensor");
 
-                    auto sens = new robo::Sensor(radius, direction, angle, consumption, priority);
+                    mod = new robo::Sensor(radius, direction, angle, consumption, priority);
                 }
+                else if (!strcmp(module->Name(), "Managing")) {
+                    std::cout << "MAN_MODULE" << std::endl;
+
+                    unsigned int consumption, radius;
+
+                    if (module->QueryUnsignedAttribute("consumption", &consumption) != 0) fileDamaged(stream, "getting consumption of maneging module");
+                    if (module->QueryUnsignedAttribute("radius", &radius) != 0) fileDamaged(stream, "getting radius of maneging module");
+
+                    mod = new robo::Managing(radius, consumption, priority);
+
+                }
+
+                modl.push_back(mod);
 
                 module = module->NextSiblingElement();
             }
+
+            //make calling constructorrs of robots
 
             robo::coordinates pos = {x, y};
 

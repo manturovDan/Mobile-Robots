@@ -192,8 +192,11 @@ namespace robo {
 
     class Managing : public Energy_Consumer {
     public:
-        Managing();
+        Managing() = delete;
+        Managing(unsigned int rad, unsigned int consumption, unsigned int priority) :
+                radius(rad), Energy_Consumer(consumption, priority, false) {  }
     protected:
+        unsigned int radius;
         //std::vector<Robo_Component *> subordinate;
     };
 
