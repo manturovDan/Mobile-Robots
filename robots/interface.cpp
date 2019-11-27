@@ -71,6 +71,9 @@ namespace interf {
                     mod = new robo::Managing(radius, consumption, priority);
 
                 }
+                else {
+                    throw std::invalid_argument("Robot has unknown module");
+                }
 
                 modl.push_back(mod);
 
@@ -78,6 +81,11 @@ namespace interf {
             }
 
             //make calling constructorrs of robots
+            unsigned int x, y;
+
+            if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0) {
+
+            }
 
             robo::coordinates pos = {x, y};
 
