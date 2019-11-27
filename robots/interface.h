@@ -38,6 +38,8 @@ namespace interf {
          *                                          consumption = ROBOT_CONSUMPTION
          *          these objects may have child elements - modules (not more than PORTS_COUNT)
          *
+         *          Objects (mobile robots) 4,6 must have attribute speed=SPEED
+         *
          *          All objects besides 3,6 MUST have attributes x and y with X_POS, Y_POS in half-interval [0, width/height of Environment)
          *
          *              a)

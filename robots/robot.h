@@ -118,11 +118,11 @@ namespace robo {
         unsigned int countPorts;
         bool appeared;
         std::vector<Module *> modules;
-        void initModules(std::vector<Module *> &);
+        void initModules(const std::vector<Module *> &);
     public:
         Observation_Center() = delete;
-        Observation_Center(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
-        Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
+        Observation_Center(unsigned int, unsigned int, int, const std::vector<Module *> &, std::string &, coordinates);
+        //Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         std::string getDescription() {  return description; }
         unsigned int getEnergyConsumption() {return energyConsumption; }
         int getCost() { return cost; }
@@ -173,7 +173,7 @@ namespace robo {
         bool getActive();
         int setActive();
 
-        //virtual Module * copy() = 0; // TODO for children?
+        Module * copy() const; // TODO for children? (ABS VIRTUAL)
     };
 
     class Power_Generator: public Module {

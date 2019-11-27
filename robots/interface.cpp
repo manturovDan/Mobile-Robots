@@ -83,9 +83,9 @@ namespace interf {
             //make calling constructorrs of robots
             unsigned int x, y;
 
-            if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0) {
-
-            }
+            bool are_coord = false;
+            if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0)
+                are_coord = true;
 
             robo::coordinates pos = {x, y};
 
@@ -94,14 +94,20 @@ namespace interf {
             robo::Map_Object *prod;
 
             if (!strcmp(mapEl->Name(), "Obstacle")) {
-                prod = env.setObject(pos, robo::Obstacle_t);
-                is_robo = false;
+                if (are_coord)
+                    prod = env.setObject(pos, robo::Obstacle_t);
+                else
+                    throw std::invalid_argument("Not coordinates for obstacle object");
             } else if (!strcmp(mapEl->Name(), "Interest")) {
-                prod = env.setObject(pos, robo::Interest_t);
-                is_robo = false;
+                if (are_coord)
+                    prod = env.setObject(pos, robo::Interest_t);
+                else
+                    throw std::invalid_argument("Not coordinates for interest point");
             } else if (!strcmp(mapEl->Name(), "Command_Center")) {
-                prod = env.setObject(pos, robo::Command_Center_t);
-                is_commander = true;
+                if (are_coord)
+                    prod = env.setObject(pos, robo::Command_Center_t);
+                else
+                    throw std::invalid_argument("Not coordinates for command center");
             } else if (!strcmp(mapEl->Name(), "Robot_Commander")) {
                 prod = env.setObject(pos, robo::Robot_Commander_t);
                 is_commander = true;

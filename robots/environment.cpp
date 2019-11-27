@@ -74,7 +74,7 @@ namespace robo {
         if (objType == Command_Center_t) {
             nw_obj = new Command_Center(pos, ports, consumption, price, modules, desc);
         } else if (objType == Observation_Center_t) {
-            nw_obj = new Observation_Center(pos, ports, consumption, price, modules, desc);
+            nw_obj = new Observation_Center(ports, consumption, price, modules, desc, pos);
         } else {
             throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (static)");
         }
@@ -91,7 +91,7 @@ namespace robo {
 
     ///////////////////////////////
 
-    void Observation_Center::initModules(std::vector<Module *> & modul) {
+    void Observation_Center::initModules(const std::vector<Module *> & modul) {
         if (countPorts < modul.size())
             throw std::invalid_argument("Robot has too many modules");
 
@@ -100,15 +100,15 @@ namespace robo {
         }
     }
 
-    Observation_Center::Observation_Center(coordinates pos, unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-                                           std::string & desc) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
+    Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, const std::vector<Module *> & mods,
+                                           std::string & desc, coordinates pos = {0, 0}) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
         initModules(mods);
     }
 
-    Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-            std::string & desc) : Map_Object(), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
-        initModules(mods);
-    }
+    //Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
+    //        std::string & desc) : Map_Object(), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
+    //    initModules(mods);
+    //}
 
     Map_Object::Map_Object(robo::coordinates pos) : position(pos), appeared(true) {
         if (pos.x >= env->getWidth() || pos.y >= env->getHeight())
@@ -131,7 +131,7 @@ namespace robo {
     ///////////////////////////////
 
     Command_Center::Command_Center(robo::coordinates pos, unsigned int ports, unsigned int consumption, int price,
-            std::vector<Module *> & mods, std::string & desc) : Observation_Center(pos, ports, consumption, price, mods, desc) {
+            std::vector<Module *> & mods, std::string & desc) : Observation_Center(ports, consumption, price, mods, desc, pos) {
         //check if there is one or more managing modules
     }
 
