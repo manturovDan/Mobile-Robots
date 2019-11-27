@@ -35,17 +35,29 @@ namespace interf {
             std::vector<robo::Module *> modl;
 
             while (module != nullptr) {
+                int priority;
+                if (pEnv->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
+
                 if (!strcmp(module->Name(), "Power_Generator")) {
                     std::cout << "POWER" << std::endl;
                     unsigned int production;
-                    int priority;
 
                     if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
-                    if (pEnv->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
 
                     auto prodm = new robo::Power_Generator(priority, production);
                     modl.push_back(prodm);
-                }///Continue from these place
+                } else if (!strcmp(module->Name(), "Sensor")) {
+                    std::cout << "SENSOR" << std::endl;
+
+                    unsigned int consumption, radius, direction, angle;
+
+                    if (module->QueryUnsignedAttribute("consumption", &consumption) != 0) fileDamaged(stream, "getting consumption of sensor");
+                    if (module->QueryUnsignedAttribute("radius", &radius) != 0) fileDamaged(stream, "getting radius of sensor");
+                    if (module->QueryUnsignedAttribute("direction", &direction) != 0) fileDamaged(stream, "getting direction of sensor");
+                    if (module->QueryUnsignedAttribute("angle", &angle) != 0) fileDamaged(stream, "getting angle of sensor");
+
+                    auto sens = new robo::Sensor(radius, direction, angle, consumption, priority);
+                }
 
                 module = module->NextSiblingElement();
             }

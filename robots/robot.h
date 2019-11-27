@@ -165,7 +165,7 @@ namespace robo {
     class Module {
     protected:
         Module() = delete;
-        Module(int prior) : priority(prior), active(true) {}
+        Module(int prior) : priority(prior), active(act) {}
         int priority;
         bool active;
     public:
@@ -183,9 +183,10 @@ namespace robo {
         int energyProduction;
     };
 
-    class Energy_Consumer {
+    class Energy_Consumer : public Module {
     protected:
-        Energy_Consumer();
+        Energy_Consumer() = delete;
+        Energy_Consumer(unsigned int cons, unsigned int prior, bool act = true) : powerConsumption(cons), Module(prior, act) {}
         int powerConsumption;
     };
 
@@ -198,11 +199,13 @@ namespace robo {
 
     class Sensor : public Energy_Consumer {
     public:
-        Sensor();
+        Sensor() = delete;
+        Sensor(unsigned int rad, unsigned int dir, unsigned int ang, unsigned int consumption, unsigned int priority) :
+        radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, false) {  }
     protected:
-        int radius;
-        int direction;
-        int angle;
+        unsigned int radius;
+        unsigned int direction;
+        unsigned int angle;
 
     };
 
