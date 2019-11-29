@@ -81,11 +81,16 @@ namespace interf {
             }
 
             //make calling constructorrs of robots
-            unsigned int x, y;
+            unsigned int x, y, ports, consumption;
 
             bool are_coord = false;
+            bool nes_robo = false;
+            bool is_speed = false;
+
             if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0)
                 are_coord = true;
+
+
 
             robo::coordinates pos = {x, y};
 
