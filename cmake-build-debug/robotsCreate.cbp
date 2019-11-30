@@ -98,10 +98,16 @@
 		<Unit filename="/home/danila/source/robots/main.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Command_Center.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Command_Center.h">
 			<Option target="robotsCreate"/>
 		</Unit>
-		<Unit filename="/home/danila/source/robots/robots/Envinronment_describer.h">
+		<Unit filename="/home/danila/source/robots/robots/Environment_describer.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Environment_describer.h">
 			<Option target="robotsCreate"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Interest_Point.h">
@@ -110,10 +116,16 @@
 		<Unit filename="/home/danila/source/robots/robots/Managing.h">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Map_Object.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Map_Object.h">
 			<Option target="robotsCreate"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Module.h">
+			<Option target="robotsCreate"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Observation_Center.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Observation_Center.h">
@@ -125,7 +137,13 @@
 		<Unit filename="/home/danila/source/robots/robots/Power_Generator.h">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Robot_Commander.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Robot_Commander.h">
+			<Option target="robotsCreate"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Robot_Scout.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Robot_Scout.h">

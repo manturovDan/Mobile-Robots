@@ -4,11 +4,12 @@
 #include <vector>
 
 #include "Observation_Center.h"
+#include "Module.h"
 
 namespace robo {
     class Command_Center : virtual public Observation_Center {
     public:
-        Command_Center(coordinates, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
+        Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
     };
 }
 

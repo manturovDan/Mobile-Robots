@@ -12,7 +12,7 @@ namespace robo {
         bool blocked;
         unsigned int speed;
     public:
-        Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
+        Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, unsigned int);
 
         unsigned int getSpeed() { return speed; }
 

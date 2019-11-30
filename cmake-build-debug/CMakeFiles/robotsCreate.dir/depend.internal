@@ -81,7 +81,65 @@ CMakeFiles/robotsCreate.dir/main.cpp.o
  /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
  /home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h
  /home/danila/source/robots/main.cpp
+ /home/danila/source/robots/robots/Command_Center.h
+ /home/danila/source/robots/robots/Energy_Consumer.h
+ /home/danila/source/robots/robots/Environment_describer.h
+ /home/danila/source/robots/robots/Interest_Point.h
+ /home/danila/source/robots/robots/Managing.h
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/Obstacle.h
+ /home/danila/source/robots/robots/Power_Generator.h
+ /home/danila/source/robots/robots/Robot_Commander.h
+ /home/danila/source/robots/robots/Robot_Scout.h
+ /home/danila/source/robots/robots/Sensor.h
  /home/danila/source/robots/robots/interface.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o
+ /home/danila/source/robots/robots/Command_Center.cpp
+ /home/danila/source/robots/robots/Command_Center.h
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o
+ /home/danila/source/robots/robots/Command_Center.h
+ /home/danila/source/robots/robots/Environment_describer.cpp
+ /home/danila/source/robots/robots/Environment_describer.h
+ /home/danila/source/robots/robots/Interest_Point.h
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/Obstacle.h
+ /home/danila/source/robots/robots/Robot_Commander.h
+ /home/danila/source/robots/robots/Robot_Scout.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o
+ /home/danila/source/robots/robots/Map_Object.cpp
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.cpp
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o
+ /home/danila/source/robots/robots/Command_Center.h
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/Robot_Commander.cpp
+ /home/danila/source/robots/robots/Robot_Commander.h
+ /home/danila/source/robots/robots/Robot_Scout.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/Robot_Scout.cpp
+ /home/danila/source/robots/robots/Robot_Scout.h
  /home/danila/source/robots/robots/robot.h
 CMakeFiles/robotsCreate.dir/robots/environment.cpp.o
  /home/danila/source/robots/robots/environment.cpp
@@ -162,6 +220,19 @@ CMakeFiles/robotsCreate.dir/robots/interface.cpp.o
  /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowHandle.hpp
  /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
  /home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h
+ /home/danila/source/robots/robots/Command_Center.h
+ /home/danila/source/robots/robots/Energy_Consumer.h
+ /home/danila/source/robots/robots/Environment_describer.h
+ /home/danila/source/robots/robots/Interest_Point.h
+ /home/danila/source/robots/robots/Managing.h
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/Obstacle.h
+ /home/danila/source/robots/robots/Power_Generator.h
+ /home/danila/source/robots/robots/Robot_Commander.h
+ /home/danila/source/robots/robots/Robot_Scout.h
+ /home/danila/source/robots/robots/Sensor.h
  /home/danila/source/robots/robots/interface.cpp
  /home/danila/source/robots/robots/interface.h
  /home/danila/source/robots/robots/robot.h

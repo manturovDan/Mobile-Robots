@@ -177,6 +177,168 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+robots/Command_Center.o: robots/Command_Center.cpp.o
+
+.PHONY : robots/Command_Center.o
+
+# target to build an object file
+robots/Command_Center.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o
+.PHONY : robots/Command_Center.cpp.o
+
+robots/Command_Center.i: robots/Command_Center.cpp.i
+
+.PHONY : robots/Command_Center.i
+
+# target to preprocess a source file
+robots/Command_Center.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.i
+.PHONY : robots/Command_Center.cpp.i
+
+robots/Command_Center.s: robots/Command_Center.cpp.s
+
+.PHONY : robots/Command_Center.s
+
+# target to generate assembly for a file
+robots/Command_Center.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.s
+.PHONY : robots/Command_Center.cpp.s
+
+robots/Environment_describer.o: robots/Environment_describer.cpp.o
+
+.PHONY : robots/Environment_describer.o
+
+# target to build an object file
+robots/Environment_describer.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o
+.PHONY : robots/Environment_describer.cpp.o
+
+robots/Environment_describer.i: robots/Environment_describer.cpp.i
+
+.PHONY : robots/Environment_describer.i
+
+# target to preprocess a source file
+robots/Environment_describer.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.i
+.PHONY : robots/Environment_describer.cpp.i
+
+robots/Environment_describer.s: robots/Environment_describer.cpp.s
+
+.PHONY : robots/Environment_describer.s
+
+# target to generate assembly for a file
+robots/Environment_describer.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.s
+.PHONY : robots/Environment_describer.cpp.s
+
+robots/Map_Object.o: robots/Map_Object.cpp.o
+
+.PHONY : robots/Map_Object.o
+
+# target to build an object file
+robots/Map_Object.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o
+.PHONY : robots/Map_Object.cpp.o
+
+robots/Map_Object.i: robots/Map_Object.cpp.i
+
+.PHONY : robots/Map_Object.i
+
+# target to preprocess a source file
+robots/Map_Object.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.i
+.PHONY : robots/Map_Object.cpp.i
+
+robots/Map_Object.s: robots/Map_Object.cpp.s
+
+.PHONY : robots/Map_Object.s
+
+# target to generate assembly for a file
+robots/Map_Object.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.s
+.PHONY : robots/Map_Object.cpp.s
+
+robots/Observation_Center.o: robots/Observation_Center.cpp.o
+
+.PHONY : robots/Observation_Center.o
+
+# target to build an object file
+robots/Observation_Center.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o
+.PHONY : robots/Observation_Center.cpp.o
+
+robots/Observation_Center.i: robots/Observation_Center.cpp.i
+
+.PHONY : robots/Observation_Center.i
+
+# target to preprocess a source file
+robots/Observation_Center.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.i
+.PHONY : robots/Observation_Center.cpp.i
+
+robots/Observation_Center.s: robots/Observation_Center.cpp.s
+
+.PHONY : robots/Observation_Center.s
+
+# target to generate assembly for a file
+robots/Observation_Center.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.s
+.PHONY : robots/Observation_Center.cpp.s
+
+robots/Robot_Commander.o: robots/Robot_Commander.cpp.o
+
+.PHONY : robots/Robot_Commander.o
+
+# target to build an object file
+robots/Robot_Commander.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o
+.PHONY : robots/Robot_Commander.cpp.o
+
+robots/Robot_Commander.i: robots/Robot_Commander.cpp.i
+
+.PHONY : robots/Robot_Commander.i
+
+# target to preprocess a source file
+robots/Robot_Commander.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.i
+.PHONY : robots/Robot_Commander.cpp.i
+
+robots/Robot_Commander.s: robots/Robot_Commander.cpp.s
+
+.PHONY : robots/Robot_Commander.s
+
+# target to generate assembly for a file
+robots/Robot_Commander.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.s
+.PHONY : robots/Robot_Commander.cpp.s
+
+robots/Robot_Scout.o: robots/Robot_Scout.cpp.o
+
+.PHONY : robots/Robot_Scout.o
+
+# target to build an object file
+robots/Robot_Scout.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o
+.PHONY : robots/Robot_Scout.cpp.o
+
+robots/Robot_Scout.i: robots/Robot_Scout.cpp.i
+
+.PHONY : robots/Robot_Scout.i
+
+# target to preprocess a source file
+robots/Robot_Scout.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.i
+.PHONY : robots/Robot_Scout.cpp.i
+
+robots/Robot_Scout.s: robots/Robot_Scout.cpp.s
+
+.PHONY : robots/Robot_Scout.s
+
+# target to generate assembly for a file
+robots/Robot_Scout.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.s
+.PHONY : robots/Robot_Scout.cpp.s
+
 robots/environment.o: robots/environment.cpp.o
 
 .PHONY : robots/environment.o
@@ -246,6 +408,24 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... robots/Command_Center.o"
+	@echo "... robots/Command_Center.i"
+	@echo "... robots/Command_Center.s"
+	@echo "... robots/Environment_describer.o"
+	@echo "... robots/Environment_describer.i"
+	@echo "... robots/Environment_describer.s"
+	@echo "... robots/Map_Object.o"
+	@echo "... robots/Map_Object.i"
+	@echo "... robots/Map_Object.s"
+	@echo "... robots/Observation_Center.o"
+	@echo "... robots/Observation_Center.i"
+	@echo "... robots/Observation_Center.s"
+	@echo "... robots/Robot_Commander.o"
+	@echo "... robots/Robot_Commander.i"
+	@echo "... robots/Robot_Commander.s"
+	@echo "... robots/Robot_Scout.o"
+	@echo "... robots/Robot_Scout.i"
+	@echo "... robots/Robot_Scout.s"
 	@echo "... robots/environment.o"
 	@echo "... robots/environment.i"
 	@echo "... robots/environment.s"

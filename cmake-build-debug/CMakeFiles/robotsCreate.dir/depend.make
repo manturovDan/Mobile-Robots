@@ -80,8 +80,66 @@ CMakeFiles/robotsCreate.dir/main.cpp.o: /home/danila/source/libraries/SFML-2.5.1
 CMakeFiles/robotsCreate.dir/main.cpp.o: /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 CMakeFiles/robotsCreate.dir/main.cpp.o: ../libraries/tinyxml2-lib/tinyxml2.h
 CMakeFiles/robotsCreate.dir/main.cpp.o: ../main.cpp
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Command_Center.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Energy_Consumer.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Environment_describer.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Interest_Point.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Managing.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Obstacle.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Power_Generator.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Robot_Commander.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Robot_Scout.h
+CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/Sensor.h
 CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/interface.h
 CMakeFiles/robotsCreate.dir/main.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o: ../robots/Command_Center.cpp
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o: ../robots/Command_Center.h
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Command_Center.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Environment_describer.cpp
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Environment_describer.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Interest_Point.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Obstacle.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Robot_Commander.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Robot_Scout.h
+CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o: ../robots/Map_Object.cpp
+CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Observation_Center.cpp
+CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Command_Center.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Robot_Commander.cpp
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Robot_Commander.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Robot_Scout.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o: ../robots/Robot_Scout.cpp
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o: ../robots/Robot_Scout.h
+CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o: ../robots/robot.h
 
 CMakeFiles/robotsCreate.dir/robots/environment.cpp.o: ../robots/environment.cpp
 CMakeFiles/robotsCreate.dir/robots/environment.cpp.o: ../robots/robot.h
@@ -161,6 +219,19 @@ CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: /home/danila/source/librarie
 CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowHandle.hpp
 CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: /home/danila/source/libraries/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../libraries/tinyxml2-lib/tinyxml2.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Command_Center.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Energy_Consumer.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Environment_describer.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Interest_Point.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Managing.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Module.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Observation_Center.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Obstacle.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Power_Generator.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Robot_Commander.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Robot_Scout.h
+CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/Sensor.h
 CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/interface.cpp
 CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/interface.h
 CMakeFiles/robotsCreate.dir/robots/interface.cpp.o: ../robots/robot.h

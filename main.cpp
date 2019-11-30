@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "robots/robot.h"
+//#include "robots/robot.h"
 #include "robots/interface.h"
 
 template <class T>
@@ -63,7 +63,7 @@ int launchFunc(int act, robo::Environment_describer & env) {
     if (act == 1) {
         return 0;
     } else if (act == 2) {
-        interf::EnvXMLCreate("/home/danila/source/robots/storage/map1.xml", env);
+        interf::EnvXMLCreate("/home/danila/source/robots/storage/map2.xml", env);
         return 0;
     } else if (act == 3) {
         env.setHeight(15);

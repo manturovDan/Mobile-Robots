@@ -7,7 +7,7 @@ namespace robo {
     class Managing : public Energy_Consumer {
     public:
         Managing() = delete;
-        Managing(unsigned int rad, unsigned int consumption, unsigned int priority) :
+        Managing(unsigned int rad, unsigned int consumption, unsigned int priority, unsigned int subs) :
                 radius(rad), Energy_Consumer(consumption, priority, false) {  }
     protected:
         unsigned int radius;

@@ -1,6 +1,5 @@
 #include "interface.h"
 
-
 namespace interf {
     EnvXMLCreate::EnvXMLCreate(const std::string & filename , robo::Environment_describer & env, std::ostream & stream) {
         tinyxml2::XMLDocument doc;
@@ -38,7 +37,7 @@ namespace interf {
 
             while (module != nullptr) {
                 int priority;
-                if (pEnv->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
+                if (module->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
 
                 if (!strcmp(module->Name(), "Power_Generator")) {
                     std::cout << "POWER" << std::endl;
@@ -63,12 +62,13 @@ namespace interf {
                 else if (!strcmp(module->Name(), "Managing")) {
                     std::cout << "MAN_MODULE" << std::endl;
 
-                    unsigned int consumption, radius;
+                    unsigned int consumption, radius, subs;
 
                     if (module->QueryUnsignedAttribute("consumption", &consumption) != 0) fileDamaged(stream, "getting consumption of maneging module");
                     if (module->QueryUnsignedAttribute("radius", &radius) != 0) fileDamaged(stream, "getting radius of maneging module");
+                    if (module->QueryUnsignedAttribute("subordinates_count", &subs) != 0) fileDamaged(stream, "getting subordinates count of maneging module");
 
-                    mod = new robo::Managing(radius, consumption, priority);
+                    mod = new robo::Managing(radius, consumption, priority, subs);
 
                 }
                 else {
@@ -80,55 +80,64 @@ namespace interf {
                 module = module->NextSiblingElement();
             }
 
-            //make calling constructorrs of robots
-            unsigned int x, y, ports, consumption;
+            unsigned int x, y, ports, consumption, speed;
+            int price;
+            const char * robo_desc;
+            std::string desc;
 
             bool are_coord = false;
-            bool nes_robo = false;
+            bool is_robot = false;
             bool is_speed = false;
+            robo::coordinates pos {0, 0};
 
-            if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0)
+            if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0) {
                 are_coord = true;
+                pos = {x, y};
+            }
 
+            if (mapEl->QueryUnsignedAttribute("consumption", &consumption) == 0 && mapEl->QueryUnsignedAttribute("ports", &ports) == 0
+            && mapEl->QueryIntAttribute("price", &price) == 0 && mapEl->QueryStringAttribute("description", &robo_desc) == 0) {
+                is_robot = true;
+                desc = robo_desc;
+            }
 
+            if (mapEl->QueryUnsignedAttribute("speed", &speed) == 0) {
+                is_speed = true;
+            }
 
-            robo::coordinates pos = {x, y};
-
-            bool is_robo = true;
             bool is_commander = false;
             robo::Map_Object *prod;
 
             if (!strcmp(mapEl->Name(), "Obstacle")) {
                 if (are_coord)
-                    prod = env.setObject(pos, robo::Obstacle_t);
+                    prod = env.setObject(robo::Obstacle_t, pos);
                 else
                     throw std::invalid_argument("Not coordinates for obstacle object");
             } else if (!strcmp(mapEl->Name(), "Interest")) {
                 if (are_coord)
-                    prod = env.setObject(pos, robo::Interest_t);
+                    prod = env.setObject(robo::Interest_t, pos);
                 else
                     throw std::invalid_argument("Not coordinates for interest point");
-            } else if (!strcmp(mapEl->Name(), "Command_Center")) {
-                if (are_coord)
-                    prod = env.setObject(pos, robo::Command_Center_t);
-                else
-                    throw std::invalid_argument("Not coordinates for command center");
-            } else if (!strcmp(mapEl->Name(), "Robot_Commander")) {
-                prod = env.setObject(pos, robo::Robot_Commander_t);
-                is_commander = true;
             } else if (!strcmp(mapEl->Name(), "Observation_Center")) {
-                prod = env.setObject(pos, robo::Observation_Center_t);
+                if (are_coord && is_robot) {
+                    prod = env.setObject(robo::Observation_Center_t, ports, consumption, price, modl, desc, pos);
+                }
+                else
+                    throw std::invalid_argument("Not enough data for Observation Center");
+            } else if (!strcmp(mapEl->Name(), "Command_Center")) {
+                if (are_coord && is_robot) {
+                    prod = env.setObject(robo::Command_Center_t, ports, consumption, price, modl, desc, pos);
+                }
+                else
+                    throw std::invalid_argument("Not enough data for Command Center");
+            } else if (!strcmp(mapEl->Name(), "Robot_Commander")) {
+                //prod = env.setObject(pos, robo::Robot_Commander_t);
+                is_commander = true;
             } else if (!strcmp(mapEl->Name(), "Robot_Scout")) {
-                prod = env.setObject(pos, robo::Robot_Scout_t);
+                //prod = env.setObject(pos, robo::Robot_Scout_t);
             }
             else {
                 throw std::invalid_argument("Unknown object on the map");
-            }
-
-
-            if (is_robo) {
-                std::cout << "ROBO" << std::endl;
-
             }
 
             mapEl = mapEl->NextSiblingElement();

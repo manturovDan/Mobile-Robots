@@ -21,12 +21,8 @@ namespace robo {
         Robot_Scout_t
     };
 
-    class Map_Object;
-    class Module;
-    class Environment_describer;
-
     /////////////////////////////////////////////////////
-    class Quick_Navigator {
+    /*class Quick_Navigator {
     private:
         std::multimap<robo::coordinates, robo::Map_Object *> objectTree;
     public:
@@ -34,7 +30,7 @@ namespace robo {
         //Map_Object * check(coordinates position) { return (*objectTree.find(position)).second; };
         void add(Map_Object *);
         int replace(coordinates);
-    };
+    };*/
 
     class AI_Dict {
 

@@ -7,7 +7,12 @@
 #include <SFML/Graphics.hpp>
 #include "../libraries/tinyxml2-lib/tinyxml2.h"
 
-#include "robot.h"
+#include "Environment_describer.h"
+#include "Map_Object.h"
+#include "Robot_Commander.h"
+#include "Power_Generator.h"
+#include "Sensor.h"
+#include "Managing.h"
 
 namespace interf {
     /// Class that creates Environment from XML FILE
@@ -97,7 +102,7 @@ namespace interf {
          *          xxxxxxxxx
          *          xxxxxxxxx
          *
-         *          Objects 3-4 MUST have one or more Managing module (PORTS_COUNT > 0)
+         *          Objects 3-4 MUST have one or more Managing module (PORTS_COUNT > 0) and subordinates_count = SUBORDINATES_COUNT param
          *
          *          At the beginning generators and managing modules are active, sensors are inactive
          *
@@ -112,7 +117,7 @@ namespace interf {
          *     <Interest x = "50" y = "22"/>
          *     <Interest x = "10" y = "14"/>
          *
-         *     <Robot_Commander description = "R2D2" pots = 10>
+         *     <Robot_Commander description = "R2D2" pots = "10" consumption = "5">
          *          <Power_Generator production = "25">
          *          <Managing consumption = "12" power = "8">
          *          <Sensor consumption = "4" direction = "1" angle = "2">

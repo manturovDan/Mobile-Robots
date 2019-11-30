@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Map_Object.h"
+#include "Module.h"
 
 namespace robo {
     class Observation_Center : public Map_Object {
@@ -21,7 +22,7 @@ namespace robo {
     public:
         Observation_Center() = delete;
 
-        Observation_Center(unsigned int, unsigned int, int, const std::vector<Module *> &, std::string &, coordinates);
+        Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 0});
 
         //Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         std::string getDescription() { return description; }
