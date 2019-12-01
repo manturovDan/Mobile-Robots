@@ -131,10 +131,15 @@ namespace interf {
                 else
                     throw std::invalid_argument("Not enough data for Command Center");
             } else if (!strcmp(mapEl->Name(), "Robot_Commander")) {
-                //prod = env.setObject(pos, robo::Robot_Commander_t);
-                is_commander = true;
+                if (is_speed && is_robot) {
+                    prod = env.setObject(robo::Robot_Commander_t, ports, consumption, price, modl, desc, speed);
+                }else
+                    throw std::invalid_argument("Not enough data for Robot Commander");
             } else if (!strcmp(mapEl->Name(), "Robot_Scout")) {
-                //prod = env.setObject(pos, robo::Robot_Scout_t);
+                if (is_speed && is_robot) {
+                    prod = env.setObject(robo::Robot_Scout_t, ports, consumption, price, modl, desc, speed);
+                }else
+                    throw std::invalid_argument("Not enough data for Robot Scout");
             }
             else {
                 throw std::invalid_argument("Unknown object on the map");

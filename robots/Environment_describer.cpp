@@ -45,8 +45,7 @@ namespace robo {
             throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (nature)");
         }
 
-        map_obj.push_back(nw_obj); // OR COPY????
-        std::cout << "+++++++++++++++ " << typeid(*nw_obj).name();
+        map_obj.push_back(nw_obj);
         //qTree.add(nw_obj);
 
         return nw_obj;

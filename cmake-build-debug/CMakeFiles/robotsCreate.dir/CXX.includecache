@@ -706,18 +706,6 @@ android/log.h
 assert.h
 -
 
-/home/danila/source/robots/main.cpp
-iostream
--
-robots/interface.h
-/home/danila/source/robots/robots/interface.h
-robots/Display.h
-/home/danila/source/robots/robots/Display.h
-
-/home/danila/source/robots/robots/Command_Center.cpp
-Command_Center.h
-/home/danila/source/robots/robots/Command_Center.h
-
 /home/danila/source/robots/robots/Command_Center.h
 vector
 -
@@ -725,16 +713,6 @@ Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
 Module.h
 /home/danila/source/robots/robots/Module.h
-
-/home/danila/source/robots/robots/Display.cpp
-Display.h
-/home/danila/source/robots/robots/Display.h
-
-/home/danila/source/robots/robots/Display.h
-SFML/Graphics.hpp
--
-Environment_describer.h
-/home/danila/source/robots/robots/Environment_describer.h
 
 /home/danila/source/robots/robots/Energy_Consumer.h
 Module.h
@@ -772,10 +750,6 @@ Map_Object.h
 Energy_Consumer.h
 /home/danila/source/robots/robots/Energy_Consumer.h
 
-/home/danila/source/robots/robots/Map_Object.cpp
-Map_Object.h
-/home/danila/source/robots/robots/Map_Object.h
-
 /home/danila/source/robots/robots/Map_Object.h
 iostream
 -
@@ -783,10 +757,6 @@ robot.h
 /home/danila/source/robots/robots/robot.h
 
 /home/danila/source/robots/robots/Module.h
-
-/home/danila/source/robots/robots/Observation_Center.cpp
-Observation_Center.h
-/home/danila/source/robots/robots/Observation_Center.h
 
 /home/danila/source/robots/robots/Observation_Center.h
 vector
@@ -806,12 +776,6 @@ Map_Object.h
 Module.h
 /home/danila/source/robots/robots/Module.h
 
-/home/danila/source/robots/robots/Robot_Commander.cpp
-Command_Center.h
-/home/danila/source/robots/robots/Command_Center.h
-Robot_Commander.h
-/home/danila/source/robots/robots/Robot_Commander.h
-
 /home/danila/source/robots/robots/Robot_Commander.h
 vector
 -
@@ -821,12 +785,6 @@ Command_Center.h
 /home/danila/source/robots/robots/Command_Center.h
 Module.h
 /home/danila/source/robots/robots/Module.h
-
-/home/danila/source/robots/robots/Robot_Scout.cpp
-Robot_Scout.h
-/home/danila/source/robots/robots/Robot_Scout.h
-Observation_Center.h
-/home/danila/source/robots/robots/Observation_Center.h
 
 /home/danila/source/robots/robots/Robot_Scout.h
 vector
