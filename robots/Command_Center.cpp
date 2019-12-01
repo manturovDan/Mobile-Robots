@@ -8,7 +8,7 @@ namespace robo {
 
     std::string Command_Center::whoami() {
         std::stringstream ss;
-        ss << "Object : Command_Center: {" << position.x << ", " << position.y << "}\n Desc: '" << description << "';\n"
+        ss << "Object : Command_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                         "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                         "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
         return ss.str();

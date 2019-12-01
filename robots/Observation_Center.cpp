@@ -27,7 +27,7 @@ namespace robo {
 
     std::string Observation_Center::whoami() {
         std::stringstream ss;
-        ss << "Object : Observation_Center: {" << position.x << ", " << position.y << "}\n Desc: '" << description << "';\n"
+        ss << "Object : Observation_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                            "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                            "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
         return ss.str();

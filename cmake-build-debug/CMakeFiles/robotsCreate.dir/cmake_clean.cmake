@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o"
+  "CMakeFiles/robotsCreate.dir/robots/Moving_Describer.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o"

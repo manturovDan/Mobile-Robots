@@ -9,7 +9,7 @@ namespace robo {
 
     std::string Robot_Scout::whoami() {
         std::stringstream ss;
-        ss << "Object : Robot_Scout: {" << position.x << ", " << position.y << "}\n Desc: '" << description << "';\n"
+        ss << "Object : Robot_Scout: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                      "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                       "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\n"
                                       "Blocked: " << blocked << "\n"

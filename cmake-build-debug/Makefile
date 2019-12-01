@@ -312,6 +312,33 @@ robots/Map_Object.cpp.s:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.s
 .PHONY : robots/Map_Object.cpp.s
 
+robots/Moving_Describer.o: robots/Moving_Describer.cpp.o
+
+.PHONY : robots/Moving_Describer.o
+
+# target to build an object file
+robots/Moving_Describer.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Moving_Describer.cpp.o
+.PHONY : robots/Moving_Describer.cpp.o
+
+robots/Moving_Describer.i: robots/Moving_Describer.cpp.i
+
+.PHONY : robots/Moving_Describer.i
+
+# target to preprocess a source file
+robots/Moving_Describer.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Moving_Describer.cpp.i
+.PHONY : robots/Moving_Describer.cpp.i
+
+robots/Moving_Describer.s: robots/Moving_Describer.cpp.s
+
+.PHONY : robots/Moving_Describer.s
+
+# target to generate assembly for a file
+robots/Moving_Describer.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Moving_Describer.cpp.s
+.PHONY : robots/Moving_Describer.cpp.s
+
 robots/Observation_Center.o: robots/Observation_Center.cpp.o
 
 .PHONY : robots/Observation_Center.o
@@ -504,6 +531,9 @@ help:
 	@echo "... robots/Map_Object.o"
 	@echo "... robots/Map_Object.i"
 	@echo "... robots/Map_Object.s"
+	@echo "... robots/Moving_Describer.o"
+	@echo "... robots/Moving_Describer.i"
+	@echo "... robots/Moving_Describer.s"
 	@echo "... robots/Observation_Center.o"
 	@echo "... robots/Observation_Center.i"
 	@echo "... robots/Observation_Center.s"

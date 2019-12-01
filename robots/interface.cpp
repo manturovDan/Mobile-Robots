@@ -160,7 +160,8 @@ namespace interf {
         stream << "DEBUG - printing all objects:" << std::endl;
         unsigned int number = 0;
         for (auto it = env->begin(); it != env->end(); ++it) {
-            std::cout << (++number) << " --- OBJECT - " << typeid(*(*it)).name() << " - " << (*it)->getX() << std::endl;
+            std::cout << (++number) << " --- OBJECT - " << typeid(*(*it)).name() << std::endl;
+            std::cout << (*it)->whoami() << std::endl;
         }
     }
 }

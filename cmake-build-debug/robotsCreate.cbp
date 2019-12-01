@@ -134,6 +134,12 @@
 		<Unit filename="/home/danila/source/robots/robots/Module.h">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Moving_Describer.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Moving_Describer.h">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Observation_Center.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
