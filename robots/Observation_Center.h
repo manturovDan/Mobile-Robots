@@ -2,7 +2,6 @@
 #define ROBOTSCREATE_OBSERVATION_CENTER_H
 
 #include <vector>
-#include <string>
 
 #include "Map_Object.h"
 #include "Module.h"
@@ -38,7 +37,7 @@ namespace robo {
         //Observation_Center * clone() const;
         void checkFree();
 
-        int whoami() { return 3; }
+        std::string whoami();
     };
 }
 

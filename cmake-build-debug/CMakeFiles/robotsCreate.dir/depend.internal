@@ -203,6 +203,11 @@ CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o
  /home/danila/source/robots/robots/Robot_Commander.h
  /home/danila/source/robots/robots/Robot_Scout.h
  /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o
+ /home/danila/source/robots/robots/Interest_Point.cpp
+ /home/danila/source/robots/robots/Interest_Point.h
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/robot.h
 CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o
  /home/danila/source/robots/robots/Map_Object.cpp
  /home/danila/source/robots/robots/Map_Object.h
@@ -212,6 +217,11 @@ CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o
  /home/danila/source/robots/robots/Module.h
  /home/danila/source/robots/robots/Observation_Center.cpp
  /home/danila/source/robots/robots/Observation_Center.h
+ /home/danila/source/robots/robots/robot.h
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o
+ /home/danila/source/robots/robots/Map_Object.h
+ /home/danila/source/robots/robots/Obstacle.cpp
+ /home/danila/source/robots/robots/Obstacle.h
  /home/danila/source/robots/robots/robot.h
 CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o
  /home/danila/source/robots/robots/Command_Center.h

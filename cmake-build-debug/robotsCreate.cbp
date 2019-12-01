@@ -116,6 +116,9 @@
 		<Unit filename="/home/danila/source/robots/robots/Environment_describer.h">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Interest_Point.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Interest_Point.h">
 			<Option target="robotsCreate"/>
 		</Unit>
@@ -135,6 +138,9 @@
 			<Option target="robotsCreate"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Observation_Center.h">
+			<Option target="robotsCreate"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Obstacle.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Obstacle.h">

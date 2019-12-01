@@ -258,6 +258,33 @@ robots/Environment_describer.cpp.s:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.s
 .PHONY : robots/Environment_describer.cpp.s
 
+robots/Interest_Point.o: robots/Interest_Point.cpp.o
+
+.PHONY : robots/Interest_Point.o
+
+# target to build an object file
+robots/Interest_Point.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o
+.PHONY : robots/Interest_Point.cpp.o
+
+robots/Interest_Point.i: robots/Interest_Point.cpp.i
+
+.PHONY : robots/Interest_Point.i
+
+# target to preprocess a source file
+robots/Interest_Point.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.i
+.PHONY : robots/Interest_Point.cpp.i
+
+robots/Interest_Point.s: robots/Interest_Point.cpp.s
+
+.PHONY : robots/Interest_Point.s
+
+# target to generate assembly for a file
+robots/Interest_Point.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.s
+.PHONY : robots/Interest_Point.cpp.s
+
 robots/Map_Object.o: robots/Map_Object.cpp.o
 
 .PHONY : robots/Map_Object.o
@@ -311,6 +338,33 @@ robots/Observation_Center.s: robots/Observation_Center.cpp.s
 robots/Observation_Center.cpp.s:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.s
 .PHONY : robots/Observation_Center.cpp.s
+
+robots/Obstacle.o: robots/Obstacle.cpp.o
+
+.PHONY : robots/Obstacle.o
+
+# target to build an object file
+robots/Obstacle.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o
+.PHONY : robots/Obstacle.cpp.o
+
+robots/Obstacle.i: robots/Obstacle.cpp.i
+
+.PHONY : robots/Obstacle.i
+
+# target to preprocess a source file
+robots/Obstacle.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.i
+.PHONY : robots/Obstacle.cpp.i
+
+robots/Obstacle.s: robots/Obstacle.cpp.s
+
+.PHONY : robots/Obstacle.s
+
+# target to generate assembly for a file
+robots/Obstacle.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.s
+.PHONY : robots/Obstacle.cpp.s
 
 robots/Robot_Commander.o: robots/Robot_Commander.cpp.o
 
@@ -444,12 +498,18 @@ help:
 	@echo "... robots/Environment_describer.o"
 	@echo "... robots/Environment_describer.i"
 	@echo "... robots/Environment_describer.s"
+	@echo "... robots/Interest_Point.o"
+	@echo "... robots/Interest_Point.i"
+	@echo "... robots/Interest_Point.s"
 	@echo "... robots/Map_Object.o"
 	@echo "... robots/Map_Object.i"
 	@echo "... robots/Map_Object.s"
 	@echo "... robots/Observation_Center.o"
 	@echo "... robots/Observation_Center.i"
 	@echo "... robots/Observation_Center.s"
+	@echo "... robots/Obstacle.o"
+	@echo "... robots/Obstacle.i"
+	@echo "... robots/Obstacle.s"
 	@echo "... robots/Robot_Commander.o"
 	@echo "... robots/Robot_Commander.i"
 	@echo "... robots/Robot_Commander.s"

@@ -105,7 +105,6 @@ namespace interf {
                 is_speed = true;
             }
 
-            bool is_commander = false;
             robo::Map_Object *prod;
 
             if (!strcmp(mapEl->Name(), "Obstacle")) {

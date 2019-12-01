@@ -21,6 +21,8 @@ namespace robo {
         int move(int);
 
         int turn(int);
+
+        std::string whoami();
     };
 }
 

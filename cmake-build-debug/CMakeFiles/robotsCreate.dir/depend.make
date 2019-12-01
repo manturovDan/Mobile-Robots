@@ -203,6 +203,11 @@ CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Robot_
 CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/Robot_Scout.h
 CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o: ../robots/robot.h
 
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o: ../robots/Interest_Point.cpp
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o: ../robots/Interest_Point.h
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o: ../robots/robot.h
+
 CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o: ../robots/Map_Object.cpp
 CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o: ../robots/Map_Object.h
 CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o: ../robots/robot.h
@@ -212,6 +217,11 @@ CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Module.h
 CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Observation_Center.cpp
 CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/Observation_Center.h
 CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o: ../robots/robot.h
+
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o: ../robots/Map_Object.h
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o: ../robots/Obstacle.cpp
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o: ../robots/Obstacle.h
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o: ../robots/robot.h
 
 CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Command_Center.h
 CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o: ../robots/Map_Object.h

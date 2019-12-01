@@ -200,6 +200,32 @@ CMakeFiles/robotsCreate.dir/robots/Display.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/robotsCreate.dir/robots/Display.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/robots/robots/Display.cpp -o CMakeFiles/robotsCreate.dir/robots/Display.cpp.s
 
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o: CMakeFiles/robotsCreate.dir/flags.make
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o: ../robots/Obstacle.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o -c /home/danila/source/robots/robots/Obstacle.cpp
+
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/robots/robots/Obstacle.cpp > CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.i
+
+CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/robots/robots/Obstacle.cpp -o CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.s
+
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o: CMakeFiles/robotsCreate.dir/flags.make
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o: ../robots/Interest_Point.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o -c /home/danila/source/robots/robots/Interest_Point.cpp
+
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/robots/robots/Interest_Point.cpp > CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.i
+
+CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/robots/robots/Interest_Point.cpp -o CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.s
+
 # Object files for target robotsCreate
 robotsCreate_OBJECTS = \
 "CMakeFiles/robotsCreate.dir/main.cpp.o" \
@@ -212,7 +238,9 @@ robotsCreate_OBJECTS = \
 "CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o" \
 "CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o" \
 "CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o" \
-"CMakeFiles/robotsCreate.dir/robots/Display.cpp.o"
+"CMakeFiles/robotsCreate.dir/robots/Display.cpp.o" \
+"CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o" \
+"CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o"
 
 # External object files for target robotsCreate
 robotsCreate_EXTERNAL_OBJECTS =
@@ -228,13 +256,15 @@ robotsCreate: CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o
 robotsCreate: CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o
 robotsCreate: CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o
 robotsCreate: CMakeFiles/robotsCreate.dir/robots/Display.cpp.o
+robotsCreate: CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o
+robotsCreate: CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o
 robotsCreate: CMakeFiles/robotsCreate.dir/build.make
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-graphics.so.2.5.1
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-window.so.2.5.1
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-audio.so.2.5.1
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-system.so.2.5.1
 robotsCreate: CMakeFiles/robotsCreate.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable robotsCreate"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable robotsCreate"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/robotsCreate.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

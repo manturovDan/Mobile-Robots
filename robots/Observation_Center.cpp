@@ -24,4 +24,12 @@ namespace robo {
         if (getCountModules() >= getCountPorts())
             throw std::invalid_argument("Count of modules exceeds count of ports");
     }
+
+    std::string Observation_Center::whoami() {
+        std::stringstream ss;
+        ss << "Object : Observation_Center: {" << position.x << ", " << position.y << "}\n Desc: '" << description << "';\n"
+                                           "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
+                                           "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
+        return ss.str();
+    }
 }

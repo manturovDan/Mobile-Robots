@@ -2,6 +2,8 @@
 #define ROBOTSCREATE_MAP_OBJECT_H
 
 #include <iostream>
+#include <string>
+#include <sstream>
 
 #include "robot.h"
 
@@ -32,7 +34,7 @@ namespace robo {
 
         void print() { std::cout << position.x << " " << position.y << std::endl; }
 
-        virtual int whoami() = 0;
+        virtual std::string whoami() = 0;
         //virtual Map_Object * clone() const = 0; //НУЖНО ЛИ??? ASK
 
     };

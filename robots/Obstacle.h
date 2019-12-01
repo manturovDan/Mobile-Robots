@@ -10,7 +10,7 @@ namespace robo {
 
         Obstacle(coordinates pos) : Map_Object(pos) {};
         //Obstacle * clone() const;
-        int whoami() { return 1; }
+        std::string whoami();
     };
 }
 

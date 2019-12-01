@@ -706,6 +706,14 @@ android/log.h
 assert.h
 -
 
+/home/danila/source/robots/main.cpp
+iostream
+-
+robots/interface.h
+/home/danila/source/robots/robots/interface.h
+robots/Display.h
+/home/danila/source/robots/robots/Display.h
+
 /home/danila/source/robots/robots/Command_Center.h
 vector
 -
@@ -713,6 +721,16 @@ Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
 Module.h
 /home/danila/source/robots/robots/Module.h
+
+/home/danila/source/robots/robots/Display.cpp
+Display.h
+/home/danila/source/robots/robots/Display.h
+
+/home/danila/source/robots/robots/Display.h
+SFML/Graphics.hpp
+-
+Environment_describer.h
+/home/danila/source/robots/robots/Environment_describer.h
 
 /home/danila/source/robots/robots/Energy_Consumer.h
 Module.h
@@ -742,6 +760,10 @@ Observation_Center.h
 Module.h
 /home/danila/source/robots/robots/Module.h
 
+/home/danila/source/robots/robots/Interest_Point.cpp
+Interest_Point.h
+/home/danila/source/robots/robots/Interest_Point.h
+
 /home/danila/source/robots/robots/Interest_Point.h
 Map_Object.h
 /home/danila/source/robots/robots/Map_Object.h
@@ -753,6 +775,10 @@ Energy_Consumer.h
 /home/danila/source/robots/robots/Map_Object.h
 iostream
 -
+string
+-
+sstream
+-
 robot.h
 /home/danila/source/robots/robots/robot.h
 
@@ -761,12 +787,14 @@ robot.h
 /home/danila/source/robots/robots/Observation_Center.h
 vector
 -
-string
--
 Map_Object.h
 /home/danila/source/robots/robots/Map_Object.h
 Module.h
 /home/danila/source/robots/robots/Module.h
+
+/home/danila/source/robots/robots/Obstacle.cpp
+Obstacle.h
+/home/danila/source/robots/robots/Obstacle.h
 
 /home/danila/source/robots/robots/Obstacle.h
 Map_Object.h

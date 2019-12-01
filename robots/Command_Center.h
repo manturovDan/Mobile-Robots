@@ -10,6 +10,7 @@ namespace robo {
     class Command_Center : virtual public Observation_Center {
     public:
         Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
+        std::string whoami();
     };
 }
 
