@@ -37,6 +37,8 @@ namespace robo {
 
         //Observation_Center * clone() const;
         void checkFree();
+
+        int whoami() { return 3; }
     };
 }
 

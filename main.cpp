@@ -2,6 +2,7 @@
 
 //#include "robots/robot.h"
 #include "robots/interface.h"
+#include "robots/Display.h"
 
 template <class T>
 int inpNum(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
@@ -59,15 +60,18 @@ int chooseAct() {
     }
 }
 
-int launchFunc(int act, robo::Environment_describer & env) {
+int launchFunc(int act, robo::Environment_describer * env) {
     if (act == 1) {
         return 0;
     } else if (act == 2) {
-        interf::EnvXMLCreate("/home/danila/source/robots/storage/map2.xml", env);
+        interf::EnvXMLCreate("/home/danila/source/robots/storage/map2.xml", *env);
+        auto itf = interf::InterfaceTools(env);
+        itf.printEnv();
+        dispr::Display disp(env);
         return 0;
     } else if (act == 3) {
-        env.setHeight(15);
-        env.setWidth(20);
+        env->setHeight(15);
+        env->setWidth(20);
         return 0;
     }
 }
@@ -84,6 +88,6 @@ int main()
         choise = chooseAct();
         if (!choise)
             return 0;
-        launchFunc(choise, env);
+        launchFunc(choise, &env);
     }
 }

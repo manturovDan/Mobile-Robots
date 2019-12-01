@@ -151,4 +151,12 @@ namespace interf {
         stream << "File was damaged! - " << add << std::endl;
         throw std::invalid_argument("file error");
     }
+
+    void InterfaceTools::printEnv(std::ostream &stream) {
+        stream << "DEBUG - printing all objects:" << std::endl;
+        unsigned int number = 0;
+        for (auto it = env->begin(); it != env->end(); ++it) {
+            std::cout << (++number) << " --- OBJECT - " << typeid(*(*it)).name() << " - " << (*it)->getX() << std::endl;
+        }
+    }
 }

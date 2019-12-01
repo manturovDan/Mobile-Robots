@@ -10,6 +10,8 @@ namespace robo {
         Interest_Point(coordinates pos) : Map_Object(pos) {};
         //Interest_Point * clone() const;
 
+        int whoami() { return 2; }
+
     };
 }
 

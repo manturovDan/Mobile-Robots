@@ -2,6 +2,8 @@
 #ifndef ROBOTSCREATE_ENVIRONMENT_DESCRIBER_H
 #define ROBOTSCREATE_ENVIRONMENT_DESCRIBER_H
 
+#include "typeinfo"
+
 #include "robot.h"
 #include "Map_Object.h"
 #include "Obstacle.h"
@@ -12,19 +14,20 @@
 #include "Module.h"
 
 namespace robo {
-    /*struct coordinates {
-        unsigned int x;
-        unsigned int y;
+    class Env_Consistent_Iter {
+    private:
+        std::vector<Map_Object *>::iterator iter;
+    public:
+        Env_Consistent_Iter() = delete;
+        Env_Consistent_Iter(std::vector<Map_Object *> & mo) { iter = mo.begin(); }
+        Env_Consistent_Iter(std::vector<Map_Object *>::iterator it) { iter = it; }
+        Env_Consistent_Iter operator++(int);
+        Env_Consistent_Iter & operator++();
+        Map_Object * operator*();
+        friend bool operator==(Env_Consistent_Iter left, Env_Consistent_Iter right) { return left.iter == right.iter; }
+        friend bool operator!=(Env_Consistent_Iter left, Env_Consistent_Iter right) { return left.iter != right.iter; }
     };
 
-    enum Characters {
-        Obstacle_t,
-        Interest_t,
-        Command_Center_t,
-        Robot_Commander_t,
-        Observation_Center_t,
-        Robot_Scout_t
-    };*/
 
     class Environment_describer {
     private:
@@ -62,11 +65,16 @@ namespace robo {
         Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &,
                               unsigned int);
 
-//        Quick_Navigator qTree;
+//      Quick_Navigator qTree;
 
         void print(std::ostream &stream = std::cout);
 
         ~Environment_describer() = default; // clear vector
+
+        friend class Env_Consistent_Iter;
+
+        Env_Consistent_Iter begin() { return Env_Consistent_Iter(map_obj); }
+        Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end());  }
     };
 }
 

@@ -104,6 +104,12 @@
 		<Unit filename="/home/danila/source/robots/robots/Command_Center.h">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Display.cpp">
+			<Option target="robotsCreate"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Display.h">
+			<Option target="robotsCreate"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Environment_describer.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>

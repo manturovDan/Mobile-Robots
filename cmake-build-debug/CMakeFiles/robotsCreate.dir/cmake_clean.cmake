@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.o"
   "CMakeFiles/robotsCreate.dir/main.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o"
+  "CMakeFiles/robotsCreate.dir/robots/Display.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o"
   "CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o"

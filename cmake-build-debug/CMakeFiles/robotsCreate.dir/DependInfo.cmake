@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.o"
   "/home/danila/source/robots/main.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/main.cpp.o"
   "/home/danila/source/robots/robots/Command_Center.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o"
+  "/home/danila/source/robots/robots/Display.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Display.cpp.o"
   "/home/danila/source/robots/robots/Environment_describer.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o"
   "/home/danila/source/robots/robots/Map_Object.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o"
   "/home/danila/source/robots/robots/Observation_Center.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o"

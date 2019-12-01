@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../libraries/tinyxml2-lib/tinyxml2.h"
+#include <typeinfo>
 
 #include "Environment_describer.h"
 #include "Map_Object.h"
@@ -131,6 +132,14 @@ namespace interf {
 
     private:
         static void fileDamaged(std::ostream &, const std::string & add = "unknown");
+    };
+
+    class InterfaceTools {
+    private:
+        robo::Environment_describer * env;
+    public:
+        InterfaceTools(robo::Environment_describer * ev) { env = ev; }
+        void printEnv(std::ostream & stream = std::cout);
     };
 }
 

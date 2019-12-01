@@ -32,6 +32,7 @@ namespace robo {
 
         void print() { std::cout << position.x << " " << position.y << std::endl; }
 
+        virtual int whoami() = 0;
         //virtual Map_Object * clone() const = 0; //НУЖНО ЛИ??? ASK
 
     };

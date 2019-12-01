@@ -204,6 +204,33 @@ robots/Command_Center.cpp.s:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.s
 .PHONY : robots/Command_Center.cpp.s
 
+robots/Display.o: robots/Display.cpp.o
+
+.PHONY : robots/Display.o
+
+# target to build an object file
+robots/Display.cpp.o:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Display.cpp.o
+.PHONY : robots/Display.cpp.o
+
+robots/Display.i: robots/Display.cpp.i
+
+.PHONY : robots/Display.i
+
+# target to preprocess a source file
+robots/Display.cpp.i:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Display.cpp.i
+.PHONY : robots/Display.cpp.i
+
+robots/Display.s: robots/Display.cpp.s
+
+.PHONY : robots/Display.s
+
+# target to generate assembly for a file
+robots/Display.cpp.s:
+	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/robots/Display.cpp.s
+.PHONY : robots/Display.cpp.s
+
 robots/Environment_describer.o: robots/Environment_describer.cpp.o
 
 .PHONY : robots/Environment_describer.o
@@ -411,6 +438,9 @@ help:
 	@echo "... robots/Command_Center.o"
 	@echo "... robots/Command_Center.i"
 	@echo "... robots/Command_Center.s"
+	@echo "... robots/Display.o"
+	@echo "... robots/Display.i"
+	@echo "... robots/Display.s"
 	@echo "... robots/Environment_describer.o"
 	@echo "... robots/Environment_describer.i"
 	@echo "... robots/Environment_describer.s"

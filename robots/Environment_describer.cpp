@@ -46,6 +46,7 @@ namespace robo {
         }
 
         map_obj.push_back(nw_obj); // OR COPY????
+        std::cout << "+++++++++++++++ " << typeid(*nw_obj).name();
         //qTree.add(nw_obj);
 
         return nw_obj;
@@ -87,5 +88,20 @@ namespace robo {
         for (auto & it : map_obj) {
             it->print();
         }
+    }
+
+    Env_Consistent_Iter Env_Consistent_Iter::operator++(int) { //postfix
+        auto retit = Env_Consistent_Iter(iter);
+        iter++;
+        return retit;
+    }
+
+    Env_Consistent_Iter & Env_Consistent_Iter::operator++() { //prefix
+        iter++;
+        return *this;
+    }
+
+    Map_Object * Env_Consistent_Iter::operator*() {
+        return *iter;
     }
 }
