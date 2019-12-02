@@ -12,6 +12,17 @@ namespace robo {
         unsigned int y;
     };
 
+    inline bool operator <(coordinates left, coordinates right) {
+        if (left.x < right.x)
+            return true;
+        else if (left.x == right.x) {
+            if (left.y < right.y)
+                return true;
+        }
+
+        return false;
+    }
+
     enum Characters {
         Obstacle_t,
         Interest_t,

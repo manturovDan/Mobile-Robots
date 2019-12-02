@@ -9,7 +9,8 @@ namespace robo {
     public:
         Sensor() = delete;
         Sensor(unsigned int rad, unsigned int dir, unsigned int ang, unsigned int consumption, unsigned int priority) :
-                radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, false) {  }
+                radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, false) {}
+        Module * copy() override;
     protected:
         unsigned int radius;
         unsigned int direction;

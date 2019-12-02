@@ -7,28 +7,19 @@
 #include "Managing.h"
 
 namespace robo {
-    enum ceil {
-        Free,
-        Obstacle,
-        Interest,
-        Command_Center,
-        Observation_Center,
-        Border,
-        Not_Found
-    };
-
     struct map_point {
-        ceil iam;
-        ceil top;
-        ceil bottom;
-        ceil right;
-        ceil left;
+        Map_Object * iam;
+        bool top;
+        bool left;
+        bool bottom;
+        bool right;
     };
 
     class Ai_Deep {
     public:
         Ai_Deep() = delete;
         explicit Ai_Deep(Environment_describer *);
+        void add_point(Map_Object *);
     private:
         std::map<coordinates, map_point> ai_dict;
     };

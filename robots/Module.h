@@ -1,6 +1,8 @@
 #ifndef ROBOTSCREATE_MODULE_H
 #define ROBOTSCREATE_MODULE_H
 
+#include <iostream>
+
 namespace robo {
     class Module {
     protected:
@@ -14,6 +16,7 @@ namespace robo {
         int setActive();
 
         virtual void whoami() { std::cout << "hello" << std::endl; }
+        virtual Module * copy() = 0;
     };
 }
 
