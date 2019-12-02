@@ -157,6 +157,7 @@ namespace interf {
     }
 
     void InterfaceTools::printEnv(std::ostream &stream) {
+        stream << "Width: " << env->getWidth() << " Height: " << env->getHeight() << std::endl;
         stream << "DEBUG - printing all objects:" << std::endl;
         unsigned int number = 0;
         for (auto it = env->begin(); it != env->end(); ++it) {

@@ -36,7 +36,26 @@ namespace robo {
 
                 std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
 
+                unsigned int real_dir = sens->getDirection(); //if will be direction of robot
 
+                int left_cor = position.x - sens->getRadius();
+                if (left_cor < 0)
+                    left_cor = 0;
+
+                int right_cor = position.x + sens->getRadius();
+                if (right_cor >= env->getWidth()) // TODO set static environment
+                    right_cor = env->getWidth()-1;
+
+                int top_cor = position.y + sens->getRadius();
+                if(top_cor >= env->getHeight())
+                    top_cor = env->getHeight()-1;
+
+                for (int w = left_cor; w <= right_cor; w++) {
+                    for (int h = position.y+1; h <= top_cor; ++top_cor) {
+                        std:: cout << " { " << w << ", " << h << " } ";
+                    }
+                    std::cout << std::endl;
+                }
             }
         }
     }

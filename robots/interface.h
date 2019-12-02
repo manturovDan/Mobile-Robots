@@ -57,7 +57,7 @@ namespace interf {
          *
          *          NUM_DIRECTION as Mobile-class field "direction" must be one of 0 (top), 1 (left), 2 (bottom), 3(right)
          *
-         *          ANGLE is in 0-3
+         *          ANGLE is in 0-2
          *          Types of angles on examples with radius = "4"   # - robot, x - in vision, o - out vision
          *          0:
          *          xxxxxxxxx
@@ -81,7 +81,7 @@ namespace interf {
          *          xxxxooooo
          *          xxxxooooo
          *
-         *          3:
+         *          2:
          *          xxxxxxxxx
          *          xxxxxxxxx
          *          xxxxxxxxx

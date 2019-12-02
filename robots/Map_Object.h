@@ -13,8 +13,8 @@ namespace robo {
     protected:
         bool appeared;
         coordinates position;
-        Environment_describer * env;
     public:
+        static Environment_describer * env;
         Map_Object() : appeared(false), position({0, 0}) {}
 
         Map_Object(coordinates coords) : appeared(true), position(coords) {} //TODO Normal
@@ -22,6 +22,8 @@ namespace robo {
         unsigned int getX() { return position.x; }
 
         unsigned int getY() { return position.y; }
+
+        static void setEnv(Environment_describer *envd);
 
         coordinates getPosition() { return position; }
 

@@ -8,7 +8,7 @@ namespace robo {
         //check collision
     }*/
 
-    int Map_Object::testEnv() {
-        return env->testV();
-    }
+    //int Map_Object::testEnv() {
+    //    return env->testV();
+    //}
 }
