@@ -32,13 +32,6 @@ namespace robo {
         int replace(coordinates);
     };*/
 
-    class AI_Dict {
-
-    };
-
-    class AI {
-
-    };
 }
 
 #endif //ROBOTSCREATE_ROBOT_H

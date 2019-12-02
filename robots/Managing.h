@@ -1,6 +1,7 @@
 #ifndef ROBOTSCREATE_MANAGING_H
 #define ROBOTSCREATE_MANAGING_H
 
+#include "Observation_Center.h"
 #include "Energy_Consumer.h"
 
 namespace robo {
@@ -8,10 +9,11 @@ namespace robo {
     public:
         Managing() = delete;
         Managing(unsigned int rad, unsigned int consumption, unsigned int priority, unsigned int subs) :
-                radius(rad), Energy_Consumer(consumption, priority, false) {  }
+                radius(rad), subs_count(subs), Energy_Consumer(consumption, priority, false) {  }
     protected:
         unsigned int radius;
-        //std::vector<Robo_Component *> subordinate;
+        unsigned int subs_count;
+        std::vector<Observation_Center *> subordinate;
     };
 }
 

@@ -13,7 +13,7 @@ namespace robo {
         bool getActive();
         int setActive();
 
-        Module * copy() const; // TODO for children? (ABS VIRTUAL)
+        virtual void whoami() { std::cout << "hello" << std::endl; }
     };
 }
 

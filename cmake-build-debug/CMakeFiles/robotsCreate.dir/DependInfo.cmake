@@ -4,20 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/libraries/tinyxml2-lib/tinyxml2.cpp.o"
   "/home/danila/source/robots/main.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/main.cpp.o"
-  "/home/danila/source/robots/robots/Command_Center.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Command_Center.cpp.o"
-  "/home/danila/source/robots/robots/Display.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Display.cpp.o"
-  "/home/danila/source/robots/robots/Environment_describer.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Environment_describer.cpp.o"
-  "/home/danila/source/robots/robots/Interest_Point.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Interest_Point.cpp.o"
-  "/home/danila/source/robots/robots/Map_Object.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Map_Object.cpp.o"
-  "/home/danila/source/robots/robots/Moving_Describer.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Moving_Describer.cpp.o"
-  "/home/danila/source/robots/robots/Observation_Center.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Observation_Center.cpp.o"
-  "/home/danila/source/robots/robots/Obstacle.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Obstacle.cpp.o"
-  "/home/danila/source/robots/robots/Robot_Commander.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Robot_Commander.cpp.o"
-  "/home/danila/source/robots/robots/Robot_Scout.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/Robot_Scout.cpp.o"
-  "/home/danila/source/robots/robots/environment.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/environment.cpp.o"
-  "/home/danila/source/robots/robots/interface.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robotsCreate.dir/robots/interface.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -28,6 +15,23 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/interfacelib.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/obstacle.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/tinyxml2.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/map_object.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/environment_describer.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/interest_point.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/observation_center.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/command_center.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robot_scout.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/robot_commander.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/module.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/power_generator.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/managing.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/sensor.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/display.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/moving_describer.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/ai_robots.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

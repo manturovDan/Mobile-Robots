@@ -1,4 +1,3 @@
-#pragma once
 #ifndef ROBOTSCREATE_ENVIRONMENT_DESCRIBER_H
 #define ROBOTSCREATE_ENVIRONMENT_DESCRIBER_H
 
@@ -33,7 +32,7 @@ namespace robo {
     private:
         unsigned int width;
         unsigned int height;
-        unsigned int time;
+        unsigned long int time;
         std::vector<Map_Object *> map_obj;
 
         /// @param bool coord : x - true, y - false
@@ -75,6 +74,9 @@ namespace robo {
 
         Env_Consistent_Iter begin() { return Env_Consistent_Iter(map_obj); }
         Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end());  }
+
+
+        int testV() { return 1; }
     };
 }
 

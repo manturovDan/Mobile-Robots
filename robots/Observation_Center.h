@@ -38,6 +38,7 @@ namespace robo {
         void checkFree();
 
         std::string whoami();
+        int look();
     };
 }
 

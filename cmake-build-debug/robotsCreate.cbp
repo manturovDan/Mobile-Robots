@@ -27,6 +27,16 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="robotsCreate">
 				<Option output="/home/danila/source/robots/cmake-build-debug/robotsCreate" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
@@ -75,109 +85,895 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
+			<Target title="interest_point">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libinterest_point.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
-				<Option type="4"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 interest_point"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="interest_point/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libinterest_point.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 interest_point/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="power_generator">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libpower_generator.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 power_generator"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="power_generator/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libpower_generator.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 power_generator/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="managing">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmanaging.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 managing"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="managing/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmanaging.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 managing/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="obstacle">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libobstacle.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 obstacle"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="obstacle/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libobstacle.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 obstacle/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ai_robots">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libai_robots.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 ai_robots"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ai_robots/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libai_robots.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 ai_robots/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="module">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmodule.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 module"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="module/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmodule.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 module/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="map_object">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmap_object.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 map_object"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="map_object/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmap_object.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 map_object/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="environment_describer">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libenvironment_describer.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 environment_describer"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="environment_describer/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libenvironment_describer.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 environment_describer/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="robot_commander">
+				<Option output="/home/danila/source/robots/cmake-build-debug/librobot_commander.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 robot_commander"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="robot_commander/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/librobot_commander.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 robot_commander/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="interfacelib">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libinterfacelib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 interfacelib"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="interfacelib/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libinterfacelib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 interfacelib/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tinyxml2">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libtinyxml2.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 tinyxml2"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tinyxml2/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libtinyxml2.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 tinyxml2/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="robot_scout">
+				<Option output="/home/danila/source/robots/cmake-build-debug/librobot_scout.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 robot_scout"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="robot_scout/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/librobot_scout.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 robot_scout/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="observation_center">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libobservation_center.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 observation_center"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="observation_center/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libobservation_center.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 observation_center/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sensor">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libsensor.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 sensor"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sensor/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libsensor.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 sensor/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="command_center">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libcommand_center.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 command_center"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="command_center/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libcommand_center.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 command_center/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="display">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libdisplay.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 display"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="display/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libdisplay.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 display/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="moving_describer">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmoving_describer.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 moving_describer"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="moving_describer/fast">
+				<Option output="/home/danila/source/robots/cmake-build-debug/libmoving_describer.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/danila/source/robots/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 moving_describer/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/danila/source/robots/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/danila/source/robots/libraries/pprint.hpp">
-			<Option target="robotsCreate"/>
-		</Unit>
 		<Unit filename="/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="tinyxml2"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h">
-			<Option target="robotsCreate"/>
+			<Option target="tinyxml2"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/main.cpp">
 			<Option target="robotsCreate"/>
 		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Ai_Deep.cpp">
+			<Option target="ai_robots"/>
+			<Option target="command_center"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Ai_Deep.h">
+			<Option target="ai_robots"/>
+			<Option target="command_center"/>
+		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Command_Center.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="command_center"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Command_Center.h">
-			<Option target="robotsCreate"/>
+			<Option target="command_center"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Display.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="display"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Display.h">
-			<Option target="robotsCreate"/>
+			<Option target="display"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Environment_describer.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="environment_describer"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Environment_describer.h">
-			<Option target="robotsCreate"/>
+			<Option target="environment_describer"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Interest_Point.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="interest_point"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Interest_Point.h">
-			<Option target="robotsCreate"/>
+			<Option target="interest_point"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Managing.cpp">
+			<Option target="managing"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Managing.h">
-			<Option target="robotsCreate"/>
+			<Option target="managing"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Map_Object.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="map_object"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Map_Object.h">
-			<Option target="robotsCreate"/>
+			<Option target="map_object"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Module.cpp">
+			<Option target="module"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Module.h">
-			<Option target="robotsCreate"/>
+			<Option target="module"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Moving_Describer.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="moving_describer"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Moving_Describer.h">
-			<Option target="robotsCreate"/>
+			<Option target="moving_describer"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Observation_Center.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="observation_center"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Observation_Center.h">
-			<Option target="robotsCreate"/>
+			<Option target="observation_center"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Obstacle.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="obstacle"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Obstacle.h">
-			<Option target="robotsCreate"/>
+			<Option target="obstacle"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Power_Generator.cpp">
+			<Option target="power_generator"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Power_Generator.h">
-			<Option target="robotsCreate"/>
+			<Option target="power_generator"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Robot_Commander.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="robot_commander"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Robot_Commander.h">
-			<Option target="robotsCreate"/>
+			<Option target="robot_commander"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Robot_Scout.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="robot_scout"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Robot_Scout.h">
-			<Option target="robotsCreate"/>
+			<Option target="robot_scout"/>
+		</Unit>
+		<Unit filename="/home/danila/source/robots/robots/Sensor.cpp">
+			<Option target="sensor"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Sensor.h">
-			<Option target="robotsCreate"/>
-		</Unit>
-		<Unit filename="/home/danila/source/robots/robots/environment.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="sensor"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/interface.cpp">
-			<Option target="robotsCreate"/>
+			<Option target="interfacelib"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/interface.h">
-			<Option target="robotsCreate"/>
+			<Option target="interfacelib"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/robot.h">
 			<Option target="robotsCreate"/>

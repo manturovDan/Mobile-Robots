@@ -32,4 +32,10 @@ namespace robo {
                                            "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
         return ss.str();
     }
+
+    int Observation_Center::look() {
+        for (auto it = modules.begin(); it != modules.end(); ++it) {
+            std::cout << typeid(**it).name() << std::endl;
+        }
+    }
 }

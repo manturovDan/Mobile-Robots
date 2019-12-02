@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "Observation_Center.h"
-#include "Module.h"
 
 namespace robo {
     class Command_Center : virtual public Observation_Center {

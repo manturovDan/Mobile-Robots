@@ -3,6 +3,7 @@
 //#include "robots/robot.h"
 #include "robots/interface.h"
 #include "robots/Display.h"
+#include "robots/Ai_Deep.h"
 
 template <class T>
 int inpNum(T &inp, bool unneg = false, const char *again = "Input error! Try again!") {
@@ -67,6 +68,8 @@ int launchFunc(int act, robo::Environment_describer * env) {
         interf::EnvXMLCreate("/home/danila/source/robots/storage/map2.xml", *env);
         auto itf = interf::InterfaceTools(env);
         itf.printEnv();
+        auto ai = robo::Ai_Deep(env);
+
         dispr::Display disp(env);
         return 0;
     } else if (act == 3) {

@@ -1,6 +1,7 @@
 #ifndef ROBOTSCREATE_SENSOR_H
 #define ROBOTSCREATE_SENSOR_H
 
+#include "Environment_describer.h"
 #include "Energy_Consumer.h"
 
 namespace robo {

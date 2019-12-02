@@ -10,7 +10,8 @@ namespace robo {
 
         Obstacle(coordinates pos) : Map_Object(pos) {};
         //Obstacle * clone() const;
-        std::string whoami();
+        std::string whoami() override ;
+
     };
 }
 
