@@ -781,6 +781,8 @@ robot.h
 /home/danila/source/robots/robots/robot.h
 
 /home/danila/source/robots/robots/Module.h
+iostream
+-
 
 /home/danila/source/robots/robots/Observation_Center.h
 vector

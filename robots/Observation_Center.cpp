@@ -1,4 +1,5 @@
 #include "Observation_Center.h"
+#include "Sensor.h"
 
 namespace robo {
     Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
@@ -29,8 +30,14 @@ namespace robo {
     }
 
     int Observation_Center::look() {
-        for (auto it = modules.begin(); it != modules.end(); ++it) {
-            std::cout << typeid(**it).name() << std::endl;
+        for (auto & module : modules) {
+            if(!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
+                auto * sens = static_cast<robo::Sensor *>(module);
+
+                std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
+
+
+            }
         }
     }
 }

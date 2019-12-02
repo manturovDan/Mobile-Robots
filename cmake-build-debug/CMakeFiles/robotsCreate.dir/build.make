@@ -102,6 +102,9 @@ robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-audio.so.2.5.
 robotsCreate: libobstacle.a
 robotsCreate: libmap_object.a
 robotsCreate: libenvironment_describer.a
+robotsCreate: libobstacle.a
+robotsCreate: libmap_object.a
+robotsCreate: libenvironment_describer.a
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-system.so.2.5.1
 robotsCreate: CMakeFiles/robotsCreate.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable robotsCreate"

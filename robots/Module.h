@@ -12,7 +12,7 @@ namespace robo {
         bool active;
     public:
         int getPriority();
-        bool getActive();
+        bool getActive() { return active; }
         int setActive();
 
         virtual void whoami() { std::cout << "hello" << std::endl; }

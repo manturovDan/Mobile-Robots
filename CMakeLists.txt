@@ -30,6 +30,8 @@ add_library(ai_robots robots/Ai_Deep.h robots/Ai_Deep.cpp)
 target_link_libraries(obstacle map_object)
 target_link_libraries(environment_describer map_object obstacle)
 target_link_libraries(map_object environment_describer)
+target_link_libraries(sensor environment_describer)
+target_link_libraries(observation_center sensor)
 
 add_executable(robotsCreate main.cpp robots/robot.h)
 
