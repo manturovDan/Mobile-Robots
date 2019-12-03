@@ -29,6 +29,24 @@ namespace robo {
         return ss.str();
     }
 
+    void Observation_Center::determineCorers(int & top_cor, int & left_cor, int & bottom_cor, int & right_cor, unsigned int rad) {
+        top_cor = position.y + rad;
+        if (top_cor >= env->getHeight())
+            top_cor = env->getHeight() - 1;
+
+        left_cor = position.x - rad;
+        if (left_cor < 0)
+            left_cor = 0;
+
+        bottom_cor = position.y - rad;
+        if (bottom_cor < 0)
+            bottom_cor = 0;
+
+        right_cor = position.x + rad;
+        if (right_cor >= env->getWidth())
+            right_cor = env->getWidth() - 1;
+    }
+
     int Observation_Center::look() {
         for (auto & module : modules) {
             if(!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
@@ -38,22 +56,8 @@ namespace robo {
 
                 unsigned int real_dir = sens->getDirection(); //if will be direction of robot
 
-                int left_cor = position.x - sens->getRadius();
-                if (left_cor < 0)
-                    left_cor = 0;
-
-                int right_cor = position.x + sens->getRadius();
-                if (right_cor >= env->getWidth())
-                    right_cor = env->getWidth() - 1;
-
-                int top_cor = position.y + sens->getRadius();
-                if (top_cor >= env->getHeight())
-                    top_cor = env->getHeight() - 1;
-
-                int bottom_cor = position.y - sens->getRadius();
-                if (bottom_cor < 0)
-                    bottom_cor = 0;
-
+                int top_cor, left_cor, bottom_cor, right_cor;
+                determineCorers(top_cor, left_cor, bottom_cor, right_cor, sens->getRadius());
 
                 if (sens->getAngle() == 2) {
                     for (int h = top_cor; h >= bottom_cor; --h) {

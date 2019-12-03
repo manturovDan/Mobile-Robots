@@ -12,6 +12,7 @@ namespace robo {
             } else if(!strcmp(typeid(**env_iter).name(), "N4robo14Command_CenterE")) {
                 add_point(*env_iter);
                 Command_Center * cc = dynamic_cast<Command_Center *>(*env_iter);
+                cc->subdue();
                 cc->look();
             }
         }

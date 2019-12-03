@@ -729,6 +729,8 @@ vector
 -
 Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
+Managing.h
+/home/danila/source/robots/robots/Managing.h
 
 /home/danila/source/robots/robots/Display.h
 SFML/Graphics.hpp

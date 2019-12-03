@@ -9,8 +9,9 @@ namespace robo {
     public:
         Managing() = delete;
         Managing(unsigned int rad, unsigned int consumption, unsigned int priority, unsigned int subs) :
-                radius(rad), subs_count(subs), Energy_Consumer(consumption, priority, false) {}
+                radius(rad), subs_count(subs), Energy_Consumer(consumption, priority, true) {}
         Module * copy() override;
+        unsigned int getRadius() { return radius; }
     protected:
         unsigned int radius;
         unsigned int subs_count;

@@ -7,6 +7,7 @@
 #include "Module.h"
 
 namespace robo {
+    class Sensor;
     class Observation_Center : public Map_Object {
     protected:
         std::string description;
@@ -31,6 +32,7 @@ namespace robo {
         void checkFree();
         std::string whoami();
         int look();
+        void determineCorers(int &, int &, int &, int &, unsigned int);
     };
 }
 
