@@ -767,6 +767,8 @@ Map_Object.h
 /home/danila/source/robots/robots/Map_Object.h
 
 /home/danila/source/robots/robots/Managing.h
+algorithm
+-
 Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
 Energy_Consumer.h

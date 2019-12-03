@@ -33,6 +33,8 @@ namespace robo {
         std::string whoami();
         int look();
         void determineCorers(int &, int &, int &, int &, unsigned int);
+        void setOwner(Map_Object *);
+        Map_Object * getOwner() { return owner; }
     };
 }
 

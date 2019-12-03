@@ -145,4 +145,8 @@ namespace robo {
             }
         }
     }
+
+    void Observation_Center::setOwner(Map_Object * own) {
+        owner = static_cast<Observation_Center *>(own);
+    }
 }

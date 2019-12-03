@@ -94,7 +94,7 @@ namespace robo {
 
         auto it = begin();
         for (; it != end(); ++it) {
-            if ((*it)->getPosition() == point) {
+            if ((*it)->getPosition() == point && strcmp(typeid(*it).name(), "N4robo15Robot_CommanderE") && strcmp(typeid(*it).name(), "N4robo11Robot_ScoutE")) {
                 break;
             }
         }

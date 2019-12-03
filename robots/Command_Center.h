@@ -10,6 +10,8 @@ namespace robo {
     class Command_Center : virtual public Observation_Center {
     protected:
         bool real_manager = true; //TODO in depend of consumption
+        int chooseManModule();
+        Managing * matchMan;
     public:
         Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
         std::string whoami() override;
