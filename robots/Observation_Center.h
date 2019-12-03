@@ -15,28 +15,20 @@ namespace robo {
         unsigned int countPorts;
         bool appeared;
         std::vector<Module *> modules;
-
         void initModules(const std::vector<Module *> &);
+        Observation_Center * owner;
 
     public:
         Observation_Center() = delete;
-
         Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 0});
-
         //Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         std::string getDescription() { return description; }
-
         unsigned int getEnergyConsumption() { return energyConsumption; }
-
         int getCost() { return cost; }
-
         unsigned int getCountPorts() { return countPorts; }
-
         int getCountModules() { return modules.size(); }
-
         //Observation_Center * clone() const;
         void checkFree();
-
         std::string whoami();
         int look();
     };

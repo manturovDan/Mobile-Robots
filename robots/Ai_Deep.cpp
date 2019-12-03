@@ -11,8 +11,8 @@ namespace robo {
                 oc->look();
             } else if(!strcmp(typeid(**env_iter).name(), "N4robo14Command_CenterE")) {
                 add_point(*env_iter);
-                //Command_Center * cc = static_cast<Command_Center *>(*env_iter);
-                //cc->look();
+                Command_Center * cc = dynamic_cast<Command_Center *>(*env_iter);
+                cc->look();
             }
         }
     }

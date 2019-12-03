@@ -405,7 +405,6 @@ robots/Ai_Deep.o: robots/Ai_Deep.cpp.o
 # target to build an object file
 robots/Ai_Deep.cpp.o:
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o
-	$(MAKE) -f CMakeFiles/command_center.dir/build.make CMakeFiles/command_center.dir/robots/Ai_Deep.cpp.o
 .PHONY : robots/Ai_Deep.cpp.o
 
 robots/Ai_Deep.i: robots/Ai_Deep.cpp.i
@@ -415,7 +414,6 @@ robots/Ai_Deep.i: robots/Ai_Deep.cpp.i
 # target to preprocess a source file
 robots/Ai_Deep.cpp.i:
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.i
-	$(MAKE) -f CMakeFiles/command_center.dir/build.make CMakeFiles/command_center.dir/robots/Ai_Deep.cpp.i
 .PHONY : robots/Ai_Deep.cpp.i
 
 robots/Ai_Deep.s: robots/Ai_Deep.cpp.s
@@ -425,7 +423,6 @@ robots/Ai_Deep.s: robots/Ai_Deep.cpp.s
 # target to generate assembly for a file
 robots/Ai_Deep.cpp.s:
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.s
-	$(MAKE) -f CMakeFiles/command_center.dir/build.make CMakeFiles/command_center.dir/robots/Ai_Deep.cpp.s
 .PHONY : robots/Ai_Deep.cpp.s
 
 robots/Command_Center.o: robots/Command_Center.cpp.o

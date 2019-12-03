@@ -879,11 +879,9 @@
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Ai_Deep.cpp">
 			<Option target="ai_robots"/>
-			<Option target="command_center"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Ai_Deep.h">
 			<Option target="ai_robots"/>
-			<Option target="command_center"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Command_Center.cpp">
 			<Option target="command_center"/>

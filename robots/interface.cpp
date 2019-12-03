@@ -54,8 +54,8 @@ namespace interf {
 
                     if (module->QueryUnsignedAttribute("consumption", &consumption) != 0) fileDamaged(stream, "getting consumption of sensor");
                     if (module->QueryUnsignedAttribute("radius", &radius) != 0) fileDamaged(stream, "getting radius of sensor");
-                    if (module->QueryUnsignedAttribute("direction", &direction) != 0) fileDamaged(stream, "getting direction of sensor");
                     if (module->QueryUnsignedAttribute("angle", &angle) != 0) fileDamaged(stream, "getting angle of sensor");
+                    if (module->QueryUnsignedAttribute("direction", &direction) != 0 && angle != 2) fileDamaged(stream, "getting direction of sensor");
 
                     mod = new robo::Sensor(radius, direction, angle, consumption, priority);
                 }

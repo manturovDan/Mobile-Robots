@@ -70,7 +70,7 @@ int launchFunc(int act, robo::Environment_describer * env) {
         itf.printEnv();
         auto ai = robo::Ai_Deep(env);
 
-        dispr::Display disp(env);
+        //dispr::Display disp(env);
         return 0;
     } else if (act == 3) {
         env->setHeight(15);
