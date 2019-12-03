@@ -40,7 +40,7 @@ namespace robo {
 
     public:
         Environment_describer() : time(0), width(0), height(0) {
-            Map_Object::env = this;
+            //Map_Object::env = this;
         };
 
         Environment_describer(int, int);
