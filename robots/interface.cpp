@@ -22,7 +22,6 @@ namespace interf {
 
         env.setWidth(width);
         env.setHeight(height);
-        robo::Map_Object::env = &env;
 
         tinyxml2::XMLElement * mapEl = pEnv->FirstChildElement();
 

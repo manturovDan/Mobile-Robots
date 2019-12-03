@@ -13,8 +13,8 @@ namespace robo {
     protected:
         bool appeared;
         coordinates position;
-    public:
         static Environment_describer * env;
+    public:
         Map_Object() : appeared(false), position({0, 0}) {}
 
         Map_Object(coordinates coords) : appeared(true), position(coords) {} //TODO Normal

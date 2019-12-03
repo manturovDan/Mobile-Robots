@@ -39,9 +39,7 @@ namespace robo {
         int setWidthHeight(int, bool);
 
     public:
-        Environment_describer() : time(0), width(0), height(0) {
-            //Map_Object::env = this;
-        };
+        Environment_describer() : time(0), width(0), height(0) { robo::Map_Object::setEnv(this); }
 
         Environment_describer(int, int);
 
