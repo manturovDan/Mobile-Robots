@@ -89,6 +89,22 @@ namespace robo {
         }
     }
 
+    Map_Object * Environment_describer::checkStaticPoint(coordinates point) {
+        //TODO maybe to do with multimap in the future
+
+        auto it = begin();
+        for (; it != end(); ++it) {
+            if ((*it)->getPosition() == point) {
+                break;
+            }
+        }
+
+        if (it == end())
+            return nullptr;
+        return *it;
+
+    }
+
     Env_Consistent_Iter Env_Consistent_Iter::operator++(int) { //postfix
         auto retit = Env_Consistent_Iter(iter);
         iter++;

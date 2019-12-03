@@ -38,24 +38,69 @@ namespace robo {
 
                 unsigned int real_dir = sens->getDirection(); //if will be direction of robot
 
-                int left_cor = position.x - sens->getRadius();
-                if (left_cor < 0)
-                    left_cor = 0;
+                if (sens->getAngle() == 2) {
+                    int left_cor = position.x - sens->getRadius();
+                    if (left_cor < 0)
+                        left_cor = 0;
 
-                int right_cor = position.x + sens->getRadius();
-                if (right_cor >= env->getWidth())
-                    right_cor = env->getWidth()-1;
+                    int right_cor = position.x + sens->getRadius();
+                    if (right_cor >= env->getWidth())
+                        right_cor = env->getWidth() - 1;
 
-                int top_cor = position.y + sens->getRadius();
-                if(top_cor >= env->getHeight())
-                    top_cor = env->getHeight()-1;
+                    int top_cor = position.y + sens->getRadius();
+                    if (top_cor >= env->getHeight())
+                        top_cor = env->getHeight() - 1;
 
+                    int bottom_cor = position.y - sens->getRadius();
+                    if (bottom_cor < 0)
+                        bottom_cor = 0;
 
-                for (int h = top_cor; h >= position.y+1; --h) {
-                    for (int w = left_cor; w <= right_cor; w++) {
-                        std:: cout << " { " << w << ", " << h << " } ";
+                    for (int h = top_cor; h >= bottom_cor; --h) {
+                        for (int w = left_cor; w <= right_cor; ++w) {
+                            if (getX() == w && getY() == h)
+                                std::cout << " ########## ";
+                            else
+                                std::cout << " { " << w << ", " << h << " } ";
+                        }
+                        std::cout << std::endl;
                     }
-                    std::cout << std::endl;
+                }
+                else {
+                    if (real_dir == 0) {
+                        int left_cor = position.x - sens->getRadius();
+                        if (left_cor < 0)
+                            left_cor = 0;
+
+                        int right_cor = position.x + sens->getRadius();
+                        if (right_cor >= env->getWidth())
+                            right_cor = env->getWidth() - 1;
+
+                        int top_cor = position.y + sens->getRadius();
+                        if (top_cor >= env->getHeight())
+                            top_cor = env->getHeight() - 1;
+
+
+                        for (int h = top_cor; h >= position.y + 1; --h) {
+                            for (int w = left_cor; w <= right_cor; w++) {
+                                std::cout << " { " << w << ", " << h << " } ";
+                            }
+                            std::cout << std::endl;
+                        }
+
+                        if (sens->getAngle() > 0) {
+                            int bottom_cor = position.y - sens->getRadius();
+                            if (bottom_cor < 0)
+                                bottom_cor = 0;
+
+                            for (int h = position.y; h >= bottom_cor; --h) {
+                                for (int w = left_cor; w < position.x; ++w) {
+                                    std::cout << " { " << w << ", " << h << " } ";
+                                }
+                                std::cout << std::endl;
+                            }
+
+                        }
+                    }
                 }
             }
         }

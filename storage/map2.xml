@@ -17,7 +17,7 @@
     <Observation_Center x = "80" y = "21" price = "1000" consumption = "10"  description = "subord" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
         <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
-        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
+        <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
     </Observation_Center>
 
     <Robot_Scout price = "10000" consumption = "10"  description = "subord" ports = "15" speed = "25">

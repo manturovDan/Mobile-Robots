@@ -4,9 +4,7 @@
 namespace robo {
     Ai_Deep::Ai_Deep(Environment_describer * env) {
         for (Env_Consistent_Iter env_iter = env->begin(); env_iter != env->end(); ++env_iter) {
-            std::cout << "THREEE1" << std::endl;
             if(!strcmp(typeid(**env_iter).name(), "N4robo18Observation_CenterE")) {
-                std::cout << "THREEE" << std::endl;
                 add_point(*env_iter);
                 Observation_Center * oc = static_cast<Observation_Center *>(*env_iter);
                 std::cout << "LOOOK" << std::endl;

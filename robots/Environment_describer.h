@@ -73,8 +73,7 @@ namespace robo {
         Env_Consistent_Iter begin() { return Env_Consistent_Iter(map_obj); }
         Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end());  }
 
-
-        int testV() { return 1; }
+        Map_Object * checkStaticPoint(coordinates);
     };
 }
 
