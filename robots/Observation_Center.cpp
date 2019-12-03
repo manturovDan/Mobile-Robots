@@ -43,16 +43,16 @@ namespace robo {
                     left_cor = 0;
 
                 int right_cor = position.x + sens->getRadius();
-                if (right_cor >= env->getWidth()) // TODO set static environment
+                if (right_cor >= env->getWidth())
                     right_cor = env->getWidth()-1;
 
-                int top_cor = position.y + sens->getRadius();
+                int top_cor = position.y + sens->getRadius(); //TODO correct there
                 if(top_cor >= env->getHeight())
                     top_cor = env->getHeight()-1;
 
                 for (int w = left_cor; w <= right_cor; w++) {
-                    for (int h = position.y+1; h <= top_cor; ++top_cor) {
-                        std:: cout << " { " << w << ", " << h << " } ";
+                    for (int h = position.y+1; h <= top_cor; ++h) {
+                        std:: cout << " { " << h << ", " << w << " } ";
                     }
                     std::cout << std::endl;
                 }
