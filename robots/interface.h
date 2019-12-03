@@ -55,6 +55,8 @@ namespace interf {
          *              c)
          *              <Sensor consumption = NUM_CONSUMPTION radius = NUM_RADIUS direction = NUM_DIRECTION angle = ANGLE priority = PRIORITY />
          *
+         *              direction is not required if angle is 2 (260 deg)
+         *
          *          NUM_DIRECTION as Mobile-class field "direction" must be one of 0 (top), 1 (left), 2 (bottom), 3(right)
          *
          *          ANGLE is in 0-2
