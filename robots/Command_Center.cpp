@@ -9,9 +9,11 @@ namespace robo {
 
     std::string Command_Center::whoami() {
         std::stringstream ss;
-        ss << "Object : Command_Center <" << this << ">: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
+        std::string host = owner != nullptr ? owner->getDescription() : "none";
+
+        ss << "Object : Command_Center {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                         "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
-                                        "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
+                                        "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\nOwner = " << host << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }

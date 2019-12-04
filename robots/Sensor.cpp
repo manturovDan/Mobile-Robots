@@ -8,7 +8,7 @@ namespace robo {
 
     std::string Sensor::whoami() {
         std::stringstream ss;
-        ss << "Sensor radius = " << radius << " direction = " << direction << " powerConsumption = " << powerConsumption << " priority = " << priority << " active = " << active;
+        ss << "\tSensor radius = " << radius << " direction = " << direction << " powerConsumption = " << powerConsumption << " priority = " << priority << " active = " << active;
         return ss.str();
     }
 }

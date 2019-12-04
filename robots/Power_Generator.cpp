@@ -8,7 +8,7 @@ namespace robo {
 
     std::string Power_Generator::whoami() {
         std::stringstream ss;
-        ss << "Power Generator energyProduction = " << energyProduction << " priority = " << priority << " active = " << active;
+        ss << "\tPower Generator energyProduction = " << energyProduction << " priority = " << priority << " active = " << active;
         return ss.str();
     }
 }

@@ -8,11 +8,13 @@ namespace robo {
 
     std::string Robot_Scout::whoami() {
         std::stringstream ss;
+        std::string host = owner != nullptr ? owner->getDescription() : "none";
+
         ss << "Object : Robot_Scout: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                      "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                       "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\n"
                                       "Blocked: " << blocked << "\n"
-                                      "Speed: " << speed <<std::endl;
+                                      "Speed: " << speed << ";\nOwner = " << host << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }

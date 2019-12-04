@@ -23,10 +23,7 @@ namespace robo {
 
     std::string Observation_Center::whoami() {
         std::stringstream ss;
-        std::string host = "none";
-
-        if (owner != nullptr)
-            host = owner->getDescription();
+        std::string host = owner != nullptr ? owner->getDescription() : "none";
 
         ss << "Object : Observation_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                            "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
