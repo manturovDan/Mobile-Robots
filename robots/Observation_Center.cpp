@@ -72,6 +72,9 @@ namespace robo {
                 int top_cor, left_cor, bottom_cor, right_cor;
                 determineCorers(top_cor, left_cor, bottom_cor, right_cor, sens->getRadius());
 
+                coordinates c_posit = getPosition(); //there may be interest point
+                Map_Object * c_resp = env->checkStaticPoint(c_posit);
+                one_view[c_posit] = c_resp;
 
                 if (sens->getAngle() == 2) {
                     for (int h = top_cor; h >= bottom_cor; --h) {
