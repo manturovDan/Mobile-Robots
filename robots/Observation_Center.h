@@ -30,7 +30,8 @@ namespace robo {
         int getCountModules() { return modules.size(); }
         //Observation_Center * clone() const;
         void checkFree();
-        std::string whoami();
+        std::string whoami() override;
+        std::string myModules();
         int look();
         void determineCorers(int &, int &, int &, int &, unsigned int);
         void setOwner(Map_Object *);

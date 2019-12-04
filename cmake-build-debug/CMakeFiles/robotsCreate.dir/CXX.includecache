@@ -769,6 +769,8 @@ Map_Object.h
 /home/danila/source/robots/robots/Managing.h
 algorithm
 -
+sstream
+-
 Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
 Energy_Consumer.h
@@ -801,6 +803,10 @@ Map_Object.h
 /home/danila/source/robots/robots/Map_Object.h
 
 /home/danila/source/robots/robots/Power_Generator.h
+string
+-
+sstream
+-
 Module.h
 /home/danila/source/robots/robots/Module.h
 
@@ -821,6 +827,8 @@ Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
 
 /home/danila/source/robots/robots/Sensor.h
+sstream
+-
 Environment_describer.h
 /home/danila/source/robots/robots/Environment_describer.h
 Energy_Consumer.h

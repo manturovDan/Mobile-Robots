@@ -12,7 +12,7 @@ namespace robo {
     public:
         Robot_Commander(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, unsigned int);
 
-        std::string whoami();
+        std::string whoami() override ;
     };
 }
 #endif //ROBOTSCREATE_ROBOT_COMMANDER_H

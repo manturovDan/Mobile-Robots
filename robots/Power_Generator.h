@@ -1,6 +1,9 @@
 #ifndef ROBOTSCREATE_POWER_GENERATOR_H
 #define ROBOTSCREATE_POWER_GENERATOR_H
 
+#include <string>
+#include <sstream>
+
 #include "Module.h"
 
 namespace robo {
@@ -8,6 +11,7 @@ namespace robo {
     public:
         Power_Generator(int prior, unsigned int prod, bool act = true) : Module(prior, act), energyProduction(prod) {}
         Module * copy() override;
+        std::string whoami() override;
     protected:
         int energyProduction;
     };

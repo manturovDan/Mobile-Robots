@@ -2,6 +2,7 @@
 #define ROBOTSCREATE_MANAGING_H
 
 #include <algorithm>
+#include <sstream>
 
 #include "Observation_Center.h"
 #include "Energy_Consumer.h"
@@ -15,6 +16,8 @@ namespace robo {
         Module * copy() override;
         unsigned int getRadius() { return radius; }
         int addSubord(Observation_Center *);
+        std::string whoami() override;
+
     protected:
         unsigned int radius;
         unsigned int subs_count;

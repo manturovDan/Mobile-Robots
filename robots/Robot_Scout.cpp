@@ -13,6 +13,7 @@ namespace robo {
                                       "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\n"
                                       "Blocked: " << blocked << "\n"
                                       "Speed: " << speed <<std::endl;
+        ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }
 }

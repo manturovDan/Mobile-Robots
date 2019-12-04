@@ -15,7 +15,7 @@ namespace robo {
         bool getActive() { return active; }
         int setActive();
 
-        virtual void whoami() { std::cout << "hello" << std::endl; }
+        virtual std::string whoami() = 0;
         virtual Module * copy() = 0;
     };
 }

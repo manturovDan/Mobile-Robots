@@ -12,6 +12,7 @@ namespace robo {
         ss << "Object : Command_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                         "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                         "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
+        ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }
 

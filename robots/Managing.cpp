@@ -17,4 +17,15 @@ namespace robo {
 
         return 0;
     }
+
+    std::string Managing::whoami() {
+        std::stringstream ss;
+        ss << "Managing maximum_subordinates_count = " << subs_count <<" radius = " << radius << " powerConsumption = " << powerConsumption << " priority = " << priority << " active = " << active << std::endl;
+        for (auto sub : subordinate) {
+            if (sub == nullptr)
+                continue;
+            ss << "s) " << sub->getDescription();
+        }
+        return ss.str();
+    }
 }

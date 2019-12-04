@@ -22,7 +22,7 @@ namespace robo {
 
         int turn(int);
 
-        std::string whoami();
+        std::string whoami() override;
     };
 }
 

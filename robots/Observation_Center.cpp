@@ -26,6 +26,16 @@ namespace robo {
         ss << "Object : Observation_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                            "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                            "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
+        ss << "Modules:\n" << myModules() << std::endl;
+        return ss.str();
+    }
+
+    std::string Observation_Center::myModules() {
+        std::stringstream ss;
+        for (auto & mod : modules) {
+            ss << mod->whoami() << std::endl;
+        }
+
         return ss.str();
     }
 

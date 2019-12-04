@@ -1,6 +1,8 @@
 #ifndef ROBOTSCREATE_SENSOR_H
 #define ROBOTSCREATE_SENSOR_H
 
+#include <sstream>
+
 #include "Environment_describer.h"
 #include "Energy_Consumer.h"
 
@@ -14,6 +16,8 @@ namespace robo {
         unsigned int getRadius() { return radius; }
         unsigned int getDirection() { return direction; }
         unsigned int getAngle() { return angle; }
+
+        std::string whoami() override;
     protected:
         unsigned int radius;
         unsigned int direction;
