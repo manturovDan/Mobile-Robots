@@ -21,6 +21,7 @@ namespace robo {
         explicit Ai_Deep(Environment_describer *);
         void add_point(Map_Object *);
         void print(std::ostream & stream = std::cout);
+        void researchMap();
     private:
         std::map<coordinates, map_point> ai_dict;
     };

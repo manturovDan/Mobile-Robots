@@ -793,10 +793,14 @@ iostream
 /home/danila/source/robots/robots/Observation_Center.h
 vector
 -
+map
+-
 Map_Object.h
 /home/danila/source/robots/robots/Map_Object.h
 Module.h
 /home/danila/source/robots/robots/Module.h
+robot.h
+/home/danila/source/robots/robots/robot.h
 
 /home/danila/source/robots/robots/Obstacle.h
 Map_Object.h

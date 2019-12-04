@@ -71,6 +71,9 @@ int launchFunc(int act, robo::Environment_describer * env) {
 
         itf.printEnv();
 
+        ai.researchMap();
+        ai.print(std::cout);
+
         //dispr::Display disp(env);
         return 0;
     } else if (act == 3) {

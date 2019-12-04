@@ -81,10 +81,18 @@ namespace robo {
         return 0;
     }
 
-    int Command_Center::research() {
+    std::map<coordinates, Map_Object *> Command_Center::research() {
         std::cout << "RESEARCHING" << std::endl;
+        std::map<coordinates, Map_Object *> full_look_res;
+        std::map<coordinates, Map_Object *> look_res = look();
+
+        full_look_res.insert(look_res.begin(), look_res.end());
+
         for (auto sub : *matchMan) {
-            sub->look();
+            look_res = sub->look();
+            full_look_res.insert(look_res.begin(), look_res.end());
         }
+
+        return full_look_res;
     }
 }

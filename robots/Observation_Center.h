@@ -2,9 +2,11 @@
 #define ROBOTSCREATE_OBSERVATION_CENTER_H
 
 #include <vector>
+#include <map>
 
 #include "Map_Object.h"
 #include "Module.h"
+#include "robot.h"
 
 namespace robo {
     class Sensor;
@@ -32,7 +34,7 @@ namespace robo {
         void checkFree();
         std::string whoami() override;
         std::string myModules();
-        int look();
+        std::map<coordinates, Map_Object *> look();
         void determineCorers(int &, int &, int &, int &, unsigned int);
         void setOwner(Map_Object *);
         Map_Object * getOwner() { return owner; }

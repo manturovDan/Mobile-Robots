@@ -17,7 +17,7 @@ namespace robo {
         std::string whoami() override;
         int subdue();
         bool isManager() { return real_manager; }
-        int research();
+        std::map<coordinates, Map_Object *> research();
         Managing * manMod() { return matchMan; }
     };
 }
