@@ -9,7 +9,7 @@
 namespace robo {
     struct map_point {
         Map_Object * iam;
-        bool top;
+        bool top; //maybe is excess
         bool left;
         bool bottom;
         bool right;
@@ -22,6 +22,8 @@ namespace robo {
         void add_point(Map_Object *);
         void print(std::ostream & stream = std::cout);
         void researchMap();
+        void connectResult(const std::map<coordinates, Map_Object *> &);
+        void print_d(int, int, std::ostream & stream = std::cout);
     private:
         std::map<coordinates, map_point> ai_dict;
     };
