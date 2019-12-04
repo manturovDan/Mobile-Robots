@@ -3,7 +3,7 @@
 
 namespace robo {
     Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-                                           std::string & desc, coordinates pos) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true) {
+                                           std::string & desc, coordinates pos) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true), owner(nullptr) {
         initModules(mods);
     }
 
@@ -23,9 +23,14 @@ namespace robo {
 
     std::string Observation_Center::whoami() {
         std::stringstream ss;
+        std::string host = "none";
+
+        if (owner != nullptr)
+            host = owner->getDescription();
+
         ss << "Object : Observation_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                            "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
-                                           "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
+                                           "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\nOwner = " << host << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }

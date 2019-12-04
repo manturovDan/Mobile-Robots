@@ -9,7 +9,7 @@ namespace robo {
 
     std::string Command_Center::whoami() {
         std::stringstream ss;
-        ss << "Object : Command_Center: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
+        ss << "Object : Command_Center <" << this << ">: {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                         "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                         "PortsCount: " << countPorts << ";\nAppeared: " << appeared << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
@@ -32,12 +32,10 @@ namespace robo {
                         if (!strcmp(typeid(*thereObj).name(), "N4robo18Observation_CenterE") ||
                         (!strcmp(typeid(*thereObj).name(), "N4robo14Command_CenterE") &&
                          !dynamic_cast<Command_Center *>(thereObj)->isManager())) {
-                            //std::cout << " { " << thereObj->getX() << ", " << thereObj->getY() << " } - "
-                            //          << typeid(*thereObj).name() << std::endl;
 
                             auto * subo = dynamic_cast<Observation_Center *>(thereObj);
-                            if (subo->getOwner() != nullptr) {
-                                if (matchMan->addSubord(subo)) { //hold iterator!!!!
+                            if (subo->getOwner() == nullptr) {
+                                if (matchMan->addSubord(subo)) {
                                     return 1;
                                 }
 

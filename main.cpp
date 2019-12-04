@@ -67,8 +67,9 @@ int launchFunc(int act, robo::Environment_describer * env) {
     } else if (act == 2) {
         interf::EnvXMLCreate("/home/danila/source/robots/storage/map2.xml", *env);
         auto itf = interf::InterfaceTools(env);
-        itf.printEnv();
         auto ai = robo::Ai_Deep(env);
+
+        itf.printEnv();
 
         //dispr::Display disp(env);
         return 0;
