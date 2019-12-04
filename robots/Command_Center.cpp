@@ -21,6 +21,14 @@ namespace robo {
     int Command_Center::subdue() {
         chooseManModule();
 
+        if (isManager()) {
+            owner = this;
+        }
+        else {
+            owner = nullptr;
+            return 2;
+        }
+
         int top_cor, left_cor, bottom_cor, right_cor;
         determineCorers(top_cor, left_cor, bottom_cor, right_cor, matchMan->getRadius());
 
@@ -71,5 +79,12 @@ namespace robo {
             return 1; //no active managing modules
 
         return 0;
+    }
+
+    int Command_Center::research() {
+        std::cout << "RESEARCHING" << std::endl;
+        for (auto sub : *matchMan) {
+            sub->look();
+        }
     }
 }

@@ -18,6 +18,9 @@ namespace robo {
         int addSubord(Observation_Center *);
         std::string whoami() override;
 
+        std::vector<Observation_Center *>::const_iterator begin() { return subordinate.begin(); }
+        std::vector<Observation_Center *>::const_iterator end() { return subordinate.end(); }
+
     protected:
         unsigned int radius;
         unsigned int subs_count;
