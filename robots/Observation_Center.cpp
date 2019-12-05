@@ -193,4 +193,18 @@ namespace robo {
     void Observation_Center::setOwner(Map_Object * own) {
         owner = static_cast<Observation_Center *>(own);
     }
+
+    unsigned int Observation_Center::getMaxRadius() {
+        unsigned int maxr = 0;
+        for (auto & module : modules) {
+            if (!strcmp(typeid(*module).name(), "N4robo6SensorE")) {
+                unsigned int curRad = dynamic_cast<Sensor *>(module)->getRadius();
+                if (curRad > maxr) {
+                    maxr = curRad;
+                }
+            }
+        }
+
+        return maxr;
+    }
 }

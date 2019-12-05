@@ -19,18 +19,4 @@ namespace robo {
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }
-
-    unsigned int Robot_Scout::getMaxRadius() {
-        unsigned int maxr = 0;
-        for (auto & module : modules) {
-            if (!strcmp(typeid(*module).name(), "N4robo6SensorE")) {
-                unsigned int curRad = dynamic_cast<Sensor *>(module)->getRadius();
-                if (curRad > maxr) {
-                    maxr = curRad;
-                }
-            }
-        }
-
-        return maxr;
-    }
 }

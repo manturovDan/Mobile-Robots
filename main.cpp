@@ -69,9 +69,10 @@ int launchFunc(int act, robo::Environment_describer * env) {
         auto itf = interf::InterfaceTools(env);
         auto ai = robo::Ai_Deep(env);
 
-        itf.printEnv();
+        //itf.printEnv();
 
         ai.researchMap();
+        itf.printEnv();
         //ai.print(std::cout);
 
         //dispr::Display disp(env);

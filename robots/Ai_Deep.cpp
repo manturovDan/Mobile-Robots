@@ -16,20 +16,41 @@ namespace robo {
                 }
             } else if (!strcmp(typeid(**env_iter).name(), "N4robo15Robot_CommanderE")) {
                 auto * r_com = dynamic_cast<Robot_Commander *>(*env_iter);
-                if (r_com->isManager())
+                if (!r_com->isManager())
                     subc = true;
                 else {
-                    if(r_com->chooseManModule())
+                    if(r_com->chooseManModule() != 0)
                         subc = true;
                     else {
-                        managers.insert(std::pair<unsigned int, Map_Object *>(r_com->manMod()->getRadius(), *env_iter));
+                        commanders.insert(std::pair<unsigned int, Map_Object *>(r_com->manMod()->getRadius(), *env_iter));
                     }
                 }
             }
 
             if (subc || !strcmp(typeid(**env_iter).name(), "N4robo11Robot_ScoutE")) {
                 auto * r_sc = dynamic_cast<Robot_Scout *>(*env_iter);
-                managers.insert(std::pair<unsigned int, Map_Object *>(r_sc->getMaxRadius(), *env_iter));
+                scouts.insert(std::pair<unsigned int, Map_Object *>(r_sc->getMaxRadius(), *env_iter));
+            }
+        }
+
+        auto com_i = commanders.begin();
+        auto sco_i = scouts.rbegin();
+
+        for(; com_i != commanders.end(); ++com_i) {
+            auto *com = dynamic_cast<Robot_Commander *>(com_i->second);
+            if (sco_i == scouts.rend()) {
+                com->setOwner(com);
+            }
+            else {
+                auto *rob = dynamic_cast<Robot_Scout *>(sco_i->second);
+                if (com->getMaxRadius() < com_i->first + rob->getMaxRadius()) { //not need subordinates
+                    if (!com->connectScout(rob)) {
+                        sco_i++;
+                    }
+                }
+                else {
+                    com->setOwner(com);
+                }
             }
         }
     }
@@ -96,6 +117,17 @@ namespace robo {
             }
             stream << std::endl;
         }
+
+        stream << "Robot_Commanders: " << std::endl;
+        for (auto & com : commanders) {
+            stream << dynamic_cast<Robot_Commander *>(com.second)->getDescription() << std::endl;
+        }
+
+        stream << std::endl << "Scouts:" << std::endl;
+        for (auto & sc : scouts) {
+            std::cout << dynamic_cast<Robot_Scout *>(sc.second)->getDescription() << std::endl;
+        }
+
     }
 
     void Ai_Deep::print(std::ostream & stream) {

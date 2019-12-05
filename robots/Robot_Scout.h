@@ -12,7 +12,6 @@ namespace robo {
         bool blocked;
     public:
         Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
-        unsigned int getMaxRadius();
         bool getBlocked() { return blocked; }
 
         int move(int);

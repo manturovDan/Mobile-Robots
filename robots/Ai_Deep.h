@@ -23,7 +23,7 @@ namespace robo {
         void print_d(int, int, std::ostream & stream = std::cout);
     private:
         std::map<coordinates, map_point> ai_dict;
-        std::multimap<unsigned int, Map_Object *> managers;
+        std::multimap<unsigned int, Map_Object *> commanders;
         std::multimap<unsigned int, Map_Object *> scouts;
     };
 }

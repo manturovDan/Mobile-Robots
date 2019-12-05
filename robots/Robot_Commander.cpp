@@ -18,4 +18,18 @@ namespace robo {
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }
+
+    int Robot_Commander::connectScout(Robot_Scout * sco) {
+        if (sco->getOwner() == nullptr) {
+            if (matchMan->addSubord(sco)) {
+                return 1;
+            }
+
+            sco->setOwner(this);
+            setOwner(this);
+            return 0;
+
+        }
+        return 1;
+    }
 }
