@@ -20,7 +20,7 @@ namespace robo {
     }
 
     void Ai_Deep::add_point(Map_Object *obj) {
-        ai_dict.insert(std::pair<coordinates, map_point>(obj->getPosition(), {obj, false, false, false, false}));
+        ai_dict.insert(std::pair<coordinates, map_point>(obj->getPosition(), {obj, false}));
     }
 
     void Ai_Deep::researchMap() {
@@ -50,7 +50,7 @@ namespace robo {
     void Ai_Deep::connectResult(const std::map<coordinates, Map_Object *> & res_res) {
         for (auto it = res_res.begin(); it != res_res.end(); ++it) {
             if(ai_dict.find(it->first) == ai_dict.end()) {
-                ai_dict[it->first] = { it->second,false, false, false, false };
+                ai_dict[it->first] = { it->second,false };
             }
         }
     }
@@ -88,7 +88,7 @@ namespace robo {
         for (auto it : ai_dict) {
             std::string who = it.second.iam == nullptr ? "LAND" : it.second.iam->whoami();
             std::cout << "KEY: { " << it.first.x << "; " << it.first.y << " }\n" << who <<
-            "\nneighbours:" << it.second.top << it.second.left << it.second.bottom << it.second.right << std::endl << std::endl;
+            "\nBoundary:" << it.second.isBoundary << std::endl;
         }
     }
 }

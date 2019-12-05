@@ -9,10 +9,7 @@
 namespace robo {
     struct map_point {
         Map_Object * iam;
-        bool top; //maybe is excess
-        bool left;
-        bool bottom;
-        bool right;
+        bool isBoundary;
     };
 
     class Ai_Deep {
