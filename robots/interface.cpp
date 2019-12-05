@@ -80,14 +80,13 @@ namespace interf {
                 module = module->NextSiblingElement();
             }
 
-            unsigned int x, y, ports, consumption, speed;
+            unsigned int x, y, ports, consumption;
             int price;
             const char * robo_desc;
             std::string desc;
 
             bool are_coord = false;
             bool is_robot = false;
-            bool is_speed = false;
             robo::coordinates pos {0, 0};
 
             if (mapEl->QueryUnsignedAttribute("x", &x) == 0 && mapEl->QueryUnsignedAttribute("y", &y) == 0) {
@@ -99,10 +98,6 @@ namespace interf {
             && mapEl->QueryIntAttribute("price", &price) == 0 && mapEl->QueryStringAttribute("description", &robo_desc) == 0) {
                 is_robot = true;
                 desc = robo_desc;
-            }
-
-            if (mapEl->QueryUnsignedAttribute("speed", &speed) == 0) {
-                is_speed = true;
             }
 
             robo::Map_Object *prod;
@@ -130,13 +125,13 @@ namespace interf {
                 else
                     throw std::invalid_argument("Not enough data for Command Center");
             } else if (!strcmp(mapEl->Name(), "Robot_Commander")) {
-                if (is_speed && is_robot) {
-                    prod = env.setObject(robo::Robot_Commander_t, ports, consumption, price, modl, desc, speed);
+                if (is_robot) {
+                    prod = env.setObject(robo::Robot_Commander_t, ports, consumption, price, modl, desc);
                 }else
                     throw std::invalid_argument("Not enough data for Robot Commander");
             } else if (!strcmp(mapEl->Name(), "Robot_Scout")) {
-                if (is_speed && is_robot) {
-                    prod = env.setObject(robo::Robot_Scout_t, ports, consumption, price, modl, desc, speed);
+                if (is_robot) {
+                    prod = env.setObject(robo::Robot_Scout_t, ports, consumption, price, modl, desc);
                 }else
                     throw std::invalid_argument("Not enough data for Robot Scout");
             }

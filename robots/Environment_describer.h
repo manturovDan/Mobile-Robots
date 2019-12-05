@@ -59,8 +59,7 @@ namespace robo {
 
         Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
 
-        Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &,
-                              unsigned int);
+        Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
 
 //      Quick_Navigator qTree;
 

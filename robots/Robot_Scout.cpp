@@ -3,7 +3,7 @@
 
 namespace robo {
     Robot_Scout::Robot_Scout(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-            std::string & desc, unsigned int spd) : speed(spd), blocked(false),
+            std::string & desc) : blocked(false),
             Observation_Center(ports, consumption, price, mods, desc) {}
 
     std::string Robot_Scout::whoami() {
@@ -14,7 +14,7 @@ namespace robo {
                                      "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                       "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\n"
                                       "Blocked: " << blocked << "\n"
-                                      "Speed: " << speed << ";\nOwner = " << host << std::endl;
+                                      "Owner = " << host << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }

@@ -10,11 +10,8 @@ namespace robo {
     class Robot_Scout : virtual public Observation_Center {
     protected:
         bool blocked;
-        unsigned int speed;
     public:
-        Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, unsigned int);
-
-        unsigned int getSpeed() { return speed; }
+        Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
 
         bool getBlocked() { return blocked; }
 

@@ -53,12 +53,12 @@ namespace robo {
 
 
     Map_Object * Environment_describer::setObject(Characters objType, unsigned int ports, unsigned int consumption,
-            int price, std::vector<robo::Module *> & modules, std::string & desc, unsigned int speed) {
+            int price, std::vector<robo::Module *> & modules, std::string & desc) {
         Map_Object * nw_obj = nullptr;
         if (objType == Robot_Commander_t) {
-            nw_obj = new Robot_Commander(ports, consumption, price, modules, desc, speed);
+            nw_obj = new Robot_Commander(ports, consumption, price, modules, desc);
         } else if (objType == Robot_Scout_t) {
-            nw_obj = new Robot_Scout(ports, consumption, price, modules, desc, speed);
+            nw_obj = new Robot_Scout(ports, consumption, price, modules, desc);
         } else {
             throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (moving)");
         }

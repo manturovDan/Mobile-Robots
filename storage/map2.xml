@@ -20,13 +20,13 @@
         <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
     </Observation_Center>
 
-    <Robot_Scout price = "10000" consumption = "10"  description = "subord_move" ports = "15" speed = "25">
+    <Robot_Scout price = "10000" consumption = "10"  description = "subord_move" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
         <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
         <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
     </Robot_Scout>
 
-    <Robot_Commander price = "10000" consumption = "10"  description = "general_move" ports = "15" speed = "1">
+    <Robot_Commander price = "10000" consumption = "10"  description = "general_move" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
         <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
         <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
