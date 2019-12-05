@@ -13,7 +13,7 @@ namespace robo {
 
         ss << "Object : Command_Center {" << position.x << ", " << position.y << "}\nDesc: '" << description << "';\n"
                                         "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
-                                        "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\nOwner = " << host << std::endl;
+                                        "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\nOwner = " << host << "\nReal manager: " << real_manager << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }
@@ -75,8 +75,10 @@ namespace robo {
             }
         }
 
-        if (matchMan == nullptr)
+        if (matchMan == nullptr) {
+            real_manager = false;
             return 1; //no active managing modules
+        }
 
         return 0;
     }

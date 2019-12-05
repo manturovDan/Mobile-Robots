@@ -4,6 +4,7 @@
 namespace robo {
     Ai_Deep::Ai_Deep(Environment_describer * env) {
         for (Env_Consistent_Iter env_iter = env->begin(); env_iter != env->end(); ++env_iter) {
+            bool subc = false;
             if(!strcmp(typeid(**env_iter).name(), "N4robo14Command_CenterE")) {
                 add_point(*env_iter);
                 auto * cc = dynamic_cast<Command_Center *>(*env_iter);
@@ -13,8 +14,22 @@ namespace robo {
                 for (auto cit : *cc->manMod()) {
                     add_point(cit);
                 }
-                //cc->research();
-                //cc->look(); //LOOK ALL SUBORDINATORS
+            } else if (!strcmp(typeid(**env_iter).name(), "N4robo15Robot_CommanderE")) {
+                auto * r_com = dynamic_cast<Robot_Commander *>(*env_iter);
+                if (r_com->isManager())
+                    subc = true;
+                else {
+                    if(r_com->chooseManModule())
+                        subc = true;
+                    else {
+                        managers.insert(std::pair<unsigned int, Map_Object *>(r_com->manMod()->getRadius(), *env_iter));
+                    }
+                }
+            }
+
+            if (subc || !strcmp(typeid(**env_iter).name(), "N4robo11Robot_ScoutE")) {
+                auto * r_sc = dynamic_cast<Robot_Scout *>(*env_iter);
+                managers.insert(std::pair<unsigned int, Map_Object *>(r_sc->getMaxRadius(), *env_iter));
             }
         }
     }
@@ -31,14 +46,14 @@ namespace robo {
                 std::map<coordinates, Map_Object *> resd = comc->research();
 
                 ///
-                for (auto it = resd.begin(); it != resd.end(); ++it) {
+                /*for (auto it = resd.begin(); it != resd.end(); ++it) {
                     std::cout << it->first.x << " - " << it->first.y << " == ";
                     if (it->second == nullptr)
                         std::cout << "land";
                     else
                         std::cout << typeid(*(it->second)).name();
                     std::cout << std::endl;
-                }
+                }*/
 
                 connectResult(resd);
             }
@@ -74,7 +89,7 @@ namespace robo {
                             stream << "I";
                         else if (!strcmp(typeid(*co).name(), "N4robo8ObstacleE"))
                             stream << "P";
-                        else if (!strcmp(typeid(*co).name(), "N4robo8ObstacleE"))
+                        else// if (!strcmp(typeid(*co).name(), "N4robo8ObstacleE"))
                             stream << "A";
                     }
                 }

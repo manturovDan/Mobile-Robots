@@ -10,7 +10,6 @@ namespace robo {
     class Command_Center : virtual public Observation_Center {
     protected:
         bool real_manager = true; //TODO in depend of consumption
-        int chooseManModule();
         Managing * matchMan;
     public:
         Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
@@ -19,6 +18,7 @@ namespace robo {
         bool isManager() { return real_manager; }
         std::map<coordinates, Map_Object *> research();
         Managing * manMod() { return matchMan; }
+        int chooseManModule();
     };
 }
 

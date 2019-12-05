@@ -14,7 +14,7 @@ namespace robo {
                                          "Consumption: " << energyConsumption << ";\nCost: " << cost << ";\n"
                                          "PortsCount: " << countPorts << ";\nAppeared: " << appeared << ";\n"
                                          "Blocked: " << blocked << "\n"
-                                         "Owner = " << host << std::endl;
+                                         "Owner = " << host << "\nReal Manager: " << real_manager << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
     }

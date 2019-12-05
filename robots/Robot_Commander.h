@@ -8,7 +8,7 @@
 #include "Module.h"
 
 namespace robo {
-    class Robot_Commander : public Robot_Scout, Command_Center {
+    class Robot_Commander : public Robot_Scout, public Command_Center {
     public:
         Robot_Commander(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
 
