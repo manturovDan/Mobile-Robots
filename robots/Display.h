@@ -3,19 +3,25 @@
 
 #include <SFML/Graphics.hpp>
 #include <thread>
+#include <chrono>
+#include <condition_variable>
+#include <mutex>
 
 #include "Environment_describer.h"
+#include "Ai_Deep.h"
 
 namespace dispr {
     class Display {
     private:
         robo::Environment_describer * env;
+        std::mutex sw;
+        std::condition_variable time_upd;
     public:
         Display() = delete;
         Display(robo::Environment_describer *);
         void show();
         void run();
-
+        void justTimer();
     };
 }
 

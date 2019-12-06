@@ -2,7 +2,6 @@
 #define ROBOTSCREATE_AI_DEEP_H
 
 #include <map>
-
 #include "robot.h"
 #include "Managing.h"
 
@@ -21,6 +20,7 @@ namespace robo {
         void researchMap();
         void connectResult(const std::map<coordinates, Map_Object *> &);
         void print_d(int, int, std::ostream & stream = std::cout);
+        void run();
     private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;

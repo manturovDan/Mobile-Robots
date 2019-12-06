@@ -4,10 +4,13 @@ namespace dispr {
     Display::Display(robo::Environment_describer * envir) : env(envir) { }
 
     void Display::show() {
+        std::unique_lock<std::mutex> lock(sw);
+
         sf::RenderWindow window (sf::VideoMode(700, 700), "Mobile Robots");
 
         window.setFramerateLimit(32);
 
+        int k = 0;
         while(window.isOpen()) {
             sf::Event event;
             while (window.pollEvent(event)) {
@@ -32,16 +35,36 @@ namespace dispr {
                 }
             }
 
-            landNoS.setPosition(32, 32);
+            landNoS.setPosition(32+k*10, 32);
             window.draw(landNoS);
 
             //window.draw(TestCirc);
             window.display();
+            k++;
+            time_upd.wait(lock);
+        }
+    }
+
+    void Display::justTimer() {
+        using namespace std::chrono_literals;
+        std::cout << "Hello waiter\n" << std::flush;
+        int i = 1;
+        while(true) {
+            auto start = std::chrono::high_resolution_clock::now();
+            std::this_thread::sleep_for(2s);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+            std::cout << "Waited " << elapsed.count() << " ms\n";
+            time_upd.notify_one();
+            if (i++ == 1000)
+                break;
         }
     }
 
     void Display::run() {
-        std::thread tr = std::thread(&Display::show, this);
-        tr.join();
+        std::thread trDisp = std::thread(&Display::show, this);
+        std::thread trInte = std::thread(&Display::justTimer, this);
+        trDisp.join();
+        trInte.join();
     }
 }
