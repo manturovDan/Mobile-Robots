@@ -94,7 +94,7 @@
         <Managing consumption = "8" radius = "10" priority = "2" subordinates_count = "5"/>
     </Robot_Commander>
 
-    <Robot_Commander price = "10000" consumption = "10"  description = "general_move" ports = "15">
+    <Robot_Commander price = "10000" consumption = "10"  description = "general_move_four" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
         <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
         <Sensor consumption = "8" radius = "4" priority = "1" direction="1" angle = "0"/>
@@ -102,20 +102,20 @@
         <Managing consumption = "8" radius = "8" priority = "2" subordinates_count = "5"/>
     </Robot_Commander>
 
-    <Robot_Commander price = "10000" consumption = "10"  description = "general_move" ports = "15">
+    <Robot_Commander price = "10000" consumption = "10"  description = "general_move_five" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
+        <Sensor consumption = "8" radius = "4" priority = "1" direction = "0" angle = "3"/>
         <Sensor consumption = "8" radius = "4" priority = "1" direction="1" angle = "0"/>
         <Sensor consumption = "8" radius = "2" priority = "1" direction="1" angle = "0"/>
         <Managing consumption = "8" radius = "8" priority = "2" subordinates_count = "5"/>
     </Robot_Commander>
 
-    <Robot_Commander price = "10000" consumption = "10"  description = "general_move" ports = "15">
+    <Robot_Commander price = "10000" consumption = "10"  description = "general_move_six" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
         <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
         <Sensor consumption = "8" radius = "4" priority = "1" direction="1" angle = "0"/>
         <Sensor consumption = "8" radius = "2" priority = "1" direction="1" angle = "0"/>
-        <Managing consumption = "8" radius = "8" priority = "2" subordinates_count = "5"/>
+        <Managing consumption = "8" radius = "4" priority = "2" subordinates_count = "5"/>
     </Robot_Commander>
 
 

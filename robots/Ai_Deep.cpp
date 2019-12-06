@@ -33,16 +33,20 @@ namespace robo {
             }
         }
 
-        auto com_i = commanders.begin();
-        auto sco_i = scouts.rbegin();
+        auto com_i = commanders.rbegin();
+        auto sco_i = scouts.begin();
 
-        for(; com_i != commanders.end(); ++com_i) {
+        std::cout << "RASPR" << std::endl;
+
+        for(; com_i != commanders.rend(); ++com_i) {
             auto *com = dynamic_cast<Robot_Commander *>(com_i->second);
-            if (sco_i == scouts.rend()) {
+            if (sco_i == scouts.end()) {
                 com->setOwner(com);
             }
             else {
                 auto *rob = dynamic_cast<Robot_Scout *>(sco_i->second);
+
+                std::cout << com->getMaxRadius() << " " << com_i->first << " " << rob->getMaxRadius() << std::endl;
                 if (com->getMaxRadius() < com_i->first + rob->getMaxRadius()) { //not need subordinates
                     if (!com->connectScout(rob)) {
                         sco_i++;
