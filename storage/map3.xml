@@ -77,7 +77,7 @@
 
     <Robot_Commander price = "10000" consumption = "10"  description = "general_move_one" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
+        <Sensor consumption = "8" radius = "50" priority = "1" direction="1" angle = "0"/>
         <Managing consumption = "8" radius = "23" priority = "2" subordinates_count = "5"/>
     </Robot_Commander>
 
@@ -107,7 +107,7 @@
         <Sensor consumption = "8" radius = "4" priority = "1" direction = "0" angle = "3"/>
         <Sensor consumption = "8" radius = "4" priority = "1" direction="1" angle = "0"/>
         <Sensor consumption = "8" radius = "2" priority = "1" direction="1" angle = "0"/>
-        <Managing consumption = "8" radius = "8" priority = "2" subordinates_count = "5"/>
+        <Managing consumption = "8" radius = "6" priority = "2" subordinates_count = "5"/>
     </Robot_Commander>
 
     <Robot_Commander price = "10000" consumption = "10"  description = "general_move_six" ports = "15">
