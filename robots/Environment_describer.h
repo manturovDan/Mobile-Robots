@@ -40,38 +40,23 @@ namespace robo {
 
     public:
         Environment_describer() : time(0), width(0), height(0) { robo::Map_Object::setEnv(this); }
-
         Environment_describer(int, int);
-
         void setWidth(unsigned int nval) { setWidthHeight(nval, true); }
-
         void setHeight(unsigned nval) { setWidthHeight(nval, false); }
-
         unsigned int getWidth() { return width; };
-
         unsigned int getHeight() { return height; };
-
         coordinates getObject(Map_Object &);
-
         Map_Object *getObject(coordinates);
 
         Map_Object *setObject(Characters, coordinates);
-
         Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
-
         Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
 
-//      Quick_Navigator qTree;
-
         void print(std::ostream &stream = std::cout);
-
         ~Environment_describer() = default; // clear vector
-
         friend class Env_Consistent_Iter;
-
         Env_Consistent_Iter begin() { return Env_Consistent_Iter(map_obj); }
         Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end());  }
-
         Map_Object * checkStaticPoint(coordinates);
     };
 }
