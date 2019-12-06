@@ -735,6 +735,8 @@ Managing.h
 /home/danila/source/robots/robots/Display.h
 SFML/Graphics.hpp
 -
+thread
+-
 Environment_describer.h
 /home/danila/source/robots/robots/Environment_describer.h
 

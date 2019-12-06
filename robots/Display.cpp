@@ -1,19 +1,12 @@
 #include "Display.h"
 
 namespace dispr {
-    Display::Display(robo::Environment_describer * envir) : env(envir) {
-        sf::RenderWindow window(sf::VideoMode(700, 700), "Mobile Robots");
+    Display::Display(robo::Environment_describer * envir) : env(envir) { }
 
-        sf::CircleShape TestCirc(350.f);
-        TestCirc.setFillColor(sf::Color::Green);
+    void Display::show() {
+        sf::RenderWindow window (sf::VideoMode(700, 700), "Mobile Robots");
 
-        sf::RectangleShape rectangle (sf::Vector2f(32, 32));
-
-        sf::Texture landNoT;
-        landNoT.loadFromFile("../static/land_no.jpg");
-        sf::Sprite landNoS(landNoT);
-
-        window.setFramerateLimit(15);
+        window.setFramerateLimit(32);
 
         while(window.isOpen()) {
             sf::Event event;
@@ -23,6 +16,12 @@ namespace dispr {
             }
 
             window.clear(sf::Color::White);
+
+            sf::RectangleShape rectangle (sf::Vector2f(32, 32));
+
+            sf::Texture landNoT;
+            landNoT.loadFromFile("../static/land_no.jpg");
+            sf::Sprite landNoS(landNoT);
 
             for (int j = 0; j < 50; ++j) {
                 for (int i = 0; i < 50; ++i) {
@@ -39,5 +38,10 @@ namespace dispr {
             //window.draw(TestCirc);
             window.display();
         }
+    }
+
+    void Display::run() {
+        std::thread tr = std::thread(&Display::show, this);
+        tr.join();
     }
 }

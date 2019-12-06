@@ -2,6 +2,7 @@
 #define ROBOTSCREATE_DISPLAY_H
 
 #include <SFML/Graphics.hpp>
+#include <thread>
 
 #include "Environment_describer.h"
 
@@ -12,8 +13,8 @@ namespace dispr {
     public:
         Display() = delete;
         Display(robo::Environment_describer *);
-
-
+        void show();
+        void run();
 
     };
 }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(robotsCreate)
 
 set(CMAKE_CXX_STANDARD 17)
-
+SET(CMAKE_CXX_FLAGS -pthread)
 set(SFML_INCLUDE_DIR "~/source/libraries/SFML-2.5.1/include")
 set(SFML_LIBRARY_DIR "~/source/libraries/SFML-2.5.1/lib")
 set(SFML_DIR "~/source/libraries/SFML-2.5.1/lib/cmake/SFML")
