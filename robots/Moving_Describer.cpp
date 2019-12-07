@@ -14,7 +14,7 @@ namespace robo {
         stream << "--------------\nMOVING:\n--------------" << std::endl;
         for (auto & it : move_d) {
             std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
-            it.pos.y << "}; direction: " << it.direction << "target_time: " << it.time << "; dest: " << it.destination << std::endl;
+            it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
         }
     }
 

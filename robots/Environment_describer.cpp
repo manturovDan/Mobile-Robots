@@ -92,17 +92,31 @@ namespace robo {
     Map_Object * Environment_describer::checkStaticPoint(coordinates point) {
         //TODO maybe to do with multimap in the future
 
-        auto it = begin();
-        for (; it != end(); ++it) {
-            if ((*it)->getPosition() == point && strcmp(typeid(*it).name(), "N4robo15Robot_CommanderE") && strcmp(typeid(*it).name(), "N4robo11Robot_ScoutE")) {
+        auto it = ibegin();
+        for (; it != iend(); ++it) {
+            std::cout << "found_res: " << typeid(**it).name() << std::endl;
+            if ((*it)->getPosition() == point && strcmp(typeid(*it).name(), "N4robo15Robot_CommanderE") != 0 && strcmp(typeid(*it).name(), "N4robo11Robot_ScoutE") != 0) {
                 break;
             }
         }
 
-        if (it == end())
+        if (it == iend())
             return nullptr;
         return *it;
 
+    }
+
+    Map_Object * Environment_describer::checkMobOnPoint(coordinates point) {
+        auto it = ibegin();
+        for (; it != iend(); ++it) {
+            if ((*it)->getPosition() == point && (strcmp(typeid(*it).name(), "N4robo15Robot_CommanderE") == 0 || strcmp(typeid(*it).name(), "N4robo11Robot_ScoutE") == 0)) {
+                break;
+            }
+        }
+
+        if (it == iend())
+            return nullptr;
+        return *it;
     }
 
     Env_Consistent_Iter Env_Consistent_Iter::operator++(int) { //postfix

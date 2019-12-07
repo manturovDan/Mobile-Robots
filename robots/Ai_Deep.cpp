@@ -2,9 +2,9 @@
 #include "Environment_describer.h"
 
 namespace robo {
-    Ai_Deep::Ai_Deep(Environment_describer * env) {
+    Ai_Deep::Ai_Deep(Environment_describer * env) : envir(env) {
         md = new Moving_Describer;
-        for (Env_Consistent_Iter env_iter = env->begin(); env_iter != env->end(); ++env_iter) {
+        for (Env_Consistent_Iter env_iter = envir->begin(); env_iter != envir->end(); ++env_iter) {
             bool subc = false;
             if(!strcmp(typeid(**env_iter).name(), "N4robo14Command_CenterE")) {
                 add_point(*env_iter);
@@ -162,6 +162,37 @@ namespace robo {
         md->addStep({testCom, {0, 4}, 0, 4, 0});
         md->addStep({testCom, {0, 5}, 0, 5, 1});
 
+        md->printSteps();
+    }
+
+    /// returns 1 if all commanders are researching, 0 - some commanders are rest, 2 - start points are busy
+    int Ai_Deep::startCommander() {
+        if(envir->checkMobOnPoint({0, 0}) != nullptr || envir->checkMobOnPoint({0, 1}) != nullptr)
+            return 2;
+
+        if(envir->checkMobOnPoint({0, 0}) != nullptr)
+            std::cout << "POINT 0 0" << static_cast<Observation_Center *>(envir->checkMobOnPoint({0, 0}))->getDescription();
+
+        if(envir->checkMobOnPoint({0, 1}) != nullptr)
+            std::cout << "POINT 0 1" << static_cast<Observation_Center *>(envir->checkMobOnPoint({0, 1}))->getDescription();
+
+        for (auto & com_it : commanders) {
+            auto * com = dynamic_cast<Robot_Commander *>(com_it.second);
+
+            if (com->getBlocked()) {
+                com->move({0, 0}, 0);
+                com->unBlock();
+                if (com->manMod()->subord_count() > 0)
+                    md->addStep({com, {0, 1}, 0, envir->getTime()+1, 1});
+                return 0;
+            }
+        }
+
+        return 1;
+    }
+
+    void Ai_Deep::nextComp() {
+        startCommander();
         md->printSteps();
     }
 }

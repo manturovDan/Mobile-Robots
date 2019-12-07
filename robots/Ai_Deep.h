@@ -28,12 +28,15 @@ namespace robo {
         Moving_Describer * getMd() { return md; }
         std::multimap<coordinates, map_point>::const_iterator begin() { return ai_dict.begin(); }
         std::multimap<coordinates, map_point>::const_iterator end() { return ai_dict.end(); }
+        int startCommander();
+        void nextComp();
     private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;
         std::multimap<unsigned int, Map_Object *> scouts;
         std::queue<Robot_Scout *> report;
         Moving_Describer * md;
+        Environment_describer * envir;
     };
 }
 

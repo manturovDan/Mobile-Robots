@@ -186,6 +186,7 @@ namespace dispr {
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
                 std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
+                ai->nextComp();
                 ai->getMd()->makeSteps(env->getTime());
                 is_comp = false;
                 if (i++ == std::numeric_limits<unsigned int>::max() - 1)
