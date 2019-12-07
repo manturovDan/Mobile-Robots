@@ -254,7 +254,7 @@ CMakeFiles/obstacle.dir/clean:
 # Target rules for target CMakeFiles/ai_robots.dir
 
 # All Build rule for target.
-CMakeFiles/ai_robots.dir/all:
+CMakeFiles/ai_robots.dir/all: CMakeFiles/moving_describer.dir/all
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/depend
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target ai_robots"
@@ -262,7 +262,7 @@ CMakeFiles/ai_robots.dir/all:
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ai_robots.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ai_robots.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/ai_robots.dir/rule

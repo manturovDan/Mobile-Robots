@@ -3,6 +3,7 @@
 
 namespace robo {
     Ai_Deep::Ai_Deep(Environment_describer * env) {
+        md = new Moving_Describer;
         for (Env_Consistent_Iter env_iter = env->begin(); env_iter != env->end(); ++env_iter) {
             bool subc = false;
             if(!strcmp(typeid(**env_iter).name(), "N4robo14Command_CenterE")) {
@@ -155,6 +156,10 @@ namespace robo {
 
     void Ai_Deep::testNext() {
         Robot_Commander * testCom = dynamic_cast<Robot_Commander *>(commanders.rbegin()->second);
-        md.addStep({testCom, {0, 1}, 0, 1, 0});
+        md->addStep({testCom, {0, 1}, 0, 1, 0});
+        md->addStep({testCom, {0, 2}, 0, 2, 0});
+        md->addStep({testCom, {0, 3}, 0, 3, 0});
+        md->addStep({testCom, {0, 4}, 0, 4, 0});
+        md->addStep({testCom, {0, 5}, 0, 5, 1});
     }
 }

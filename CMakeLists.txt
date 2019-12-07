@@ -32,6 +32,7 @@ target_link_libraries(environment_describer map_object obstacle)
 target_link_libraries(map_object environment_describer)
 target_link_libraries(sensor environment_describer)
 target_link_libraries(observation_center sensor)
+target_link_libraries(ai_robots moving_describer)
 
 add_executable(robotsCreate main.cpp robots/robot.h)
 

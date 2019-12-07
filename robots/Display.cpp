@@ -1,7 +1,7 @@
 #include "Display.h"
 
 namespace dispr {
-    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip) : env(envir), ai(aip) { }
+    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip) : env(envir), ai(aip) { sw.unlock(); }
 
     void Display::show() {
         const int winWidth = 700;
@@ -157,9 +157,10 @@ namespace dispr {
             }
 
             unsigned int curTime = env->getTime();
-            if (realTime < curTime) {
+            if(!sw.try_lock()) {
                 std::cout << "UPDDD" << std::endl;
                 realTime = curTime;
+                sw.lock();
             }
 
 
@@ -175,14 +176,17 @@ namespace dispr {
         std::cout << "Hello waiter\n" << std::flush;
         int i = 1;
         while(true) {
-            auto start = std::chrono::high_resolution_clock::now();
-            std::this_thread::sleep_for(2s);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::milli> elapsed = end - start;
-            std::cout << "Waited " << elapsed.count() << " ms\n";
-            env->plusTime();
-            if (i++ == std::numeric_limits<unsigned int>::max() - 1)
-                break; // error
+            if (sw.try_lock()) {
+                auto start = std::chrono::high_resolution_clock::now();
+                std::this_thread::sleep_for(2s);
+                env->plusTime();
+                auto end = std::chrono::high_resolution_clock::now();
+                std::chrono::duration<double, std::milli> elapsed = end - start;
+                std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
+                sw.unlock();
+                if (i++ == std::numeric_limits<unsigned int>::max() - 1)
+                    break; // error
+            }
         }
     }
 

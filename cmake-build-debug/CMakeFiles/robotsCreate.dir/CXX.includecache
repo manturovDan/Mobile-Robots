@@ -743,8 +743,6 @@ thread
 -
 chrono
 -
-condition_variable
--
 mutex
 -
 Environment_describer.h
@@ -805,9 +803,7 @@ iostream
 -
 
 /home/danila/source/robots/robots/Moving_Describer.h
-forward_list
--
-set
+deque
 -
 Robot_Scout.h
 /home/danila/source/robots/robots/Robot_Scout.h

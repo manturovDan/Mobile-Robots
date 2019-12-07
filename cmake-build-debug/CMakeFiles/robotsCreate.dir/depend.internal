@@ -87,6 +87,7 @@ CMakeFiles/robotsCreate.dir/main.cpp.o
  /home/danila/source/robots/robots/Managing.h
  /home/danila/source/robots/robots/Map_Object.h
  /home/danila/source/robots/robots/Module.h
+ /home/danila/source/robots/robots/Moving_Describer.h
  /home/danila/source/robots/robots/Observation_Center.h
  /home/danila/source/robots/robots/Obstacle.h
  /home/danila/source/robots/robots/Power_Generator.h

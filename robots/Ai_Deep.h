@@ -32,7 +32,7 @@ namespace robo {
         std::multimap<unsigned int, Map_Object *> commanders;
         std::multimap<unsigned int, Map_Object *> scouts;
         std::queue<Robot_Scout *> report;
-        Moving_Describer md;
+        Moving_Describer * md;
     };
 }
 

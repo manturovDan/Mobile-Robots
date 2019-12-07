@@ -19,6 +19,7 @@ namespace robo {
         std::deque<moment> move_d;
         unsigned long int time;
     public:
+        Moving_Describer() = default;
         int addStep(moment);
     };
 }
