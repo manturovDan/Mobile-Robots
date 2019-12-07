@@ -1,6 +1,8 @@
 #include "Managing.h"
+#include "Ai_Deep.h"
 
 namespace robo {
+    Ai_Deep * Managing::ai;
     Module * Managing::copy() {
         auto nw_mm = new Managing(radius, powerConsumption, priority, subs_count);
         return nw_mm;
@@ -27,5 +29,13 @@ namespace robo {
             ss << "\t\ts) " << sub->getDescription();
         }
         return ss.str();
+    }
+
+    void Managing::reportAI(Robot_Scout * reporter, int type) {
+        ai->makeReport(reporter, type);
+    }
+
+    void Managing::setAI(Ai_Deep *aip) {
+        ai = aip;
     }
 }

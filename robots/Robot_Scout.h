@@ -16,6 +16,7 @@ namespace robo {
         bool getBlocked() { return blocked; }
         void unBlock() { blocked = false; }
         void move(coordinates, int);
+        void report(int);
 
         std::string whoami() override;
     };

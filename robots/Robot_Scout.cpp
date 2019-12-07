@@ -26,4 +26,8 @@ namespace robo {
 
         direction = dir;
     }
+
+    void Robot_Scout::report(int type) {
+        dynamic_cast<Command_Center *>(owner)->comReport(this, type);
+    }
 }

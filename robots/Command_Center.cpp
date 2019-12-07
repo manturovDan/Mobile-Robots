@@ -97,4 +97,8 @@ namespace robo {
 
         return full_look_res;
     }
+
+    void Command_Center::comReport(Robot_Scout * sub, int type) {
+        manMod()->reportAI(sub, type);
+    }
 }

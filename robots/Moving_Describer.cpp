@@ -25,6 +25,8 @@ namespace robo {
                 throw std::invalid_argument("ROBOTIME error");
             if (it->time == curTime) {
                 it->moving_obj->move(it->pos, it->direction);
+                if(it->destination != 0)
+                    it->moving_obj->report(it->destination);
                 delev.push_back(it);
             }
         }

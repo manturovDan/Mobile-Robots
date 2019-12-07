@@ -18,7 +18,8 @@ namespace robo {
         bool isManager() { return real_manager; }
         std::map<coordinates, Map_Object *> research();
         Managing * manMod() { return matchMan; }
-        int chooseManModule();
+        int chooseManModule();;
+        void comReport(Robot_Scout *, int);
     };
 }
 

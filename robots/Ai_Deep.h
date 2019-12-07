@@ -2,7 +2,7 @@
 #define ROBOTSCREATE_AI_DEEP_H
 
 #include <map>
-#include <queue>
+#include <deque>
 #include "robot.h"
 #include "Managing.h"
 #include "Moving_Describer.h"
@@ -30,11 +30,12 @@ namespace robo {
         std::multimap<coordinates, map_point>::const_iterator end() { return ai_dict.end(); }
         int startCommander();
         void nextComp();
+        void makeReport(Robot_Scout * who, int type) { report.push_back(std::pair<Robot_Scout *, int>(who, type)); }
     private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;
         std::multimap<unsigned int, Map_Object *> scouts;
-        std::queue<Robot_Scout *> report;
+        std::deque<std::pair<Robot_Scout *, int>> report;
         Moving_Describer * md;
         Environment_describer * envir;
     };

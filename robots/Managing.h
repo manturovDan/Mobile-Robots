@@ -6,8 +6,11 @@
 
 #include "Observation_Center.h"
 #include "Energy_Consumer.h"
+#include "Robot_Scout.h"
+#include "Ai_Deep.h"
 
 namespace robo {
+    class Ai_Deep;
     class Managing : public Energy_Consumer {
     public:
         Managing() = delete;
@@ -20,11 +23,13 @@ namespace robo {
         int subord_count() { return subordinate.size(); }
         std::vector<Observation_Center *>::const_iterator begin() { return subordinate.begin(); }
         std::vector<Observation_Center *>::const_iterator end() { return subordinate.end(); }
-
+        void reportAI(Robot_Scout *, int);
+        static void setAI(Ai_Deep * aip);
     protected:
         unsigned int radius;
         unsigned int subs_count;
         std::vector<Observation_Center *> subordinate;
+        static Ai_Deep * ai;
     };
 }
 
