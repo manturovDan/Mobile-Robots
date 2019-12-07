@@ -195,7 +195,13 @@ namespace robo {
                 auto pair = commer->getPair();
                 pair->move({0, 0}, 0);
                 pair->unBlock();
-                std::cout << "PAIR IS READY" << std::endl;
+                rep.first->report(3);
+            }
+            else if (rep.second == 2) {
+
+            }
+            else if (rep.second == 3) {
+                std::cout << "commander research" << std::endl;
             }
         }
 
