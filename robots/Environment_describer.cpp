@@ -92,29 +92,29 @@ namespace robo {
     Map_Object * Environment_describer::checkStaticPoint(coordinates point) {
         //TODO maybe to do with multimap in the future
 
-        auto it = ibegin();
-        for (; it != iend(); ++it) {
-            std::cout << "found_res: " << typeid(**it).name() << std::endl;
-            if ((*it)->getPosition() == point && strcmp(typeid(*it).name(), "N4robo15Robot_CommanderE") != 0 && strcmp(typeid(*it).name(), "N4robo11Robot_ScoutE") != 0) {
+        auto it = begin();
+        for (; it != end(); ++it) {
+            if ((*it)->getPosition() == point && strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE") != 0 && strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE") != 0) {
                 break;
             }
         }
 
-        if (it == iend())
+        if (it == end())
             return nullptr;
         return *it;
 
     }
 
     Map_Object * Environment_describer::checkMobOnPoint(coordinates point) {
-        auto it = ibegin();
-        for (; it != iend(); ++it) {
-            if ((*it)->getPosition() == point && (strcmp(typeid(*it).name(), "N4robo15Robot_CommanderE") == 0 || strcmp(typeid(*it).name(), "N4robo11Robot_ScoutE") == 0)) {
+        auto it = begin();
+        for (; it != end(); ++it) {
+            if ((*it)->getPosition() == point && !dynamic_cast<Robot_Scout *>(*it)->getBlocked() &&
+                (strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE") == 0 || strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE") == 0)) {
                 break;
             }
         }
 
-        if (it == iend())
+        if (it == end())
             return nullptr;
         return *it;
     }

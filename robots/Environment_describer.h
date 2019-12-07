@@ -59,10 +59,6 @@ namespace robo {
         friend class Env_Consistent_Iter;
         Env_Consistent_Iter begin() { return Env_Consistent_Iter(map_obj); }
         Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end()); }
-
-        std::vector<Map_Object *>::const_iterator ibegin() { return  map_obj.begin(); }
-        std::vector<Map_Object *>::const_iterator iend() { return  map_obj.end(); }
-
         Map_Object * checkStaticPoint(coordinates);
         Map_Object * checkMobOnPoint(coordinates);
     };

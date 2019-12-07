@@ -170,12 +170,6 @@ namespace robo {
         if(envir->checkMobOnPoint({0, 0}) != nullptr || envir->checkMobOnPoint({0, 1}) != nullptr)
             return 2;
 
-        if(envir->checkMobOnPoint({0, 0}) != nullptr)
-            std::cout << "POINT 0 0" << static_cast<Observation_Center *>(envir->checkMobOnPoint({0, 0}))->getDescription();
-
-        if(envir->checkMobOnPoint({0, 1}) != nullptr)
-            std::cout << "POINT 0 1" << static_cast<Observation_Center *>(envir->checkMobOnPoint({0, 1}))->getDescription();
-
         for (auto & com_it : commanders) {
             auto * com = dynamic_cast<Robot_Commander *>(com_it.second);
 
@@ -192,7 +186,7 @@ namespace robo {
     }
 
     void Ai_Deep::nextComp() {
-        startCommander();
+        std::cout << startCommander() << std::endl;
         md->printSteps();
     }
 }
