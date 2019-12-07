@@ -202,6 +202,7 @@ namespace robo {
             }
             else if (rep.second == 3) {
                 std::cout << "commander research" << std::endl;
+                //TODO full research in sqare, move to next - on tomorrow
             }
         }
 
