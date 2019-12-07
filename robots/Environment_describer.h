@@ -52,6 +52,8 @@ namespace robo {
         Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
         Map_Object *setObject(Characters, unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
 
+        void plusTime() { time++; };
+        unsigned int getTime() { return time; }
         void print(std::ostream &stream = std::cout);
         ~Environment_describer() = default; // clear vector
         friend class Env_Consistent_Iter;
