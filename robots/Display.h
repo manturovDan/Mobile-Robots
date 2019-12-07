@@ -15,6 +15,7 @@ namespace dispr {
         robo::Environment_describer * env;
         robo::Ai_Deep * ai;
         std::mutex sw;
+        bool is_comp;
     public:
         Display() = delete;
         Display(robo::Environment_describer *, robo::Ai_Deep *);

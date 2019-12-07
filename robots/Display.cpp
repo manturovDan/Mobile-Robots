@@ -1,7 +1,7 @@
 #include "Display.h"
 
 namespace dispr {
-    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip) : env(envir), ai(aip) { sw.unlock(); }
+    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip) : env(envir), ai(aip) { is_comp = false; }
 
     void Display::show() {
         const int winWidth = 700;
@@ -157,10 +157,10 @@ namespace dispr {
             }
 
             unsigned int curTime = env->getTime();
-            if(!sw.try_lock()) {
+            if(!is_comp) {
                 std::cout << "UPDDD" << std::endl;
                 realTime = curTime;
-                sw.lock();
+                is_comp = true;
             }
 
 
@@ -174,16 +174,19 @@ namespace dispr {
 
         using namespace std::chrono_literals;
         std::cout << "Hello waiter\n" << std::flush;
+        ai->getMd()->printSteps();
+
         int i = 1;
         while(true) {
-            if (sw.try_lock()) {
+            if (is_comp) {
                 auto start = std::chrono::high_resolution_clock::now();
                 std::this_thread::sleep_for(2s);
                 env->plusTime();
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
                 std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
-                sw.unlock();
+                //precessing
+                is_comp = false;
                 if (i++ == std::numeric_limits<unsigned int>::max() - 1)
                     break; // error
             }

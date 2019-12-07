@@ -161,5 +161,7 @@ namespace robo {
         md->addStep({testCom, {0, 3}, 0, 3, 0});
         md->addStep({testCom, {0, 4}, 0, 4, 0});
         md->addStep({testCom, {0, 5}, 0, 5, 1});
+
+        md->printSteps();
     }
 }

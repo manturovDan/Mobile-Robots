@@ -21,6 +21,7 @@ namespace robo {
     public:
         Moving_Describer() = default;
         int addStep(moment);
+        void printSteps(std::ostream & stream = std::cout);
     };
 }
 
