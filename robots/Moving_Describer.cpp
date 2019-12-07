@@ -17,4 +17,21 @@ namespace robo {
             it.pos.y << "}; direction: " << it.direction << "target_time: " << it.time << "; dest: " << it.destination << std::endl;
         }
     }
+
+    void Moving_Describer::makeSteps(unsigned int curTime) {
+        std::vector<std::deque<moment>::iterator> delev;
+        for (auto it = move_d.begin(); it != move_d.end(); ++ it) {
+            if (it->time < curTime)
+                throw std::invalid_argument("ROBOTIME error");
+            if (it->time == curTime) {
+                it->moving_obj->move(it->pos, it->direction);
+                delev.push_back(it);
+            }
+        }
+
+        for (auto dit : delev) {
+            move_d.erase(dit);
+        }
+    }
+
 }

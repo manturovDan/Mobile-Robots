@@ -17,11 +17,11 @@ namespace robo {
     class Moving_Describer {
     private:
         std::deque<moment> move_d;
-        unsigned long int time;
     public:
         Moving_Describer() = default;
         int addStep(moment);
         void printSteps(std::ostream & stream = std::cout);
+        void makeSteps(unsigned int);
     };
 }
 

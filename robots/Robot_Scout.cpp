@@ -4,7 +4,7 @@
 
 namespace robo {
     Robot_Scout::Robot_Scout(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-            std::string & desc) : blocked(true),
+            std::string & desc) : blocked(true), direction(0),
             Observation_Center(ports, consumption, price, mods, desc) {}
 
     std::string Robot_Scout::whoami() {
@@ -18,5 +18,12 @@ namespace robo {
                                       "Owner = " << host << std::endl;
         ss << "Modules:\n" << myModules() << std::endl;
         return ss.str();
+    }
+
+    void Robot_Scout::move(coordinates pos, int dir) {
+        position.x = pos.x;
+        position.y = pos.y;
+
+        direction = dir;
     }
 }

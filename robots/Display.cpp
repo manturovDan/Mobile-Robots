@@ -181,12 +181,12 @@ namespace dispr {
         while(true) {
             if (is_comp) {
                 auto start = std::chrono::high_resolution_clock::now();
-                std::this_thread::sleep_for(2s);
+                std::this_thread::sleep_for(1s);
                 env->plusTime();
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
                 std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
-                //precessing
+                ai->getMd()->makeSteps(env->getTime());
                 is_comp = false;
                 if (i++ == std::numeric_limits<unsigned int>::max() - 1)
                     break; // error
