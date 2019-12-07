@@ -1,7 +1,7 @@
 #include "Display.h"
 
 namespace dispr {
-    Display::Display(robo::Environment_describer * envir) : env(envir) { }
+    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip) : env(envir), ai(aip) { }
 
     void Display::show() {
         const int winWidth = 700;
@@ -43,6 +43,18 @@ namespace dispr {
         sf::Texture obsT;
         obsT.loadFromFile("../static/observ.jpg");
         sf::Sprite obsS(obsT);
+
+        sf::Texture lanOT;
+        lanOT.loadFromFile("../static/land_o.jpg");
+        sf::Sprite lanOS(lanOT);
+
+        sf::Texture intOT;
+        intOT.loadFromFile("../static/int_o.jpg");
+        sf::Sprite intOS(intOT);
+
+        sf::Texture obsOT;
+        obsOT.loadFromFile("../static/obs_o.jpg");
+        sf::Sprite obsOS(obsOT);
 
         while(window.isOpen()) {
             view.zoom(1.f + zoom);
@@ -112,6 +124,22 @@ namespace dispr {
                 if(!strcmp(typeid(**it).name(), "N4robo18Observation_CenterE")) {
                     obsS.setPosition(static_cast<float>(x)*rectSize, winHeight - rectSize -static_cast<float>(y)*rectSize);
                     window.draw(obsS);
+                }
+            }
+
+            for(const auto & it : *ai) {
+                if (it.second.iam == nullptr) {
+                    lanOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
+                    window.draw(lanOS);
+                } else {
+                    if(!strcmp(typeid(*it.second.iam).name(), "N4robo14Interest_PointE")) {
+                        intOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
+                        window.draw(intOS);
+                    }
+                    if(!strcmp(typeid(*it.second.iam).name(), "N4robo8ObstacleE")) {
+                        obsOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
+                        window.draw(obsOS);
+                    }
                 }
             }
 

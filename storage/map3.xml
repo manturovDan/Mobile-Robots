@@ -8,6 +8,7 @@
     <Obstacle x = "84" y = "5"/>
     <Obstacle x = "3" y = "2"/>
     <Obstacle x = "10" y = "10"/>
+    <Obstacle x = "46" y = "23"/>
 
     <Interest x = "10" y = "11"/>
     <Interest x = "5" y = "8"/>
@@ -19,6 +20,7 @@
     <Interest x = "67" y = "72"/>
     <Interest x = "33" y = "11"/>
     <Interest x = "34" y = "54"/>
+    <Interest x = "48" y = "24"/>
 
     <Command_Center x = "50" y = "21" price = "2000" description = "general" consumption = "13" ports = "5">
         <Power_Generator priority = "1" production = "25"/>
