@@ -60,6 +60,10 @@ namespace dispr {
         commanderT.loadFromFile("../static/commander.jpg");
         sf::Sprite commanderS(commanderT);
 
+        sf::Texture scoutT;
+        scoutT.loadFromFile("../static/scout.jpg");
+        sf::Sprite scoutS(scoutT);
+
         while(window.isOpen()) {
             view.zoom(1.f + zoom);
             if (zoom != 0.f) {
@@ -132,12 +136,22 @@ namespace dispr {
                 if(!strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE")) {
                     auto * curCom = dynamic_cast<robo::Robot_Commander *>(*it);
                     if (!curCom->getBlocked()) {
-                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize);\
+                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize);
                         //commanderS.setRotation(90.f);
                         window.draw(commanderS);
                     }
 
                 }
+                if(!strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE")) {
+                    auto * curSc = dynamic_cast<robo::Robot_Scout *>(*it);
+                    if (!curSc->getBlocked()) {
+                        scoutS.setPosition(static_cast<float>(curSc->getX())*rectSize, winHeight - rectSize - static_cast<float>(curSc->getY())*rectSize);
+                        //commanderS.setRotation(90.f);
+                        window.draw(scoutS);
+                    }
+
+                }
+
             }
 
             for(const auto & it : *ai) {
