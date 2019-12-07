@@ -152,4 +152,9 @@ namespace robo {
 
         testCom->unBlock();
     }
+
+    void Ai_Deep::testNext() {
+        Robot_Commander * testCom = dynamic_cast<Robot_Commander *>(commanders.rbegin()->second);
+        md.addStep({testCom, {0, 1}, 0, 1, 0});
+    }
 }

@@ -2,8 +2,10 @@
 #define ROBOTSCREATE_AI_DEEP_H
 
 #include <map>
+#include <queue>
 #include "robot.h"
 #include "Managing.h"
+#include "Moving_Describer.h"
 
 namespace robo {
     struct map_point {
@@ -22,12 +24,15 @@ namespace robo {
         void print_d(int, int, std::ostream & stream = std::cout);
         void run();
         void testMove();
+        void testNext();
         std::multimap<coordinates, map_point>::const_iterator begin() { return ai_dict.begin(); }
         std::multimap<coordinates, map_point>::const_iterator end() { return ai_dict.end(); }
     private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;
         std::multimap<unsigned int, Map_Object *> scouts;
+        std::queue<Robot_Scout *> report;
+        Moving_Describer md;
     };
 }
 

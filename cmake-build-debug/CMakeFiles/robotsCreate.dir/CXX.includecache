@@ -719,10 +719,14 @@ robots/Ai_Deep.h
 /home/danila/source/robots/robots/Ai_Deep.h
 map
 -
+queue
+-
 robot.h
 /home/danila/source/robots/robots/robot.h
 Managing.h
 /home/danila/source/robots/robots/Managing.h
+Moving_Describer.h
+/home/danila/source/robots/robots/Moving_Describer.h
 
 /home/danila/source/robots/robots/Command_Center.h
 vector
@@ -799,6 +803,14 @@ robot.h
 /home/danila/source/robots/robots/Module.h
 iostream
 -
+
+/home/danila/source/robots/robots/Moving_Describer.h
+forward_list
+-
+set
+-
+Robot_Scout.h
+/home/danila/source/robots/robots/Robot_Scout.h
 
 /home/danila/source/robots/robots/Observation_Center.h
 vector

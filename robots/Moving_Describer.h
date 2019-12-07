@@ -1,8 +1,7 @@
 #ifndef ROBOTSCREATE_MOVING_DESCRIBER_H
 #define ROBOTSCREATE_MOVING_DESCRIBER_H
 
-#include <forward_list>
-#include <set>
+#include <deque>
 
 #include "Robot_Scout.h"
 
@@ -12,12 +11,15 @@ namespace robo {
         coordinates pos;
         int direction;
         unsigned long int time;
+        bool destination;
     };
 
     class Moving_Describer {
     private:
-        std::forward_list<moment> move_lst;
+        std::deque<moment> move_d;
         unsigned long int time;
+    public:
+        int addStep(moment);
     };
 }
 
