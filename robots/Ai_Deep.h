@@ -21,6 +21,7 @@ namespace robo {
         void connectResult(const std::map<coordinates, Map_Object *> &);
         void print_d(int, int, std::ostream & stream = std::cout);
         void run();
+        void testMove();
         std::multimap<coordinates, map_point>::const_iterator begin() { return ai_dict.begin(); }
         std::multimap<coordinates, map_point>::const_iterator end() { return ai_dict.end(); }
     private:

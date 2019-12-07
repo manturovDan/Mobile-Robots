@@ -4,7 +4,7 @@
 
 namespace robo {
     Robot_Scout::Robot_Scout(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
-            std::string & desc) : blocked(false),
+            std::string & desc) : blocked(true),
             Observation_Center(ports, consumption, price, mods, desc) {}
 
     std::string Robot_Scout::whoami() {

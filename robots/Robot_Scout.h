@@ -13,9 +13,8 @@ namespace robo {
     public:
         Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         bool getBlocked() { return blocked; }
-
+        void unBlock() { blocked = false; }
         int move(int);
-
         int turn(int);
 
         std::string whoami() override;

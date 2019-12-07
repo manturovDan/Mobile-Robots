@@ -56,6 +56,10 @@ namespace dispr {
         obsOT.loadFromFile("../static/obs_o.jpg");
         sf::Sprite obsOS(obsOT);
 
+        sf::Texture commanderT;
+        commanderT.loadFromFile("../static/commander.jpg");
+        sf::Sprite commanderS(commanderT);
+
         while(window.isOpen()) {
             view.zoom(1.f + zoom);
             if (zoom != 0.f) {
@@ -125,6 +129,14 @@ namespace dispr {
                     obsS.setPosition(static_cast<float>(x)*rectSize, winHeight - rectSize -static_cast<float>(y)*rectSize);
                     window.draw(obsS);
                 }
+                if(!strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE")) {
+                    auto * curCom = dynamic_cast<robo::Robot_Commander *>(*it);
+                    if (!curCom->getBlocked()) {
+                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize);
+                        window.draw(commanderS);
+                    }
+
+                }
             }
 
             for(const auto & it : *ai) {
@@ -155,6 +167,9 @@ namespace dispr {
     }
 
     void Display::justTimer() {
+        ai->run();
+        ai->testMove();
+
         using namespace std::chrono_literals;
         std::cout << "Hello waiter\n" << std::flush;
         int i = 1;
@@ -165,8 +180,8 @@ namespace dispr {
             std::chrono::duration<double, std::milli> elapsed = end - start;
             std::cout << "Waited " << elapsed.count() << " ms\n";
             env->plusTime();
-            if (i++ == 1000)
-                break;
+            if (i++ == std::numeric_limits<unsigned int>::max() - 1)
+                break; // error
         }
     }
 

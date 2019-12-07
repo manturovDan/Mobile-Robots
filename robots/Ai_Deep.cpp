@@ -142,4 +142,14 @@ namespace robo {
             "\nBoundary:" << it.second.isBoundary << std::endl;
         }
     }
+
+    void Ai_Deep::run() {
+        researchMap();
+    }
+
+    void Ai_Deep::testMove() {
+        Robot_Commander * testCom = dynamic_cast<Robot_Commander *>(commanders.rbegin()->second);
+
+        testCom->unBlock();
+    }
 }

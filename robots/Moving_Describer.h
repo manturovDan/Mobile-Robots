@@ -7,7 +7,7 @@
 #include "Robot_Scout.h"
 
 namespace robo {
-    struct displ {
+    struct moment {
         Robot_Scout * moving_obj;
         coordinates pos;
         int direction;
@@ -16,8 +16,7 @@ namespace robo {
 
     class Moving_Describer {
     private:
-        std::forward_list<displ> move_lst;
-        std::multiset<coordinates> busy;
+        std::forward_list<moment> move_lst;
         unsigned long int time;
     };
 }
