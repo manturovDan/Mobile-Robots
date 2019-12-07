@@ -719,7 +719,7 @@ robots/Ai_Deep.h
 /home/danila/source/robots/robots/Ai_Deep.h
 map
 -
-queue
+deque
 -
 robot.h
 /home/danila/source/robots/robots/robot.h
@@ -787,6 +787,10 @@ Observation_Center.h
 /home/danila/source/robots/robots/Observation_Center.h
 Energy_Consumer.h
 /home/danila/source/robots/robots/Energy_Consumer.h
+Robot_Scout.h
+/home/danila/source/robots/robots/Robot_Scout.h
+Ai_Deep.h
+/home/danila/source/robots/robots/Ai_Deep.h
 
 /home/danila/source/robots/robots/Map_Object.h
 iostream

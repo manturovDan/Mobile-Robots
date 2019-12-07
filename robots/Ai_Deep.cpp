@@ -160,7 +160,7 @@ namespace robo {
         md->addStep({testCom, {0, 2}, 0, 2, 0});
         md->addStep({testCom, {0, 3}, 0, 3, 0});
         md->addStep({testCom, {0, 4}, 0, 4, 0});
-        md->addStep({testCom, {0, 5}, 0, 5, 1});
+        md->addStep({testCom, {0, 5}, 0, 5, 3});
 
         md->printSteps();
     }
@@ -188,5 +188,17 @@ namespace robo {
     void Ai_Deep::nextComp() {
         std::cout << startCommander() << std::endl;
         md->printSteps();
+
+        for (auto & rep : report) {
+            if (rep.second == 1) {
+                auto commer = static_cast<Robot_Commander *>(rep.first);
+                auto pair = commer->getPair();
+                pair->move({0, 0}, 0);
+                pair->unBlock();
+                std::cout << "PAIR IS READY" << std::endl;
+            }
+        }
+
+        report.clear();
     }
 }

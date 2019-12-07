@@ -32,4 +32,14 @@ namespace robo {
         }
         return 1;
     }
+
+    Robot_Scout * Robot_Commander::getPair() {
+        for(auto it : *manMod()) {
+            if (it->getOwner() == this) {
+                return dynamic_cast<Robot_Scout *>(it);
+            }
+        }
+
+        return nullptr;
+    }
 }

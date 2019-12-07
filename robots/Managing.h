@@ -21,8 +21,10 @@ namespace robo {
         int addSubord(Observation_Center *);
         std::string whoami() override;
         int subord_count() { return subordinate.size(); }
+
         std::vector<Observation_Center *>::const_iterator begin() { return subordinate.begin(); }
         std::vector<Observation_Center *>::const_iterator end() { return subordinate.end(); }
+
         void reportAI(Robot_Scout *, int);
         static void setAI(Ai_Deep * aip);
     protected:

@@ -12,7 +12,7 @@ namespace robo {
         coordinates pos;
         int direction;
         unsigned long int time;
-        bool destination;
+        int destination;
     };
 
     class Moving_Describer {
