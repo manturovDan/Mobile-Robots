@@ -344,7 +344,7 @@ namespace robo {
         for (auto it : pred) {
             stream << it.first.x << ";" << it.first.y << " ";
             for (auto itc : it.second) {
-                stream << "{" << itc.second.x << ";" << itc.second.y << "}" << "(" << itc.first.x << ";" << itc.first.y <<") ";
+                stream << "{" << itc.first.x << ";" << itc.first.y << "}" << "(" << itc.second.x << ";" << itc.second.y <<") ";
             }
             stream << std::endl;
         }
