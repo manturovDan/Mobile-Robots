@@ -6,7 +6,10 @@
 #include "Robot_Scout.h"
 
 namespace robo {
-    /// destination == 0 - nothing to do, moving is continue; 1 - commander has arrived to 0,1 - need a subordinate; 2 - scout has arrived to task point; 3 - commander has arrived to new point; REPORT_TYPES
+    /// destination == 0 - nothing to do, moving is continue; 1 - commander has arrived to 0,1 - need a subordinate;
+    /// 2 - scout has arrived to task point;
+    /// 3 - commander has arrived to new point; -1 - is waiting for deleting;
+    /// 4 - arrived commander is ready for full area researching  REPORT_TYPES
     struct moment {
         Robot_Scout * moving_obj;
         coordinates pos;

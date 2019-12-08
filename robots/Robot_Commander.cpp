@@ -56,6 +56,7 @@ namespace robo {
             look_res = look();
             full_look_res.insert(look_res.begin(), look_res.end());
         }
+        //int curdir =
 
         //std::map<coordinates, Map_Object *> look_res = look();
 

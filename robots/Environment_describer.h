@@ -61,6 +61,7 @@ namespace robo {
         Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end()); }
         Map_Object * checkStaticPoint(coordinates);
         Map_Object * checkMobOnPoint(coordinates);
+        bool isBoundary(coordinates);
     };
 }
 

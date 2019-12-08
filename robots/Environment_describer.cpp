@@ -91,7 +91,6 @@ namespace robo {
 
     Map_Object * Environment_describer::checkStaticPoint(coordinates point) {
         //TODO maybe to do with multimap in the future
-
         auto it = begin();
         for (; it != end(); ++it) {
             if ((*it)->getPosition() == point && strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE") != 0 && strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE") != 0) {
@@ -117,6 +116,12 @@ namespace robo {
         if (it == end())
             return nullptr;
         return *it;
+    }
+
+    bool Environment_describer::isBoundary(coordinates point) {
+        if (point.x == 0 || point.y == 0)
+            return true;
+        return point.x == width - 1 || point.y == height - 1;
     }
 
     Env_Consistent_Iter Env_Consistent_Iter::operator++(int) { //postfix

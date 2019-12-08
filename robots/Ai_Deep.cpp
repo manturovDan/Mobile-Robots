@@ -89,9 +89,11 @@ namespace robo {
     }
 
     void Ai_Deep::connectResult(const std::map<coordinates, Map_Object *> & res_res) {
-        for (auto it = res_res.begin(); it != res_res.end(); ++it) {
-            if(ai_dict.find(it->first) == ai_dict.end()) {
-                ai_dict[it->first] = { it->second,false };
+        for (auto res_re : res_res) {
+            if(ai_dict.find(res_re.first) == ai_dict.end()) {
+                bool bnd = envir->isBoundary(res_re.first);
+
+                ai_dict[res_re.first] = { res_re.second, bnd };
             }
         }
     }
@@ -204,7 +206,6 @@ namespace robo {
 
             }
             else if (rep->second == 3) {
-                std::cout << "commander research" << std::endl;
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);

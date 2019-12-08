@@ -65,7 +65,7 @@ namespace robo {
             if(!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
                 auto * sens = static_cast<robo::Sensor *>(module);
 
-                std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
+                //std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
 
                 unsigned int real_dir = sens->getDirection(getDirection()); //if will be direction of robot
 
