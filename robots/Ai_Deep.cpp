@@ -216,9 +216,9 @@ namespace robo {
                 if (commer->getPair() != nullptr && md->isMoving(commer->getPair()))
                     nextRep.emplace_back(rep->first, 4);
                 else {
-                    std::cout << "PAIR IS READYYYYYY!!!!!!" << std::endl;
+                    unsigned int ri = commer->ri();
+                    std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
                 }
-                //calculating RO
                 //algorithm from the paper
             }
 

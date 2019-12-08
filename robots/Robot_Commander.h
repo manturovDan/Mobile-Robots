@@ -15,6 +15,8 @@ namespace robo {
         std::string whoami() override;
         Robot_Scout * getPair();
         std::map<coordinates, Map_Object *> research() override;
+        ///radius of impact = radius of managing module + radius of pair's sensor
+        unsigned int ri();
     };
 }
 #endif //ROBOTSCREATE_ROBOT_COMMANDER_H

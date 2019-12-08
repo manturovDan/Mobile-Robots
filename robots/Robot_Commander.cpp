@@ -82,4 +82,8 @@ namespace robo {
 
         return full_look_res;
     }
+
+    unsigned int Robot_Commander::ri() {
+        return manMod()->getRadius() + getPair()->getMaxRadius();
+    }
 }
