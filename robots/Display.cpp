@@ -182,7 +182,20 @@ namespace dispr {
                     if (!curSc->getBlocked()) {
                         scoutS.setPosition(static_cast<float>(curSc->getX())*rectSize + rectSize / 2, winHeight - rectSize - static_cast<float>(curSc->getY())*rectSize + rectSize / 2);
                         scoutS.setOrigin({8, 8});
-                        //commanderS.setRotation(90.f);
+
+                        if (curSc->getDirection() == 0) {
+                            scoutS.setRotation(0);
+                        }
+                        if (curSc->getDirection() == 1) {
+                            scoutS.setRotation(-90.f);
+                        }
+                        if (curSc->getDirection() == 2) {
+                            scoutS.setRotation(-180.f);
+                        }
+                        if (curSc->getDirection() == 3) {
+                            scoutS.setRotation(90.f);
+                        }
+
                         window.draw(scoutS);
                     }
 

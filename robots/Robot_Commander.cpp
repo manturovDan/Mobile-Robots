@@ -61,7 +61,7 @@ namespace robo {
         unsigned int max_rad_s = getPair()->getMaxRadius();
         int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
         getPair()->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, max_rad_s);
-        if (manMod()->unknownSquare(top_cor, left_cor, bottom_cor, right_cor)) {
+        if (manMod()->unknownSquare(top_cor_s, top_cor_s, top_cor_s, top_cor_s)) {
             look_res = getPair()->look();
             full_look_res.insert(look_res.begin(), look_res.end());
         }
@@ -73,9 +73,12 @@ namespace robo {
             manMod()->addStep(this, position, direction, env->getTime()+4, 4);
         }
 
-        //std::map<coordinates, Map_Object *> look_res = look();
-
-        //full_look_res.insert(look_res.begin(), look_res.end());
+        if (manMod()->unknownSquare(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s)) {
+            manMod()->addStep(getPair(), getPair()->getPosition(), (getPair()->getDirection() + 1) % 4, env->getTime()+1, 2);
+            manMod()->addStep(getPair(), getPair()->getPosition(), (getPair()->getDirection() + 2) % 4, env->getTime()+2, 2);
+            manMod()->addStep(getPair(), getPair()->getPosition(), (getPair()->getDirection() + 3) % 4, env->getTime()+3, 2);
+            manMod()->addStep(getPair(), getPair()->getPosition(), getPair()->getDirection(), env->getTime()+4, 0);
+        }
 
         return full_look_res;
     }
