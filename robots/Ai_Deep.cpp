@@ -259,11 +259,23 @@ namespace robo {
             std::cout << "ALL_POINTS IN MO ARE OPENED" << std::endl;
         } else {
             std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
-            //finding grey
             auto grey = findGrey(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m);
+            std::sort(grey.begin(), grey.end());
             std::cout << "GREY" << std::endl;
-            for (auto it : grey)
+
+            for (auto it : grey) {
                 std::cout << it.x << " - " << it.y << std::endl;
+            }
+
+            std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+            for (auto & ly : leeTab) {
+                for(int & lx : ly) {
+                    std::cout << lx;
+                }
+                std::cout << std::endl;
+            }
+
+
         }
 
     }
@@ -326,6 +338,36 @@ namespace robo {
         }
 
         return grey;
+    }
+
+    std::vector<std::vector<int>> Ai_Deep::ititLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, coordinates commander) {
+        std::vector<int> row (right_cor - left_cor + 1);
+        std::vector<std::vector<int>> leeTab (top_cor-bottom_cor+1);
+
+        for (unsigned int h = bottom_cor; h <= top_cor; ++h) {
+            leeTab[h] = row;
+            for (unsigned int w = left_cor; w <= right_cor; ++w) {
+                coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
+                if(coord == commander) {
+                    leeTab[h-bottom_cor][w-left_cor] = 1;
+                    continue;
+                }
+
+                auto p_val = ai_dict.find(coord);
+                if (p_val == ai_dict.end()) {
+                    leeTab[h-bottom_cor][w-left_cor] = 2;
+                    continue;
+                }
+
+                if(p_val->second.iam == nullptr || !strcmp(typeid(*p_val->second.iam).name(), "N4robo14Interest_PointE")) {
+                    leeTab[h-bottom_cor][w-left_cor] = 0;
+                } else {
+                    leeTab[h-bottom_cor][w-left_cor] = 1;
+                }
+            }
+        }
+
+        return leeTab;
     }
 
 }
