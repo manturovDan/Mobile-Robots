@@ -213,7 +213,11 @@ namespace robo {
                 connectResult(resd);
                 reported(rep);
             }
-            //else
+            else if (rep->second == 4) {
+                //check if subords are moving
+                //calculating RO
+                //algorithm from the paper
+            }
             //    throw std::invalid_argument("Unknown report");
         }
 

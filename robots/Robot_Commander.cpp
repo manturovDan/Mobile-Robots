@@ -36,7 +36,7 @@ namespace robo {
 
     Robot_Scout * Robot_Commander::getPair() {
         for(auto it : *manMod()) {
-            if (it->getOwner() == this) {
+            if (it->getOwner() == this && !strcmp(typeid((*it)).name(), "N4robo11Robot_ScoutE")) {
                 return dynamic_cast<Robot_Scout *>(it);
             }
         }
