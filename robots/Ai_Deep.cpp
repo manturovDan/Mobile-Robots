@@ -260,6 +260,10 @@ namespace robo {
         } else {
             std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
             //finding grey
+            auto grey = findGrey(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m);
+            std::cout << "GREY" << std::endl;
+            for (auto it : grey)
+                std::cout << it.x << " - " << it.y << std::endl;
         }
 
     }
@@ -277,6 +281,51 @@ namespace robo {
         }
 
         return true;
+    }
+
+    std::vector<coordinates> Ai_Deep::findGrey(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
+        std::vector<coordinates> grey;
+
+        for (unsigned int h = bottom_cor; h <= top_cor; ++h) {
+            for (unsigned int w = left_cor; w <= right_cor; ++w) {
+                coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
+                auto p_val = ai_dict.find(coord);
+
+                if (p_val == ai_dict.end())
+                    continue;
+
+                if(!p_val->second.topBoundaty) {
+                    if (ai_dict.find({static_cast<unsigned int>(w), static_cast<unsigned int>(h+1)}) == ai_dict.end()) {
+                        grey.push_back(p_val->first);
+                        continue;
+                    }
+                }
+
+                if(p_val->first.x > 0) {
+                    if (ai_dict.find({static_cast<unsigned int>(w-1), static_cast<unsigned int>(h)}) == ai_dict.end()) {
+                        grey.push_back(p_val->first);
+                        continue;
+                    }
+                }
+
+                if(p_val->first.y > 0) {
+                    if (ai_dict.find({static_cast<unsigned int>(w), static_cast<unsigned int>(h-1)}) == ai_dict.end()) {
+                        grey.push_back(p_val->first);
+                        continue;
+                    }
+                }
+
+                if(!p_val->second.rightBoundary) {
+                    if (ai_dict.find({static_cast<unsigned int>(w+1), static_cast<unsigned int>(h)}) == ai_dict.end()) {
+                        grey.push_back(p_val->first);
+                        continue;
+                    }
+                }
+
+            }
+        }
+
+        return grey;
     }
 
 }

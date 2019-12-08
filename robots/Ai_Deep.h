@@ -16,7 +16,13 @@ namespace robo {
 
     class Robot_Commander;
 
-    class Ai_Deep {
+    class Ai_Deep {private:
+        std::map<coordinates, map_point> ai_dict;
+        std::multimap<unsigned int, Map_Object *> commanders;
+        std::multimap<unsigned int, Map_Object *> scouts;
+        std::deque<std::pair<Robot_Scout *, int>> report;
+        Moving_Describer * md;
+        Environment_describer * envir;
     public:
         Ai_Deep() = delete;
         explicit Ai_Deep(Environment_describer *);
@@ -38,13 +44,7 @@ namespace robo {
         void reported(std::deque<std::pair<Robot_Scout *, int>>::iterator);
         void pairRes(Robot_Commander *);
         bool allOpened(unsigned int, unsigned int, unsigned int, unsigned int);
-    private:
-        std::map<coordinates, map_point> ai_dict;
-        std::multimap<unsigned int, Map_Object *> commanders;
-        std::multimap<unsigned int, Map_Object *> scouts;
-        std::deque<std::pair<Robot_Scout *, int>> report;
-        Moving_Describer * md;
-        Environment_describer * envir;
+        std::vector<coordinates> findGrey(unsigned int, unsigned int, unsigned int, unsigned int);
     };
 }
 
