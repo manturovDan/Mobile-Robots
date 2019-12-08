@@ -27,6 +27,7 @@ namespace robo {
         int addStep(moment);
         void printSteps(std::ostream & stream = std::cout);
         void makeSteps(unsigned int);
+        bool isMoving(Robot_Scout *);
     };
 }
 

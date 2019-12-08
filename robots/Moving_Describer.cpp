@@ -36,4 +36,13 @@ namespace robo {
         }
     }
 
+    bool Moving_Describer::isMoving(Robot_Scout * scout) {
+        for (auto it = move_d.begin(); it != move_d.end(); ++ it) {
+            if (it->moving_obj == scout)
+                return true;
+        }
+
+        return false;
+    }
+
 }

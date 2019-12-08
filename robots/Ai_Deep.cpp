@@ -202,7 +202,6 @@ namespace robo {
                 pair->move({0, 0}, 0);
                 pair->unBlock();
                 nextRep.emplace_back(rep->first, 3);
-                reported(rep);
             }
             else if (rep->second == 2) {
                 connectResult(rep->first->look());
@@ -211,13 +210,19 @@ namespace robo {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);
-                reported(rep);
             }
             else if (rep->second == 4) {
-                //check if subords are moving
+                auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
+                if (commer->getPair() != nullptr && md->isMoving(commer->getPair()))
+                    nextRep.emplace_back(rep->first, 4);
+                else {
+                    std::cout << "PAIR IS READYYYYYY!!!!!!" << std::endl;
+                }
                 //calculating RO
                 //algorithm from the paper
             }
+
+            reported(rep);
             //    throw std::invalid_argument("Unknown report");
         }
 
