@@ -260,23 +260,26 @@ namespace robo {
         } else {
             std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
             auto grey = findGrey(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m);
-            std::sort(grey.begin(), grey.end());
             std::cout << "GREY" << std::endl;
 
-            for (auto it : grey) {
-                std::cout << it.x << " - " << it.y << std::endl;
-            }
-
             std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
-            for (auto & ly : leeTab) {
+            /*for (auto & ly : leeTab) {
                 for(int & lx : ly) {
                     std::cout << lx;
                 }
                 std::cout << std::endl;
-            }
+            }*/
             std::cout << std::endl;
             leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
+
+            std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
+            for (auto it : grey) {
+                std::cout << it.x << "," << it.y << " = " << leeTab[it.y][it.x] <<  std::endl;
+                if (leeTab[it.y][it.x] > 0) {
+                    //got to this point
+                }
+            }
         }
 
     }
