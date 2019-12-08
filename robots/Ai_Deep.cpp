@@ -205,7 +205,7 @@ namespace robo {
                 reported(rep);
             }
             else if (rep->second == 2) {
-                //next to do
+                connectResult(rep->first->look());
             }
             else if (rep->second == 3) {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
