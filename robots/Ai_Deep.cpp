@@ -250,21 +250,23 @@ namespace robo {
     void Ai_Deep::pairRes(Robot_Commander * comm) {
         unsigned int ri = comm->ri();
         std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
-        std::vector<std::map<coordinates, std::map<coordinates, int>>> distances;
+        std::map<coordinates, std::map<coordinates, int>> distances;
         std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> previous;
 
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
 
         if(FW_sub(distances, previous, comm->getPosition(), top_cor_m, left_cor_m, bottom_cor_m, right_cor_m)) {
-            std::cout << "ALL_POINTS IN MO ARE OPENED";
+            std::cout << "ALL_POINTS IN MO ARE OPENED" << std::endl;
         } else {
-            std::cout << "ALL_POINTS IN MO ARE NOT OPENED";
+            std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
         }
+
+        printDistances(distances);
 
     }
 
-    bool Ai_Deep::FW_sub(std::vector<std::map<coordinates, std::map<coordinates, int>>> &distances,
+    bool Ai_Deep::FW_sub(std::map<coordinates, std::map<coordinates, int>> &distances,
                          std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> &previous,
                          coordinates commander, unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor,
                          unsigned int right_cor) {
@@ -282,13 +284,23 @@ namespace robo {
                     if (p_val == ai_dict.end()) {
                         allOpened = false;
                     } else {
-                        zdist[coord][coord] = 0;
+                        if((*p_val).second.iam == nullptr || !strcmp(typeid(*((*p_val).second.iam)).name(), "N4robo14Interest_PointE")) {
+                            distances[coord][coord] = 0;
+                        }
                     }
 
                 }
             }
         }
-        distances.push_back(zdist);
+
+
         return  allOpened;
+    }
+
+    void Ai_Deep::printDistances(std::map<coordinates, std::map<coordinates, int>> & dist, std::ostream &stream) {
+        std::cout << "KEYS:" << std::endl;
+        for (auto it : dist) {
+            std::cout << it.first.x << " --- " << it.first.y << std::endl;
+        }
     }
 }
