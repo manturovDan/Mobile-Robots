@@ -27,6 +27,9 @@ namespace robo {
         return ((left.x == right.x) && (left.y == right.y));
     }
 
+    inline bool operator != (coordinates left, coordinates right) {
+        return !(left == right);
+    }
 
     enum Characters {
         Obstacle_t,

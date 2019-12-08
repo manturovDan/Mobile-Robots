@@ -251,7 +251,7 @@ namespace robo {
         unsigned int ri = comm->ri();
         std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
         std::map<coordinates, std::map<coordinates, int>> distances;
-        std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> previous;
+        std::map<coordinates, std::map<coordinates, coordinates>> previous;
 
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
@@ -263,18 +263,18 @@ namespace robo {
         }
 
         printDistances(distances);
+        printPredecessors(previous);
 
     }
 
     bool Ai_Deep::FW_sub(std::map<coordinates, std::map<coordinates, int>> &distances,
-                         std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> &previous,
+                         std::map<coordinates, std::map<coordinates, coordinates>> &previous,
                          coordinates commander, unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor,
                          unsigned int right_cor) {
         distances.clear();
         previous.clear();
 
         bool allOpened = true;
-        std::map<coordinates, std::map<coordinates, int>> zdist;
         std::cout << top_cor << " " << left_cor << " " << bottom_cor << " "<< right_cor << std::endl;
         for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
             for (int w = left_cor; w <= right_cor; ++w) {
@@ -293,6 +293,13 @@ namespace robo {
             }
         }
 
+        FW(distances, previous);
+
+        return  allOpened;
+    }
+
+    void Ai_Deep::FW(std::map<coordinates, std::map<coordinates, int>> & distances,
+                     std::map<coordinates, std::map<coordinates, coordinates>> & previous) {
         for (auto it = distances.begin(); it != distances.end(); ++it) {
             if (distances.find({it->first.x, it->first.y+1}) != distances.end()) { //top
                 distances[it->first][{it->first.x, it->first.y+1}] = 1;
@@ -312,13 +319,36 @@ namespace robo {
             }
         }
 
-        return  allOpened;
+        for (auto it = distances.begin(); it != distances.end(); ++it) {
+            for (auto itd = it->second.begin(); itd != it->second.end(); ++itd) {
+                if (it->first != itd->first) {
+                    previous[it->first][itd->first] = it->first;
+                }
+            }
+        }
     }
 
     void Ai_Deep::printDistances(std::map<coordinates, std::map<coordinates, int>> & dist, std::ostream &stream) {
-        std::cout << "KEYS:" << std::endl;
+        stream << "KEYS:" << std::endl;
         for (auto it : dist) {
-            std::cout << it.first.x << " --- " << it.first.y << std::endl;
+            stream << it.first.x << ";" << it.first.y << " ";
+            for (auto itc : it.second) {
+                stream << itc.second << "(" << itc.first.x << ";" << itc.first.y <<") ";
+            }
+            stream << std::endl;
         }
     }
+
+    void Ai_Deep::printPredecessors(std::map<coordinates, std::map<coordinates, coordinates>> & pred, std::ostream &stream) {
+        stream << "WAYS: {} - where, [] - through what" << std::endl;
+        for (auto it : pred) {
+            stream << it.first.x << ";" << it.first.y << " ";
+            for (auto itc : it.second) {
+                stream << "{" << itc.second.x << ";" << itc.second.y << "}" << "(" << itc.first.x << ";" << itc.first.y <<") ";
+            }
+            stream << std::endl;
+        }
+    }
+
+
 }
