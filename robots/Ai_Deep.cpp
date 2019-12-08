@@ -274,7 +274,8 @@ namespace robo {
                 }
                 std::cout << std::endl;
             }
-
+            std::cout << std::endl;
+            leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
         }
 
@@ -349,25 +350,75 @@ namespace robo {
             for (unsigned int w = left_cor; w <= right_cor; ++w) {
                 coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
                 if(coord == commander) {
-                    leeTab[h-bottom_cor][w-left_cor] = 1;
+                    leeTab[h-bottom_cor][w-left_cor] = -2;
                     continue;
                 }
 
                 auto p_val = ai_dict.find(coord);
                 if (p_val == ai_dict.end()) {
-                    leeTab[h-bottom_cor][w-left_cor] = 2;
+                    leeTab[h-bottom_cor][w-left_cor] = -2;
                     continue;
                 }
 
                 if(p_val->second.iam == nullptr || !strcmp(typeid(*p_val->second.iam).name(), "N4robo14Interest_PointE")) {
-                    leeTab[h-bottom_cor][w-left_cor] = 0;
+                    leeTab[h-bottom_cor][w-left_cor] = -1;
                 } else {
-                    leeTab[h-bottom_cor][w-left_cor] = 1;
+                    leeTab[h-bottom_cor][w-left_cor] = -2;
                 }
             }
         }
 
         return leeTab;
+    }
+
+    void Ai_Deep::leeComp(std::vector<std::vector<int>> & leeTable, unsigned int startX, unsigned int startY, coordinates start) {
+        leeTable[start.y][start.x] = 0;
+
+        int curD = 0;
+
+        while (true) {
+            bool changed = false;
+            for (int i = 0; i < leeTable.size(); ++i) {
+                for (int j = 0; j < leeTable[i].size(); ++j) {
+                    if (leeTable[i][j] == curD) {
+                        if (i != leeTable.size() - 1 && leeTable[i+1][j] == -1) {
+                            leeTable[i + 1][j] = curD + 1;
+                            changed = true;
+                        }
+
+                        if (j != 0 && leeTable[i][j-1] == -1) {
+                            leeTable[i][j - 1] = curD + 1;
+                            changed = true;
+                        }
+
+                        if (i != 0 && leeTable[i-1][j] == -1) {
+                            leeTable[i - 1][j] = curD + 1;
+                            changed = true;
+                        }
+
+                        if (j != leeTable[i].size()-1 && leeTable[i][j+1] == -1) {
+                            leeTable[i][j + 1] = curD + 1;
+                            changed = true;
+                        }
+                    }
+
+                }
+            }
+            if(!changed)
+                break;
+            curD++;
+        }
+
+        for (auto & ly : leeTable) {
+            for(int & lx : ly) {
+                if (lx > 0)
+                    std::cout << " ";
+                if (lx < 10)
+                    std::cout << " ";
+                std::cout << lx << " ";
+            }
+            std::cout << std::endl;
+        }
     }
 
 }

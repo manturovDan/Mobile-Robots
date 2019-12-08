@@ -47,7 +47,7 @@ namespace robo {
         std::vector<coordinates> findGrey(unsigned int, unsigned int, unsigned int, unsigned int);
         /// return matrix with 0 - free for moving, 1 - unreachable
         std::vector<std::vector<int>> ititLee(unsigned int, unsigned int, unsigned int, unsigned int, coordinates);
-        void leeComp(std::vector<std::vector<int>>, unsigned int, unsigned int);
+        void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
     };
 }
 
