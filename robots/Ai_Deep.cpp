@@ -277,7 +277,7 @@ namespace robo {
             for (auto it : grey) {
                 std::cout << it.x << "," << it.y << " = " << leeTab[it.y][it.x] <<  std::endl;
                 if (leeTab[it.y][it.x] > 0) {
-                    //got to this point
+                    //go to to this point TODO
                 }
             }
         }
