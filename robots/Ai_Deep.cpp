@@ -326,6 +326,33 @@ namespace robo {
                 }
             }
         }
+
+        FW_iter(distances, previous);
+    }
+
+    void Ai_Deep::FW_iter(std::map<coordinates, std::map<coordinates, int>> & distances,
+                          std::map<coordinates, std::map<coordinates, coordinates>> & previous) {
+
+        std::map<coordinates, std::map<coordinates, int>> new_dist;
+
+        int imn = 0;
+        for (auto k = distances.begin(); k != distances.end(); ++k) {
+            for (auto i = distances.begin(); i != distances.end(); ++i) {
+                for (auto j = distances.begin(); j != distances.end(); ++j) {
+                    std::cout << imn++ << std::endl;
+                    if((distances[i->first].find(j->first) != distances[i->first].end() &&
+                            (distances[i->first].find(k->first) == distances[i->first].end() ||
+                                    distances[k->first].find(j->first) == distances[k->first].end()))
+                    ||
+                    (distances[i->first][j->first] < distances[i->first][k->first] + distances[k->first][j->first]))
+                    {
+                        new_dist[i->first][j->first] = distances[i->first][j->first];
+                    }
+                }
+            }
+        }
+
+        distances = new_dist;
     }
 
     void Ai_Deep::printDistances(std::map<coordinates, std::map<coordinates, int>> & dist, std::ostream &stream) {
@@ -349,6 +376,5 @@ namespace robo {
             stream << std::endl;
         }
     }
-
 
 }
