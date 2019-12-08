@@ -56,7 +56,14 @@ namespace robo {
             look_res = look();
             full_look_res.insert(look_res.begin(), look_res.end());
         }
-        //int curdir =
+
+        unsigned int max_rad_s = getPair()->getMaxRadius();
+        int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
+        getPair()->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, max_rad_s);
+        if (manMod()->unknownSquare(top_cor, left_cor, bottom_cor, right_cor)) {
+            look_res = getPair()->look();
+            full_look_res.insert(look_res.begin(), look_res.end());
+        }
 
         //std::map<coordinates, Map_Object *> look_res = look();
 

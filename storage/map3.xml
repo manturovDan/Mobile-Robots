@@ -50,8 +50,8 @@
 
     <Robot_Scout price = "10000" consumption = "10"  description = "subord_move_one" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
-        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "2"/>
+        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "2"/>
     </Robot_Scout>
 
     <Robot_Scout price = "10000" consumption = "10"  description = "subord_move_two" ports = "15">

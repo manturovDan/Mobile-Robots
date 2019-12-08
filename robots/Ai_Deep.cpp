@@ -209,9 +209,11 @@ namespace robo {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);
+                print_d(70, 70);
+                reported(rep);
             }
-            else
-                throw std::invalid_argument("Unknown report");
+            //else
+            //    throw std::invalid_argument("Unknown report");
         }
 
         std::remove_if(report.begin(), report.end(), [](std::pair<Robot_Scout *, int> pr){ return (pr.second == -1);} );
