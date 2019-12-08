@@ -191,35 +191,42 @@ namespace robo {
         std::cout << startCommander() << std::endl;
         md->printSteps();
 
-        for (auto & rep : report) {
-            if (rep.second == 1) {
-                auto commer = static_cast<Robot_Commander *>(rep.first);
+        for (auto rep = report.begin(); rep != report.end(); ++rep) {
+            if (rep->second == 1) {
+                auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
                 pair->move({0, 0}, 0);
                 pair->unBlock();
-                rep.first->report(3);
+                rep->first->report(3);
+                reported(rep);
             }
-            else if (rep.second == 2) {
+            else if (rep->second == 2) {
 
             }
-            else if (rep.second == 3) {
+            else if (rep->second == 3) {
                 std::cout << "commander research" << std::endl;
-                auto * commer = dynamic_cast<Robot_Commander *>(rep.first);
+                auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);
-                //TODO full research in square, move to next - on tomorrow
-                print_d(70, 70);
             }
             else
                 throw std::invalid_argument("Unknown report");
         }
 
-        report.clear();
+        std::remove_if(report.begin(), report.end(), [](std::pair<Robot_Scout *, int> pr){ return (pr.second == -1);} );
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
         if(ai_dict.find(pos) == ai_dict.end())
             return false;
         return true;
+    }
+
+    void Ai_Deep::makeReport(Robot_Scout *who, int type) {
+        report.push_back(std::pair<Robot_Scout *, int>(who, type));
+    }
+
+    void Ai_Deep::reported(std::deque<std::pair<Robot_Scout *, int>>::iterator delit) {
+        (*delit).second = -1;
     }
 }

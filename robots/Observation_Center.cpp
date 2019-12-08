@@ -59,7 +59,7 @@ namespace robo {
             right_cor = env->getWidth() - 1;
     }
 
-    std::map<coordinates, Map_Object *> Observation_Center::look() { // there is a problem
+    std::map<coordinates, Map_Object *> Observation_Center::look() {
         std::map<coordinates, Map_Object *> one_view;
         for (auto & module : modules) {
             if(!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
