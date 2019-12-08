@@ -10,7 +10,8 @@
 namespace robo {
     struct map_point {
         Map_Object * iam;
-        bool isBoundary;
+        bool topBoundaty;
+        bool rightBoundary;
     };
 
     class Robot_Commander;
@@ -36,15 +37,7 @@ namespace robo {
         void makeReport(Robot_Scout *, int);
         void reported(std::deque<std::pair<Robot_Scout *, int>>::iterator);
         void pairRes(Robot_Commander *);
-        bool FW_sub(std::map<coordinates, std::map<coordinates, int>> &,
-                std::map<coordinates, std::map<coordinates, coordinates>> &, coordinates,
-                unsigned int, unsigned int, unsigned int, unsigned int);
-        void FW(std::map<coordinates, std::map<coordinates, int>> &,
-                std::map<coordinates, std::map<coordinates, coordinates>> &);
-        void FW_iter(std::map<coordinates, std::map<coordinates, int>> &,
-                     std::map<coordinates, std::map<coordinates, coordinates>> &);
-        void printDistances(std::map<coordinates, std::map<coordinates, int>> &, std::ostream & stream = std::cout);
-        void printPredecessors(std::map<coordinates, std::map<coordinates, coordinates>> &, std::ostream & stream = std::cout);
+        bool allOpened(unsigned int, unsigned int, unsigned int, unsigned int);
     private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;

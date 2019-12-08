@@ -124,6 +124,14 @@ namespace robo {
         return point.x == width - 1 || point.y == height - 1;
     }
 
+    bool Environment_describer::isTopBoundary(coordinates point) {
+        return point.y == height - 1;
+    }
+
+    bool Environment_describer::isRightBoundary(coordinates point) {
+        return point.x == width - 1;
+    }
+
     Env_Consistent_Iter Env_Consistent_Iter::operator++(int) { //postfix
         auto retit = Env_Consistent_Iter(iter);
         iter++;

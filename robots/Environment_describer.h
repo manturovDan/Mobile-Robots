@@ -62,6 +62,8 @@ namespace robo {
         Map_Object * checkStaticPoint(coordinates);
         Map_Object * checkMobOnPoint(coordinates);
         bool isBoundary(coordinates);
+        bool isTopBoundary(coordinates);
+        bool isRightBoundary(coordinates);
     };
 }
 

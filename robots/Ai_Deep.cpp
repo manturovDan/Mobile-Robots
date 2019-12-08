@@ -91,9 +91,10 @@ namespace robo {
     void Ai_Deep::connectResult(const std::map<coordinates, Map_Object *> & res_res) {
         for (auto res_re : res_res) {
             if(ai_dict.find(res_re.first) == ai_dict.end()) {
-                bool bnd = envir->isBoundary(res_re.first);
+                bool bndTop = envir->isTopBoundary(res_re.first);
+                bool bndRight = envir->isRightBoundary(res_re.first);
 
-                ai_dict[res_re.first] = { res_re.second, bnd };
+                ai_dict[res_re.first] = { res_re.second, bndTop, bndRight };
             }
         }
     }
@@ -142,7 +143,7 @@ namespace robo {
         for (auto it : ai_dict) {
             std::string who = it.second.iam == nullptr ? "LAND" : it.second.iam->whoami();
             std::cout << "KEY: { " << it.first.x << "; " << it.first.y << " }\n" << who <<
-            "\nBoundary:" << it.second.isBoundary << std::endl;
+            "\nTop boundary:" << it.second.topBoundaty << "; Right boundary: " << it.second.rightBoundary << std::endl;
         }
     }
 
@@ -250,131 +251,32 @@ namespace robo {
     void Ai_Deep::pairRes(Robot_Commander * comm) {
         unsigned int ri = comm->ri();
         std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
-        std::map<coordinates, std::map<coordinates, int>> distances;
-        std::map<coordinates, std::map<coordinates, coordinates>> previous;
 
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
 
-        if(FW_sub(distances, previous, comm->getPosition(), top_cor_m, left_cor_m, bottom_cor_m, right_cor_m)) {
+        if(allOpened(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m)) {
             std::cout << "ALL_POINTS IN MO ARE OPENED" << std::endl;
         } else {
             std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
+            //finding grey
         }
-
-        printDistances(distances);
-        printPredecessors(previous);
 
     }
 
-    bool Ai_Deep::FW_sub(std::map<coordinates, std::map<coordinates, int>> &distances,
-                         std::map<coordinates, std::map<coordinates, coordinates>> &previous,
-                         coordinates commander, unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor,
-                         unsigned int right_cor) {
-        distances.clear();
-        previous.clear();
-
-        bool allOpened = true;
+    bool Ai_Deep::allOpened(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
         std::cout << top_cor << " " << left_cor << " " << bottom_cor << " "<< right_cor << std::endl;
-        for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
-            for (int w = left_cor; w <= right_cor; ++w) {
-                if (commander.x != w || commander.y != h) {
-                    coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
-                    auto p_val = ai_dict.find(coord);
-                    if (p_val == ai_dict.end()) {
-                        allOpened = false;
-                    } else {
-                        if((*p_val).second.iam == nullptr || !strcmp(typeid(*((*p_val).second.iam)).name(), "N4robo14Interest_PointE")) {
-                            distances[coord][coord] = 0;
-                        }
-                    }
-
+        for (unsigned int h = bottom_cor; h <= top_cor; ++h) {
+            for (unsigned int w = left_cor; w <= right_cor; ++w) {
+                coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
+                auto p_val = ai_dict.find(coord);
+                if (p_val == ai_dict.end()) {
+                    return false;
                 }
             }
         }
 
-        FW(distances, previous);
-
-        return  allOpened;
-    }
-
-    void Ai_Deep::FW(std::map<coordinates, std::map<coordinates, int>> & distances,
-                     std::map<coordinates, std::map<coordinates, coordinates>> & previous) {
-        for (auto it = distances.begin(); it != distances.end(); ++it) {
-            if (distances.find({it->first.x, it->first.y+1}) != distances.end()) { //top
-                distances[it->first][{it->first.x, it->first.y+1}] = 1;
-                distances[{it->first.x, it->first.y+1}][it->first] = 1;
-            }
-            if (distances.find({it->first.x-1, it->first.y}) != distances.end()) { //left
-                distances[it->first][{it->first.x-1, it->first.y}] = 1;
-                distances[{it->first.x-1, it->first.y}][it->first] = 1;
-            }
-            if (distances.find({it->first.x, it->first.y-1}) != distances.end()) { //bottom
-                distances[it->first][{it->first.x, it->first.y-1}] = 1;
-                distances[{it->first.x, it->first.y-1}][it->first] = 1;
-            }
-            if (distances.find({it->first.x+1, it->first.y}) != distances.end()) { //right
-                distances[it->first][{it->first.x+1, it->first.y}] = 1;
-                distances[{it->first.x+1, it->first.y}][it->first] = 1;
-            }
-        }
-
-        for (auto it = distances.begin(); it != distances.end(); ++it) {
-            for (auto itd = it->second.begin(); itd != it->second.end(); ++itd) {
-                if (it->first != itd->first) {
-                    previous[it->first][itd->first] = it->first;
-                }
-            }
-        }
-
-        FW_iter(distances, previous);
-    }
-
-    void Ai_Deep::FW_iter(std::map<coordinates, std::map<coordinates, int>> & distances,
-                          std::map<coordinates, std::map<coordinates, coordinates>> & previous) {
-
-        std::map<coordinates, std::map<coordinates, int>> new_dist;
-
-        int imn = 0;
-        for (auto k = distances.begin(); k != distances.end(); ++k) {
-            for (auto i = distances.begin(); i != distances.end(); ++i) {
-                for (auto j = distances.begin(); j != distances.end(); ++j) {
-                    std::cout << imn++ << std::endl;
-                    if((distances[i->first].find(j->first) != distances[i->first].end() &&
-                            (distances[i->first].find(k->first) == distances[i->first].end() ||
-                                    distances[k->first].find(j->first) == distances[k->first].end()))
-                    ||
-                    (distances[i->first][j->first] < distances[i->first][k->first] + distances[k->first][j->first]))
-                    {
-                        new_dist[i->first][j->first] = distances[i->first][j->first];
-                    }
-                }
-            }
-        }
-
-        distances = new_dist;
-    }
-
-    void Ai_Deep::printDistances(std::map<coordinates, std::map<coordinates, int>> & dist, std::ostream &stream) {
-        stream << "KEYS:" << std::endl;
-        for (auto it : dist) {
-            stream << it.first.x << ";" << it.first.y << " ";
-            for (auto itc : it.second) {
-                stream << itc.second << "(" << itc.first.x << ";" << itc.first.y <<") ";
-            }
-            stream << std::endl;
-        }
-    }
-
-    void Ai_Deep::printPredecessors(std::map<coordinates, std::map<coordinates, coordinates>> & pred, std::ostream &stream) {
-        stream << "WAYS: {} - where, [] - through what" << std::endl;
-        for (auto it : pred) {
-            stream << it.first.x << ";" << it.first.y << " ";
-            for (auto itc : it.second) {
-                stream << "{" << itc.first.x << ";" << itc.first.y << "}" << "(" << itc.second.x << ";" << itc.second.y <<") ";
-            }
-            stream << std::endl;
-        }
+        return true;
     }
 
 }
