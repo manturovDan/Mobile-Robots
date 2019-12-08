@@ -205,9 +205,10 @@ namespace robo {
             else if (rep.second == 3) {
                 std::cout << "commander research" << std::endl;
                 auto * commer = dynamic_cast<Robot_Commander *>(rep.first);
-                commer->research();
+                std::map<coordinates, Map_Object *> resd = commer->research();
+                connectResult(resd);
                 //TODO full research in square, move to next - on tomorrow
-
+                print_d(70, 70);
             }
             else
                 throw std::invalid_argument("Unknown report");

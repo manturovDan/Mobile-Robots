@@ -133,6 +133,26 @@ namespace dispr {
                     obsS.setPosition(static_cast<float>(x)*rectSize, winHeight - rectSize -static_cast<float>(y)*rectSize);
                     window.draw(obsS);
                 }
+
+            }
+
+            for(const auto & it : *ai) {
+                if (it.second.iam == nullptr) {
+                    lanOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
+                    window.draw(lanOS);
+                } else {
+                    if(!strcmp(typeid(*it.second.iam).name(), "N4robo14Interest_PointE")) {
+                        intOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
+                        window.draw(intOS);
+                    }
+                    if(!strcmp(typeid(*it.second.iam).name(), "N4robo8ObstacleE")) {
+                        obsOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
+                        window.draw(obsOS);
+                    }
+                }
+            }
+
+            for(robo::Env_Consistent_Iter it = env->begin(); it != env->end(); ++it) {
                 if(!strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE")) {
                     auto * curCom = dynamic_cast<robo::Robot_Commander *>(*it);
                     if (!curCom->getBlocked()) {
@@ -150,23 +170,6 @@ namespace dispr {
                         window.draw(scoutS);
                     }
 
-                }
-
-            }
-
-            for(const auto & it : *ai) {
-                if (it.second.iam == nullptr) {
-                    lanOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
-                    window.draw(lanOS);
-                } else {
-                    if(!strcmp(typeid(*it.second.iam).name(), "N4robo14Interest_PointE")) {
-                        intOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
-                        window.draw(intOS);
-                    }
-                    if(!strcmp(typeid(*it.second.iam).name(), "N4robo8ObstacleE")) {
-                        obsOS.setPosition(static_cast<float>(it.first.x)*rectSize, winHeight - rectSize -static_cast<float>(it.first.y)*rectSize);
-                        window.draw(obsOS);
-                    }
                 }
             }
 

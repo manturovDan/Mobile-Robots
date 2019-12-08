@@ -52,7 +52,6 @@ namespace robo {
         int top_cor, left_cor, bottom_cor, right_cor;
         determineCorers(top_cor, left_cor, bottom_cor, right_cor, max_rad);
 
-
         if (manMod()->unknownSquare(top_cor, left_cor, bottom_cor, right_cor)) {
             look_res = look();
             full_look_res.insert(look_res.begin(), look_res.end());
