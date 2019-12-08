@@ -216,8 +216,7 @@ namespace robo {
                 if (commer->getPair() != nullptr && md->isMoving(commer->getPair()))
                     nextRep.emplace_back(rep->first, 4);
                 else {
-                    unsigned int ri = commer->ri();
-                    std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
+                    pairRes(commer);
                 }
                 //algorithm from the paper
             }
@@ -246,5 +245,50 @@ namespace robo {
 
     void Ai_Deep::reported(std::deque<std::pair<Robot_Scout *, int>>::iterator delit) {
         (*delit).second = -1;
+    }
+
+    void Ai_Deep::pairRes(Robot_Commander * comm) {
+        unsigned int ri = comm->ri();
+        std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
+        std::vector<std::map<coordinates, std::map<coordinates, int>>> distances;
+        std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> previous;
+
+        int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
+        comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
+
+        if(FW_sub(distances, previous, comm->getPosition(), top_cor_m, left_cor_m, bottom_cor_m, right_cor_m)) {
+            std::cout << "ALL_POINTS IN MO ARE OPENED";
+        } else {
+            std::cout << "ALL_POINTS IN MO ARE NOT OPENED";
+        }
+
+    }
+
+    bool Ai_Deep::FW_sub(std::vector<std::map<coordinates, std::map<coordinates, int>>> &distances,
+                         std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> &previous,
+                         coordinates commander, unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor,
+                         unsigned int right_cor) {
+        distances.clear();
+        previous.clear();
+
+        bool allOpened = true;
+        std::map<coordinates, std::map<coordinates, int>> zdist;
+        std::cout << top_cor << " " << left_cor << " " << bottom_cor << " "<< right_cor << std::endl;
+        for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
+            for (int w = left_cor; w <= right_cor; ++w) {
+                if (commander.x != w || commander.y != h) {
+                    coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
+                    auto p_val = ai_dict.find(coord);
+                    if (p_val == ai_dict.end()) {
+                        allOpened = false;
+                    } else {
+                        zdist[coord][coord] = 0;
+                    }
+
+                }
+            }
+        }
+        distances.push_back(zdist);
+        return  allOpened;
     }
 }

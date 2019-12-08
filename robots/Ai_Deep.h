@@ -13,6 +13,8 @@ namespace robo {
         bool isBoundary;
     };
 
+    class Robot_Commander;
+
     class Ai_Deep {
     public:
         Ai_Deep() = delete;
@@ -33,6 +35,10 @@ namespace robo {
         void nextComp();
         void makeReport(Robot_Scout *, int);
         void reported(std::deque<std::pair<Robot_Scout *, int>>::iterator);
+        void pairRes(Robot_Commander *);
+        bool FW_sub(std::vector<std::map<coordinates, std::map<coordinates, int>>> &,
+                std::vector<std::map<coordinates, std::map<coordinates, coordinates>>> &, coordinates,
+                unsigned int, unsigned int, unsigned int, unsigned int);
     private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;

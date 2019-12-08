@@ -77,7 +77,7 @@ namespace robo {
                 one_view[c_posit] = c_resp;
 
                 if (sens->getAngle() == 2) {
-                    for (int h = top_cor; h >= bottom_cor; --h) {
+                    for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
                         for (int w = left_cor; w <= right_cor; ++w) {
                             if (getX() != w || getY() != h) {
                                 //std::cout << " { " << w << ", " << h << " } ";
@@ -102,7 +102,7 @@ namespace robo {
                         }
 
                         if (sens->getAngle() > 0) {
-                            for (int h = position.y; h >= bottom_cor; --h) {
+                            for (int h = position.y; h >= bottom_cor && h <= position.y; --h) {
                                 for (int w = left_cor; w < position.x; ++w) {
                                     //std::cout << " { " << w << ", " << h << " } ";
                                     coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -115,7 +115,7 @@ namespace robo {
                         }
                     }
                     else if (real_dir == 1) { // left
-                        for (int h = top_cor; h >= bottom_cor; --h) {
+                        for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
                             for (int w = left_cor; w < position.x; ++w) {
                                 //std::cout << " { " << w << ", " << h << " } ";
                                 coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -126,7 +126,7 @@ namespace robo {
                         }
                         //std::cout << std::endl;
                         if (sens->getAngle() > 0) {
-                            for (int h = position.y-1; h >= bottom_cor; --h) {
+                            for (int h = position.y-1; h >= bottom_cor && h <= position.y-1; --h) {
                                 for (int w = position.x; w < right_cor; ++w) {
                                     //std::cout << " { " << w << ", " << h << " } ";
                                     coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -138,7 +138,7 @@ namespace robo {
                         }
                     }
                     else if (real_dir == 2) { //bottom
-                        for (int h = position.y-1; h >= bottom_cor; --h) {
+                        for (int h = position.y-1; h >= bottom_cor && h <= position.y-1; --h) {
                             for (int w = left_cor; w <= right_cor; ++w) {
                                 //std::cout << " { " << w << ", " << h << " } ";
                                 coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -149,7 +149,7 @@ namespace robo {
                         }
                         //std::cout << std::endl;
                         if (sens->getAngle() > 0) {
-                            for (int h = top_cor; h >= position.y; --h) {
+                            for (int h = top_cor; h >= position.y && h <= top_cor; --h) {
                                 for (int w = position.x+1; w <= right_cor; ++w) {
                                     //std::cout << " { " << w << ", " << h << " } ";
                                     coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -161,7 +161,7 @@ namespace robo {
                         }
                     }
                     else { //right
-                        for (int h = top_cor; h >= bottom_cor; --h) {
+                        for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
                             for (int w = position.x+1; w <= right_cor; ++w) {
                                 //std::cout << " { " << w << ", " << h << " } ";
                                 coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -174,7 +174,7 @@ namespace robo {
 
                     //std::cout << std::endl;
                     if (sens->getAngle() > 0) {
-                        for (int h = top_cor; h > position.y; --h) {
+                        for (int h = top_cor; h > position.y && h <= top_cor; --h) {
                             for (int w = left_cor; w <= position.x; ++w) {
                                 //std::cout << " { " << w << ", " << h << " } ";
                                 coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};

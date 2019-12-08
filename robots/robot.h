@@ -27,6 +27,7 @@ namespace robo {
         return ((left.x == right.x) && (left.y == right.y));
     }
 
+
     enum Characters {
         Obstacle_t,
         Interest_t,
