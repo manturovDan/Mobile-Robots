@@ -156,17 +156,21 @@ namespace dispr {
                 if(!strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE")) {
                     auto * curCom = dynamic_cast<robo::Robot_Commander *>(*it);
                     if (!curCom->getBlocked()) {
-                        int addx = 0;
-                        int addy = 0;
 
-                        if (curCom->getDirection() == 1) {
-                            addy = rectSize;
+                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize + rectSize / 2, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize + rectSize / 2);
+                        commanderS.setOrigin({8, 8});
+
+                        if (curCom->getDirection() == 0) {
+                            commanderS.setRotation(0);
                         }
-
-                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize + addx, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize + addy);
-
                         if (curCom->getDirection() == 1) {
                             commanderS.setRotation(-90.f);
+                        }
+                        if (curCom->getDirection() == 2) {
+                            commanderS.setRotation(-180.f);
+                        }
+                        if (curCom->getDirection() == 3) {
+                            commanderS.setRotation(90.f);
                         }
 
                         window.draw(commanderS);
@@ -176,7 +180,8 @@ namespace dispr {
                 if(!strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE")) {
                     auto * curSc = dynamic_cast<robo::Robot_Scout *>(*it);
                     if (!curSc->getBlocked()) {
-                        scoutS.setPosition(static_cast<float>(curSc->getX())*rectSize, winHeight - rectSize - static_cast<float>(curSc->getY())*rectSize);
+                        scoutS.setPosition(static_cast<float>(curSc->getX())*rectSize + rectSize / 2, winHeight - rectSize - static_cast<float>(curSc->getY())*rectSize + rectSize / 2);
+                        scoutS.setOrigin({8, 8});
                         //commanderS.setRotation(90.f);
                         window.draw(scoutS);
                     }
