@@ -25,6 +25,7 @@ namespace robo {
         void run();
         void testMove();
         void testNext();
+        bool isOpened(coordinates);
         Moving_Describer * getMd() { return md; }
         std::multimap<coordinates, map_point>::const_iterator begin() { return ai_dict.begin(); }
         std::multimap<coordinates, map_point>::const_iterator end() { return ai_dict.end(); }

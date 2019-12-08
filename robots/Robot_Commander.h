@@ -14,6 +14,7 @@ namespace robo {
         int connectScout(Robot_Scout *);
         std::string whoami() override;
         Robot_Scout * getPair();
+        std::map<coordinates, Map_Object *> research() override;
     };
 }
 #endif //ROBOTSCREATE_ROBOT_COMMANDER_H

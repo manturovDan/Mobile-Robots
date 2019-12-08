@@ -38,4 +38,18 @@ namespace robo {
     void Managing::setAI(Ai_Deep *aip) {
         ai = aip;
     }
+
+    bool Managing::unknownSquare(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
+        for (int h = top_cor; h >= bottom_cor; --h) {
+            for (int w = left_cor; w <= right_cor; ++w) {
+                if (!checkPoint({static_cast<unsigned int>(w), static_cast<unsigned int>(h)}))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    bool Managing::checkPoint(coordinates pos) {
+        return ai->isOpened(pos);
+    }
 }

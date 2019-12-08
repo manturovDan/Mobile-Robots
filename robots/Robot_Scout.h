@@ -14,9 +14,11 @@ namespace robo {
     public:
         Robot_Scout(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
         bool getBlocked() { return blocked; }
+        int getDirection() override { return direction; }
         void unBlock() { blocked = false; }
         void move(coordinates, int);
         void report(int);
+        //std::map<coordinates, Map_Object *> look() override;
 
         std::string whoami() override;
     };

@@ -17,14 +17,15 @@ namespace robo {
         Managing(unsigned int rad, unsigned int consumption, unsigned int priority, unsigned int subs) :
                 radius(rad), subs_count(subs), Energy_Consumer(consumption, priority, true) {}
         Module * copy() override;
-        unsigned int getRadius() { return radius; }
+        unsigned int getRadius() override { return radius; }
         int addSubord(Observation_Center *);
         std::string whoami() override;
         int subord_count() { return subordinate.size(); }
 
         std::vector<Observation_Center *>::const_iterator begin() { return subordinate.begin(); }
         std::vector<Observation_Center *>::const_iterator end() { return subordinate.end(); }
-
+        bool checkPoint(coordinates);
+        bool unknownSquare(unsigned int, unsigned int, unsigned int, unsigned int);
         void reportAI(Robot_Scout *, int);
         static void setAI(Ai_Deep * aip);
     protected:

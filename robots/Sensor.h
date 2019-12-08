@@ -13,8 +13,8 @@ namespace robo {
         Sensor(unsigned int rad, unsigned int dir, unsigned int ang, unsigned int consumption, unsigned int priority) :
                 radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, true) {}
         Module * copy() override;
-        unsigned int getRadius() { return radius; }
-        unsigned int getDirection() { return direction; }
+        unsigned int getRadius() override { return radius; }
+        unsigned int getDirection(int dir = 0) { return (dir+direction) % 4; }
         unsigned int getAngle() { return angle; }
 
         std::string whoami() override;

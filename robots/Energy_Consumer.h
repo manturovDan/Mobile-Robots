@@ -5,6 +5,8 @@
 
 namespace robo {
     class Energy_Consumer : public Module {
+    public:
+        virtual unsigned int getRadius() = 0;
     protected:
         Energy_Consumer() = delete;
         Energy_Consumer(unsigned int cons, unsigned int prior, bool act = true) : powerConsumption(cons), Module(prior, act) {}

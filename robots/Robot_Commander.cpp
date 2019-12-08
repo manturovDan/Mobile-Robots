@@ -42,4 +42,26 @@ namespace robo {
 
         return nullptr;
     }
+
+    std::map<coordinates, Map_Object *> Robot_Commander::research() {
+        std::map<coordinates, Map_Object *> full_look_res;
+        std::map<coordinates, Map_Object *> look_res;
+
+
+        unsigned int max_rad = getMaxRadius();
+        int top_cor, left_cor, bottom_cor, right_cor;
+        determineCorers(top_cor, left_cor, bottom_cor, right_cor, max_rad);
+
+
+        if (manMod()->unknownSquare(top_cor, left_cor, bottom_cor, right_cor)) {
+            look_res = look();
+            full_look_res.insert(look_res.begin(), look_res.end());
+        }
+
+        //std::map<coordinates, Map_Object *> look_res = look();
+
+        //full_look_res.insert(look_res.begin(), look_res.end());
+
+        return full_look_res;
+    }
 }

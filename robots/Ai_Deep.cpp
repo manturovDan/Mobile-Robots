@@ -160,7 +160,9 @@ namespace robo {
         md->addStep({testCom, {0, 2}, 0, 2, 0});
         md->addStep({testCom, {0, 3}, 0, 3, 0});
         md->addStep({testCom, {0, 4}, 0, 4, 0});
-        md->addStep({testCom, {0, 5}, 0, 5, 3});
+        md->addStep({testCom, {0, 5}, 0, 5, 0});
+        md->addStep({testCom, {0, 6}, 0, 6, 0});
+        md->addStep({testCom, {0, 7}, 0, 7, 3});
 
         md->printSteps();
     }
@@ -202,10 +204,21 @@ namespace robo {
             }
             else if (rep.second == 3) {
                 std::cout << "commander research" << std::endl;
-                //TODO full research in sqare, move to next - on tomorrow
+                auto * commer = dynamic_cast<Robot_Commander *>(rep.first);
+                commer->research();
+                //TODO full research in square, move to next - on tomorrow
+
             }
+            else
+                throw std::invalid_argument("Unknown report");
         }
 
         report.clear();
+    }
+
+    bool Ai_Deep::isOpened(coordinates pos) {
+        if(ai_dict.find(pos) == ai_dict.end())
+            return false;
+        return true;
     }
 }

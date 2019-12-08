@@ -30,4 +30,25 @@ namespace robo {
     void Robot_Scout::report(int type) {
         dynamic_cast<Command_Center *>(owner)->comReport(this, type);
     }
+
+    //bool check all opened if square
+    /*
+    std::map<coordinates, Map_Object *> Robot_Scout::look() {
+        unsigned int max_rad = getMaxRadius();
+        int top_cor, left_cor, bottom_cor, right_cor;
+        determineCorers(top_cor, left_cor, bottom_cor, right_cor, max_rad);
+
+        for (int h = top_cor; h >= bottom_cor; --h) {
+            for (int w = left_cor; w <= right_cor; ++w) {
+                if ()
+
+            }
+            std::cout << std::endl;
+        }
+
+        std::map<coordinates, Map_Object *> one_view;
+        one_view = Observation_Center::look();
+
+
+    }*/
 }

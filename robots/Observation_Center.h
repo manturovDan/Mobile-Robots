@@ -39,6 +39,7 @@ namespace robo {
         void setOwner(Map_Object *);
         Map_Object * getOwner() { return owner; }
         unsigned int getMaxRadius();
+        virtual int getDirection() { return 0; }
     };
 }
 
