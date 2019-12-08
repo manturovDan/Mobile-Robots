@@ -52,4 +52,8 @@ namespace robo {
     bool Managing::checkPoint(coordinates pos) {
         return ai->isOpened(pos);
     }
+
+    void Managing::addStep(Robot_Scout * who, coordinates pos, int dir, unsigned int time, int report) {
+        ai->getMd()->addStep({who, pos, dir, time, report});
+    }
 }

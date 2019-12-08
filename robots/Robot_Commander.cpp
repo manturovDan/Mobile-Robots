@@ -1,5 +1,6 @@
 #include "Command_Center.h"
 #include "Robot_Commander.h"
+#include "Environment_describer.h"
 
 namespace robo {
     Robot_Commander::Robot_Commander(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods, std::string & desc)
@@ -63,6 +64,13 @@ namespace robo {
         if (manMod()->unknownSquare(top_cor, left_cor, bottom_cor, right_cor)) {
             look_res = getPair()->look();
             full_look_res.insert(look_res.begin(), look_res.end());
+        }
+
+        if (manMod()->unknownSquare(top_cor, left_cor, bottom_cor, right_cor)) {
+            manMod()->addStep(this, position, (direction + 1) % 4, env->getTime()+1, 2);
+            manMod()->addStep(this, position, (direction + 2) % 4, env->getTime()+2, 2);
+            manMod()->addStep(this, position, (direction + 3) % 4, env->getTime()+3, 2);
+            manMod()->addStep(this, position, direction, env->getTime()+4, 4);
         }
 
         //std::map<coordinates, Map_Object *> look_res = look();

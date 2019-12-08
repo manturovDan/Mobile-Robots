@@ -27,6 +27,7 @@ namespace robo {
         bool checkPoint(coordinates);
         bool unknownSquare(unsigned int, unsigned int, unsigned int, unsigned int);
         void reportAI(Robot_Scout *, int);
+        void addStep(Robot_Scout *, coordinates, int, unsigned int, int);
         static void setAI(Ai_Deep * aip);
     protected:
         unsigned int radius;
