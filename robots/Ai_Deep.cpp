@@ -193,13 +193,15 @@ namespace robo {
         std::cout << startCommander() << std::endl;
         md->printSteps();
 
+        std::vector<std::pair<Robot_Scout *, int>> nextRep;
+
         for (auto rep = report.begin(); rep != report.end(); ++rep) {
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
                 pair->move({0, 0}, 0);
                 pair->unBlock();
-                rep->first->report(3);
+                nextRep.emplace_back(rep->first, 3);
                 reported(rep);
             }
             else if (rep->second == 2) {
@@ -209,7 +211,6 @@ namespace robo {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);
-                print_d(70, 70);
                 reported(rep);
             }
             //else
@@ -217,6 +218,11 @@ namespace robo {
         }
 
         std::remove_if(report.begin(), report.end(), [](std::pair<Robot_Scout *, int> pr){ return (pr.second == -1);} );
+
+        for (auto it : nextRep) {
+            it.first->report(it.second);
+        }
+
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
