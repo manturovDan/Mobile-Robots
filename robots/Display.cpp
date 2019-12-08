@@ -156,8 +156,19 @@ namespace dispr {
                 if(!strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE")) {
                     auto * curCom = dynamic_cast<robo::Robot_Commander *>(*it);
                     if (!curCom->getBlocked()) {
-                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize);
-                        //commanderS.setRotation(90.f);
+                        int addx = 0;
+                        int addy = 0;
+
+                        if (curCom->getDirection() == 1) {
+                            addy = rectSize;
+                        }
+
+                        commanderS.setPosition(static_cast<float>(curCom->getX())*rectSize + addx, winHeight - rectSize - static_cast<float>(curCom->getY())*rectSize + addy);
+
+                        if (curCom->getDirection() == 1) {
+                            commanderS.setRotation(-90.f);
+                        }
+
                         window.draw(commanderS);
                     }
 
