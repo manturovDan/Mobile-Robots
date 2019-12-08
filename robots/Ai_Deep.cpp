@@ -293,6 +293,24 @@ namespace robo {
             }
         }
 
+        for (auto it = distances.begin(); it != distances.end(); ++it) {
+            if (distances.find({it->first.x, it->first.y+1}) != distances.end()) { //top
+                distances[it->first][{it->first.x, it->first.y+1}] = 1;
+                distances[{it->first.x, it->first.y+1}][it->first] = 1;
+            }
+            if (distances.find({it->first.x-1, it->first.y}) != distances.end()) { //left
+                distances[it->first][{it->first.x-1, it->first.y}] = 1;
+                distances[{it->first.x-1, it->first.y}][it->first] = 1;
+            }
+            if (distances.find({it->first.x, it->first.y-1}) != distances.end()) { //bottom
+                distances[it->first][{it->first.x, it->first.y-1}] = 1;
+                distances[{it->first.x, it->first.y-1}][it->first] = 1;
+            }
+            if (distances.find({it->first.x+1, it->first.y}) != distances.end()) { //right
+                distances[it->first][{it->first.x+1, it->first.y}] = 1;
+                distances[{it->first.x+1, it->first.y}][it->first] = 1;
+            }
+        }
 
         return  allOpened;
     }
