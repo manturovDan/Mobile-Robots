@@ -48,6 +48,7 @@ namespace robo {
         int revolve(Robot_Scout *);
         bool allOpened(unsigned int, unsigned int, unsigned int, unsigned int);
         std::vector<coordinates> findGrey(unsigned int, unsigned int, unsigned int, unsigned int);
+        std::vector<coordinates> findGreyRI(unsigned int, unsigned int, unsigned int, unsigned int, int);
         /// return matrix with 0 - free for moving, 1 - unreachable
         std::vector<std::vector<int>> ititLee(unsigned int, unsigned int, unsigned int, unsigned int, coordinates);
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);

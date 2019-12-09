@@ -232,12 +232,19 @@ namespace robo {
             } else if (rep->second == 55) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
-                    makeReport(subd, 6);
+                    makeReport(subd, 9);//6 - back to chief
                 }
             }else if (rep->second == 6) {
                 backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
             } else if (rep->second == 7) {
                 md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
+            } else if (rep->second == 8) {
+
+            } else if (rep->second == 9) {
+                auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
+                int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
+                dynamic_cast<Robot_Commander *>(subd->getOwner())->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+                findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
             }
 
             reported(rep);
@@ -449,6 +456,51 @@ namespace robo {
         }
 
         return grey;
+    }
+
+    std::vector<coordinates> Ai_Deep::findGreyRI(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, int rad) {
+        int radius = rad-1;
+
+        unsigned int big_top = top_cor + radius;
+        unsigned int big_left;
+        unsigned int big_bottom;
+        unsigned int big_right = right_cor + radius;
+
+        if (big_top >= envir->getHeight())
+            big_top = envir->getHeight() - 1;
+
+        if (big_right >= envir->getWidth())
+            big_right = envir->getWidth() - 1;
+
+        if (radius > left_cor)
+            big_left = 0;
+        else
+            big_left = left_cor - radius;
+
+        if (radius > bottom_cor)
+            big_bottom = 0;
+        else
+            big_bottom = bottom_cor - radius;
+
+        std::vector<coordinates> ri_grey;
+        std::vector<coordinates> big = findGrey(big_top, big_left, big_bottom, big_right);
+        std::vector<coordinates> internal = findGrey(top_cor, left_cor, bottom_cor, right_cor);
+
+        std::sort(big.begin(), big.end());
+        std::sort(internal.begin(), internal.end());
+
+        std::set_difference(
+                big.begin(), big.end(),
+                internal.begin(), internal.end(),
+                std::back_inserter(ri_grey)
+                );
+
+        for (auto it : ri_grey) {
+            std::cout << it.x + left_cor << "," << it.y + bottom_cor << std::endl;
+        }
+
+        return ri_grey;
+
     }
 
     std::vector<std::vector<int>> Ai_Deep::ititLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, coordinates commander) {
