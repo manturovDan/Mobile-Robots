@@ -255,7 +255,7 @@ namespace robo {
             //    throw std::invalid_argument("Unknown report");
         }
 
-        std::remove_if(report.begin(), report.end(), [](std::pair<Robot_Scout *, int> pr){ return (pr.second == -1);} );
+        report.erase(std::remove_if(report.begin(), report.end(), [](std::pair<Robot_Scout *, int> pr){ return (pr.second == -1);} ), report.end());
 
         for (auto it : nextRep) {
             it.first->report(it.second);
