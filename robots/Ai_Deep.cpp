@@ -495,16 +495,44 @@ namespace robo {
     int Ai_Deep::riRes(robo::Robot_Commander * comm) {
         auto * subd = comm->getPair();
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
-        comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+        comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
         auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
 
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
 
-        std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
         for (auto it : grey) {
-            std::cout << it.x +left_cor_m << ";" << it.y + bottom_cor_m << std::endl;
+            std::cout << it.x << ";" << it.y << " VIEW ";
+            auto mys = maySee(it, subd->getMaxRadius());
+            if (mys.size() > 1)
+                std::cout << "IT ";
+            for (auto my : mys) {
+                if (my.x - left_cor_m < leeTab.size() && my.y - bottom_cor_m < leeTab.size() && leeTab[my.y - bottom_cor_m][my.x - left_cor_m] > 0) {
+                    //std::cout << " ::: " << my.x << ";" << my.y << " ";
+                }
+            }
+            std::cout << std::endl;
+            //may see
         }
+    }
+
+    std::vector<coordinates> Ai_Deep::maySee(coordinates obj, int radius) {
+        std::vector<coordinates> ret;
+        int y = static_cast<int>(obj.y);
+        int x = static_cast<int>(obj.x);
+        //std::cout << "CALCULATING " << x << ";" << y << std::endl;
+        for (int h = y - radius; h <= y + radius; ++h) {
+            for (int w = x - radius; w <= x + radius; ++w) {
+                if (x != w || y != h) {
+                    if (h >= 0 && w >= 0)
+                        ret.push_back({static_cast<unsigned int>(w), static_cast<unsigned  int>(h)});
+                    //std::cout << " {" << w << ";" << h << "}";
+                }
+            }
+        }
+        //std::cout << std::endl;
+
+        return ret;
     }
 
     std::vector<std::vector<int>> Ai_Deep::initLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, coordinates commander) {
