@@ -53,7 +53,7 @@ namespace robo {
         coordinates lastPos = mobile->getPosition();
         for(auto & it : move_d) {
             if (it.moving_obj == mobile && assumeTime <= it.time) {
-                ++assumeTime;
+                assumeTime = it.time + 1;
                 lastDir = it.direction;
                 lastPos = it.pos;
             }
@@ -63,12 +63,15 @@ namespace robo {
         if (lastPos.x - pos.x == 1 && lastPos.y == pos.y)
             tarDir = 3;
         else if (lastPos.x - pos.x == -1 && lastPos.y == pos.y)
-            tarDir = 1;
+            tarDir = 3;
         else if (lastPos.y - pos.y == -1 && lastPos.x == pos.x)
             tarDir = 0;
         else if (lastPos.y - pos.y == 1 && lastPos.x == pos.x)
             tarDir = 2;
-        else if (lastPos.x != pos.x && lastPos.y != pos.y)
+        else if (lastPos.x == pos.x && lastPos.y == pos.y) {
+            return;
+        }
+        else
             throw std::invalid_argument("Unknown direction");
 
         assumeTime = setDirection(mobile, lastPos, tarDir, lastDir, assumeTime, destination);
