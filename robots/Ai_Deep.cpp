@@ -242,13 +242,19 @@ namespace robo {
             } else if (rep->second == 9) {
                 riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
             } else if (rep->second == 10) {
+                std::cout << "RESS" << std::endl;
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 revolve(subd, 101);
 
             } else if (rep->second == 101) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                std::cout << "REEEEEEEEEEEEEEEADY" <<std::endl;
+                if (false && riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
+                    //makeReport(subd, 10);
+                }
+                else {
+                    makeReport(subd, 9);
+                }
             }
 
             reported(rep);
@@ -267,7 +273,7 @@ namespace robo {
         int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
         mobile->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, mobile->getMaxRadius());
         auto * comm = dynamic_cast<Robot_Commander *>(mobile->getOwner());
-        if(comm->manMod()->unknownSquare(top_cor_s, top_cor_s, top_cor_s, top_cor_s)) {
+        if(true || comm->manMod()->unknownSquare(top_cor_s, top_cor_s, top_cor_s, top_cor_s)) {
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 1) % 4, envir->getTime()+1, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 2) % 4, envir->getTime()+2, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 3) % 4, envir->getTime()+3, 2);
@@ -275,6 +281,7 @@ namespace robo {
 
             return 1;
         } else {
+            std::cout << "THERE IS ERROR" << std::endl;
             makeReport(mobile, ret);
             return 0;
         }
