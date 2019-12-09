@@ -279,8 +279,9 @@ namespace robo {
                     //go to to this point TODO
                     std::cout << "FULL WAY TO {" << it.x + left_cor_m << ";" << it.y + bottom_cor_m << "}" << std::endl;
                     makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {it.x + left_cor_m, it.y+bottom_cor_m});
-                    for (auto coord : route) {
-                        std::cout << coord.x << ";" << coord.y << std::endl;
+                    for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+                        std::cout << coord->x << ";" << coord->y << std::endl;
+                        md->routePoint(comm->getPair(), *coord, 2, envir->getTime());
                     }
                     std::cout << "END OF THE WAY" << std::endl;
 
