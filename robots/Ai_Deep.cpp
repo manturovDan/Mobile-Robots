@@ -217,13 +217,19 @@ namespace robo {
                 if (commer->getPair() != nullptr && md->isMoving(commer->getPair()))
                     nextRep.emplace_back(rep->first, 4);
                 else {
-                    pairRes(commer);
+                    if (pairRes(commer)) {
+                        makeReport(commer->getPair(), 6);
+                    }
                 }
                 //algorithm from the paper
             } else if (rep->second == 5) {
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()));
+                if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
+                    makeReport(subd, 6);
+                }
+            } else if (rep->second == 6) {
+                backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
             }
 
             reported(rep);
@@ -250,7 +256,7 @@ namespace robo {
         (*delit).second = -1;
     }
 
-    void Ai_Deep::pairRes(Robot_Commander * comm) {
+    int Ai_Deep::pairRes(Robot_Commander * comm) {
         unsigned int ri = comm->ri();
         std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
 
@@ -258,6 +264,7 @@ namespace robo {
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
 
         if(allOpened(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m)) {
+            return 1;
             std::cout << "ALL_POINTS IN MO ARE OPENED" << std::endl;
         } else {
             std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
@@ -265,7 +272,6 @@ namespace robo {
             std::cout << "GREY" << std::endl;
 
             std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
-            std::cout << std::endl;
             leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
 
@@ -292,7 +298,44 @@ namespace robo {
                     break;
                 }
             }
+
+            return 0;
         }
+
+    }
+
+    void Ai_Deep::backToChief(Robot_Commander * comm) {
+        int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
+        comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
+        std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+        leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
+
+        coordinates target;
+        if (comm->getDirection() == 0) {
+            target = {comm->getX(), comm->getY()-1};
+        } else if (comm->getDirection() == 1) {
+            target = {comm->getX()+1, comm->getY()};
+        } else if (comm->getDirection() == 2) {
+            target = {comm->getX(), comm->getY()+1};
+        } else if (comm->getDirection() == 3) {
+            target = {comm->getX()-1, comm->getY()};
+        }
+        else
+            throw std::invalid_argument("unknown direction : 2");
+
+        std::cout << "BACK_HOME" << std::endl;
+
+        std::vector<coordinates> route;
+        makeRoute(leeTab, route, bottom_cor_m, left_cor_m, target);
+
+        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+            //std::cout << coord->x << ";" << coord->y << std::endl;
+
+            md->routePoint(comm->getPair(), *coord, 0, envir->getTime());
+
+        }
+
+        //turnung
 
     }
 

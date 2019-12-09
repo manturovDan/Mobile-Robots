@@ -61,7 +61,7 @@ namespace robo {
 
         int tarDir = 0;
         if (lastPos.x - pos.x == 1 && lastPos.y == pos.y)
-            tarDir = 3;
+            tarDir = 1;
         else if (lastPos.x - pos.x == -1 && lastPos.y == pos.y)
             tarDir = 3;
         else if (lastPos.y - pos.y == -1 && lastPos.x == pos.x)

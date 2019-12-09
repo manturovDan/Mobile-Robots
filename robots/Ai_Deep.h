@@ -42,7 +42,9 @@ namespace robo {
         void nextComp();
         void makeReport(Robot_Scout *, int);
         void reported(std::deque<std::pair<Robot_Scout *, int>>::iterator);
-        void pairRes(Robot_Commander *);
+        ///returns 1 if all points are opened 0 - else
+        int pairRes(Robot_Commander *);
+        void backToChief(Robot_Commander *);
         bool allOpened(unsigned int, unsigned int, unsigned int, unsigned int);
         std::vector<coordinates> findGrey(unsigned int, unsigned int, unsigned int, unsigned int);
         /// return matrix with 0 - free for moving, 1 - unreachable
