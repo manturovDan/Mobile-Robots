@@ -225,10 +225,16 @@ namespace robo {
             } else if (rep->second == 5) {
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
+
+                if (!revolve(subd)) {
+                    makeReport(subd, 55);
+                }
+            } else if (rep->second == 55) {
+                auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
                     makeReport(subd, 6);
                 }
-            } else if (rep->second == 6) {
+            }else if (rep->second == 6) {
                 backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
             } else if (rep->second == 7) {
                 md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
@@ -244,6 +250,21 @@ namespace robo {
             it.first->report(it.second);
         }
 
+    }
+
+    int Ai_Deep::revolve(Robot_Scout * mobile) {
+        int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
+        mobile->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, mobile->getMaxRadius());
+        auto * comm = dynamic_cast<Robot_Commander *>(mobile->getOwner());
+        if(comm->manMod()->unknownSquare(top_cor_s, top_cor_s, top_cor_s, top_cor_s)) {
+            comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 1) % 4, envir->getTime()+1, 2);
+            comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 2) % 4, envir->getTime()+2, 2);
+            comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 3) % 4, envir->getTime()+3, 2);
+            comm->manMod()->addStep(mobile, mobile->getPosition(), mobile->getDirection(), envir->getTime()+4, 55);
+
+            return 1;
+        } else
+            return 0;
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
