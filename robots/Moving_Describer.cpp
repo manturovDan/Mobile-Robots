@@ -8,6 +8,8 @@ namespace robo {
         }
 
         move_d.push_back(mom);
+
+        return 0;
     }
 
     void Moving_Describer::printSteps(std::ostream & stream) {
@@ -43,6 +45,25 @@ namespace robo {
         }
 
         return false;
+    }
+
+    void Moving_Describer::routePoint(Robot_Scout * mobile, coordinates pos, int direction, int destination, unsigned int curTime) {
+        unsigned int assumeTime = curTime + 1;
+        for(auto & it : move_d) {
+            if (it.moving_obj == mobile && assumeTime <= it.time) {
+                ++assumeTime;
+            }
+        }
+
+        for(auto & it : move_d) {
+            if (it.pos == pos && assumeTime == it.time) {
+                ++assumeTime;
+            }
+        }
+
+        //TODO if object stops on the point it must make it blocked and previously check if no routs have his point
+
+        addStep({mobile, pos, direction, assumeTime, destination});
     }
 
 }
