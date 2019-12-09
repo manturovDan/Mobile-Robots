@@ -48,6 +48,7 @@ namespace robo {
         /// return matrix with 0 - free for moving, 1 - unreachable
         std::vector<std::vector<int>> ititLee(unsigned int, unsigned int, unsigned int, unsigned int, coordinates);
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
+        void makeRoute(std::vector<std::vector<int>> &, std::vector<coordinates> &, unsigned int, unsigned int, coordinates);
     };
 }
 

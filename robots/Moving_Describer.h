@@ -28,7 +28,8 @@ namespace robo {
         void printSteps(std::ostream & stream = std::cout);
         void makeSteps(unsigned int);
         bool isMoving(Robot_Scout *);
-        void routePoint(Robot_Scout *, coordinates, int, int, unsigned int);
+        void routePoint(Robot_Scout *, coordinates, int, unsigned int);
+        unsigned int setDirection(Robot_Scout *, coordinates, int, int, unsigned int, int);
     };
 }
 

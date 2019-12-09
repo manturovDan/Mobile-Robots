@@ -235,13 +235,11 @@ namespace robo {
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
-        if(ai_dict.find(pos) == ai_dict.end())
-            return false;
-        return true;
+        return !(ai_dict.find(pos) == ai_dict.end());
     }
 
     void Ai_Deep::makeReport(Robot_Scout *who, int type) {
-        report.push_back(std::pair<Robot_Scout *, int>(who, type));
+        report.emplace_back(who, type);
     }
 
     void Ai_Deep::reported(std::deque<std::pair<Robot_Scout *, int>>::iterator delit) {
@@ -275,13 +273,53 @@ namespace robo {
 
             std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
             for (auto it : grey) {
-                std::cout << it.x << "," << it.y << " = " << leeTab[it.y][it.x] <<  std::endl;
+                std::cout << it.x + left_cor_m << "," << it.y + bottom_cor_m << " = " << leeTab[it.y][it.x] <<  std::endl;
+                std::vector<coordinates> route;
                 if (leeTab[it.y][it.x] > 0) {
                     //go to to this point TODO
+                    std::cout << "FULL WAY TO {" << it.x + left_cor_m << ";" << it.y + bottom_cor_m << "}" << std::endl;
+                    makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {it.x + left_cor_m, it.y+bottom_cor_m});
+                    for (auto coord : route) {
+                        std::cout << coord.x << ";" << coord.y << std::endl;
+                    }
+                    std::cout << "END OF THE WAY" << std::endl;
+
+                    break;
                 }
             }
         }
 
+    }
+
+    void Ai_Deep::makeRoute(std::vector<std::vector<int>> & leeTab, std::vector<coordinates> & route, unsigned int startX, unsigned int startY, coordinates targetPos) {
+        int ceil = leeTab[targetPos.y-startY][targetPos.x-startX];
+        if (ceil <= 0)
+            return;
+
+        route.clear();
+        route.push_back(targetPos);
+        unsigned int curX = targetPos.x;
+        unsigned int curY = targetPos.y;
+
+        while (ceil > 0) {
+            if (leeTab.size() > curY-startY + 1 && leeTab[curY-startY+1][curX-startX] == ceil - 1) {
+                curY++;
+            }
+            else if (curX != startX && leeTab[curY-startY][curX-startX-1] == ceil - 1) {
+                curX--;
+            }
+            else if (curY != startY && leeTab[curY-startY-1][curX-startX] == ceil - 1) {
+                curY--;
+            }
+            else if (leeTab[curY-startY].size() > curX-startX + 1 && leeTab[curY-startY][curX-startX+1] == ceil - 1) {
+                curX++;
+            }
+            else
+                throw std::invalid_argument("Invalid LEE table");
+
+            route.push_back({curX + 1, curY});
+            ceil--;
+        }
     }
 
     bool Ai_Deep::allOpened(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
@@ -423,5 +461,4 @@ namespace robo {
             std::cout << std::endl;
         }
     }
-
 }
