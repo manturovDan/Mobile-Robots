@@ -241,10 +241,7 @@ namespace robo {
             } else if (rep->second == 8) {
 
             } else if (rep->second == 9) {
-                auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
-                dynamic_cast<Robot_Commander *>(subd->getOwner())->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
-                findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+                riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
             }
 
             reported(rep);
@@ -288,30 +285,24 @@ namespace robo {
 
     int Ai_Deep::pairRes(Robot_Commander * comm) {
         unsigned int ri = comm->ri();
-        std::cout << "PAIR IS READYYYYYY!!!!!! - " << ri << std::endl;
 
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
 
         if(allOpened(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m)) {
             return 1;
-            std::cout << "ALL_POINTS IN MO ARE OPENED" << std::endl;
         } else {
-            std::cout << "ALL_POINTS IN MO ARE NOT OPENED" << std::endl;
             auto grey = findGrey(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m);
-            std::cout << "GREY" << std::endl;
 
-            std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+            std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
             leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
 
             std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
             for (auto it : grey) {
-                std::cout << it.x + left_cor_m << "," << it.y + bottom_cor_m << " = " << leeTab[it.y][it.x] <<  std::endl;
+                //std::cout << it.x + left_cor_m << "," << it.y + bottom_cor_m << " = " << leeTab[it.y][it.x] <<  std::endl;
                 std::vector<coordinates> route;
                 if (leeTab[it.y][it.x] > 0) {
-                    //go to to this point TODO
-                    std::cout << "FULL WAY TO {" << it.x + left_cor_m << ";" << it.y + bottom_cor_m << "}" << std::endl;
                     makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {it.x + left_cor_m, it.y+bottom_cor_m});
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                         std::cout << coord->x << ";" << coord->y << std::endl;
@@ -322,8 +313,6 @@ namespace robo {
                             md->routePoint(comm->getPair(), *coord, 2, envir->getTime());
 
                     }
-                    //makeReport(comm->getPair(), 5);
-                    std::cout << "END OF THE WAY" << std::endl;
 
                     break;
                 }
@@ -337,7 +326,7 @@ namespace robo {
     void Ai_Deep::backToChief(Robot_Commander * comm) {
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
-        std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+        std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
         leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
         coordinates target;
@@ -495,15 +484,30 @@ namespace robo {
                 std::back_inserter(ri_grey)
                 );
 
-        for (auto it : ri_grey) {
-            std::cout << it.x + left_cor << "," << it.y + bottom_cor << std::endl;
-        }
+        //for (auto it : ri_grey) {
+        //    std::cout << it.x + left_cor << "," << it.y + bottom_cor << std::endl;
+        //}
 
         return ri_grey;
 
     }
 
-    std::vector<std::vector<int>> Ai_Deep::ititLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, coordinates commander) {
+    int Ai_Deep::riRes(robo::Robot_Commander * comm) {
+        auto * subd = comm->getPair();
+        int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
+        comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+        auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+
+        std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+        leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
+
+        std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
+        for (auto it : grey) {
+            std::cout << it.x +left_cor_m << ";" << it.y + bottom_cor_m << std::endl;
+        }
+    }
+
+    std::vector<std::vector<int>> Ai_Deep::initLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, coordinates commander) {
         std::vector<int> row (right_cor - left_cor + 1);
         std::vector<std::vector<int>> leeTab (top_cor-bottom_cor+1);
 

@@ -44,13 +44,14 @@ namespace robo {
         void reported(std::deque<std::pair<Robot_Scout *, int>>::iterator);
         ///returns 1 if all points are opened 0 - else
         int pairRes(Robot_Commander *);
+        int riRes(Robot_Commander *);
         void backToChief(Robot_Commander *);
         int revolve(Robot_Scout *);
         bool allOpened(unsigned int, unsigned int, unsigned int, unsigned int);
         std::vector<coordinates> findGrey(unsigned int, unsigned int, unsigned int, unsigned int);
         std::vector<coordinates> findGreyRI(unsigned int, unsigned int, unsigned int, unsigned int, int);
         /// return matrix with 0 - free for moving, 1 - unreachable
-        std::vector<std::vector<int>> ititLee(unsigned int, unsigned int, unsigned int, unsigned int, coordinates);
+        std::vector<std::vector<int>> initLee(unsigned int, unsigned int, unsigned int, unsigned int, coordinates);
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
         void makeRoute(std::vector<std::vector<int>> &, std::vector<coordinates> &, unsigned int, unsigned int, coordinates);
     };
