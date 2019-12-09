@@ -220,6 +220,10 @@ namespace robo {
                     pairRes(commer);
                 }
                 //algorithm from the paper
+            } else if (rep->second == 5) {
+                connectResult(rep->first->look());
+                auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
+                pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()));
             }
 
             reported(rep);
@@ -261,12 +265,6 @@ namespace robo {
             std::cout << "GREY" << std::endl;
 
             std::vector<std::vector<int>> leeTab = ititLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
-            /*for (auto & ly : leeTab) {
-                for(int & lx : ly) {
-                    std::cout << lx;
-                }
-                std::cout << std::endl;
-            }*/
             std::cout << std::endl;
             leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
@@ -281,8 +279,14 @@ namespace robo {
                     makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {it.x + left_cor_m, it.y+bottom_cor_m});
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                         std::cout << coord->x << ";" << coord->y << std::endl;
-                        md->routePoint(comm->getPair(), *coord, 2, envir->getTime());
+
+                        if (*coord == route[0])
+                            md->routePoint(comm->getPair(), *coord, 5, envir->getTime());
+                        else
+                            md->routePoint(comm->getPair(), *coord, 2, envir->getTime());
+
                     }
+                    //makeReport(comm->getPair(), 5);
                     std::cout << "END OF THE WAY" << std::endl;
 
                     break;
@@ -318,7 +322,7 @@ namespace robo {
             else
                 throw std::invalid_argument("Invalid LEE table");
 
-            route.push_back({curX + 1, curY});
+            route.push_back({curX, curY});
             ceil--;
         }
     }

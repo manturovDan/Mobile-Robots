@@ -10,6 +10,7 @@ namespace robo {
     /// 2 - commander/scout is moving/rotating to task point;
     /// 3 - commander has arrived to new point; -1 - is waiting for deleting;
     /// 4 - arrived commander is ready for full area researching
+    /// 5 - subordinate has arrived to grey point
     /// REPORT_TYPES
     struct moment {
         Robot_Scout * moving_obj;

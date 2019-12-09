@@ -71,8 +71,10 @@ namespace robo {
         else if (lastPos.x == pos.x && lastPos.y == pos.y) {
             return;
         }
-        else
+        else {
+            std::cout << lastPos.x << " " << pos.x << " " << lastPos.y << " " <<  pos.y << std::endl;
             throw std::invalid_argument("Unknown direction");
+        }
 
         assumeTime = setDirection(mobile, lastPos, tarDir, lastDir, assumeTime, destination);
 
