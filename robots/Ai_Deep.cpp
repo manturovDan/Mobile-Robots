@@ -379,8 +379,9 @@ namespace robo {
             else if (leeTab[curY-startY].size() > curX-startX + 1 && leeTab[curY-startY][curX-startX+1] == ceil - 1) {
                 curX++;
             }
-            else
+            else {
                 throw std::invalid_argument("Invalid LEE table");
+            }
 
             route.push_back({curX, curY});
             ceil--;
@@ -501,14 +502,18 @@ namespace robo {
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
 
+        std::vector<coordinates> route;
         for (auto it : grey) {
             std::cout << it.x << ";" << it.y << " VIEW ";
             auto mys = maySee(it, subd->getMaxRadius());
             if (mys.size() > 1)
                 std::cout << "IT ";
             for (auto my : mys) {
-                if (my.x - left_cor_m < leeTab.size() && my.y - bottom_cor_m < leeTab.size() && leeTab[my.y - bottom_cor_m][my.x - left_cor_m] > 0) {
+                if (my.y - bottom_cor_m < leeTab.size() && my.x - left_cor_m < leeTab[my.y - bottom_cor_m].size() && leeTab[my.y - bottom_cor_m][my.x - left_cor_m] > 0) {
                     //std::cout << " ::: " << my.x << ";" << my.y << " ";
+                    makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {my.x + left_cor_m, my.y+bottom_cor_m});
+
+                    return 0;
                 }
             }
             std::cout << std::endl;
@@ -605,7 +610,7 @@ namespace robo {
 
         for (auto & ly : leeTable) {
             for(int & lx : ly) {
-                if (lx > 0)
+                if (lx >= 0)
                     std::cout << " ";
                 if (lx < 10)
                     std::cout << " ";
