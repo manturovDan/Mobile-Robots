@@ -76,7 +76,7 @@ namespace robo {
             throw std::invalid_argument("Unknown direction");
         }
 
-        assumeTime = setDirection(mobile, lastPos, tarDir, lastDir, assumeTime, destination);
+        assumeTime = setDirection(mobile, lastPos, tarDir, lastDir, assumeTime, 2);
 
 
         for(auto & it : move_d) {

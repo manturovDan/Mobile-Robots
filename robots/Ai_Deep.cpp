@@ -230,6 +230,8 @@ namespace robo {
                 }
             } else if (rep->second == 6) {
                 backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
+            } else if (rep->second == 7) {
+                md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
             }
 
             reported(rep);
@@ -329,13 +331,11 @@ namespace robo {
         makeRoute(leeTab, route, bottom_cor_m, left_cor_m, target);
 
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-            //std::cout << coord->x << ";" << coord->y << std::endl;
-
-            md->routePoint(comm->getPair(), *coord, 0, envir->getTime());
-
+            if (*coord == route[0])
+                md->routePoint(comm->getPair(), *coord, 7, envir->getTime());
+            else
+                md->routePoint(comm->getPair(), *coord, 0, envir->getTime());
         }
-
-        //turnung
 
     }
 

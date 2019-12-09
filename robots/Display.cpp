@@ -227,7 +227,7 @@ namespace dispr {
         while(true) {
             if (is_comp) {
                 auto start = std::chrono::high_resolution_clock::now();
-                std::this_thread::sleep_for(1s);
+                std::this_thread::sleep_for(0.1s); //TIME
                 env->plusTime();
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
