@@ -14,7 +14,8 @@ namespace robo {
     /// 6 - subordinate has ended the researching and must move to init
     /// 7 - subordinate has backed to owner and should be turned
     /// 8 - sends subordinate when area is researching
-    /// 9 - MO is researching, subordinate is ready ro RI-1 researching
+    /// 9 - MO is researching, subordinate is ready to RI-1 researching
+    /// 10 - subordinate has researched part in RI-1 area; 101 - revolved
     /// REPORT_TYPES
     struct moment {
         Robot_Scout * moving_obj;

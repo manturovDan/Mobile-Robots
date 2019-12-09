@@ -197,6 +197,7 @@ namespace robo {
         std::vector<std::pair<Robot_Scout *, int>> nextRep;
 
         for (auto rep = report.begin(); rep != report.end(); ++rep) {
+            std::cout << "REP " << rep->second << std::endl;
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
@@ -226,15 +227,13 @@ namespace robo {
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
 
-                if (!revolve(subd)) {
-                    makeReport(subd, 55);
-                }
+                revolve(subd, 55);
             } else if (rep->second == 55) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
                     makeReport(subd, 9);//6 - back to chief
                 }
-            }else if (rep->second == 6) {
+            } else if (rep->second == 6) {
                 backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
             } else if (rep->second == 7) {
                 md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
@@ -242,6 +241,14 @@ namespace robo {
 
             } else if (rep->second == 9) {
                 riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
+            } else if (rep->second == 10) {
+                connectResult(rep->first->look());
+                auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
+                revolve(subd, 101);
+
+            } else if (rep->second == 101) {
+                auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
+                std::cout << "REEEEEEEEEEEEEEEADY" <<std::endl;
             }
 
             reported(rep);
@@ -256,7 +263,7 @@ namespace robo {
 
     }
 
-    int Ai_Deep::revolve(Robot_Scout * mobile) {
+    int Ai_Deep::revolve(Robot_Scout * mobile, int ret) {
         int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
         mobile->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, mobile->getMaxRadius());
         auto * comm = dynamic_cast<Robot_Commander *>(mobile->getOwner());
@@ -264,11 +271,13 @@ namespace robo {
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 1) % 4, envir->getTime()+1, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 2) % 4, envir->getTime()+2, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 3) % 4, envir->getTime()+3, 2);
-            comm->manMod()->addStep(mobile, mobile->getPosition(), mobile->getDirection(), envir->getTime()+4, 55);
+            comm->manMod()->addStep(mobile, mobile->getPosition(), mobile->getDirection(), envir->getTime()+4, ret);
 
             return 1;
-        } else
+        } else {
+            makeReport(mobile, ret);
             return 0;
+        }
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
@@ -503,22 +512,34 @@ namespace robo {
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
 
         std::vector<coordinates> route;
+        int minway = -1;
+        coordinates nearest;
         for (auto it : grey) {
-            std::cout << it.x << ";" << it.y << " VIEW ";
             auto mys = maySee(it, subd->getMaxRadius());
-            if (mys.size() > 1)
-                std::cout << "IT ";
             for (auto my : mys) {
                 if (my.y - bottom_cor_m < leeTab.size() && my.x - left_cor_m < leeTab[my.y - bottom_cor_m].size() && leeTab[my.y - bottom_cor_m][my.x - left_cor_m] > 0) {
-                    //std::cout << " ::: " << my.x << ";" << my.y << " ";
-                    makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {my.x + left_cor_m, my.y+bottom_cor_m});
-
-                    return 0;
+                    if (minway < 0 || minway > leeTab[my.y - bottom_cor_m][my.x - left_cor_m]) {
+                        minway = leeTab[my.y - bottom_cor_m][my.x - left_cor_m];
+                        nearest = my;
+                    }
                 }
             }
-            std::cout << std::endl;
-            //may see
         }
+
+        if (minway < 0)
+            return 1;
+
+        std::cout <<  " ::: " << nearest.x << ";" << nearest.y << " ";
+        makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {nearest.x + left_cor_m, nearest.y+bottom_cor_m});
+        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+            if (*coord == route[0]) {
+                md->routePoint(comm->getPair(), *coord, 10, envir->getTime());
+            }
+            else
+                md->routePoint(comm->getPair(), *coord, 2, envir->getTime());
+        }
+
+        return 0;
     }
 
     std::vector<coordinates> Ai_Deep::maySee(coordinates obj, int radius) {
