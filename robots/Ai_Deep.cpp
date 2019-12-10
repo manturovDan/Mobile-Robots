@@ -277,7 +277,7 @@ namespace robo {
         mobile->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, mobile->getMaxRadius());
         std::cout << "REVOLVING\n" << top_cor_s << " " << left_cor_s << " " << bottom_cor_s << " "  << right_cor_s << std::endl;
         auto * comm = dynamic_cast<Robot_Commander *>(mobile->getOwner());
-        if(comm->manMod()->unknownSquare(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s)) { //BUG!!
+        if(comm->manMod()->unknownSquare(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s)) {
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 1) % 4, envir->getTime()+1, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 2) % 4, envir->getTime()+2, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 3) % 4, envir->getTime()+3, 2);
@@ -285,24 +285,13 @@ namespace robo {
 
             return 1;
         } else {
-            std::cout << "THERE IS ERROR" << std::endl;
             makeReport(mobile, ret);
             return 0;
         }
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
-        //return !(ai_dict.find(pos) == ai_dict.end());
-        std::vector<coordinates> opened;
-        for (auto aa : ai_dict) {
-            opened.push_back(aa.first);
-        }
-        for (coordinates p : opened) {
-            if (p == pos)
-                return true;
-        }
-        return false;
-
+        return !(ai_dict.find(pos) == ai_dict.end());
     }
 
     void Ai_Deep::makeReport(Robot_Scout *who, int type) {
@@ -478,8 +467,25 @@ namespace robo {
         return grey;
     }
 
+    std::vector<coordinates> Ai_Deep::findWhite(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
+        std::vector<coordinates> white;
+
+        for (unsigned int h = bottom_cor; h <= top_cor; ++h) {
+            for (unsigned int w = left_cor; w <= right_cor; ++w) {
+                coordinates coord = {w, h};
+                auto p_val = ai_dict.find(coord);
+
+                if (p_val == ai_dict.end())
+                    white.push_back({w, h});
+
+            }
+        }
+
+        return white;
+    }
+
     std::vector<coordinates> Ai_Deep::findGreyRI(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, int rad) {
-        int radius = rad-2;
+        int radius = rad - 1;
 
         unsigned int big_top = top_cor + radius;
         unsigned int big_left;
@@ -539,15 +545,67 @@ namespace robo {
 
     }
 
+    std::vector<coordinates> Ai_Deep::findWhiteRI(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, int radius) {
+        unsigned int big_top = top_cor + radius;
+        unsigned int big_left;
+        unsigned int big_bottom;
+        unsigned int big_right = right_cor + radius;
+
+        if (big_top >= envir->getHeight())
+            big_top = envir->getHeight() - 1;
+
+        if (big_right >= envir->getWidth())
+            big_right = envir->getWidth() - 1;
+
+        if (radius > left_cor)
+            big_left = 0;
+        else
+            big_left = left_cor - radius;
+
+        if (radius > bottom_cor)
+            big_bottom = 0;
+        else
+            big_bottom = bottom_cor - radius;
+
+        std::vector<coordinates> ri_white;
+        std::vector<coordinates> big = findWhite(big_top, big_left, big_bottom, big_right);
+        std::vector<coordinates> internal = findWhite(top_cor, left_cor, bottom_cor, right_cor);
+
+        std::sort(big.begin(), big.end());
+        std::sort(internal.begin(), internal.end());
+
+        //std::set_difference(
+        //        big.begin(), big.end(),
+        //        internal.begin(), internal.end(),
+        //        std::back_inserter(ri_grey)
+        //        );
+
+        for (auto it = big.begin(); it != big.end(); it++) {
+            if (std::find(internal.begin(), internal.end(), *it) == internal.end()) {
+                ri_white.push_back((*it));
+            }
+        }
+
+        return ri_white;
+    }
+
     int Ai_Deep::riRes(robo::Robot_Commander * comm) {
-        print_d(60, 60);
         auto * subd = comm->getPair();
+
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
         std::cout << top_cor_m << " " << left_cor_m << " " << bottom_cor_m << " " << right_cor_m << " " << static_cast<int>(subd->getMaxRadius()) << std::endl;
-        auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+
+        /*auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
         std::cout << "RI_GREY_PRINT" << (*ai_dict.find({0, 53})).second.iam << std::endl;
         for (coordinates coord : grey) {
+            std::cout << coord.x << ";" << coord.y << " ";
+        }
+        std::cout << std::endl;*/
+
+        auto white = findWhiteRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+        std::cout << "\n#######RI_WHITE_PRINT" << std::endl;
+        for (coordinates coord : white) {
             std::cout << coord.x << ";" << coord.y << " ";
         }
         std::cout << std::endl;
@@ -558,7 +616,7 @@ namespace robo {
         std::vector<coordinates> route;
         int minway = -1;
         coordinates nearest;
-        for (auto it : grey) {
+        for (auto it : white) {
             auto mys = maySee(it, subd->getMaxRadius());
             for (auto my : mys) {
                 if (my.y - bottom_cor_m < leeTab.size() && my.x - left_cor_m < leeTab[my.y - bottom_cor_m].size() && leeTab[my.y - bottom_cor_m][my.x - left_cor_m] > 0) {
