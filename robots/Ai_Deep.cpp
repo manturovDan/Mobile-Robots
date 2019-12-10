@@ -89,7 +89,6 @@ namespace robo {
     }
 
     void Ai_Deep::connectResult(const std::map<coordinates, Map_Object *> & res_res) {
-        std::cout << "MARKER11" << std::endl;
         for (auto res_re : res_res) {
             if(ai_dict.find(res_re.first) == ai_dict.end()) {
                 bool bndTop = envir->isTopBoundary(res_re.first);
@@ -237,12 +236,9 @@ namespace robo {
                 }
                 //algorithm from the paper
             } else if (rep->second == 5) {
-                std::cout << "MARKER" << std::endl;
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                std::cout << "MARKER2" << std::endl;
                 revolve(subd, 55);
-                std::cout << "MARKER3" << std::endl;
             } else if (rep->second == 55) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
@@ -267,7 +263,6 @@ namespace robo {
                     makeReport(subd, 6);
                 }
             } else if (rep->second == 10) {
-                std::cout << "RESS" << std::endl;
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 revolve(subd, 101);
@@ -281,6 +276,9 @@ namespace robo {
                 else {
                     makeReport(subd, 1011);
                 }
+            } else if (rep->second == 11) {
+                auto * comm = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
+                trainNext(comm);
             }
 
             reported(rep);
@@ -298,7 +296,7 @@ namespace robo {
     int Ai_Deep::revolve(Robot_Scout * mobile, int ret) {
         int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
         mobile->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, mobile->getMaxRadius());
-        std::cout << "REVOLVING\n" << top_cor_s << " " << left_cor_s << " " << bottom_cor_s << " "  << right_cor_s << std::endl;
+        //std::cout << "REVOLVING\n" << top_cor_s << " " << left_cor_s << " " << bottom_cor_s << " "  << right_cor_s << std::endl;
         auto * comm = dynamic_cast<Robot_Commander *>(mobile->getOwner());
         if(comm->manMod()->unknownSquare(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s)) {
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 1) % 4, envir->getTime()+1, 2);
@@ -438,7 +436,7 @@ namespace robo {
     }
 
     bool Ai_Deep::allOpened(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
-        std::cout << top_cor << " " << left_cor << " " << bottom_cor << " "<< right_cor << std::endl;
+        //std::cout << top_cor << " " << left_cor << " " << bottom_cor << " "<< right_cor << std::endl;
         for (unsigned int h = bottom_cor; h <= top_cor; ++h) {
             for (unsigned int w = left_cor; w <= right_cor; ++w) {
                 coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
@@ -881,7 +879,7 @@ namespace robo {
             }
         }
 
-        //THAT'S ALL
+        md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
 
         std::cout << "THE END!!!" << std::endl;
     }
@@ -909,8 +907,11 @@ namespace robo {
 
     bool Ai_Deep::checkInAreas(coordinates pnt) const {
         for (auto it : busyArea) {
-            if (pnt.y >= it[2] && pnt.y <= it[0] && pnt.x >= it[1] && pnt.x <= it[3])
+            if (pnt.y >= it[2] && pnt.y <= it[0] && pnt.x >= it[1] && pnt.x <= it[3]) {
+                //std::cout << it[0] << " * " << it[1] << " * " << it[2] << " * " << it[3] << std::endl;
+                //std::cout << pnt.x << ";" << pnt.y <<std::endl;
                 return true;
+            }
         }
 
         return false;

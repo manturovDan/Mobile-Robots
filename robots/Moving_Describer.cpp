@@ -13,13 +13,13 @@ namespace robo {
     }
 
     void Moving_Describer::printSteps(std::ostream & stream) {
-        stream << "--------------\nMOVING:\n--------------" << std::endl;
-        for (auto & it : move_d) {
-            if(it.moving_obj == nullptr)
-                continue;
-            std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
-            it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
-        }
+        //stream << "--------------\nMOVING:\n--------------" << std::endl;
+        //for (auto & it : move_d) {
+        //    if(it.moving_obj == nullptr)
+        //        continue;
+        //    std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
+        //    it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
+        //}
     }
 
     void Moving_Describer::makeSteps(unsigned int curTime) {
@@ -40,13 +40,13 @@ namespace robo {
             }
         }
 
-        std::cout << "SECOND " << curTime << std::endl;
-        for (auto dit : delev) {
+        //std::cout << "SECOND " << curTime << std::endl;
+        for (auto dit : delev) { //not iter
             std::cout << "Robot: " << dit->moving_obj->getDescription() << "; target_position: {" << dit->pos.x << "; " <<
             dit->pos.y << "}; direction: " << dit->direction << "; target_time: " << dit->time << "; dest: " << dit->destination << std::endl;
             move_d.erase(dit);
         }
-        std::cout << "---------------------" <<std::endl;
+        //std::cout << "---------------------" <<std::endl;
     }
 
     bool Moving_Describer::isMoving(Robot_Scout * scout) {

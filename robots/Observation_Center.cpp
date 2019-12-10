@@ -62,11 +62,10 @@ namespace robo {
     std::map<coordinates, Map_Object *> Observation_Center::look() {
         std::map<coordinates, Map_Object *> one_view;
         for (auto & module : modules) {
-            std::cout << "MARKER222" << std::endl;
             if(!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
                 auto * sens = static_cast<robo::Sensor *>(module);
 
-                std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
+                //std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
 
                 unsigned int real_dir = sens->getDirection(getDirection()); //if will be direction of robot
                 std::cout << real_dir << std::endl;
@@ -88,7 +87,7 @@ namespace robo {
                                 one_view[posit] = resp;
                             }
                         }
-                        std::cout << std::endl;
+                        //std::cout << std::endl;
                     }
                 }
                 else {
