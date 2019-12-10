@@ -213,8 +213,6 @@ namespace robo {
                 commer = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);
-
-                std::cout << "MARKER@@@" << std::endl;
             }
             else if (rep->second == 4) {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
@@ -319,15 +317,17 @@ namespace robo {
             auto grey = findGrey(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m);
 
             std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+
             leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
 
-            std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
+            std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y- bottom_cor_m][a.x - left_cor_m] < leeTab[b.y - bottom_cor_m][b.x - left_cor_m]; });
             for (auto it : grey) {
-                //std::cout << it.x + left_cor_m << "," << it.y + bottom_cor_m << " = " << leeTab[it.y][it.x] <<  std::endl;
+                std::cout << "GREY" << std::endl;
+                std::cout << it.x << "," << it.y << " = " << leeTab[it.y - bottom_cor_m][it.x - left_cor_m] <<  std::endl;
                 std::vector<coordinates> route;
-                if (leeTab[it.y][it.x] > 0) {
-                    makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {it.x + left_cor_m, it.y+bottom_cor_m});
+                if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) {
+                    makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {it.x, it.y});
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                         std::cout << coord->x << ";" << coord->y << std::endl;
 
@@ -369,7 +369,7 @@ namespace robo {
         std::cout << "BACK_HOME" << std::endl;
 
         std::vector<coordinates> route;
-        makeRoute(leeTab, route, bottom_cor_m, left_cor_m, target);
+        makeRoute(leeTab, route, left_cor_m, bottom_cor_m, target);
 
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0])
@@ -673,7 +673,7 @@ namespace robo {
             return 1;
 
         std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
-        makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {nearest.x + left_cor_m, nearest.y+bottom_cor_m});
+        makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {nearest.x, nearest.y});
         std::cout << "RTTT" << std::endl;
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             std::cout << coord->x << ";" << coord->y << std::endl;
@@ -713,11 +713,11 @@ namespace robo {
         std::vector<std::vector<int>> leeTab (top_cor-bottom_cor+1);
 
         for (unsigned int h = bottom_cor; h <= top_cor; ++h) {
-            leeTab[h] = row;
+            leeTab[h-bottom_cor] = row;
             for (unsigned int w = left_cor; w <= right_cor; ++w) {
                 coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
                 if(coord == commander) {
-                    leeTab[h-bottom_cor][w-left_cor] = -2;
+                    leeTab[h-bottom_cor][w-left_cor] = -4;
                     continue;
                 }
 
@@ -739,7 +739,7 @@ namespace robo {
     }
 
     void Ai_Deep::leeComp(std::vector<std::vector<int>> & leeTable, unsigned int startX, unsigned int startY, coordinates start) {
-        leeTable[start.y][start.x] = 0;
+        leeTable[start.y - startY][start.x - startX] = 0;
 
         int curD = 0;
 
@@ -800,7 +800,7 @@ namespace robo {
                 maxY = g.y;
         }
 
-        std::vector<std::vector<int>> leeTab = initLee(maxY, 0, 0, maxX, comm->getPosition());
+        std::vector<std::vector<int>> leeTab = initLee(envir->getHeight()-1, 0, 0, envir->getWidth()-1, comm->getPosition());
         leeComp(leeTab, 0, 0, comm->getPosition());
 
         std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });

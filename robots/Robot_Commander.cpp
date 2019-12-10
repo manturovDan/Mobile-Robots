@@ -77,8 +77,9 @@ namespace robo {
             manMod()->addStep(this, position, (direction + 1) % 4, env->getTime()+1, 2);
             manMod()->addStep(this, position, (direction + 2) % 4, env->getTime()+2, 2);
             manMod()->addStep(this, position, (direction + 3) % 4, env->getTime()+3, 2);
-            manMod()->addStep(this, position, direction, env->getTime()+4, 4);
         }
+
+        manMod()->addStep(this, position, direction, env->getTime()+4, 4);
 
         return full_look_res;
     }
