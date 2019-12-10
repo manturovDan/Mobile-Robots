@@ -790,6 +790,7 @@ namespace robo {
 
     void Ai_Deep::trainNext(Robot_Commander * comm) {
         auto grey = findAllGrey();
+
         unsigned int maxX = openedRightBoundary();;
         unsigned int maxY = openedTopBoundary();;
 
@@ -830,9 +831,13 @@ namespace robo {
                     last = *coord;
                 }
 
-                break;
+                return;
             }
         }
+
+        //THAT'S ALL
+
+        std::cout << "THE END!!!" << std::endl;
     }
 
     unsigned int Ai_Deep::openedRightBoundary() {
