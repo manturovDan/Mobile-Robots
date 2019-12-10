@@ -59,6 +59,8 @@ namespace robo {
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
         void makeRoute(std::vector<std::vector<int>> &, std::vector<coordinates> &, unsigned int, unsigned int, coordinates);
         void trainNext(Robot_Commander *);
+        unsigned int openedRightBoundary();
+        unsigned int openedTopBoundary();
     };
 }
 

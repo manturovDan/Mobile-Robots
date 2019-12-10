@@ -790,8 +790,8 @@ namespace robo {
 
     void Ai_Deep::trainNext(Robot_Commander * comm) {
         auto grey = findAllGrey();
-        unsigned int maxX = 0;
-        unsigned int maxY = 0;
+        unsigned int maxX = openedRightBoundary();;
+        unsigned int maxY = openedTopBoundary();;
 
         for (auto g : grey) {
             if (g.x > maxX)
@@ -800,7 +800,7 @@ namespace robo {
                 maxY = g.y;
         }
 
-        std::vector<std::vector<int>> leeTab = initLee(envir->getHeight()-1, 0, 0, envir->getWidth()-1, comm->getPosition());
+        std::vector<std::vector<int>> leeTab = initLee(maxY, 0, 0, maxX, comm->getPosition()); ///
         leeComp(leeTab, 0, 0, comm->getPosition());
 
         std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
@@ -834,4 +834,20 @@ namespace robo {
             }
         }
     }
+
+    unsigned int Ai_Deep::openedRightBoundary() {
+        for (auto a = ai_dict.rbegin(); a != ai_dict.rend(); ++a)
+            if (a->second.rightBoundary)
+                return a->first.x;
+        return 0;
+    }
+
+    unsigned int Ai_Deep::openedTopBoundary() {
+        for (auto a : ai_dict)
+            if (a.second.topBoundaty)
+                return a.first.y;
+
+        return 0;
+    }
+
 }
