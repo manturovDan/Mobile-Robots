@@ -207,6 +207,12 @@ namespace robo {
 
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
                 unsigned int pair_rad = rep->first->getMaxRadius();
+
+                if (commer->getPair() != nullptr)
+                    pair_rad = dynamic_cast<Robot_Scout *>(commer->getPair())->getMaxRadius();
+                else
+                    pair_rad = commer->getMaxRadius();
+
                 commer->determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri, commer->manMod()->getRadius() + pair_rad);
                 addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
             }
@@ -832,15 +838,16 @@ namespace robo {
                 unsigned int areaBottom;
                 unsigned int areaRight;
 
+                unsigned int pairRad;
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
                 // in g.x, g.y
                 if (comm->getPair() != nullptr)
-                    unsigned int pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
+                    pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
                 else
-                    unsigned int pairRad = comm->getMaxRadius();
+                    pairRad = comm->getMaxRadius();
 
                 Observation_Center::determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri, comm->manMod()->getRadius() +
-                        dynamic_cast<Robot_Scout *>(comm->getOwner())->getMaxRadius(), g);
+                        pairRad, g);
 
                 addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
 
