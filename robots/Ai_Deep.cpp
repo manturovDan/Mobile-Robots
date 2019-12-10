@@ -209,9 +209,12 @@ namespace robo {
                 connectResult(rep->first->look());
             }
             else if (rep->second == 3) {
-                auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
+                Robot_Commander * commer;
+                commer = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
                 std::map<coordinates, Map_Object *> resd = commer->research();
                 connectResult(resd);
+
+                std::cout << "MARKER@@@" << std::endl;
             }
             else if (rep->second == 4) {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
@@ -818,8 +821,10 @@ namespace robo {
                         std::cout << "WAY" << std::endl;
                         md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2, envir->getTime());
                     }
-                    else {
+                    else if (*coord != *route.begin()) {
                         md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
+                    } else {
+                        md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
                     }
 
                     last = *coord;
