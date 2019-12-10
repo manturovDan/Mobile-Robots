@@ -13,29 +13,40 @@ namespace robo {
     }
 
     void Moving_Describer::printSteps(std::ostream & stream) {
-        //stream << "--------------\nMOVING:\n--------------" << std::endl;
-        //for (auto & it : move_d) {
-        //    std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
-        //    it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
-        //}
+        stream << "--------------\nMOVING:\n--------------" << std::endl;
+        for (auto & it : move_d) {
+            if(it.moving_obj == nullptr)
+                continue;
+            std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
+            it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
+        }
     }
 
     void Moving_Describer::makeSteps(unsigned int curTime) {
         std::vector<std::deque<moment>::iterator> delev;
-        for (auto it = move_d.begin(); it != move_d.end(); ++ it) {
+        for (auto it = move_d.begin(); it != move_d.end(); ++it) {
+            if(it->moving_obj == nullptr)
+                continue;
+
             if (it->time < curTime)
                 throw std::invalid_argument("ROBOTIME error");
             if (it->time == curTime) {
+                std:: cout << curTime << " ";
                 it->moving_obj->move(it->pos, it->direction);
                 if(it->destination != 0)
                     it->moving_obj->report(it->destination);
-                delev.push_back(it);
+                it->moving_obj = nullptr;
+                //delev.push_back(it);
             }
         }
 
+        std::cout << "SECOND " << curTime << std::endl;
         for (auto dit : delev) {
+            std::cout << "Robot: " << dit->moving_obj->getDescription() << "; target_position: {" << dit->pos.x << "; " <<
+            dit->pos.y << "}; direction: " << dit->direction << "; target_time: " << dit->time << "; dest: " << dit->destination << std::endl;
             move_d.erase(dit);
         }
+        std::cout << "---------------------" <<std::endl;
     }
 
     bool Moving_Describer::isMoving(Robot_Scout * scout) {
@@ -47,7 +58,7 @@ namespace robo {
         return false;
     }
 
-    void Moving_Describer::routePoint(Robot_Scout * mobile, coordinates pos, int destination, unsigned int curTime) {
+    unsigned int Moving_Describer::routePoint(Robot_Scout * mobile, coordinates pos, int destination, unsigned int curTime) {
         unsigned int assumeTime = curTime + 1;
         int lastDir = mobile->getDirection();
         coordinates lastPos = mobile->getPosition();
@@ -69,7 +80,7 @@ namespace robo {
         else if (lastPos.y - pos.y == 1 && lastPos.x == pos.x)
             tarDir = 2;
         else if (lastPos.x == pos.x && lastPos.y == pos.y) {
-            return;
+            return assumeTime;
         }
         else {
             std::cout << lastPos.x << " " << pos.x << " " << lastPos.y << " " <<  pos.y << std::endl;
@@ -88,6 +99,8 @@ namespace robo {
         //TODO if object stops on the point it must make it blocked and previously check if no routs have his point
 
         addStep({mobile, pos, tarDir, assumeTime, destination});
+
+        return assumeTime;
     }
 
     unsigned int Moving_Describer::setDirection(Robot_Scout * mobile, coordinates pos, int tarDir, int initDir, unsigned int turnTime, int destination) {

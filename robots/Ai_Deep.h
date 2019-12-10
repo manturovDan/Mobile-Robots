@@ -51,7 +51,7 @@ namespace robo {
         int pairRes(Robot_Commander *);
         int riRes(Robot_Commander *);
         std::vector<coordinates> maySee(coordinates, int);
-        void backToChief(Robot_Commander *);
+        int backToChief(Robot_Commander *);
         int revolve(Robot_Scout *, int);
         bool allOpened(unsigned int, unsigned int, unsigned int, unsigned int);
         std::vector<coordinates> findGrey(unsigned int, unsigned int, unsigned int, unsigned int);

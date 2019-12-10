@@ -62,12 +62,14 @@ namespace robo {
     std::map<coordinates, Map_Object *> Observation_Center::look() {
         std::map<coordinates, Map_Object *> one_view;
         for (auto & module : modules) {
+            std::cout << "MARKER222" << std::endl;
             if(!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
                 auto * sens = static_cast<robo::Sensor *>(module);
 
-                //std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
+                std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
 
                 unsigned int real_dir = sens->getDirection(getDirection()); //if will be direction of robot
+                std::cout << real_dir << std::endl;
 
                 int top_cor, left_cor, bottom_cor, right_cor;
                 determineCorers(top_cor, left_cor, bottom_cor, right_cor, sens->getRadius());
@@ -125,7 +127,7 @@ namespace robo {
                             //std::cout << std::endl;
                         }
                         //std::cout << std::endl;
-                        if (sens->getAngle() > 0) {
+                        if (sens->getAngle() > 0 && position.y != 0) {
                             for (int h = position.y-1; h >= bottom_cor && h <= position.y-1; --h) {
                                 for (int w = position.x; w < right_cor; ++w) {
                                     //std::cout << " { " << w << ", " << h << " } ";
@@ -138,20 +140,21 @@ namespace robo {
                         }
                     }
                     else if (real_dir == 2) { //bottom
-                        for (int h = position.y-1; h >= bottom_cor && h <= position.y-1; --h) {
-                            for (int w = left_cor; w <= right_cor; ++w) {
-                                //std::cout << " { " << w << ", " << h << " } ";
-                                coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
-                                Map_Object * resp = env->checkStaticPoint(posit);
-                                one_view[posit] = resp;
+                        if(position.y != 0) {
+                            for (int h = position.y-1; h >= bottom_cor && h <= position.y-1; --h) {
+                                for (int w = left_cor; w <= right_cor; ++w) {
+                                    coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
+                                    Map_Object * resp = env->checkStaticPoint(posit);
+                                    one_view[posit] = resp;
+                                }
+                                //std::cout << std::endl;
                             }
-                            //std::cout << std::endl;
                         }
                         //std::cout << std::endl;
                         if (sens->getAngle() > 0) {
-                            for (int h = top_cor; h >= position.y && h <= top_cor; --h) {
-                                for (int w = position.x+1; w <= right_cor; ++w) {
-                                    //std::cout << " { " << w << ", " << h << " } ";
+                            for (unsigned int h = top_cor; h >= position.y && h <= top_cor; --h) {
+                                for (unsigned int w = position.x+1; w <= right_cor; ++w) {
+                                    std::cout << " { " << w << ", " << h << " } ";
                                     coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
                                     Map_Object * resp = env->checkStaticPoint(posit);
                                     one_view[posit] = resp;

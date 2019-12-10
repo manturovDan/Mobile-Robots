@@ -89,6 +89,7 @@ namespace robo {
     }
 
     void Ai_Deep::connectResult(const std::map<coordinates, Map_Object *> & res_res) {
+        std::cout << "MARKER11" << std::endl;
         for (auto res_re : res_res) {
             if(ai_dict.find(res_re.first) == ai_dict.end()) {
                 bool bndTop = envir->isTopBoundary(res_re.first);
@@ -206,7 +207,7 @@ namespace robo {
                 nextRep.emplace_back(rep->first, 3);
 
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
-                unsigned int pair_rad = rep->first->getMaxRadius();
+                unsigned int pair_rad;
 
                 if (commer->getPair() != nullptr)
                     pair_rad = dynamic_cast<Robot_Scout *>(commer->getPair())->getMaxRadius();
@@ -231,24 +232,28 @@ namespace robo {
                     nextRep.emplace_back(rep->first, 4);
                 else {
                     if (pairRes(commer)) {
-                        makeReport(commer->getPair(), 6);
+                        makeReport(commer->getPair(), 5);
                     }
                 }
                 //algorithm from the paper
             } else if (rep->second == 5) {
+                std::cout << "MARKER" << std::endl;
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-
+                std::cout << "MARKER2" << std::endl;
                 revolve(subd, 55);
+                std::cout << "MARKER3" << std::endl;
             } else if (rep->second == 55) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
                     makeReport(subd, 9);//6 - back to chief
                 }
             } else if (rep->second == 6) {
-                backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
+                if(backToChief(dynamic_cast<Robot_Commander *>(rep->first->getOwner())))
+                    makeReport(rep->first, 7);
             } else if (rep->second == 7) {
-                md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
+                if(md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8) == envir->getTime()+1)
+                    makeReport(rep->first, 8);
             } else if (rep->second == 8) {
                 auto * comm = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
@@ -362,7 +367,7 @@ namespace robo {
 
     }
 
-    void Ai_Deep::backToChief(Robot_Commander * comm) {
+    int Ai_Deep::backToChief(Robot_Commander * comm) {
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
@@ -386,12 +391,17 @@ namespace robo {
         std::vector<coordinates> route;
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, target);
 
+        if (route.size() == 0)
+            return 1;
+
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0])
                 md->routePoint(comm->getPair(), *coord, 7, envir->getTime());
             else
                 md->routePoint(comm->getPair(), *coord, 0, envir->getTime());
         }
+
+        return 0;
 
     }
 
@@ -827,17 +837,12 @@ namespace robo {
         }
 
         for (auto g : grey) {
-            //std::cout << "G " << g.x << ";" << g.y << std::endl;
+            std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             std::vector<coordinates> route;
 
             coordinates last;
             if(leeTab[g.y][g.x] > 0 && !checkInAreas(g)) {
-                unsigned int areaTop;
-                unsigned int areaLeft;
-                unsigned int areaBottom;
-                unsigned int areaRight;
-
                 unsigned int pairRad;
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
                 // in g.x, g.y
@@ -855,18 +860,21 @@ namespace robo {
                 for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                     std::cout << coord->x << ";" << coord->y << std::endl;
 
-                    md->routePoint(comm, *coord, 2, envir->getTime());
-                    if(coord == route.rbegin()) {
-                        std::cout << "WAY" << std::endl;
-                        md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2, envir->getTime());
-                    }
-                    else if (*coord != *route.begin()) {
-                        md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
-                    } else {
-                        md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
-                    }
+                    unsigned int atime = md->routePoint(comm, *coord, 2, envir->getTime());
 
-                    last = *coord;
+                    if (comm->getPair() != nullptr) {
+                        if (coord == route.rbegin()) {
+                            std::cout << "WAY" << std::endl;
+                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2,
+                                           atime+1);
+                        } else if (*coord != *route.begin()) {
+                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
+                        } else {
+                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
+                        }
+
+                        last = *coord;
+                    }
                 }
 
                 return;
