@@ -238,7 +238,8 @@ namespace robo {
             } else if (rep->second == 7) {
                 md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
             } else if (rep->second == 8) {
-
+                auto * comm = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
+                trainNext(comm);
             } else if (rep->second == 9) {
                 if(riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
                     auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
@@ -462,6 +463,42 @@ namespace robo {
                     }
                 }
 
+            }
+        }
+
+        return grey;
+    }
+
+    std::vector<coordinates> Ai_Deep::findAllGrey() {
+        std::vector<coordinates> grey;
+
+        for (auto pnt : ai_dict) {
+            if(!pnt.second.topBoundaty) {
+                if (ai_dict.find({static_cast<unsigned int>(pnt.first.x), static_cast<unsigned int>(pnt.first.y+1)}) == ai_dict.end()) {
+                    grey.push_back(pnt.first);
+                    continue;
+                }
+            }
+
+            if(pnt.first.x > 0) {
+                if (ai_dict.find({static_cast<unsigned int>(pnt.first.x-1), static_cast<unsigned int>(pnt.first.y)}) == ai_dict.end()) {
+                    grey.push_back(pnt.first);
+                    continue;
+                }
+            }
+
+            if(pnt.first.y > 0) {
+                if (ai_dict.find({static_cast<unsigned int>(pnt.first.x), static_cast<unsigned int>(pnt.first.y-1)}) == ai_dict.end()) {
+                    grey.push_back(pnt.first);
+                    continue;
+                }
+            }
+
+            if(!pnt.second.rightBoundary) {
+                if (ai_dict.find({static_cast<unsigned int>(pnt.first.x+1), static_cast<unsigned int>(pnt.first.y)}) == ai_dict.end()) {
+                    grey.push_back(pnt.first);
+                    continue;
+                }
             }
         }
 
@@ -745,6 +782,41 @@ namespace robo {
                 std::cout << lx << " ";
             }
             std::cout << std::endl;
+        }
+    }
+
+    void Ai_Deep::trainNext(Robot_Commander * comm) {
+        auto grey = findAllGrey();
+        unsigned int maxX = 0;
+        unsigned int maxY = 0;
+
+        for (auto g : grey) {
+            if (g.x > maxX)
+                maxX = g.x;
+            if (g.y > maxY)
+                maxY = g.y;
+        }
+
+        std::vector<std::vector<int>> leeTab = initLee(maxY, 0, 0, maxX, comm->getPosition());
+        leeComp(leeTab, 0, 0, comm->getPosition());
+
+        std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
+
+        for (auto g : grey) {
+            std::cout << "G " << g.x << ";" << g.y << std::endl;
+
+            std::vector<coordinates> route;
+
+            if(leeTab[g.y][g.x] > 0) {
+                makeRoute(leeTab, route, 0, 0, {g.x, g.y});
+                for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+                    std::cout << coord->x << ";" << coord->y << std::endl;
+
+                    md->routePoint(comm, *coord, 2, envir->getTime());
+                }
+
+                break;
+            }
         }
     }
 }
