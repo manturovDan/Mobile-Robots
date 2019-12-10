@@ -240,20 +240,23 @@ namespace robo {
             } else if (rep->second == 8) {
 
             } else if (rep->second == 9) {
-                riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()));
+                if(riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
+                    std::cout << "THATS ALL" << std::endl;
+                }
             } else if (rep->second == 10) {
                 std::cout << "RESS" << std::endl;
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 revolve(subd, 101);
 
-            } else if (rep->second == 101) {
+            } else if (rep->second == 101) { //101
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                if (false && riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
+                if (riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
                     //makeReport(subd, 10);
+                    std::cout << "THATS ALL" << std::endl;
                 }
                 else {
-                    makeReport(subd, 9);
+                    makeReport(subd, 1011);
                 }
             }
 
@@ -272,8 +275,9 @@ namespace robo {
     int Ai_Deep::revolve(Robot_Scout * mobile, int ret) {
         int top_cor_s, left_cor_s, bottom_cor_s, right_cor_s;
         mobile->determineCorers(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s, mobile->getMaxRadius());
+        std::cout << "REVOLVING\n" << top_cor_s << " " << left_cor_s << " " << bottom_cor_s << " "  << right_cor_s << std::endl;
         auto * comm = dynamic_cast<Robot_Commander *>(mobile->getOwner());
-        if(true || comm->manMod()->unknownSquare(top_cor_s, top_cor_s, top_cor_s, top_cor_s)) {
+        if(comm->manMod()->unknownSquare(top_cor_s, left_cor_s, bottom_cor_s, right_cor_s)) { //BUG!!
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 1) % 4, envir->getTime()+1, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 2) % 4, envir->getTime()+2, 2);
             comm->manMod()->addStep(mobile, mobile->getPosition(), (mobile->getDirection() + 3) % 4, envir->getTime()+3, 2);
@@ -288,7 +292,17 @@ namespace robo {
     }
 
     bool Ai_Deep::isOpened(coordinates pos) {
-        return !(ai_dict.find(pos) == ai_dict.end());
+        //return !(ai_dict.find(pos) == ai_dict.end());
+        std::vector<coordinates> opened;
+        for (auto aa : ai_dict) {
+            opened.push_back(aa.first);
+        }
+        for (coordinates p : opened) {
+            if (p == pos)
+                return true;
+        }
+        return false;
+
     }
 
     void Ai_Deep::makeReport(Robot_Scout *who, int type) {
@@ -465,7 +479,7 @@ namespace robo {
     }
 
     std::vector<coordinates> Ai_Deep::findGreyRI(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, int rad) {
-        int radius = rad-1;
+        int radius = rad-2;
 
         unsigned int big_top = top_cor + radius;
         unsigned int big_left;
@@ -488,6 +502,8 @@ namespace robo {
         else
             big_bottom = bottom_cor - radius;
 
+        std::cout << big_top << " " << big_left << " " << big_bottom << " " << big_right << std::endl;
+
         std::vector<coordinates> ri_grey;
         std::vector<coordinates> big = findGrey(big_top, big_left, big_bottom, big_right);
         std::vector<coordinates> internal = findGrey(top_cor, left_cor, bottom_cor, right_cor);
@@ -495,25 +511,46 @@ namespace robo {
         std::sort(big.begin(), big.end());
         std::sort(internal.begin(), internal.end());
 
-        std::set_difference(
-                big.begin(), big.end(),
-                internal.begin(), internal.end(),
-                std::back_inserter(ri_grey)
-                );
+        //std::set_difference(
+        //        big.begin(), big.end(),
+        //        internal.begin(), internal.end(),
+        //        std::back_inserter(ri_grey)
+        //        );
 
-        //for (auto it : ri_grey) {
-        //    std::cout << it.x + left_cor << "," << it.y + bottom_cor << std::endl;
-        //}
+        for (auto it = big.begin(); it != big.end(); it++) {
+            if (std::find(internal.begin(), internal.end(), *it) == internal.end()) {
+                ri_grey.push_back((*it));
+            }
+        }
+
+        std::cout << "-----------\nBIG\n--------------" << std::endl;
+        for (auto it : big) {
+            std::cout << it.x + left_cor << "," << it.y + bottom_cor << std::endl;
+        }
+        std::cout << "-----------\nEND\n--------------" << std::endl << std::endl;
+
+        std::cout << "-----------\nINTERNAL\n--------------" << std::endl;
+        for (auto it : internal) {
+            std::cout << it.x + left_cor << "," << it.y + bottom_cor << std::endl;
+        }
+        std::cout << "-----------\nEND\n--------------" << std::endl << std::endl;
 
         return ri_grey;
 
     }
 
     int Ai_Deep::riRes(robo::Robot_Commander * comm) {
+        print_d(60, 60);
         auto * subd = comm->getPair();
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
+        std::cout << top_cor_m << " " << left_cor_m << " " << bottom_cor_m << " " << right_cor_m << " " << static_cast<int>(subd->getMaxRadius()) << std::endl;
         auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
+        std::cout << "RI_GREY_PRINT" << (*ai_dict.find({0, 53})).second.iam << std::endl;
+        for (coordinates coord : grey) {
+            std::cout << coord.x << ";" << coord.y << " ";
+        }
+        std::cout << std::endl;
 
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
@@ -536,8 +573,12 @@ namespace robo {
         if (minway < 0)
             return 1;
 
-        std::cout <<  " ::: " << nearest.x << ";" << nearest.y << " ";
+        std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
         makeRoute(leeTab, route, bottom_cor_m, left_cor_m, {nearest.x + left_cor_m, nearest.y+bottom_cor_m});
+        std::cout << "RTTT" << std::endl;
+        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+            std::cout << coord->x << ";" << coord->y << std::endl;
+        }
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0]) {
                 md->routePoint(comm->getPair(), *coord, 10, envir->getTime());
