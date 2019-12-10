@@ -807,6 +807,7 @@ namespace robo {
 
             std::vector<coordinates> route;
 
+            coordinates last;
             if(leeTab[g.y][g.x] > 0) {
                 makeRoute(leeTab, route, 0, 0, {g.x, g.y});
                 for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
@@ -817,6 +818,11 @@ namespace robo {
                         std::cout << "WAY" << std::endl;
                         md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2, envir->getTime());
                     }
+                    else {
+                        md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
+                    }
+
+                    last = *coord;
                 }
 
                 break;
