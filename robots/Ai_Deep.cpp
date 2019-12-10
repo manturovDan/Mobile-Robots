@@ -241,7 +241,8 @@ namespace robo {
 
             } else if (rep->second == 9) {
                 if(riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
-                    std::cout << "THATS ALL" << std::endl;
+                    auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
+                    makeReport(subd, 6);
                 }
             } else if (rep->second == 10) {
                 std::cout << "RESS" << std::endl;
@@ -253,7 +254,7 @@ namespace robo {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                 if (riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
                     //makeReport(subd, 10);
-                    std::cout << "THATS ALL" << std::endl;
+                    makeReport(subd, 6);
                 }
                 else {
                     makeReport(subd, 1011);
