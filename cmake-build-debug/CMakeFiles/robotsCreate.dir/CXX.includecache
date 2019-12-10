@@ -719,6 +719,10 @@ robots/Ai_Deep.h
 /home/danila/source/robots/robots/Ai_Deep.h
 map
 -
+set
+-
+array
+-
 deque
 -
 robot.h

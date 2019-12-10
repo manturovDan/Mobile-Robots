@@ -207,4 +207,22 @@ namespace robo {
 
         return maxr;
     }
+
+    void Observation_Center::determineCorers(int & top_cor, int & left_cor, int & bottom_cor, int & right_cor, unsigned int rad, coordinates pos) {
+        top_cor = pos.y + rad;
+        if (top_cor >= env->getHeight())
+            top_cor = env->getHeight() - 1;
+
+        left_cor = pos.x - rad;
+        if (left_cor < 0)
+            left_cor = 0;
+
+        bottom_cor = pos.y - rad;
+        if (bottom_cor < 0)
+            bottom_cor = 0;
+
+        right_cor = pos.x + rad;
+        if (right_cor >= env->getWidth())
+            right_cor = env->getWidth() - 1;
+    }
 }

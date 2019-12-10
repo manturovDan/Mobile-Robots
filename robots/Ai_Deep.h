@@ -2,6 +2,8 @@
 #define ROBOTSCREATE_AI_DEEP_H
 
 #include <map>
+#include <set>
+#include <array>
 #include <deque>
 #include "robot.h"
 #include "Managing.h"
@@ -16,13 +18,16 @@ namespace robo {
 
     class Robot_Commander;
 
-    class Ai_Deep {private:
+    class Ai_Deep {
+    private:
         std::map<coordinates, map_point> ai_dict;
         std::multimap<unsigned int, Map_Object *> commanders;
         std::multimap<unsigned int, Map_Object *> scouts;
         std::deque<std::pair<Robot_Scout *, int>> report;
         Moving_Describer * md;
         Environment_describer * envir;
+        std::set<std::array<unsigned int, 4>> busyArea;
+        bool theEnd = false;
     public:
         Ai_Deep() = delete;
         explicit Ai_Deep(Environment_describer *);
@@ -34,7 +39,7 @@ namespace robo {
         void run();
         void testMove();
         void testNext();
-        bool isOpened(coordinates);
+        bool isOpened(coordinates) const;
         Moving_Describer * getMd() { return md; }
         std::multimap<coordinates, map_point>::const_iterator begin() { return ai_dict.begin(); }
         std::multimap<coordinates, map_point>::const_iterator end() { return ai_dict.end(); }
@@ -59,8 +64,16 @@ namespace robo {
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
         void makeRoute(std::vector<std::vector<int>> &, std::vector<coordinates> &, unsigned int, unsigned int, coordinates);
         void trainNext(Robot_Commander *);
-        unsigned int openedRightBoundary();
-        unsigned int openedTopBoundary();
+        unsigned int openedRightBoundary() const;
+        unsigned int openedTopBoundary() const;
+        bool getEnd() const { return theEnd; }
+        /// returns 1 if area is busy, else 0
+        std::set<std::array<unsigned int, 4>>::iterator checkArea (unsigned int, unsigned int, unsigned int, unsigned int) const;
+        /// return 1 if point is busy, else 0
+        bool checkInAreas(coordinates) const;
+        ///true if successfully
+        bool addArea(unsigned int, unsigned int, unsigned int, unsigned int);
+        void deleteArea(unsigned int, unsigned int, unsigned int, unsigned int);
     };
 }
 

@@ -204,6 +204,11 @@ namespace robo {
                 pair->move({0, 0}, 0);
                 pair->unBlock();
                 nextRep.emplace_back(rep->first, 3);
+
+                int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
+                unsigned int pair_rad = rep->first->getMaxRadius();
+                commer->determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri, commer->manMod()->getRadius() + pair_rad);
+                addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
             }
             else if (rep->second == 2) {
                 connectResult(rep->first->look());
@@ -240,6 +245,10 @@ namespace robo {
                 md->setDirection(rep->first, rep->first->getPosition(), dynamic_cast<Robot_Commander *>(rep->first->getOwner())->getDirection(), rep->first->getDirection(), envir->getTime()+1, 8);
             } else if (rep->second == 8) {
                 auto * comm = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
+                int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
+                unsigned int pair_rad = rep->first->getMaxRadius();
+                comm->determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri, comm->manMod()->getRadius() + pair_rad);
+                deleteArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
                 trainNext(comm);
             } else if (rep->second == 9) {
                 if(riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
@@ -293,7 +302,7 @@ namespace robo {
         }
     }
 
-    bool Ai_Deep::isOpened(coordinates pos) {
+    bool Ai_Deep::isOpened(coordinates pos) const {
         return !(ai_dict.find(pos) == ai_dict.end());
     }
 
@@ -635,7 +644,7 @@ namespace robo {
 
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
-        std::cout << top_cor_m << " " << left_cor_m << " " << bottom_cor_m << " " << right_cor_m << " " << static_cast<int>(subd->getMaxRadius()) << std::endl;
+        //std::cout << top_cor_m << " " << left_cor_m << " " << bottom_cor_m << " " << right_cor_m << " " << static_cast<int>(subd->getMaxRadius()) << std::endl;
 
         /*auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
         std::cout << "RI_GREY_PRINT" << (*ai_dict.find({0, 53})).second.iam << std::endl;
@@ -645,11 +654,11 @@ namespace robo {
         std::cout << std::endl;*/
 
         auto white = findWhiteRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
-        std::cout << "\n#######RI_WHITE_PRINT" << std::endl;
-        for (coordinates coord : white) {
-            std::cout << coord.x << ";" << coord.y << " ";
-        }
-        std::cout << std::endl;
+        //std::cout << "\n#######RI_WHITE_PRINT" << std::endl;
+        //for (coordinates coord : white) {
+        //    std::cout << coord.x << ";" << coord.y << " ";
+        //}
+        //std::cout << std::endl;
 
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
@@ -776,7 +785,7 @@ namespace robo {
             curD++;
         }
 
-        for (auto & ly : leeTable) {
+        /*for (auto & ly : leeTable) {
             for(int & lx : ly) {
                 if (lx >= 0)
                     std::cout << " ";
@@ -785,7 +794,7 @@ namespace robo {
                 std::cout << lx << " ";
             }
             std::cout << std::endl;
-        }
+        }*/
     }
 
     void Ai_Deep::trainNext(Robot_Commander * comm) {
@@ -806,13 +815,35 @@ namespace robo {
 
         std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
 
+        std::cout << "BA" << std::endl;
+        for (auto ca : busyArea) {
+            std::cout << ca[0] << " * " << ca[1] << " * " << ca[2] << " * " << ca[3] << std::endl;
+        }
+
         for (auto g : grey) {
-            std::cout << "G " << g.x << ";" << g.y << std::endl;
+            //std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             std::vector<coordinates> route;
 
             coordinates last;
-            if(leeTab[g.y][g.x] > 0) {
+            if(leeTab[g.y][g.x] > 0 && !checkInAreas(g)) {
+                unsigned int areaTop;
+                unsigned int areaLeft;
+                unsigned int areaBottom;
+                unsigned int areaRight;
+
+                int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
+                // in g.x, g.y
+                if (comm->getPair() != nullptr)
+                    unsigned int pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
+                else
+                    unsigned int pairRad = comm->getMaxRadius();
+
+                Observation_Center::determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri, comm->manMod()->getRadius() +
+                        dynamic_cast<Robot_Scout *>(comm->getOwner())->getMaxRadius(), g);
+
+                addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
+
                 makeRoute(leeTab, route, 0, 0, {g.x, g.y});
                 for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                     std::cout << coord->x << ";" << coord->y << std::endl;
@@ -840,19 +871,45 @@ namespace robo {
         std::cout << "THE END!!!" << std::endl;
     }
 
-    unsigned int Ai_Deep::openedRightBoundary() {
+    unsigned int Ai_Deep::openedRightBoundary() const {
         for (auto a = ai_dict.rbegin(); a != ai_dict.rend(); ++a)
             if (a->second.rightBoundary)
                 return a->first.x;
         return 0;
     }
 
-    unsigned int Ai_Deep::openedTopBoundary() {
+    unsigned int Ai_Deep::openedTopBoundary() const {
         for (auto a : ai_dict)
             if (a.second.topBoundaty)
                 return a.first.y;
 
         return 0;
+    }
+
+    std::set<std::array<unsigned int, 4>>::iterator Ai_Deep::checkArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) const {
+        std::cout << "FINDDDDING " << top_cor << " " << left_cor << " " << bottom_cor << " " << right_cor << std::endl;
+        auto req = std::array<unsigned int, 4>({top_cor, left_cor, bottom_cor, right_cor});
+        return busyArea.find(req);
+    }
+
+    bool Ai_Deep::checkInAreas(coordinates pnt) const {
+        for (auto it : busyArea) {
+            if (pnt.y >= it[2] && pnt.y <= it[0] && pnt.x >= it[1] && pnt.x <= it[3])
+                return true;
+        }
+
+        return false;
+    }
+
+    bool Ai_Deep::addArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
+        auto req = std::array<unsigned int, 4>({top_cor, left_cor, bottom_cor, right_cor});
+        busyArea.insert(req);
+    }
+
+    void Ai_Deep::deleteArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
+        auto ca = checkArea(top_cor, left_cor, bottom_cor, right_cor);
+        if (ca != busyArea.end())
+            busyArea.erase(ca);
     }
 
 }

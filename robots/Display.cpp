@@ -204,7 +204,7 @@ namespace dispr {
 
             unsigned int curTime = env->getTime();
             if(!is_comp) {
-                std::cout << "UPDDD" << std::endl;
+                //std::cout << "UPDDD" << std::endl;
                 realTime = curTime;
                 is_comp = true;
             }
@@ -231,7 +231,7 @@ namespace dispr {
                 env->plusTime();
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
-                std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
+                //std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
                 ai->nextComp();
                 ai->getMd()->makeSteps(env->getTime());
                 is_comp = false;

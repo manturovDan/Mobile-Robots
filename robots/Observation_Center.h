@@ -36,6 +36,7 @@ namespace robo {
         std::string myModules();
         std::map<coordinates, Map_Object *> look();
         void determineCorers(int &, int &, int &, int &, unsigned int);
+        static void determineCorers(int &, int &, int &, int &, unsigned int, coordinates);
         void setOwner(Map_Object *);
         Map_Object * getOwner() { return owner; }
         unsigned int getMaxRadius();
