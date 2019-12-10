@@ -813,6 +813,10 @@ namespace robo {
                     std::cout << coord->x << ";" << coord->y << std::endl;
 
                     md->routePoint(comm, *coord, 2, envir->getTime());
+                    if(coord == route.rbegin()) {
+                        std::cout << "WAY" << std::endl;
+                        md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2, envir->getTime());
+                    }
                 }
 
                 break;
