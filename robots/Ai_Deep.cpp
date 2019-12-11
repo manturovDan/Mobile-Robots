@@ -278,6 +278,7 @@ namespace robo {
                 }
             } else if (rep->second == 11) {
                 auto * comm = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
+                //collision
                 trainNext(comm);
             }
 
