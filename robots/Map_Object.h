@@ -18,14 +18,14 @@ namespace robo {
         Map_Object() : appeared(false), position({0, 0}) {}
         Map_Object(coordinates coords) : appeared(true), position(coords) {} //TODO Normal
 
-        unsigned int getX() { return position.x; }
-        unsigned int getY() { return position.y; }
+        unsigned int getX() const { return position.x; }
+        unsigned int getY() const { return position.y; }
         static void setEnv(Environment_describer *envd);
-        coordinates getPosition() { return position; }
+        coordinates getPosition() const { return position; }
         friend bool operator==(const Map_Object &left, const Map_Object &right) {
             return ((left.position.x == right.position.x) && (left.position.y == right.position.y));
         }
-        void print() { std::cout << position.x << " " << position.y << std::endl; }
+        void print() const { std::cout << position.x << " " << position.y << std::endl; }
         virtual std::string whoami() = 0;
         virtual ~Map_Object() = default;
     };

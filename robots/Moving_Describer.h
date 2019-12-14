@@ -37,6 +37,7 @@ namespace robo {
         bool isMoving(Robot_Scout *);
         unsigned int routePoint(Robot_Scout *, coordinates, int, unsigned int);
         unsigned int setDirection(Robot_Scout *, coordinates, int, int, unsigned int, int);
+
     };
 }
 

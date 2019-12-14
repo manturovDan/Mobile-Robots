@@ -225,7 +225,7 @@ namespace dispr {
 
         int i = 1;
         while(true) {
-            if (is_comp) {
+            if (is_comp) { // USE MUTEX
                 auto start = std::chrono::high_resolution_clock::now();
                 std::this_thread::sleep_for(0.1s); //TIME
                 env->plusTime();

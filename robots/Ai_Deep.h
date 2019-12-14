@@ -27,6 +27,7 @@ namespace robo {
         Moving_Describer * md;
         Environment_describer * envir;
         std::set<std::array<unsigned int, 4>> busyArea;
+        std::set<coordinates> busyPoints;
         bool theEnd = false;
     public:
         Ai_Deep() = delete;
@@ -60,7 +61,7 @@ namespace robo {
         std::vector<coordinates> findGreyRI(unsigned int, unsigned int, unsigned int, unsigned int, int);
         std::vector<coordinates> findWhiteRI(unsigned int, unsigned int, unsigned int, unsigned int, int);
         /// return matrix with 0 - free for moving, 1 - unreachable
-        std::vector<std::vector<int>> initLee(unsigned int, unsigned int, unsigned int, unsigned int, coordinates);
+        std::vector<std::vector<int>> initLee(unsigned int, unsigned int, unsigned int, unsigned int, const Robot_Commander *, const coordinates * target = nullptr);
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
         void makeRoute(std::vector<std::vector<int>> &, std::vector<coordinates> &, unsigned int, unsigned int, coordinates);
         void trainNext(Robot_Commander *);
@@ -74,6 +75,9 @@ namespace robo {
         ///true if successfully
         bool addArea(unsigned int, unsigned int, unsigned int, unsigned int);
         void deleteArea(unsigned int, unsigned int, unsigned int, unsigned int);
+        int addBlockedPoint(coordinates);
+        void deleteBlockedPoint(coordinates);
+        bool checkBlocked(coordinates);
     };
 }
 

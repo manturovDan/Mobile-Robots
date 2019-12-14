@@ -17,7 +17,7 @@ namespace robo {
         int subdue();
         bool isManager() { return real_manager; }
         virtual std::map<coordinates, Map_Object *> research();
-        Managing * manMod() { return matchMan; }
+        Managing * manMod() const { return matchMan; }
         int chooseManModule();;
         void comReport(Robot_Scout *, int);
     };

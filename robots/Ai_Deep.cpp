@@ -227,6 +227,10 @@ namespace robo {
             }
             else if (rep->second == 4) {
                 auto * commer = dynamic_cast<Robot_Commander *>(rep->first);
+                addBlockedPoint(commer->getPosition());
+                if(commer->getPair() != nullptr)
+                    addBlockedPoint(commer->getPair()->getPosition());
+
                 if (commer->getPair() != nullptr && md->isMoving(commer->getPair()))
                     nextRep.emplace_back(rep->first, 4);
                 else {
@@ -335,15 +339,21 @@ namespace robo {
         } else {
             auto grey = findGrey(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m);
 
-            std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+            std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm);
 
             leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
 
             std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y- bottom_cor_m][a.x - left_cor_m] < leeTab[b.y - bottom_cor_m][b.x - left_cor_m]; });
+
+            std::cout << "BLOCKED_POINTS:" << std::endl;
+            for (auto itBl : busyPoints) {
+                std::cout << itBl.x << ";" << itBl.y << std::endl;
+            }
+
             for (auto it : grey) {
-                std::cout << "GREY" << std::endl;
-                std::cout << it.x << "," << it.y << " = " << leeTab[it.y - bottom_cor_m][it.x - left_cor_m] <<  std::endl;
+                //std::cout << "GREY" << std::endl;
+                //std::cout << it.x << "," << it.y << " = " << leeTab[it.y - bottom_cor_m][it.x - left_cor_m] <<  std::endl;
                 std::vector<coordinates> route;
                 if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) {
                     makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {it.x, it.y});
@@ -369,8 +379,6 @@ namespace robo {
     int Ai_Deep::backToChief(Robot_Commander * comm) {
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
-        std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
-        leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
         coordinates target;
         if (comm->getDirection() == 0) {
@@ -384,6 +392,9 @@ namespace robo {
         }
         else
             throw std::invalid_argument("unknown direction : 2");
+
+        std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm, &target);
+        leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
         std::cout << "BACK_HOME" << std::endl;
 
@@ -675,7 +686,7 @@ namespace robo {
         //}
         //std::cout << std::endl;
 
-        std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->getPosition());
+        std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm);
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
 
         std::vector<coordinates> route;
@@ -732,7 +743,7 @@ namespace robo {
         return ret;
     }
 
-    std::vector<std::vector<int>> Ai_Deep::initLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, coordinates commander) {
+    std::vector<std::vector<int>> Ai_Deep::initLee(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor, const Robot_Commander * commander, const coordinates * target) {
         std::vector<int> row (right_cor - left_cor + 1);
         std::vector<std::vector<int>> leeTab (top_cor-bottom_cor+1);
 
@@ -740,7 +751,7 @@ namespace robo {
             leeTab[h-bottom_cor] = row;
             for (unsigned int w = left_cor; w <= right_cor; ++w) {
                 coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
-                if(coord == commander) {
+                if(coord == commander->getPosition()) {
                     leeTab[h-bottom_cor][w-left_cor] = -4;
                     continue;
                 }
@@ -756,8 +767,27 @@ namespace robo {
                 } else {
                     leeTab[h-bottom_cor][w-left_cor] = -2;
                 }
+
+                coordinates cur = {w, h};
+                if (checkBlocked({w, h}) && commander->getPosition() != cur) {
+                    if (target == nullptr)
+                        leeTab[h-bottom_cor][w-left_cor] = -2;
+                    else if (*target != cur)
+                        leeTab[h-bottom_cor][w-left_cor] = -2;
+                }
             }
         }
+
+        /*for (auto & ly : leeTab) {
+            for(int & lx : ly) {
+                if (lx >= 0)
+                    std::cout << " ";
+                if (lx < 10)
+                    std::cout << " ";
+                std::cout << lx << " ";
+            }
+            std::cout << std::endl;
+        }*/
 
         return leeTab;
     }
@@ -800,7 +830,7 @@ namespace robo {
             curD++;
         }
 
-        /*for (auto & ly : leeTable) {
+        for (auto & ly : leeTable) {
             for(int & lx : ly) {
                 if (lx >= 0)
                     std::cout << " ";
@@ -809,7 +839,7 @@ namespace robo {
                 std::cout << lx << " ";
             }
             std::cout << std::endl;
-        }*/
+        }
     }
 
     void Ai_Deep::trainNext(Robot_Commander * comm) {
@@ -825,18 +855,18 @@ namespace robo {
                 maxY = g.y;
         }
 
-        std::vector<std::vector<int>> leeTab = initLee(maxY, 0, 0, maxX, comm->getPosition()); ///
+        std::vector<std::vector<int>> leeTab = initLee(maxY, 0, 0, maxX, comm);
         leeComp(leeTab, 0, 0, comm->getPosition());
 
         std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y][a.x] < leeTab[b.y][b.x]; });
 
-        std::cout << "BA" << std::endl;
-        for (auto ca : busyArea) {
-            std::cout << ca[0] << " * " << ca[1] << " * " << ca[2] << " * " << ca[3] << std::endl;
-        }
+        //std::cout << "BA" << std::endl;
+        //for (auto ca : busyArea) {
+        //    std::cout << ca[0] << " * " << ca[1] << " * " << ca[2] << " * " << ca[3] << std::endl;
+        //}
 
         for (auto g : grey) {
-            std::cout << "G " << g.x << ";" << g.y << std::endl;
+            //std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             std::vector<coordinates> route;
 
@@ -863,7 +893,7 @@ namespace robo {
 
                     if (comm->getPair() != nullptr) {
                         if (coord == route.rbegin()) {
-                            std::cout << "WAY" << std::endl;
+                            std::cout << "WAY " << comm->getX() << ";" << comm->getY() << " <- " << comm->getPair()->getX() << ";" << comm->getPair()->getY() << std::endl;
                             md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2,
                                            atime+1);
                         } else if (*coord != *route.begin()) {
@@ -901,7 +931,7 @@ namespace robo {
     }
 
     std::set<std::array<unsigned int, 4>>::iterator Ai_Deep::checkArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) const {
-        std::cout << "FINDDDDING " << top_cor << " " << left_cor << " " << bottom_cor << " " << right_cor << std::endl;
+        //std::cout << "FINDDDDING " << top_cor << " " << left_cor << " " << bottom_cor << " " << right_cor << std::endl;
         auto req = std::array<unsigned int, 4>({top_cor, left_cor, bottom_cor, right_cor});
         return busyArea.find(req);
     }
@@ -927,6 +957,26 @@ namespace robo {
         auto ca = checkArea(top_cor, left_cor, bottom_cor, right_cor);
         if (ca != busyArea.end())
             busyArea.erase(ca);
+    }
+
+    int Ai_Deep::addBlockedPoint(coordinates pos) {
+        if (busyPoints.find(pos) != busyPoints.end())
+            return 1;
+
+        busyPoints.insert(pos); //due to i have made multiset
+
+        return 0;
+    }
+
+    bool Ai_Deep::checkBlocked(coordinates pos) {
+        return busyPoints.find(pos) != busyPoints.end();
+    }
+
+    void Ai_Deep::deleteBlockedPoint(coordinates pos) {
+        auto delPos = busyPoints.find(pos);
+        if(delPos != busyPoints.end()) {
+            busyPoints.erase(delPos);
+        }
     }
 
 }
