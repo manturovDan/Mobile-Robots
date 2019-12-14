@@ -830,7 +830,7 @@ namespace robo {
             curD++;
         }
 
-        for (auto & ly : leeTable) {
+        /*for (auto & ly : leeTable) {
             for(int & lx : ly) {
                 if (lx >= 0)
                     std::cout << " ";
@@ -839,7 +839,7 @@ namespace robo {
                 std::cout << lx << " ";
             }
             std::cout << std::endl;
-        }
+        }*/
     }
 
     void Ai_Deep::trainNext(Robot_Commander * comm) {
@@ -872,6 +872,10 @@ namespace robo {
 
             coordinates last;
             if(leeTab[g.y][g.x] > 0 && !checkInAreas(g)) {
+                deleteBlockedPoint(comm->getPosition());
+                if (comm->getPair() != nullptr)
+                    deleteBlockedPoint(comm->getPair()->getPosition());
+
                 unsigned int pairRad;
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
                 // in g.x, g.y
