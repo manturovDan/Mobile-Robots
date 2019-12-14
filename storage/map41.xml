@@ -1,0 +1,60 @@
+<Environment width = "100" height = "120">
+    <Obstacle x = "5" y = "1"/>
+    <Obstacle x = "1" y = "2"/>
+    <Obstacle x = "25" y = "20"/>
+    <Obstacle x = "12" y = "23"/>
+    <Obstacle x = "0" y = "32"/>
+    <Obstacle x = "11" y = "12"/>
+    <Obstacle x = "84" y = "5"/>
+    <Obstacle x = "3" y = "2"/>
+    <Obstacle x = "10" y = "10"/>
+    <Obstacle x = "46" y = "23"/>
+
+    <Interest x = "10" y = "11"/>
+    <Interest x = "5" y = "8"/>
+    <Interest x = "5" y = "9"/>
+    <Interest x = "0" y = "4"/>
+    <Interest x = "3" y = "8"/>
+    <Interest x = "5" y = "0"/>
+    <Interest x = "99" y = "80"/>
+    <Interest x = "67" y = "72"/>
+    <Interest x = "33" y = "11"/>
+    <Interest x = "34" y = "54"/>
+    <Interest x = "48" y = "24"/>
+
+    <Command_Center x = "50" y = "21" price = "2000" description = "general" consumption = "13" ports = "5">
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Sensor consumption = "8" radius = "1" priority = "1" angle = "2"/>
+        <Managing consumption = "12" priority = "1" radius = "7" subordinates_count = "14"/>
+    </Command_Center>
+
+    <Observation_Center x = "43" y = "27" price = "1000" consumption = "10"  description = "subord1" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "7" priority = "1" angle = "2"/>
+    </Observation_Center>
+
+    <Observation_Center x = "55" y = "21" price = "1000" consumption = "10"  description = "subord2" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "3" angle = "1"/>
+        <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
+    </Observation_Center>
+
+    <Command_Center x = "99" y = "99" price = "2000" description = "generalBorder" consumption = "13" ports = "5">
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "1"/>
+        <Managing consumption = "12" priority = "1" radius = "10" subordinates_count = "14"/>
+    </Command_Center>
+
+    <Robot_Commander price = "10000" consumption = "10"  description = "general_move_one" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
+        <Sensor consumption = "8" radius = "4" priority = "1" direction="1" angle = "0"/>
+        <Sensor consumption = "8" radius = "2" priority = "1" direction="1" angle = "0"/>
+        <Managing consumption = "8" radius = "30" priority = "2" subordinates_count = "5"/>
+    </Robot_Commander>
+
+
+</Environment>
