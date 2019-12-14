@@ -191,7 +191,7 @@ namespace robo {
     }
 
     void Ai_Deep::nextComp() {
-        std::cout << startCommander() << std::endl;
+        startCommander();
         md->printSteps();
 
         std::vector<std::pair<Robot_Scout *, int>> nextRep;
@@ -707,9 +707,9 @@ namespace robo {
         if (minway < 0)
             return 1;
 
-        std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
+        //std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {nearest.x, nearest.y});
-        std::cout << "RTTT" << std::endl;
+        //std::cout << "RTTT" << std::endl;
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             std::cout << coord->x << ";" << coord->y << std::endl;
         }

@@ -68,7 +68,7 @@ namespace robo {
                 //std::cout << "Active Senor rad = " << sens->getRadius() << " dir = " << sens->getDirection() << " angle = " << sens->getAngle() << std::endl;
 
                 unsigned int real_dir = sens->getDirection(getDirection()); //if will be direction of robot
-                std::cout << real_dir << std::endl;
+                //std::cout << real_dir << std::endl;
 
                 int top_cor, left_cor, bottom_cor, right_cor;
                 determineCorers(top_cor, left_cor, bottom_cor, right_cor, sens->getRadius());
