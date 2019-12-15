@@ -895,7 +895,7 @@ namespace robo {
         bool ava = false;
 
         for (auto g : grey) {
-            //std::cout << "G " << g.x << ";" << g.y << std::endl;
+            std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             if (checkLee[g.y][g.x] > 0) {
                 ava = true;
