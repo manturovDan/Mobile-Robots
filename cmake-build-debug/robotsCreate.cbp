@@ -1084,6 +1084,7 @@
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/robot.h">
 			<Option target="robotsCreate"/>
+			<Option target="u_test"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/tests/test1.cpp">
 			<Option target="u_test"/>

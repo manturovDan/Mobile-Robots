@@ -13,7 +13,7 @@ namespace robo {
             throw std::invalid_argument("Too many modules");
 
         unsigned int energy = 0;
-        unsigned int cons = 0;
+        unsigned int cons = getEnergyConsumption();
 
         for (auto itm : modul) {
             if (!strcmp(typeid(*itm).name(), "N4robo15Power_GeneratorE"))
