@@ -6,14 +6,18 @@ namespace robo {
                                    std::vector<Module *> & mods, std::string & desc, robo::coordinates pos) : Observation_Center(ports, consumption, price, mods, desc, pos) {
         bool commander = false;
         for (auto & mod : modules) {
-            if (!strcmp(typeid(mod).name(), "N4robo8ManagingE")) {
-                if (dynamic_cast<Managing *>(mod)->getActive())
+            if (!strcmp(typeid(*mod).name(), "N4robo8ManagingE")) {
+                if (dynamic_cast<Managing *>(mod)->getActive()) {
                     commander = true;
+                    break;
+                }
             }
         }
 
-        if (!commander)
+        if (!commander) {
+            std::cerr << whoami() << std::endl;
             throw std::invalid_argument("Commander has no active managing module");
+        }
     }
 
     std::string Command_Center::whoami() {

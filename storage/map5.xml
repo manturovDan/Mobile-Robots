@@ -268,7 +268,7 @@
 
     <Command_Center x = "23" y = "3" price = "2000" description = "general2" consumption = "13" ports = "5">
         <Power_Generator priority = "1" production = "25"/>
-        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "250"/>
         <Sensor consumption = "8" radius = "3" priority = "100" direction = "0" angle = "2"/>
         <Managing consumption = "12" priority = "-1" radius = "4" subordinates_count = "14"/>
     </Command_Center>
