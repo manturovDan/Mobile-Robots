@@ -63,7 +63,7 @@ namespace robo {
         /// return matrix with 0 - free for moving, 1 - unreachable
         std::vector<std::vector<int>> initLee(unsigned int, unsigned int, unsigned int, unsigned int, const Robot_Commander *, const coordinates * target = nullptr);
         void leeComp(std::vector<std::vector<int>> &, unsigned int, unsigned int, coordinates);
-        bool leeAv(std::vector<std::vector<int>> &);
+        std::vector<std::vector<int>> leeAv();
         void makeRoute(std::vector<std::vector<int>> &, std::vector<coordinates> &, unsigned int, unsigned int, coordinates);
         void trainNext(Robot_Commander *);
         unsigned int openedRightBoundary() const;

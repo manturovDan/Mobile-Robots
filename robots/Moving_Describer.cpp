@@ -23,7 +23,7 @@ namespace robo {
         }
     }
 
-    void Moving_Describer::makeSteps(unsigned int curTime) {
+    int Moving_Describer::makeSteps(unsigned int curTime) {
         std::vector<std::deque<moment>::iterator> delev;
         for (auto it = move_d.begin(); it != move_d.end(); ++it) {
             if(it->moving_obj == nullptr)
@@ -32,7 +32,7 @@ namespace robo {
             if (it->time < curTime)
                 throw std::invalid_argument("ROBOTIME error");
             if (it->time == curTime) {
-                std:: cout << curTime << " ";
+                //std:: cout << curTime << " ";
                 it->moving_obj->move(it->pos, it->direction);
                 if(it->destination != 0)
                     it->moving_obj->report(it->destination);
@@ -48,6 +48,7 @@ namespace robo {
             move_d.erase(dit);
         }
         //std::cout << "---------------------" <<std::endl;
+        return 0;
     }
 
     bool Moving_Describer::isMoving(Robot_Scout * scout) {

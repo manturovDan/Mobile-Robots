@@ -298,7 +298,7 @@ namespace robo {
                 }
             } else if (rep->second == 11) {
                 auto * comm = dynamic_cast<Robot_Commander *>(rep->first->getOwner());
-                //collision
+                //check the end there
                 trainNext(comm);
             }
 
@@ -887,61 +887,72 @@ namespace robo {
         //    std::cout << ca[0] << " * " << ca[1] << " * " << ca[2] << " * " << ca[3] << std::endl;
         //}
 
-        if (grey.empty() || !leeAv(leeTab))
+        if (grey.empty())
             setEnd();
+
+        auto checkLee = leeAv();
+        bool ava = false;
 
         for (auto g : grey) {
             //std::cout << "G " << g.x << ";" << g.y << std::endl;
 
-            std::vector<coordinates> route;
+            if (checkLee[g.y][g.x] > 0) {
+                ava = true;
+                std::vector<coordinates> route;
 
-            coordinates last;
-            if(leeTab[g.y][g.x] > 0 && !checkInAreas(g)) {
-                deleteBlockedPoint(comm->getPosition());
-                if (comm->getPair() != nullptr)
-                    deleteBlockedPoint(comm->getPair()->getPosition());
+                coordinates last;
+                if (leeTab[g.y][g.x] > 0 && !checkInAreas(g)) {
+                    deleteBlockedPoint(comm->getPosition());
+                    if (comm->getPair() != nullptr)
+                        deleteBlockedPoint(comm->getPair()->getPosition());
 
-                unsigned int pairRad;
-                int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
-                // in g.x, g.y
-                if (comm->getPair() != nullptr)
-                    pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
-                else
-                    pairRad = comm->getMaxRadius();
-
-                Observation_Center::determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri, comm->manMod()->getRadius() +
-                        pairRad, g);
-
-                addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
-
-                makeRoute(leeTab, route, 0, 0, {g.x, g.y});
-                for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-                    std::cout << coord->x << ";" << coord->y << std::endl;
-                    unsigned int atime;
-
-                    if (*coord != *route.begin() || comm->getPair() != nullptr)
-                        atime = md->routePoint(comm, *coord, 2, envir->getTime());
+                    unsigned int pairRad;
+                    int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
+                    // in g.x, g.y
+                    if (comm->getPair() != nullptr)
+                        pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
                     else
-                        atime = md->routePoint(comm, *coord, 3, envir->getTime());
+                        pairRad = comm->getMaxRadius();
 
-                    if (comm->getPair() != nullptr) {
-                        if (coord == route.rbegin()) {
-                            std::cout << "WAY " << comm->getX() << ";" << comm->getY() << " <- " << comm->getPair()->getX() << ";" << comm->getPair()->getY() << std::endl;
-                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2,
-                                           atime+1);
-                        } else if (*coord != *route.begin()) {
-                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
-                        } else {
-                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
+                    Observation_Center::determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri,
+                                                        comm->manMod()->getRadius() +
+                                                        pairRad, g);
+
+                    addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
+
+                    makeRoute(leeTab, route, 0, 0, {g.x, g.y});
+                    for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+                        std::cout << coord->x << ";" << coord->y << std::endl;
+                        unsigned int atime;
+
+                        if (*coord != *route.begin() || comm->getPair() != nullptr)
+                            atime = md->routePoint(comm, *coord, 2, envir->getTime());
+                        else
+                            atime = md->routePoint(comm, *coord, 3, envir->getTime());
+
+                        if (comm->getPair() != nullptr) {
+                            if (coord == route.rbegin()) {
+                                std::cout << "WAY " << comm->getX() << ";" << comm->getY() << " <- "
+                                          << comm->getPair()->getX() << ";" << comm->getPair()->getY() << std::endl;
+                                md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2,
+                                               atime + 1);
+                            } else if (*coord != *route.begin()) {
+                                md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
+                            } else {
+                                md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
+                            }
+
+                            last = *coord;
                         }
-
-                        last = *coord;
                     }
-                }
 
-                return;
+                    return;
+                }
             }
         }
+
+        if (!ava)
+            setEnd();
 
         md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
 
@@ -1011,17 +1022,76 @@ namespace robo {
         }
     }
 
-    bool Ai_Deep::leeAv(std::vector<std::vector<int>> & leeTable) {
-        for (int i = 0; i < leeTable.size(); ++i) {
-            for (int j = 0; j < leeTable[i].size(); ++j) {
-                if (leeTable[i][j] > 0) {
-                    return true;
+    std::vector<std::vector<int>> Ai_Deep::leeAv() {
+        std::vector<int> row (envir->getWidth());
+        std::vector<std::vector<int>> leeTab (envir->getHeight());
+
+        for (unsigned int h = 0; h <= envir->getHeight()-1; ++h) {
+            leeTab[h] = row;
+            for (unsigned int w = 0; w <= envir->getWidth() - 1; ++w) {
+                coordinates coord = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
+
+                auto p_val = ai_dict.find(coord);
+                if (p_val == ai_dict.end()) {
+                    leeTab[h][w] = -2;
+                    continue;
                 }
 
+                if(p_val->second.iam == nullptr || !strcmp(typeid(*p_val->second.iam).name(), "N4robo14Interest_PointE")) {
+                    leeTab[h][w] = -1;
+                } else {
+                    leeTab[h][w] = -2;
+                }
             }
         }
 
-        return false;
+        leeTab[0][0] = 0;
+        int curD = 0;
+        while (true) {
+            bool changed = false;
+            for (int i = 0; i < leeTab.size(); ++i) {
+                for (int j = 0; j < leeTab[i].size(); ++j) {
+                    if (leeTab[i][j] == curD) {
+                        if (i != leeTab.size() - 1 && leeTab[i+1][j] == -1) {
+                            leeTab[i + 1][j] = curD + 1;
+                            changed = true;
+                        }
+
+                        if (j != 0 && leeTab[i][j-1] == -1) {
+                            leeTab[i][j - 1] = curD + 1;
+                            changed = true;
+                        }
+
+                        if (i != 0 && leeTab[i-1][j] == -1) {
+                            leeTab[i - 1][j] = curD + 1;
+                            changed = true;
+                        }
+
+                        if (j != leeTab[i].size()-1 && leeTab[i][j+1] == -1) {
+                            leeTab[i][j + 1] = curD + 1;
+                            changed = true;
+                        }
+                    }
+
+                }
+            }
+            if(!changed)
+                break;
+            curD++;
+        }
+
+        /*for (auto & ly : leeTab) {
+            for(int & lx : ly) {
+                if (lx >= 0)
+                    std::cout << " ";
+                if (lx < 10)
+                    std::cout << " ";
+                std::cout << lx << " ";
+            }
+            std::cout << std::endl;
+        }*/
+
+        return leeTab;
     }
 
 }
