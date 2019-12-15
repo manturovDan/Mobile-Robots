@@ -36,6 +36,7 @@ namespace robo {
         void makeSteps(unsigned int);
         bool isMoving(Robot_Scout *);
         unsigned int routePoint(Robot_Scout *, coordinates, int, unsigned int);
+        bool onRoute(coordinates) const;
         unsigned int setDirection(Robot_Scout *, coordinates, int, int, unsigned int, int);
         bool empMd() const { return move_d.empty(); }
     };

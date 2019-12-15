@@ -370,8 +370,12 @@ namespace robo {
                 //std::cout << "GREY" << std::endl;
                 //std::cout << it.x << "," << it.y << " = " << leeTab[it.y - bottom_cor_m][it.x - left_cor_m] <<  std::endl;
                 std::vector<coordinates> route;
-                if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) {
-                    makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {it.x, it.y});
+                if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) { //check if on the route
+                    if (md->onRoute(it)) {
+                        std::cout << "NOT GO" << std::endl;
+                        continue;
+                    }
+                    makeRoute(leeTab, route, left_cor_m, bottom_cor_m, it);
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                         std::cout << coord->x << ";" << coord->y << std::endl;
 
@@ -747,8 +751,12 @@ namespace robo {
         for (int h = y - radius; h <= y + radius; ++h) {
             for (int w = x - radius; w <= x + radius; ++w) {
                 if (x != w || y != h) {
-                    if (h >= 0 && w >= 0)
-                        ret.push_back({static_cast<unsigned int>(w), static_cast<unsigned  int>(h)});
+                    if (h >= 0 && w >= 0) {
+                        if (md->onRoute({static_cast<unsigned int>(w), static_cast<unsigned int>(h)})) {
+                            continue;
+                        }
+                        ret.push_back({static_cast<unsigned int>(w), static_cast<unsigned int>(h)});
+                    }
                     //std::cout << " {" << w << ";" << h << "}";
                 }
             }

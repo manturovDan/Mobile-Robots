@@ -13,13 +13,13 @@ namespace robo {
     }
 
     void Moving_Describer::printSteps(std::ostream & stream) {
-        //stream << "--------------\nMOVING:\n--------------" << std::endl;
-        //for (auto & it : move_d) {
-        //    if(it.moving_obj == nullptr)
-        //        continue;
-        //    std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
-        //    it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
-        //}
+        stream << "--------------\nMOVING:\n--------------" << std::endl;
+        for (auto & it : move_d) {
+            if(it.moving_obj == nullptr)
+                continue;
+            std::cout << "Robot: " << it.moving_obj->getDescription() << "; target_position: {" << it.pos.x << "; " <<
+            it.pos.y << "}; direction: " << it.direction << "; target_time: " << it.time << "; dest: " << it.destination << std::endl;
+        }
     }
 
     void Moving_Describer::makeSteps(unsigned int curTime) {
@@ -89,12 +89,22 @@ namespace robo {
 
         assumeTime = setDirection(mobile, lastPos, tarDir, lastDir, assumeTime, 2);
 
-
-        for(auto & it : move_d) {
-            if (it.pos == pos && assumeTime == it.time) {
-                ++assumeTime;
+        bool isRoute = false;
+        while (!isRoute) {
+            int watched = 0;
+            for(auto & it : move_d) {
+                if (it.pos == pos && assumeTime == it.time) {
+                    ++assumeTime;
+                    watched = 0;
+                    break;
+                }
+                ++watched;
             }
+
+            if (watched == move_d.size())
+                isRoute = true;
         }
+
 
         //TODO if object stops on the point it must make it blocked and previously check if no routs have his point
 
@@ -133,6 +143,15 @@ namespace robo {
         }
 
         return turnTime+1;
+    }
+
+    bool Moving_Describer::onRoute(coordinates tar) const {
+        for (auto & it : move_d) {
+            if (it.pos == tar)
+                return true;
+        }
+
+        return false;
     }
 
 }
