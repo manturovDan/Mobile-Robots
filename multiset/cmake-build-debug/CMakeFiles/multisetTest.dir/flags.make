@@ -6,5 +6,5 @@ CXX_FLAGS = -pthread -g   -std=gnu++1z
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /home/danila/source/libraries/SFML-2.5.1/include 
+CXX_INCLUDES = 
 
