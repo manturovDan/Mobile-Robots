@@ -1,5 +1,6 @@
 #include "Observation_Center.h"
 #include "Sensor.h"
+#include "Power_Generator.h"
 
 namespace robo {
     Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
@@ -8,11 +9,30 @@ namespace robo {
     }
 
     void Observation_Center::initModules(const std::vector<Module *> & modul) {
-        if (countPorts < modul.size())
-            throw std::invalid_argument("Robot has too many modules");
+        if (modul.size() > getCountPorts())
+            throw std::invalid_argument("Too many modules");
+
+        unsigned int energy = 0;
+        unsigned int cons = 0;
 
         for (auto itm : modul) {
+            if (!strcmp(typeid(*itm).name(), "N4robo15Power_GeneratorE"))
+                energy += dynamic_cast<Power_Generator *>(itm)->getProduction();
+            else
+                cons += dynamic_cast<Energy_Consumer *>(itm)->getConsumption();
             modules.push_back((*itm).copy());
+        }
+
+        std::sort(modules.begin(), modules.end(), [](Module * a, Module * b){ if (a->getPriority() > b->getPriority()) return true; });
+
+        //std::cout << "ENERGY_" << energy << " - " << cons << std::endl;
+        while (cons > energy) {
+            for (auto mod = modules.rbegin(); mod != modules.rend(); ++mod) {
+                if (strcmp(typeid(**mod).name(), "N4robo15Power_GeneratorE") != 0) {
+                    (*mod)->deactivate();
+                    cons -= dynamic_cast<Energy_Consumer *>(*mod)->getConsumption();
+                }
+            }
         }
     }
 

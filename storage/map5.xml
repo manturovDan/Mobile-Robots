@@ -261,47 +261,47 @@
 
     <Command_Center x = "0" y = "23" price = "2000" description = "general1" consumption = "13" ports = "5">
         <Power_Generator priority = "1" production = "25"/>
-        <Power_Generator priority = "1" production = "25"/>
-        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "3" production = "25"/>
+        <Power_Generator priority = "2" production = "25"/>
         <Managing consumption = "12" priority = "1" radius = "4" subordinates_count = "14"/>
     </Command_Center>
 
     <Command_Center x = "23" y = "3" price = "2000" description = "general2" consumption = "13" ports = "5">
         <Power_Generator priority = "1" production = "25"/>
         <Power_Generator priority = "1" production = "25"/>
-        <Sensor consumption = "8" radius = "3" priority = "1" direction = "0" angle = "2"/>
-        <Managing consumption = "12" priority = "1" radius = "4" subordinates_count = "14"/>
+        <Sensor consumption = "8" radius = "3" priority = "100" direction = "0" angle = "2"/>
+        <Managing consumption = "12" priority = "-1" radius = "4" subordinates_count = "14"/>
     </Command_Center>
 
     <Command_Center x = "29" y = "3" price = "2000" description = "general3" consumption = "13" ports = "5">
-        <Power_Generator priority = "1" production = "25"/>
-        <Power_Generator priority = "1" production = "25"/>
-        <Sensor consumption = "8" radius = "3" priority = "1" direction = "1" angle = "1"/>
-        <Managing consumption = "12" priority = "1" radius = "4" subordinates_count = "14"/>
+        <Power_Generator priority = "12" production = "25"/>
+        <Power_Generator priority = "11" production = "25"/>
+        <Sensor consumption = "8" radius = "3" priority = "111" direction = "1" angle = "1"/>
+        <Managing consumption = "12" priority = "110" radius = "4" subordinates_count = "14"/>
     </Command_Center>
 
     <Observation_Center x = "0" y = "22" price = "1000" consumption = "10"  description = "station1" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "1" priority = "1" angle = "2"/>
+        <Sensor consumption = "8" radius = "1" priority = "11" angle = "2"/>
     </Observation_Center>
 
     <Observation_Center x = "38" y = "24" price = "1000" consumption = "10"  description = "station2" ports = "15">
-        <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "8" priority = "1" direction = "3" angle = "1"/>
-        <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
+        <Power_Generator priority = "14" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "11" direction = "3" angle = "1"/>
+        <Sensor consumption = "8" radius = "3" priority = "0" direction="2" angle = "2"/>
     </Observation_Center>
 
     <Robot_Commander price = "10000" consumption = "10"  description = "commander1" ports = "15">
-        <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "3" priority = "1" direction = "0" angle = "2"/>
-        <Sensor consumption = "8" radius = "1" priority = "1" direction="1" angle = "0"/>
-        <Managing consumption = "8" radius = "3" priority = "2" subordinates_count = "5"/>
+        <Power_Generator priority = "0" production = "100"/>
+        <Sensor consumption = "8" radius = "3" priority = "111" direction = "0" angle = "2"/>
+        <Sensor consumption = "8" radius = "1" priority = "12" direction="1" angle = "0"/>
+        <Managing consumption = "8" radius = "3" priority = "23" subordinates_count = "5"/>
     </Robot_Commander>
 
     <Robot_Commander price = "10000" consumption = "10"  description = "commander2" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "4" priority = "1" angle = "2"/>
-        <Managing consumption = "8" radius = "4" priority = "2" subordinates_count = "5"/>
+        <Sensor consumption = "8" radius = "4" priority = "1321" angle = "2"/>
+        <Managing consumption = "8" radius = "4" priority = "21" subordinates_count = "5"/>
     </Robot_Commander>
 
     <Robot_Commander price = "10000" consumption = "10"  description = "commander3" ports = "15">
@@ -311,13 +311,13 @@
     </Robot_Commander>
 
     <Robot_Scout price = "10000" consumption = "10"  description = "scout1" ports = "15">
-        <Power_Generator priority = "1" production = "100"/>
+        <Power_Generator priority = "-1" production = "100"/>
         <Sensor consumption = "8" radius = "5" priority = "1" direction = "0" angle = "0"/>
     </Robot_Scout>
 
     <Robot_Scout price = "10000" consumption = "10"  description = "scout2" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
-        <Sensor consumption = "8" radius = "6" priority = "1" direction = "3" angle = "0"/>
+        <Sensor consumption = "8" radius = "6" priority = "0" direction = "3" angle = "0"/>
     </Robot_Scout>
 
 </Environment>

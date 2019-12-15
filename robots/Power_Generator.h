@@ -12,6 +12,7 @@ namespace robo {
         Power_Generator(int prior, unsigned int prod, bool act = true) : Module(prior, act), energyProduction(prod) {}
         Module * copy() override;
         std::string whoami() override;
+        unsigned int getProduction() const { return energyProduction; }
         ~Power_Generator() override = default;
     protected:
         int energyProduction;
