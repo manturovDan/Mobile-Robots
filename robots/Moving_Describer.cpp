@@ -13,6 +13,7 @@ namespace robo {
     }
 
     void Moving_Describer::printSteps(std::ostream & stream) {
+        return;
         stream << "--------------\nMOVING:\n--------------" << std::endl;
         for (auto & it : move_d) {
             if(it.moving_obj == nullptr)

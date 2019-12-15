@@ -206,7 +206,7 @@ namespace robo {
         std::vector<std::pair<Robot_Scout *, int>> nextRep;
 
         for (auto rep = report.begin(); rep != report.end(); ++rep) {
-            std::cout << "REP " << rep->second << std::endl;
+            //std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
@@ -249,7 +249,8 @@ namespace robo {
                     else {
                         if (pairRes(commer)) {
                             makeReport(commer->getPair(), 5);
-                        }
+                        } else
+                            makeReport(commer->getPair(), 9);
                     }
                 }
                 else
@@ -367,14 +368,12 @@ namespace robo {
             }
 
             for (auto it : grey) {
+                if (md->onRoute(it))
+                    continue;
                 //std::cout << "GREY" << std::endl;
                 //std::cout << it.x << "," << it.y << " = " << leeTab[it.y - bottom_cor_m][it.x - left_cor_m] <<  std::endl;
                 std::vector<coordinates> route;
-                if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) { //check if on the route
-                    if (md->onRoute(it)) {
-                        std::cout << "NOT GO" << std::endl;
-                        continue;
-                    }
+                if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) {
                     makeRoute(leeTab, route, left_cor_m, bottom_cor_m, it);
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                         std::cout << coord->x << ";" << coord->y << std::endl;
@@ -729,9 +728,9 @@ namespace robo {
         //std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {nearest.x, nearest.y});
         //std::cout << "RTTT" << std::endl;
-        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-            std::cout << coord->x << ";" << coord->y << std::endl;
-        }
+        //for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+        //    std::cout << coord->x << ";" << coord->y << std::endl;
+        //}
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0]) {
                 md->routePoint(comm->getPair(), *coord, 10, envir->getTime());
