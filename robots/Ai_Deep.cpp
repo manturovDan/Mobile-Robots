@@ -884,7 +884,7 @@ namespace robo {
             setEnd();
 
         for (auto g : grey) {
-            std::cout << "G " << g.x << ";" << g.y << std::endl;
+            //std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             std::vector<coordinates> route;
 
