@@ -25,7 +25,7 @@ add_library(managing robots/Managing.h robots/Managing.cpp)
 add_library(sensor robots/Sensor.h robots/Sensor.cpp)
 add_library(display robots/Display.h robots/Display.cpp)
 add_library(moving_describer robots/Moving_Describer.h robots/Moving_Describer.cpp)
-add_library(ai_robots robots/Ai_Deep.h robots/Ai_Deep.cpp)
+add_library(ai_robots robots/Ai_Deep.h robots/Ai_Deep.cpp tests/test1.cpp)
 
 target_link_libraries(obstacle map_object)
 target_link_libraries(environment_describer map_object obstacle)
@@ -41,3 +41,10 @@ target_link_libraries(robotsCreate interfacelib obstacle tinyxml2 map_object env
         moving_describer ai_robots)
 
 target_link_libraries(robotsCreate sfml-graphics sfml-window sfml-audio)
+
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+add_executable(u_test tests/test1.cpp)
+target_link_libraries(u_test ${GTEST_LIBRARIES} pthread)
+add_test(NAME uTest COMMAND u_test)

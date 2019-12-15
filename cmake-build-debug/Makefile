@@ -78,6 +78,17 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles /home/danila/source/robots/cmake-build-debug/CMakeFiles/progress.marks
@@ -122,6 +133,19 @@ robotsCreate: cmake_check_build_system
 robotsCreate/fast:
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/build
 .PHONY : robotsCreate/fast
+
+#=============================================================================
+# Target rules for targets named u_test
+
+# Build rule for target.
+u_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 u_test
+.PHONY : u_test
+
+# fast build rule for target.
+u_test/fast:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
+.PHONY : u_test/fast
 
 #=============================================================================
 # Target rules for targets named interest_point
@@ -830,6 +854,36 @@ robots/interface.cpp.s:
 	$(MAKE) -f CMakeFiles/interfacelib.dir/build.make CMakeFiles/interfacelib.dir/robots/interface.cpp.s
 .PHONY : robots/interface.cpp.s
 
+tests/test1.o: tests/test1.cpp.o
+
+.PHONY : tests/test1.o
+
+# target to build an object file
+tests/test1.cpp.o:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/tests/test1.cpp.o
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/tests/test1.cpp.o
+.PHONY : tests/test1.cpp.o
+
+tests/test1.i: tests/test1.cpp.i
+
+.PHONY : tests/test1.i
+
+# target to preprocess a source file
+tests/test1.cpp.i:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/tests/test1.cpp.i
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/tests/test1.cpp.i
+.PHONY : tests/test1.cpp.i
+
+tests/test1.s: tests/test1.cpp.s
+
+.PHONY : tests/test1.s
+
+# target to generate assembly for a file
+tests/test1.cpp.s:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/tests/test1.cpp.s
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/tests/test1.cpp.s
+.PHONY : tests/test1.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -838,7 +892,9 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... robotsCreate"
+	@echo "... u_test"
 	@echo "... interest_point"
 	@echo "... power_generator"
 	@echo "... managing"
@@ -910,6 +966,9 @@ help:
 	@echo "... robots/interface.o"
 	@echo "... robots/interface.i"
 	@echo "... robots/interface.s"
+	@echo "... tests/test1.o"
+	@echo "... tests/test1.i"
+	@echo "... tests/test1.s"
 .PHONY : help
 
 
