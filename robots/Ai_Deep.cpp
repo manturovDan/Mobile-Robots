@@ -183,6 +183,8 @@ namespace robo {
                 com->unBlock();
                 if (com->manMod()->subord_count() > 0)
                     md->addStep({com, {0, 1}, 0, envir->getTime()+1, 1});
+                else
+                    md->addStep({com, {0, 0}, 0, envir->getTime()+1, 1});
                 return 0;
             }
         }
@@ -201,8 +203,10 @@ namespace robo {
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
-                pair->move({0, 0}, 0);
-                pair->unBlock();
+                if (pair != nullptr) {
+                    pair->move({0, 0}, 0);
+                    pair->unBlock();
+                }
                 nextRep.emplace_back(rep->first, 3);
 
                 int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
@@ -231,14 +235,17 @@ namespace robo {
                 if(commer->getPair() != nullptr)
                     addBlockedPoint(commer->getPair()->getPosition());
 
-                if (commer->getPair() != nullptr && md->isMoving(commer->getPair()))
-                    nextRep.emplace_back(rep->first, 4);
-                else {
-                    if (pairRes(commer)) {
-                        makeReport(commer->getPair(), 5);
+                if (commer->getPair() != nullptr) {
+                    if (md->isMoving(commer->getPair()))
+                        nextRep.emplace_back(rep->first, 4);
+                    else {
+                        if (pairRes(commer)) {
+                            makeReport(commer->getPair(), 5);
+                        }
                     }
                 }
-                //algorithm from the paper
+                else
+                    nextRep.emplace_back(commer, 8);
             } else if (rep->second == 5) {
                 connectResult(rep->first->look());
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
@@ -892,8 +899,12 @@ namespace robo {
                 makeRoute(leeTab, route, 0, 0, {g.x, g.y});
                 for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                     std::cout << coord->x << ";" << coord->y << std::endl;
+                    unsigned int atime;
 
-                    unsigned int atime = md->routePoint(comm, *coord, 2, envir->getTime());
+                    if (*coord != *route.begin() || comm->getPair() != nullptr)
+                        atime = md->routePoint(comm, *coord, 2, envir->getTime());
+                    else
+                        atime = md->routePoint(comm, *coord, 3, envir->getTime());
 
                     if (comm->getPair() != nullptr) {
                         if (coord == route.rbegin()) {

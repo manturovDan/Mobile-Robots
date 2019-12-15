@@ -16,7 +16,7 @@ namespace robo {
         Robot_Scout * getPair() const;
         std::map<coordinates, Map_Object *> research() override;
         ///radius of impact = radius of managing module + radius of pair's sensor
-        unsigned int ri();
+        unsigned int ri() const;
     };
 }
 #endif //ROBOTSCREATE_ROBOT_COMMANDER_H

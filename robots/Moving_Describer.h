@@ -9,7 +9,7 @@ namespace robo {
     /// destination == 0 - nothing to do, moving is continue; 1 - commander has arrived to 0,1 - need a subordinate;
     /// 2 - commander/scout is moving/rotating to task point;
     /// 3 - commander has arrived to new point; -1 - is waiting for deleting;
-    /// 4 - arrived commander is ready for full area researching (READY FOR RI)
+    /// 4 - arrived commander is ready for full area researching (READY FOR PairRest)
     /// 5 - subordinate has arrived to grey point; 55 - revolved
     /// 6 - subordinate has ended the researching and must move to init
     /// 7 - subordinate has backed to owner and should be turned
