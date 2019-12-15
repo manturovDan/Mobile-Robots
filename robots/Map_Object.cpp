@@ -13,9 +13,7 @@ namespace robo {
 
         for(robo::Env_Consistent_Iter it = env->begin(); it != env->end(); ++it) {
             if ((*it)->getPosition() == coords)
-                if (!strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE") || !strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE"))
-                    continue;
-                else {
+                if (strcmp(typeid(**it).name(), "N4robo11Robot_ScoutE") != 0 && strcmp(typeid(**it).name(), "N4robo15Robot_CommanderE") != 0) {
                     std::cerr << coords.x << " - " << coords.y << std::endl;
                     throw std::invalid_argument("Map object collision");
                 }
