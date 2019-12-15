@@ -68,6 +68,7 @@ namespace robo {
         unsigned int openedRightBoundary() const;
         unsigned int openedTopBoundary() const;
         bool getEnd() const { return theEnd; }
+        void setEnd() { theEnd = true; }
         /// returns 1 if area is busy, else 0
         std::set<std::array<unsigned int, 4>>::iterator checkArea (unsigned int, unsigned int, unsigned int, unsigned int) const;
         /// return 1 if point is busy, else 0

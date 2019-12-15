@@ -41,6 +41,12 @@
         <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
     </Observation_Center>
 
+    <Observation_Center x = "3" y = "60" price = "1000" consumption = "10"  description = "subord3Lonely" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "3" angle = "1"/>
+        <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
+    </Observation_Center>
+
     <Command_Center x = "99" y = "99" price = "2000" description = "generalBorder" consumption = "13" ports = "5">
         <Power_Generator priority = "1" production = "25"/>
         <Power_Generator priority = "1" production = "25"/>

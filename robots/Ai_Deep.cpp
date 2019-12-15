@@ -61,7 +61,14 @@ namespace robo {
     }
 
     void Ai_Deep::add_point(Map_Object *obj) {
-        ai_dict.insert(std::pair<coordinates, map_point>(obj->getPosition(), {obj, false}));
+        bool topB = false;
+        bool rightB = false;
+        if (obj->getY() == envir->getHeight()-1)
+            topB = true;
+        if (obj->getX() == envir->getWidth() - 1)
+            rightB = true;
+
+        ai_dict.insert(std::pair<coordinates, map_point>(obj->getPosition(), {obj, topB, rightB}));
     }
 
     void Ai_Deep::researchMap() {
@@ -221,6 +228,7 @@ namespace robo {
                 addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
             }
             else if (rep->second == 2) {
+                //maybe subdue lonely observation center
                 connectResult(rep->first->look());
             }
             else if (rep->second == 3) {
@@ -872,8 +880,11 @@ namespace robo {
         //    std::cout << ca[0] << " * " << ca[1] << " * " << ca[2] << " * " << ca[3] << std::endl;
         //}
 
+        if (grey.empty())
+            setEnd();
+
         for (auto g : grey) {
-            //std::cout << "G " << g.x << ";" << g.y << std::endl;
+            std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             std::vector<coordinates> route;
 
@@ -927,7 +938,6 @@ namespace robo {
 
         md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
 
-        std::cout << "THE END!!!" << std::endl;
     }
 
     unsigned int Ai_Deep::openedRightBoundary() const {

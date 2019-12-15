@@ -77,6 +77,10 @@ namespace robo {
                 Map_Object * c_resp = env->checkStaticPoint(c_posit);
                 one_view[c_posit] = c_resp;
 
+                coordinates posit = {static_cast<unsigned int>(getX()), static_cast<unsigned int>(getY())};
+                Map_Object * resp = env->checkStaticPoint(posit);
+                one_view[posit] = resp;
+
                 if (sens->getAngle() == 2) {
                     for (int h = top_cor; h >= bottom_cor && h <= top_cor; --h) {
                         for (int w = left_cor; w <= right_cor; ++w) {

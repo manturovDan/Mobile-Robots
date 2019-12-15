@@ -232,6 +232,10 @@ namespace dispr {
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double, std::milli> elapsed = end - start;
                 //std::cout << "ROBOWORLD Time: " << env->getTime() << "; Waited " << elapsed.count() << " ms\n";
+                if (ai->getEnd()) {
+                    is_comp = false;
+                    break;
+                }
                 ai->nextComp();
                 ai->getMd()->makeSteps(env->getTime());
                 is_comp = false;
@@ -239,6 +243,7 @@ namespace dispr {
                     break; // error
             }
         }
+        std::cout << "THE END DETECTION" << std::endl;
     }
 
     void Display::run() {
