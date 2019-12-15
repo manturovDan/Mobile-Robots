@@ -880,7 +880,7 @@ namespace robo {
         //    std::cout << ca[0] << " * " << ca[1] << " * " << ca[2] << " * " << ca[3] << std::endl;
         //}
 
-        if (grey.empty())
+        if (grey.empty() || !leeAv(leeTab))
             setEnd();
 
         for (auto g : grey) {
@@ -1002,6 +1002,19 @@ namespace robo {
         if(delPos != busyPoints.end()) {
             busyPoints.erase(delPos);
         }
+    }
+
+    bool Ai_Deep::leeAv(std::vector<std::vector<int>> & leeTable) {
+        for (int i = 0; i < leeTable.size(); ++i) {
+            for (int j = 0; j < leeTable[i].size(); ++j) {
+                if (leeTable[i][j] > 0) {
+                    return true;
+                }
+
+            }
+        }
+
+        return false;
     }
 
 }
