@@ -12,7 +12,7 @@ namespace robo {
         bool real_manager = true; //TODO in depend of consumption
         Managing * matchMan;
     public:
-        Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates);
+        Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 2});
         std::string whoami() override;
         int subdue();
         bool isManager() { return real_manager; }

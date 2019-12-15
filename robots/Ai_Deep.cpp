@@ -30,7 +30,8 @@ namespace robo {
 
             if (subc || !strcmp(typeid(**env_iter).name(), "N4robo11Robot_ScoutE")) {
                 auto * r_sc = dynamic_cast<Robot_Scout *>(*env_iter);
-                scouts.insert(std::pair<unsigned int, Map_Object *>(r_sc->getMaxRadius(), *env_iter));
+                if (r_sc->getMaxRadius() > 0)
+                    scouts.insert(std::pair<unsigned int, Map_Object *>(r_sc->getMaxRadius(), *env_iter));
             }
         }
 

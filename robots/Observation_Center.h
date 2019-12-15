@@ -23,7 +23,7 @@ namespace robo {
 
     public:
         Observation_Center() = delete;
-        Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 0});
+        Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 2});
         std::string getDescription() const { return description; }
         unsigned int getEnergyConsumption() const { return energyConsumption; }
         int getCost() const { return cost; }

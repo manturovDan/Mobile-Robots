@@ -5,6 +5,8 @@
 namespace robo {
     Observation_Center::Observation_Center(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods,
                                            std::string & desc, coordinates pos) : Map_Object(pos), description(desc), cost(price), countPorts(ports), energyConsumption(consumption), appeared(true), owner(nullptr) {
+        if (pos.x == 0 && (pos.y == 0 || pos.y == 1))
+            throw std::invalid_argument("Can't initialize object int origin");
         initModules(mods);
     }
 
@@ -31,6 +33,7 @@ namespace robo {
                 if (strcmp(typeid(**mod).name(), "N4robo15Power_GeneratorE") != 0) {
                     (*mod)->deactivate();
                     cons -= dynamic_cast<Energy_Consumer *>(*mod)->getConsumption();
+                    break;
                 }
             }
         }
@@ -218,7 +221,7 @@ namespace robo {
     unsigned int Observation_Center::getMaxRadius() const {
         unsigned int maxr = 0;
         for (auto & module : modules) {
-            if (!strcmp(typeid(*module).name(), "N4robo6SensorE")) {
+            if (!strcmp(typeid(*module).name(), "N4robo6SensorE") && module->getActive()) {
                 unsigned int curRad = dynamic_cast<Sensor *>(module)->getRadius();
                 if (curRad > maxr) {
                     maxr = curRad;
