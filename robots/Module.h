@@ -11,12 +11,14 @@ namespace robo {
         int priority;
         bool active;
     public:
-        int getPriority();
-        bool getActive() { return active; }
-        int setActive();
+        int getPriority() const { return priority; }
+        bool getActive() const { return active; }
+        void activate() { active = true; }
+        void deactivate() { active = false; }
 
         virtual std::string whoami() = 0;
         virtual Module * copy() = 0;
+        virtual ~Module() = default;
     };
 }
 

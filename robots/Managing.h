@@ -29,6 +29,7 @@ namespace robo {
         void reportAI(Robot_Scout *, int);
         void addStep(Robot_Scout *, coordinates, int, unsigned int, int);
         static void setAI(Ai_Deep * aip);
+        ~Managing() = default;
     protected:
         unsigned int radius;
         unsigned int subs_count;

@@ -24,23 +24,21 @@ namespace robo {
     public:
         Observation_Center() = delete;
         Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 0});
-        //Observation_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &);
-        std::string getDescription() { return description; }
-        unsigned int getEnergyConsumption() { return energyConsumption; }
-        int getCost() { return cost; }
+        std::string getDescription() const { return description; }
+        unsigned int getEnergyConsumption() const { return energyConsumption; }
+        int getCost() const { return cost; }
         unsigned int getCountPorts() { return countPorts; }
-        int getCountModules() { return modules.size(); }
-        //Observation_Center * clone() const;
-        void checkFree();
+        int getCountModules() const { return modules.size(); }
         std::string whoami() override;
         std::string myModules();
         std::map<coordinates, Map_Object *> look();
-        void determineCorers(int &, int &, int &, int &, unsigned int);
+        void determineCorers(int &, int &, int &, int &, unsigned int) const;
         static void determineCorers(int &, int &, int &, int &, unsigned int, coordinates);
         void setOwner(Map_Object *);
-        Map_Object * getOwner() { return owner; }
-        unsigned int getMaxRadius();
-        virtual int getDirection() { return 0; }
+        Map_Object * getOwner() const { return owner; }
+        unsigned int getMaxRadius() const;
+        virtual int getDirection() const { return 0; }
+        virtual ~Observation_Center() override = default;
     };
 }
 

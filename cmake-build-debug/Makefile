@@ -135,108 +135,17 @@ robotsCreate/fast:
 .PHONY : robotsCreate/fast
 
 #=============================================================================
-# Target rules for targets named u_test
+# Target rules for targets named moving_describer
 
 # Build rule for target.
-u_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 u_test
-.PHONY : u_test
+moving_describer: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 moving_describer
+.PHONY : moving_describer
 
 # fast build rule for target.
-u_test/fast:
-	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
-.PHONY : u_test/fast
-
-#=============================================================================
-# Target rules for targets named interest_point
-
-# Build rule for target.
-interest_point: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 interest_point
-.PHONY : interest_point
-
-# fast build rule for target.
-interest_point/fast:
-	$(MAKE) -f CMakeFiles/interest_point.dir/build.make CMakeFiles/interest_point.dir/build
-.PHONY : interest_point/fast
-
-#=============================================================================
-# Target rules for targets named power_generator
-
-# Build rule for target.
-power_generator: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 power_generator
-.PHONY : power_generator
-
-# fast build rule for target.
-power_generator/fast:
-	$(MAKE) -f CMakeFiles/power_generator.dir/build.make CMakeFiles/power_generator.dir/build
-.PHONY : power_generator/fast
-
-#=============================================================================
-# Target rules for targets named managing
-
-# Build rule for target.
-managing: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 managing
-.PHONY : managing
-
-# fast build rule for target.
-managing/fast:
-	$(MAKE) -f CMakeFiles/managing.dir/build.make CMakeFiles/managing.dir/build
-.PHONY : managing/fast
-
-#=============================================================================
-# Target rules for targets named obstacle
-
-# Build rule for target.
-obstacle: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 obstacle
-.PHONY : obstacle
-
-# fast build rule for target.
-obstacle/fast:
-	$(MAKE) -f CMakeFiles/obstacle.dir/build.make CMakeFiles/obstacle.dir/build
-.PHONY : obstacle/fast
-
-#=============================================================================
-# Target rules for targets named ai_robots
-
-# Build rule for target.
-ai_robots: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ai_robots
-.PHONY : ai_robots
-
-# fast build rule for target.
-ai_robots/fast:
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/build
-.PHONY : ai_robots/fast
-
-#=============================================================================
-# Target rules for targets named module
-
-# Build rule for target.
-module: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 module
-.PHONY : module
-
-# fast build rule for target.
-module/fast:
-	$(MAKE) -f CMakeFiles/module.dir/build.make CMakeFiles/module.dir/build
-.PHONY : module/fast
-
-#=============================================================================
-# Target rules for targets named map_object
-
-# Build rule for target.
-map_object: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 map_object
-.PHONY : map_object
-
-# fast build rule for target.
-map_object/fast:
-	$(MAKE) -f CMakeFiles/map_object.dir/build.make CMakeFiles/map_object.dir/build
-.PHONY : map_object/fast
+moving_describer/fast:
+	$(MAKE) -f CMakeFiles/moving_describer.dir/build.make CMakeFiles/moving_describer.dir/build
+.PHONY : moving_describer/fast
 
 #=============================================================================
 # Target rules for targets named environment_describer
@@ -304,6 +213,123 @@ robot_scout/fast:
 .PHONY : robot_scout/fast
 
 #=============================================================================
+# Target rules for targets named u_test
+
+# Build rule for target.
+u_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 u_test
+.PHONY : u_test
+
+# fast build rule for target.
+u_test/fast:
+	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
+.PHONY : u_test/fast
+
+#=============================================================================
+# Target rules for targets named interest_point
+
+# Build rule for target.
+interest_point: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 interest_point
+.PHONY : interest_point
+
+# fast build rule for target.
+interest_point/fast:
+	$(MAKE) -f CMakeFiles/interest_point.dir/build.make CMakeFiles/interest_point.dir/build
+.PHONY : interest_point/fast
+
+#=============================================================================
+# Target rules for targets named ai_robots
+
+# Build rule for target.
+ai_robots: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ai_robots
+.PHONY : ai_robots
+
+# fast build rule for target.
+ai_robots/fast:
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/build
+.PHONY : ai_robots/fast
+
+#=============================================================================
+# Target rules for targets named map_object
+
+# Build rule for target.
+map_object: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_object
+.PHONY : map_object
+
+# fast build rule for target.
+map_object/fast:
+	$(MAKE) -f CMakeFiles/map_object.dir/build.make CMakeFiles/map_object.dir/build
+.PHONY : map_object/fast
+
+#=============================================================================
+# Target rules for targets named module
+
+# Build rule for target.
+module: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 module
+.PHONY : module
+
+# fast build rule for target.
+module/fast:
+	$(MAKE) -f CMakeFiles/module.dir/build.make CMakeFiles/module.dir/build
+.PHONY : module/fast
+
+#=============================================================================
+# Target rules for targets named energy_consuber
+
+# Build rule for target.
+energy_consuber: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 energy_consuber
+.PHONY : energy_consuber
+
+# fast build rule for target.
+energy_consuber/fast:
+	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/build
+.PHONY : energy_consuber/fast
+
+#=============================================================================
+# Target rules for targets named power_generator
+
+# Build rule for target.
+power_generator: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 power_generator
+.PHONY : power_generator
+
+# fast build rule for target.
+power_generator/fast:
+	$(MAKE) -f CMakeFiles/power_generator.dir/build.make CMakeFiles/power_generator.dir/build
+.PHONY : power_generator/fast
+
+#=============================================================================
+# Target rules for targets named obstacle
+
+# Build rule for target.
+obstacle: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 obstacle
+.PHONY : obstacle
+
+# fast build rule for target.
+obstacle/fast:
+	$(MAKE) -f CMakeFiles/obstacle.dir/build.make CMakeFiles/obstacle.dir/build
+.PHONY : obstacle/fast
+
+#=============================================================================
+# Target rules for targets named managing
+
+# Build rule for target.
+managing: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 managing
+.PHONY : managing
+
+# fast build rule for target.
+managing/fast:
+	$(MAKE) -f CMakeFiles/managing.dir/build.make CMakeFiles/managing.dir/build
+.PHONY : managing/fast
+
+#=============================================================================
 # Target rules for targets named observation_center
 
 # Build rule for target.
@@ -354,19 +380,6 @@ display: cmake_check_build_system
 display/fast:
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/build
 .PHONY : display/fast
-
-#=============================================================================
-# Target rules for targets named moving_describer
-
-# Build rule for target.
-moving_describer: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 moving_describer
-.PHONY : moving_describer
-
-# fast build rule for target.
-moving_describer/fast:
-	$(MAKE) -f CMakeFiles/moving_describer.dir/build.make CMakeFiles/moving_describer.dir/build
-.PHONY : moving_describer/fast
 
 libraries/tinyxml2-lib/tinyxml2.o: libraries/tinyxml2-lib/tinyxml2.cpp.o
 
@@ -502,6 +515,36 @@ robots/Display.s: robots/Display.cpp.s
 robots/Display.cpp.s:
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/robots/Display.cpp.s
 .PHONY : robots/Display.cpp.s
+
+robots/Energy_Consumer.o: robots/Energy_Consumer.cpp.o
+
+.PHONY : robots/Energy_Consumer.o
+
+# target to build an object file
+robots/Energy_Consumer.cpp.o:
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o
+	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.o
+.PHONY : robots/Energy_Consumer.cpp.o
+
+robots/Energy_Consumer.i: robots/Energy_Consumer.cpp.i
+
+.PHONY : robots/Energy_Consumer.i
+
+# target to preprocess a source file
+robots/Energy_Consumer.cpp.i:
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.i
+	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.i
+.PHONY : robots/Energy_Consumer.cpp.i
+
+robots/Energy_Consumer.s: robots/Energy_Consumer.cpp.s
+
+.PHONY : robots/Energy_Consumer.s
+
+# target to generate assembly for a file
+robots/Energy_Consumer.cpp.s:
+	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.s
+	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.s
+.PHONY : robots/Energy_Consumer.cpp.s
 
 robots/Environment_describer.o: robots/Environment_describer.cpp.o
 
@@ -894,24 +937,25 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... robotsCreate"
-	@echo "... u_test"
-	@echo "... interest_point"
-	@echo "... power_generator"
-	@echo "... managing"
-	@echo "... obstacle"
-	@echo "... ai_robots"
-	@echo "... module"
-	@echo "... map_object"
+	@echo "... moving_describer"
 	@echo "... environment_describer"
 	@echo "... robot_commander"
 	@echo "... interfacelib"
 	@echo "... tinyxml2"
 	@echo "... robot_scout"
+	@echo "... u_test"
+	@echo "... interest_point"
+	@echo "... ai_robots"
+	@echo "... map_object"
+	@echo "... module"
+	@echo "... energy_consuber"
+	@echo "... power_generator"
+	@echo "... obstacle"
+	@echo "... managing"
 	@echo "... observation_center"
 	@echo "... sensor"
 	@echo "... command_center"
 	@echo "... display"
-	@echo "... moving_describer"
 	@echo "... libraries/tinyxml2-lib/tinyxml2.o"
 	@echo "... libraries/tinyxml2-lib/tinyxml2.i"
 	@echo "... libraries/tinyxml2-lib/tinyxml2.s"
@@ -927,6 +971,9 @@ help:
 	@echo "... robots/Display.o"
 	@echo "... robots/Display.i"
 	@echo "... robots/Display.s"
+	@echo "... robots/Energy_Consumer.o"
+	@echo "... robots/Energy_Consumer.i"
+	@echo "... robots/Energy_Consumer.s"
 	@echo "... robots/Environment_describer.o"
 	@echo "... robots/Environment_describer.i"
 	@echo "... robots/Environment_describer.s"

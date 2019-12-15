@@ -16,11 +16,6 @@ namespace robo {
         }
     }
 
-    void Observation_Center::checkFree() {
-        if (getCountModules() >= getCountPorts())
-            throw std::invalid_argument("Count of modules exceeds count of ports");
-    }
-
     std::string Observation_Center::whoami() {
         std::stringstream ss;
         std::string host = owner != nullptr ? owner->getDescription() : "none";
@@ -41,7 +36,7 @@ namespace robo {
         return ss.str();
     }
 
-    void Observation_Center::determineCorers(int & top_cor, int & left_cor, int & bottom_cor, int & right_cor, unsigned int rad) {
+    void Observation_Center::determineCorers(int & top_cor, int & left_cor, int & bottom_cor, int & right_cor, unsigned int rad) const {
         top_cor = position.y + rad;
         if (top_cor >= env->getHeight())
             top_cor = env->getHeight() - 1;
@@ -200,7 +195,7 @@ namespace robo {
         owner = static_cast<Observation_Center *>(own);
     }
 
-    unsigned int Observation_Center::getMaxRadius() {
+    unsigned int Observation_Center::getMaxRadius() const {
         unsigned int maxr = 0;
         for (auto & module : modules) {
             if (!strcmp(typeid(*module).name(), "N4robo6SensorE")) {

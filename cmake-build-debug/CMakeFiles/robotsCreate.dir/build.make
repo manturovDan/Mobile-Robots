@@ -96,6 +96,7 @@ robotsCreate: libsensor.a
 robotsCreate: libdisplay.a
 robotsCreate: libmoving_describer.a
 robotsCreate: libai_robots.a
+robotsCreate: libenergy_consuber.a
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-graphics.so.2.5.1
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-window.so.2.5.1
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-audio.so.2.5.1
@@ -105,6 +106,7 @@ robotsCreate: libenvironment_describer.a
 robotsCreate: libobstacle.a
 robotsCreate: libmap_object.a
 robotsCreate: libenvironment_describer.a
+robotsCreate: libmodule.a
 robotsCreate: libmoving_describer.a
 robotsCreate: /home/danila/source/libraries/SFML-2.5.1/lib/libsfml-system.so.2.5.1
 robotsCreate: CMakeFiles/robotsCreate.dir/link.txt

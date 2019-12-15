@@ -11,13 +11,14 @@ namespace robo {
     public:
         Sensor() = delete;
         Sensor(unsigned int rad, unsigned int dir, unsigned int ang, unsigned int consumption, unsigned int priority) :
-                radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, true) {}
+                radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, true) { if (angle == 2) { direction = 0; } }
         Module * copy() override;
         unsigned int getRadius() override { return radius; }
         unsigned int getDirection(int dir = 0) { return (dir+direction) % 4; }
         unsigned int getAngle() { return angle; }
 
         std::string whoami() override;
+        ~Sensor() override = default;
     protected:
         unsigned int radius;
         unsigned int direction;

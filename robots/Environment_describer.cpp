@@ -37,12 +37,16 @@ namespace robo {
             throw std::invalid_argument("Incorrect object coordinates!");
 
         Map_Object * nw_obj = nullptr;
-        if (objType == Obstacle_t) {
-            nw_obj = new Obstacle(position);
-        } else if (objType == Interest_t) {
-            nw_obj = new Interest_Point(position);
-        } else {
-            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (nature)");
+        try {
+            if (objType == Obstacle_t) {
+                nw_obj = new Obstacle(position);
+            } else if (objType == Interest_t) {
+                nw_obj = new Interest_Point(position);
+            } else {
+                throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (nature)");
+            }
+        } catch (std::exception &e) {
+            throw std::invalid_argument("Incorrect object tries to penetrate in my laboratory work (nature)");
         }
 
         map_obj.push_back(nw_obj);
@@ -54,13 +58,18 @@ namespace robo {
 
     Map_Object * Environment_describer::setObject(Characters objType, unsigned int ports, unsigned int consumption,
             int price, std::vector<robo::Module *> & modules, std::string & desc) {
-        Map_Object * nw_obj = nullptr;
-        if (objType == Robot_Commander_t) {
-            nw_obj = new Robot_Commander(ports, consumption, price, modules, desc);
-        } else if (objType == Robot_Scout_t) {
-            nw_obj = new Robot_Scout(ports, consumption, price, modules, desc);
-        } else {
-            throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (moving)");
+
+        Map_Object *nw_obj = nullptr;
+        try {
+            if (objType == Robot_Commander_t) {
+                nw_obj = new Robot_Commander(ports, consumption, price, modules, desc);
+            } else if (objType == Robot_Scout_t) {
+                nw_obj = new Robot_Scout(ports, consumption, price, modules, desc);
+            } else {
+                throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (moving)");
+            }
+        } catch (std::exception &e) {
+            throw std::invalid_argument("Incorrect object tries to penetrate in my laboratory work (moving)");
         }
 
         map_obj.push_back(nw_obj);

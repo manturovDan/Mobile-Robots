@@ -11,6 +11,7 @@ namespace robo {
         Energy_Consumer() = delete;
         Energy_Consumer(unsigned int cons, unsigned int prior, bool act = true) : powerConsumption(cons), Module(prior, act) {}
         int powerConsumption;
+        ~Energy_Consumer() override = default;
     };
 }
 
