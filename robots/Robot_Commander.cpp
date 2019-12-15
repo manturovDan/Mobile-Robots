@@ -5,7 +5,9 @@
 namespace robo {
     Robot_Commander::Robot_Commander(unsigned int ports, unsigned int consumption, int price, std::vector<Module *> & mods, std::string & desc)
     : Command_Center(ports, consumption, price, mods, desc),
-    Robot_Scout(ports, consumption, price, mods, desc), Observation_Center(ports, consumption, price, mods, desc) {}
+    Robot_Scout(ports, consumption, price, mods, desc), Observation_Center(ports, consumption, price, mods, desc) {
+
+    }
 
     std::string Robot_Commander::whoami() {
         std::stringstream ss;

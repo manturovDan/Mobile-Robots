@@ -4,7 +4,16 @@
 namespace robo {
     Command_Center::Command_Center(unsigned int ports, unsigned int consumption, int price,
                                    std::vector<Module *> & mods, std::string & desc, robo::coordinates pos) : Observation_Center(ports, consumption, price, mods, desc, pos) {
-        //TODO check if there is one or more managing modules
+        bool commander = false;
+        for (auto & mod : modules) {
+            if (!strcmp(typeid(mod).name(), "N4robo8ManagingE")) {
+                if (dynamic_cast<Managing *>(mod)->getActive())
+                    commander = true;
+            }
+        }
+
+        if (!commander)
+            throw std::invalid_argument("Commander has no active managing module");
     }
 
     std::string Command_Center::whoami() {

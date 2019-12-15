@@ -10,8 +10,7 @@ namespace robo {
     class Sensor : public Energy_Consumer {
     public:
         Sensor() = delete;
-        Sensor(unsigned int rad, unsigned int dir, unsigned int ang, unsigned int consumption, unsigned int priority) :
-                radius(rad), direction(dir), angle(ang), Energy_Consumer(consumption, priority, true) { if (angle == 2) { direction = 0; } }
+        Sensor(unsigned int rad, unsigned int dir, unsigned int ang, unsigned int consumption, unsigned int priority);
         Module * copy() override;
         unsigned int getRadius() override { return radius; }
         unsigned int getDirection(int dir = 0) { return (dir+direction) % 4; }

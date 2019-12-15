@@ -15,7 +15,7 @@ namespace robo {
     public:
         Managing() = delete;
         Managing(unsigned int rad, unsigned int consumption, unsigned int priority, unsigned int subs) :
-                radius(rad), subs_count(subs), Energy_Consumer(consumption, priority, true) {}
+                radius(rad), subs_count(subs), Energy_Consumer(consumption, priority, true) { if (rad == 0 || subs == 0) throw std::invalid_argument("Incorrect managing radius or subs count"); }
         Module * copy() override;
         unsigned int getRadius() override { return radius; }
         int addSubord(Observation_Center *);
