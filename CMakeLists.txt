@@ -26,7 +26,7 @@ add_library(managing robots/Managing.h robots/Managing.cpp)
 add_library(sensor robots/Sensor.h robots/Sensor.cpp)
 add_library(display robots/Display.h robots/Display.cpp)
 add_library(moving_describer robots/Moving_Describer.h robots/Moving_Describer.cpp)
-add_library(ai_robots robots/Ai_Deep.h robots/Ai_Deep.cpp tests/test1.cpp robots/Energy_Consumer.cpp)
+add_library(ai_robots robots/Ai_Deep.h robots/Ai_Deep.cpp)
 
 target_link_libraries(obstacle map_object)
 target_link_libraries(environment_describer map_object obstacle)
