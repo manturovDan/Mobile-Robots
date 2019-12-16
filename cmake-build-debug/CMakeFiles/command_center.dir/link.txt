@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcommand_center.a  CMakeFiles/command_center.dir/robots/Command_Center.cpp.o
+/usr/bin/ranlib libcommand_center.a

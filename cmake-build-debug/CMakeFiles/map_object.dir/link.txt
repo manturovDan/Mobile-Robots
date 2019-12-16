@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmap_object.a  CMakeFiles/map_object.dir/robots/Map_Object.cpp.o
+/usr/bin/ranlib libmap_object.a

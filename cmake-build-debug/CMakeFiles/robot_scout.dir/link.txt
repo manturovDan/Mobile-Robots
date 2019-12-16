@@ -1,0 +1,2 @@
+/usr/bin/ar qc librobot_scout.a  CMakeFiles/robot_scout.dir/robots/Robot_Scout.cpp.o
+/usr/bin/ranlib librobot_scout.a

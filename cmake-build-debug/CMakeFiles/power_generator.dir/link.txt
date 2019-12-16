@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpower_generator.a  CMakeFiles/power_generator.dir/robots/Power_Generator.cpp.o
+/usr/bin/ranlib libpower_generator.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmodule.a  CMakeFiles/module.dir/robots/Module.cpp.o
+/usr/bin/ranlib libmodule.a
