@@ -1,0 +1,2 @@
+/usr/bin/ar qc libai_robots.a  CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o
+/usr/bin/ranlib libai_robots.a

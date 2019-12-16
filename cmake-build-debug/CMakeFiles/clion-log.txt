@@ -1,0 +1,5 @@
+/home/danila/source/bins/clion-2019.2.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/danila/source/robots
+-- Found SFML 2.5.1 in /home/danila/source/libraries/SFML-2.5.1/lib/cmake/SFML
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/danila/source/robots/cmake-build-debug

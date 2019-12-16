@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/danila/source/robots/robots/Interest_Point.cpp
+Interest_Point.h
+/home/danila/source/robots/robots/Interest_Point.h
+
+/home/danila/source/robots/robots/Interest_Point.h
+Map_Object.h
+/home/danila/source/robots/robots/Map_Object.h
+
+/home/danila/source/robots/robots/Map_Object.h
+iostream
+-
+string
+-
+sstream
+-
+robot.h
+/home/danila/source/robots/robots/robot.h
+
+/home/danila/source/robots/robots/robot.h
+vector
+-
+string
+-
+map
+-
+cstring
+-
+

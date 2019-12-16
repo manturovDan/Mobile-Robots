@@ -1,0 +1,2 @@
+/usr/bin/ar qc librobot_commander.a  CMakeFiles/robot_commander.dir/robots/Robot_Commander.cpp.o
+/usr/bin/ranlib librobot_commander.a

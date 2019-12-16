@@ -1,0 +1,2 @@
+/usr/bin/ar qc libenvironment_describer.a  CMakeFiles/environment_describer.dir/robots/Environment_describer.cpp.o
+/usr/bin/ranlib libenvironment_describer.a

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/danila/source/robots/robots/environment.cpp
+iostream
+-
+algorithm
+-
+robot.h
+/home/danila/source/robots/robots/robot.h
+
+/home/danila/source/robots/robots/robot.h
+vector
+-
+string
+-
+map
+-
+cstring
+-
+

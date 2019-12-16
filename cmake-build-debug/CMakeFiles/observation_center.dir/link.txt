@@ -1,0 +1,2 @@
+/usr/bin/ar qc libobservation_center.a  CMakeFiles/observation_center.dir/robots/Observation_Center.cpp.o
+/usr/bin/ranlib libobservation_center.a

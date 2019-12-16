@@ -1,0 +1,2 @@
+/usr/bin/ar qc libenergy_consuber.a  CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.o
+/usr/bin/ranlib libenergy_consuber.a

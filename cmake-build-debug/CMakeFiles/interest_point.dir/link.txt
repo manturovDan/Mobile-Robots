@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinterest_point.a  CMakeFiles/interest_point.dir/robots/Interest_Point.cpp.o
+/usr/bin/ranlib libinterest_point.a

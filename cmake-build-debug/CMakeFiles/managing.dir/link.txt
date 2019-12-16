@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmanaging.a  CMakeFiles/managing.dir/robots/Managing.cpp.o
+/usr/bin/ranlib libmanaging.a

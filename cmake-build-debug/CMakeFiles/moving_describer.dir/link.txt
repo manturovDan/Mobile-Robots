@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmoving_describer.a  CMakeFiles/moving_describer.dir/robots/Moving_Describer.cpp.o
+/usr/bin/ranlib libmoving_describer.a
