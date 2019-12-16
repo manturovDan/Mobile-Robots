@@ -151,6 +151,7 @@ namespace robo {
     }
 
     bool Moving_Describer::onRoute(coordinates tar) const {
+        return false;
         for (auto & it : move_d) {
             if (it.moving_obj != nullptr && it.pos == tar) {
                 return true;

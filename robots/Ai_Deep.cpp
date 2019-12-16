@@ -207,7 +207,7 @@ namespace robo {
         std::vector<std::pair<Robot_Scout *, int>> nextRep;
 
         for (auto rep = report.begin(); rep != report.end(); ++rep) {
-            std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
+            //std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
@@ -363,10 +363,10 @@ namespace robo {
 
             std::sort(grey.begin(), grey.end(), [&](coordinates const & a, coordinates const &b) { return leeTab[a.y- bottom_cor_m][a.x - left_cor_m] < leeTab[b.y - bottom_cor_m][b.x - left_cor_m]; });
 
-            std::cout << "BLOCKED_POINTS:" << std::endl;
-            for (auto itBl : busyPoints) {
-                std::cout << itBl.x << ";" << itBl.y << std::endl;
-            }
+            //std::cout << "BLOCKED_POINTS:" << std::endl;
+            //for (auto itBl : busyPoints) {
+            //    std::cout << itBl.x << ";" << itBl.y << std::endl;
+            //}
 
             for (auto it : grey) {
                 if (md->onRoute(it))
@@ -689,21 +689,8 @@ namespace robo {
 
         int top_cor_m, left_cor_m, bottom_cor_m, right_cor_m;
         comm->determineCorers(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm->manMod()->getRadius());
-        //std::cout << top_cor_m << " " << left_cor_m << " " << bottom_cor_m << " " << right_cor_m << " " << static_cast<int>(subd->getMaxRadius()) << std::endl;
-
-        /*auto grey = findGreyRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
-        std::cout << "RI_GREY_PRINT" << (*ai_dict.find({0, 53})).second.iam << std::endl;
-        for (coordinates coord : grey) {
-            std::cout << coord.x << ";" << coord.y << " ";
-        }
-        std::cout << std::endl;*/
 
         auto white = findWhiteRI(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, subd->getMaxRadius());
-        //std::cout << "\n#######RI_WHITE_PRINT" << std::endl;
-        //for (coordinates coord : white) {
-        //    std::cout << coord.x << ";" << coord.y << " ";
-        //}
-        //std::cout << std::endl;
 
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm);
         leeComp(leeTab, left_cor_m, bottom_cor_m, subd->getPosition());
@@ -726,12 +713,12 @@ namespace robo {
         if (minway < 0)
             return 1;
 
-        //std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
+        std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {nearest.x, nearest.y});
-        //std::cout << "RTTT" << std::endl;
-        //for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-        //    std::cout << coord->x << ";" << coord->y << std::endl;
-        //}
+        std::cout << "RTTT" << std::endl;
+        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+            std::cout << coord->x << ";" << coord->y << std::endl;
+        }
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0]) {
                 md->routePoint(comm->getPair(), *coord, 10, envir->getTime());
