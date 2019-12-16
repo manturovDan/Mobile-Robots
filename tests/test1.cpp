@@ -6,9 +6,6 @@
 #include "../robots/Power_Generator.h"
 #include "../robots/Sensor.h"
 
-TEST (ConstrTest, simpleTest) {
-    ASSERT_EQ(1, 1);
-}
 
 //env max size
 //envoronment construction
@@ -18,6 +15,9 @@ TEST (ConstrTest, simpleTest) {
 //count of researched points
 //finding grey
 //creating route
+//route table optimization
+//blocked points
+//blocked areas
 
 TEST (SimpleCreating, RobotConst) {
     robo::Environment_describer env;

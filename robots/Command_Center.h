@@ -9,7 +9,7 @@
 namespace robo {
     class Command_Center : virtual public Observation_Center {
     protected:
-        bool real_manager = true; //TODO in depend of consumption
+        bool real_manager = true;
         Managing * matchMan;
     public:
         Command_Center(unsigned int, unsigned int, int, std::vector<Module *> &, std::string &, coordinates pos = {0, 2});
