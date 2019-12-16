@@ -18,7 +18,7 @@ namespace robo {
     }
 
     void Moving_Describer::printSteps(std::ostream & stream) const {
-        return;
+        //return;
         stream << "--------------\nMOVING:\n--------------" << std::endl;
         for (auto & it : move_d) {
             if(it.moving_obj == nullptr)
@@ -66,9 +66,12 @@ namespace robo {
     }
 
     unsigned int Moving_Describer::routePoint(Robot_Scout * mobile, coordinates pos, int destination, unsigned int curTime) {
+        std::cout << "UNKNOWN POS" << std::endl;
+        std::cout << mobile->getX() << ";" << mobile->getY() << std::endl;
         unsigned int assumeTime = curTime + 1;
         int lastDir = mobile->getDirection();
         coordinates lastPos = mobile->getPosition();
+        printSteps(std::cout);
         for(auto & it : move_d) {
             if (it.moving_obj == mobile && assumeTime <= it.time) {
                 assumeTime = it.time + 1;
@@ -76,6 +79,8 @@ namespace robo {
                 lastPos = it.pos;
             }
         }
+        std::cout << mobile->getX() << ";" << mobile->getY() << std::endl;
+        std::cout << lastPos.x << ";" << lastPos.y << std::endl;
 
         int tarDir = 0;
         if (lastPos.x - pos.x == 1 && lastPos.y == pos.y)

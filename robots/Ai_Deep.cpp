@@ -207,7 +207,7 @@ namespace robo {
         std::vector<std::pair<Robot_Scout *, int>> nextRep;
 
         for (auto rep = report.begin(); rep != report.end(); ++rep) {
-            //std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
+            std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
@@ -245,13 +245,16 @@ namespace robo {
                     addBlockedPoint(commer->getPair()->getPosition());
 
                 if (commer->getPair() != nullptr) {
+                    //std::cout << "CHECK_MOVE" << std::endl;
+                    //md->printSteps(std::cout);
+                    //std::cout << "END_CHECK" << std::endl;
                     if (md->isMoving(commer->getPair()))
                         nextRep.emplace_back(rep->first, 4);
                     else {
                         if (pairRes(commer)) {
                             makeReport(commer->getPair(), 5);
-                        } //else
-                           //makeReport(commer->getPair(), 55);
+                        } else
+                           makeReport(commer->getPair(), 9); //BUG
                     }
                 }
                 else
@@ -262,7 +265,9 @@ namespace robo {
                 revolve(subd, 55);
             } else if (rep->second == 55) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
+                if (md->isMoving(subd))
+                    nextRep.emplace_back(subd, 55);
+                else if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
                     makeReport(subd, 9);//6 - back to chief
                 }
             } else if (rep->second == 6) {
@@ -279,7 +284,9 @@ namespace robo {
                 deleteArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
                 trainNext(comm);
             } else if (rep->second == 9) {
-                if(riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
+                if (md->isMoving(rep->first))
+                    nextRep.emplace_back(rep->first, 9);
+                else if(riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
                     auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
                     makeReport(subd, 6);
                 }
@@ -290,7 +297,9 @@ namespace robo {
 
             } else if (rep->second == 101) { //101
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                if (riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
+                if (md->isMoving(rep->first))
+                    nextRep.emplace_back(rep->first, 101);
+                else if (riRes(dynamic_cast<Robot_Commander *>(rep->first->getOwner()))) {
                     //makeReport(subd, 10);
                     makeReport(subd, 6);
                 }
@@ -368,6 +377,7 @@ namespace robo {
             //    std::cout << itBl.x << ";" << itBl.y << std::endl;
             //}
 
+            bool vr = false;
             for (auto it : grey) {
                 if (md->onRoute(it))
                     continue;
@@ -375,6 +385,7 @@ namespace robo {
                 //std::cout << it.x << "," << it.y << " = " << leeTab[it.y - bottom_cor_m][it.x - left_cor_m] <<  std::endl;
                 std::vector<coordinates> route;
                 if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) {
+                    vr = true;
                     makeRoute(leeTab, route, left_cor_m, bottom_cor_m, it);
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
                         //std::cout << coord->x << ";" << coord->y << std::endl;
@@ -389,6 +400,8 @@ namespace robo {
                     break;
                 }
             }
+            //if (!vr)
+            //    md->routePoint(comm->getPair(), comm->getPair()->getPosition(), 5, envir->getTime());
 
             return 0; //EARLY 0 - DEBUG
         }
@@ -713,12 +726,14 @@ namespace robo {
         if (minway < 0)
             return 1;
 
+        std::cout << std::endl << "SUBD_POS" << subd->getX() << ";" << subd->getY() << std::endl;
         std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {nearest.x, nearest.y});
         std::cout << "RTTT" << std::endl;
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             std::cout << coord->x << ";" << coord->y << std::endl;
         }
+        std::cout << "NNNN" << std::endl;
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0]) {
                 md->routePoint(comm->getPair(), *coord, 10, envir->getTime());
