@@ -240,6 +240,8 @@ namespace std {
         template <class IterType>
         IterType begin() {
             Vertex * pntr = top;
+            if (pntr == nullptr)
+                return IterType(nullptr);
             while(pntr->getLeftChild() != nullptr)
                 pntr = pntr->getLeftChild();
             IterType iter(pntr);
