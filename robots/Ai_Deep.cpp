@@ -250,8 +250,8 @@ namespace robo {
                     else {
                         if (pairRes(commer)) {
                             makeReport(commer->getPair(), 5);
-                        } else
-                            makeReport(commer->getPair(), 9);
+                        } //else
+                           //makeReport(commer->getPair(), 55);
                     }
                 }
                 else
@@ -390,7 +390,7 @@ namespace robo {
                 }
             }
 
-            return 0;
+            return 0; //EARLY 0 - DEBUG
         }
 
     }
