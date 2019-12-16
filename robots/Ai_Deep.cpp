@@ -248,10 +248,11 @@ namespace robo {
                     if (md->isMoving(commer->getPair()))
                         nextRep.emplace_back(rep->first, 4);
                     else {
-                        if (pairRes(commer)) {
+                        int pr = pairRes(commer);
+                        if (pr == 1) {
                             makeReport(commer->getPair(), 5);
-                        } //else
-                           //makeReport(commer->getPair(), 55);
+                        } else if (pr == -1)
+                           makeReport(commer->getPair(), 9);
                     }
                 }
                 else
@@ -262,7 +263,7 @@ namespace robo {
                 revolve(subd, 55);
             } else if (rep->second == 55) {
                 auto * subd = dynamic_cast<Robot_Scout *>(rep->first);
-                if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner()))) {
+                if(pairRes(dynamic_cast<Robot_Commander *>(subd->getOwner())) == 1) {
                     makeReport(subd, 9);//6 - back to chief
                 }
             } else if (rep->second == 6) {
@@ -386,11 +387,12 @@ namespace robo {
 
                     }
 
-                    break;
+                    //break;
+                    return 0;
                 }
             }
 
-            return 0; //EARLY 0 - DEBUG
+            return -1; //EARLY 0 - DEBUG
         }
 
     }
