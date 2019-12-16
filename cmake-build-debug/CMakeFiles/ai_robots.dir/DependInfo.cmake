@@ -5,8 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/danila/source/robots/robots/Ai_Deep.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o"
-  "/home/danila/source/robots/robots/Energy_Consumer.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o"
-  "/home/danila/source/robots/tests/test1.cpp" "/home/danila/source/robots/cmake-build-debug/CMakeFiles/ai_robots.dir/tests/test1.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

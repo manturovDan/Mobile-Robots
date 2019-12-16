@@ -1,7 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o"
-  "CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o"
-  "CMakeFiles/ai_robots.dir/tests/test1.cpp.o"
   "libai_robots.a"
   "libai_robots.pdb"
 )

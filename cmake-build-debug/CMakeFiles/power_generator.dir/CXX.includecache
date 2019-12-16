@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/danila/source/robots/robots/Module.h
+iostream
+-
+
+/home/danila/source/robots/robots/Power_Generator.cpp
+Power_Generator.h
+/home/danila/source/robots/robots/Power_Generator.h
+
+/home/danila/source/robots/robots/Power_Generator.h
+string
+-
+sstream
+-
+Module.h
+/home/danila/source/robots/robots/Module.h
+

@@ -998,7 +998,6 @@
 			<Option target="display"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Energy_Consumer.cpp">
-			<Option target="ai_robots"/>
 			<Option target="energy_consuber"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/robots/Energy_Consumer.h">
@@ -1088,7 +1087,6 @@
 		</Unit>
 		<Unit filename="/home/danila/source/robots/tests/test1.cpp">
 			<Option target="u_test"/>
-			<Option target="ai_robots"/>
 		</Unit>
 		<Unit filename="/home/danila/source/robots/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

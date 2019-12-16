@@ -2,12 +2,17 @@
 
 namespace robo {
     int Moving_Describer::addStep(robo::moment mom) {
-        for (auto & it : move_d) {
-            if (it.pos == mom.pos && it.time == mom.time)
+        auto target = move_d.end();
+        for (auto it = move_d.begin(); it != move_d.end(); ++it) {
+            if (it->pos == mom.pos && it->time == mom.time)
                 return 1;
+            if (it->moving_obj == nullptr)
+                target = it;
         }
-
-        move_d.push_back(mom);
+        if (target == move_d.end())
+            move_d.push_back(mom);
+        else
+            *target = mom;
 
         return 0;
     }
@@ -146,6 +151,7 @@ namespace robo {
     }
 
     bool Moving_Describer::onRoute(coordinates tar) const {
+        //return false;
         for (auto & it : move_d) {
             if (it.moving_obj != nullptr && it.pos == tar) {
                 return true;

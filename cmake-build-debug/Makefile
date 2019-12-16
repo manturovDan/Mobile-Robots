@@ -522,7 +522,6 @@ robots/Energy_Consumer.o: robots/Energy_Consumer.cpp.o
 
 # target to build an object file
 robots/Energy_Consumer.cpp.o:
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o
 	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.o
 .PHONY : robots/Energy_Consumer.cpp.o
 
@@ -532,7 +531,6 @@ robots/Energy_Consumer.i: robots/Energy_Consumer.cpp.i
 
 # target to preprocess a source file
 robots/Energy_Consumer.cpp.i:
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.i
 	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.i
 .PHONY : robots/Energy_Consumer.cpp.i
 
@@ -542,7 +540,6 @@ robots/Energy_Consumer.s: robots/Energy_Consumer.cpp.s
 
 # target to generate assembly for a file
 robots/Energy_Consumer.cpp.s:
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.s
 	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/robots/Energy_Consumer.cpp.s
 .PHONY : robots/Energy_Consumer.cpp.s
 
@@ -904,7 +901,6 @@ tests/test1.o: tests/test1.cpp.o
 # target to build an object file
 tests/test1.cpp.o:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/tests/test1.cpp.o
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/tests/test1.cpp.o
 .PHONY : tests/test1.cpp.o
 
 tests/test1.i: tests/test1.cpp.i
@@ -914,7 +910,6 @@ tests/test1.i: tests/test1.cpp.i
 # target to preprocess a source file
 tests/test1.cpp.i:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/tests/test1.cpp.i
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/tests/test1.cpp.i
 .PHONY : tests/test1.cpp.i
 
 tests/test1.s: tests/test1.cpp.s
@@ -924,7 +919,6 @@ tests/test1.s: tests/test1.cpp.s
 # target to generate assembly for a file
 tests/test1.cpp.s:
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/tests/test1.cpp.s
-	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/tests/test1.cpp.s
 .PHONY : tests/test1.cpp.s
 
 # Help Target

@@ -157,7 +157,7 @@ namespace std {
             try {
                 top = clone(copy_st.top, nullptr);
             } catch (std::bad_alloc &ba) {
-                std::cerr << "No memory" << std::endl;
+                //std::cerr << "No memory" << std::endl;
                 throw &ba;
             }
 
@@ -178,7 +178,7 @@ namespace std {
             try {
                 top = clone(copy_st.top, nullptr);
             } catch (std::bad_alloc &ba) {
-                std::cerr << "No memory" << std::endl;
+                //std::cerr << "No memory" << std::endl;
                 exit(EXIT_FAILURE);
             }
             elCount = copy_st.count();
@@ -240,6 +240,8 @@ namespace std {
         template <class IterType>
         IterType begin() {
             Vertex * pntr = top;
+            if (pntr == nullptr)
+                return IterType(nullptr);
             while(pntr->getLeftChild() != nullptr)
                 pntr = pntr->getLeftChild();
             IterType iter(pntr);
@@ -301,7 +303,7 @@ namespace std {
             try {
                 newVer = new Vertex(newVal);
             } catch (std::bad_alloc &ba) {
-                std::cerr << "No memory" << std::endl;
+                //std::cerr << "No memory" << std::endl;
                 throw &ba;
             }
 

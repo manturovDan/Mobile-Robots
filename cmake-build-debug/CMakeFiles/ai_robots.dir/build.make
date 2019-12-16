@@ -70,47 +70,17 @@ CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/robots/robots/Ai_Deep.cpp -o CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.s
 
-CMakeFiles/ai_robots.dir/tests/test1.cpp.o: CMakeFiles/ai_robots.dir/flags.make
-CMakeFiles/ai_robots.dir/tests/test1.cpp.o: ../tests/test1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ai_robots.dir/tests/test1.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ai_robots.dir/tests/test1.cpp.o -c /home/danila/source/robots/tests/test1.cpp
-
-CMakeFiles/ai_robots.dir/tests/test1.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ai_robots.dir/tests/test1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/robots/tests/test1.cpp > CMakeFiles/ai_robots.dir/tests/test1.cpp.i
-
-CMakeFiles/ai_robots.dir/tests/test1.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ai_robots.dir/tests/test1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/robots/tests/test1.cpp -o CMakeFiles/ai_robots.dir/tests/test1.cpp.s
-
-CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o: CMakeFiles/ai_robots.dir/flags.make
-CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o: ../robots/Energy_Consumer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o -c /home/danila/source/robots/robots/Energy_Consumer.cpp
-
-CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danila/source/robots/robots/Energy_Consumer.cpp > CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.i
-
-CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danila/source/robots/robots/Energy_Consumer.cpp -o CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.s
-
 # Object files for target ai_robots
 ai_robots_OBJECTS = \
-"CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o" \
-"CMakeFiles/ai_robots.dir/tests/test1.cpp.o" \
-"CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o"
+"CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o"
 
 # External object files for target ai_robots
 ai_robots_EXTERNAL_OBJECTS =
 
 libai_robots.a: CMakeFiles/ai_robots.dir/robots/Ai_Deep.cpp.o
-libai_robots.a: CMakeFiles/ai_robots.dir/tests/test1.cpp.o
-libai_robots.a: CMakeFiles/ai_robots.dir/robots/Energy_Consumer.cpp.o
 libai_robots.a: CMakeFiles/ai_robots.dir/build.make
 libai_robots.a: CMakeFiles/ai_robots.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libai_robots.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libai_robots.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/ai_robots.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ai_robots.dir/link.txt --verbose=$(VERBOSE)
 

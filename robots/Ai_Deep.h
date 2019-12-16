@@ -5,9 +5,13 @@
 #include <set>
 #include <array>
 #include <deque>
+
+#include "../multiset/multiset.h"
+
 #include "robot.h"
 #include "Managing.h"
 #include "Moving_Describer.h"
+
 
 namespace robo {
     struct map_point {

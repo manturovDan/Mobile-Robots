@@ -109,30 +109,30 @@ preinstall:
 # Target rules for target CMakeFiles/robotsCreate.dir
 
 # All Build rule for target.
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/ai_robots.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/environment_describer.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/module.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/energy_consuber.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/managing.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/observation_center.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/robot_commander.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/interfacelib.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/display.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/interest_point.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/tinyxml2.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/robot_scout.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/managing.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/observation_center.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/sensor.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/command_center.dir/all
-CMakeFiles/robotsCreate.dir/all: CMakeFiles/power_generator.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/display.dir/all
 CMakeFiles/robotsCreate.dir/all: CMakeFiles/moving_describer.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/robot_scout.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/interest_point.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/ai_robots.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/module.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/energy_consuber.dir/all
+CMakeFiles/robotsCreate.dir/all: CMakeFiles/power_generator.dir/all
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/depend
 	$(MAKE) -f CMakeFiles/robotsCreate.dir/build.make CMakeFiles/robotsCreate.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=35,36 "Built target robotsCreate"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=33,34 "Built target robotsCreate"
 .PHONY : CMakeFiles/robotsCreate.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/robotsCreate.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 40
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 38
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/robotsCreate.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/robotsCreate.dir/rule
@@ -154,7 +154,7 @@ CMakeFiles/robotsCreate.dir/clean:
 CMakeFiles/moving_describer.dir/all:
 	$(MAKE) -f CMakeFiles/moving_describer.dir/build.make CMakeFiles/moving_describer.dir/depend
 	$(MAKE) -f CMakeFiles/moving_describer.dir/build.make CMakeFiles/moving_describer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=23,24 "Built target moving_describer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=21,22 "Built target moving_describer"
 .PHONY : CMakeFiles/moving_describer.dir/all
 
 # Build rule for subdir invocation for target.
@@ -181,7 +181,7 @@ CMakeFiles/moving_describer.dir/clean:
 CMakeFiles/environment_describer.dir/all: CMakeFiles/map_object.dir/all
 	$(MAKE) -f CMakeFiles/environment_describer.dir/build.make CMakeFiles/environment_describer.dir/depend
 	$(MAKE) -f CMakeFiles/environment_describer.dir/build.make CMakeFiles/environment_describer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target environment_describer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target environment_describer"
 .PHONY : CMakeFiles/environment_describer.dir/all
 
 # Build rule for subdir invocation for target.
@@ -208,7 +208,7 @@ CMakeFiles/environment_describer.dir/clean:
 CMakeFiles/robot_commander.dir/all:
 	$(MAKE) -f CMakeFiles/robot_commander.dir/build.make CMakeFiles/robot_commander.dir/depend
 	$(MAKE) -f CMakeFiles/robot_commander.dir/build.make CMakeFiles/robot_commander.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=31,32 "Built target robot_commander"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=29,30 "Built target robot_commander"
 .PHONY : CMakeFiles/robot_commander.dir/all
 
 # Build rule for subdir invocation for target.
@@ -235,7 +235,7 @@ CMakeFiles/robot_commander.dir/clean:
 CMakeFiles/interfacelib.dir/all: CMakeFiles/module.dir/all
 	$(MAKE) -f CMakeFiles/interfacelib.dir/build.make CMakeFiles/interfacelib.dir/depend
 	$(MAKE) -f CMakeFiles/interfacelib.dir/build.make CMakeFiles/interfacelib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=15,16 "Built target interfacelib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=13,14 "Built target interfacelib"
 .PHONY : CMakeFiles/interfacelib.dir/all
 
 # Build rule for subdir invocation for target.
@@ -262,7 +262,7 @@ CMakeFiles/interfacelib.dir/clean:
 CMakeFiles/tinyxml2.dir/all:
 	$(MAKE) -f CMakeFiles/tinyxml2.dir/build.make CMakeFiles/tinyxml2.dir/depend
 	$(MAKE) -f CMakeFiles/tinyxml2.dir/build.make CMakeFiles/tinyxml2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=39,40 "Built target tinyxml2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=37,38 "Built target tinyxml2"
 .PHONY : CMakeFiles/tinyxml2.dir/all
 
 # Build rule for subdir invocation for target.
@@ -289,7 +289,7 @@ CMakeFiles/tinyxml2.dir/clean:
 CMakeFiles/robot_scout.dir/all:
 	$(MAKE) -f CMakeFiles/robot_scout.dir/build.make CMakeFiles/robot_scout.dir/depend
 	$(MAKE) -f CMakeFiles/robot_scout.dir/build.make CMakeFiles/robot_scout.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=33,34 "Built target robot_scout"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=31,32 "Built target robot_scout"
 .PHONY : CMakeFiles/robot_scout.dir/all
 
 # Build rule for subdir invocation for target.
@@ -313,28 +313,28 @@ CMakeFiles/robot_scout.dir/clean:
 # Target rules for target CMakeFiles/u_test.dir
 
 # All Build rule for target.
-CMakeFiles/u_test.dir/all: CMakeFiles/ai_robots.dir/all
 CMakeFiles/u_test.dir/all: CMakeFiles/environment_describer.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/module.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/energy_consuber.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/robot_commander.dir/all
 CMakeFiles/u_test.dir/all: CMakeFiles/managing.dir/all
 CMakeFiles/u_test.dir/all: CMakeFiles/observation_center.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/robot_commander.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/display.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/interest_point.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/robot_scout.dir/all
 CMakeFiles/u_test.dir/all: CMakeFiles/sensor.dir/all
 CMakeFiles/u_test.dir/all: CMakeFiles/command_center.dir/all
-CMakeFiles/u_test.dir/all: CMakeFiles/power_generator.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/display.dir/all
 CMakeFiles/u_test.dir/all: CMakeFiles/moving_describer.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/robot_scout.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/interest_point.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/ai_robots.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/module.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/energy_consuber.dir/all
+CMakeFiles/u_test.dir/all: CMakeFiles/power_generator.dir/all
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/depend
 	$(MAKE) -f CMakeFiles/u_test.dir/build.make CMakeFiles/u_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=41,42 "Built target u_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=39,40 "Built target u_test"
 .PHONY : CMakeFiles/u_test.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/u_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 36
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 34
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/u_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/u_test.dir/rule
@@ -356,7 +356,7 @@ CMakeFiles/u_test.dir/clean:
 CMakeFiles/interest_point.dir/all:
 	$(MAKE) -f CMakeFiles/interest_point.dir/build.make CMakeFiles/interest_point.dir/depend
 	$(MAKE) -f CMakeFiles/interest_point.dir/build.make CMakeFiles/interest_point.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=13,14 "Built target interest_point"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target interest_point"
 .PHONY : CMakeFiles/interest_point.dir/all
 
 # Build rule for subdir invocation for target.
@@ -383,12 +383,12 @@ CMakeFiles/interest_point.dir/clean:
 CMakeFiles/ai_robots.dir/all: CMakeFiles/moving_describer.dir/all
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/depend
 	$(MAKE) -f CMakeFiles/ai_robots.dir/build.make CMakeFiles/ai_robots.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target ai_robots"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target ai_robots"
 .PHONY : CMakeFiles/ai_robots.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ai_robots.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ai_robots.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/danila/source/robots/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/ai_robots.dir/rule
@@ -410,7 +410,7 @@ CMakeFiles/ai_robots.dir/clean:
 CMakeFiles/map_object.dir/all: CMakeFiles/obstacle.dir/all
 	$(MAKE) -f CMakeFiles/map_object.dir/build.make CMakeFiles/map_object.dir/depend
 	$(MAKE) -f CMakeFiles/map_object.dir/build.make CMakeFiles/map_object.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=19,20 "Built target map_object"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=17,18 "Built target map_object"
 .PHONY : CMakeFiles/map_object.dir/all
 
 # Build rule for subdir invocation for target.
@@ -437,7 +437,7 @@ CMakeFiles/map_object.dir/clean:
 CMakeFiles/module.dir/all:
 	$(MAKE) -f CMakeFiles/module.dir/build.make CMakeFiles/module.dir/depend
 	$(MAKE) -f CMakeFiles/module.dir/build.make CMakeFiles/module.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=21,22 "Built target module"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=19,20 "Built target module"
 .PHONY : CMakeFiles/module.dir/all
 
 # Build rule for subdir invocation for target.
@@ -464,7 +464,7 @@ CMakeFiles/module.dir/clean:
 CMakeFiles/energy_consuber.dir/all: CMakeFiles/module.dir/all
 	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/depend
 	$(MAKE) -f CMakeFiles/energy_consuber.dir/build.make CMakeFiles/energy_consuber.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target energy_consuber"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=7,8 "Built target energy_consuber"
 .PHONY : CMakeFiles/energy_consuber.dir/all
 
 # Build rule for subdir invocation for target.
@@ -491,7 +491,7 @@ CMakeFiles/energy_consuber.dir/clean:
 CMakeFiles/power_generator.dir/all: CMakeFiles/module.dir/all
 	$(MAKE) -f CMakeFiles/power_generator.dir/build.make CMakeFiles/power_generator.dir/depend
 	$(MAKE) -f CMakeFiles/power_generator.dir/build.make CMakeFiles/power_generator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=29,30 "Built target power_generator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=27,28 "Built target power_generator"
 .PHONY : CMakeFiles/power_generator.dir/all
 
 # Build rule for subdir invocation for target.
@@ -518,7 +518,7 @@ CMakeFiles/power_generator.dir/clean:
 CMakeFiles/obstacle.dir/all:
 	$(MAKE) -f CMakeFiles/obstacle.dir/build.make CMakeFiles/obstacle.dir/depend
 	$(MAKE) -f CMakeFiles/obstacle.dir/build.make CMakeFiles/obstacle.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=27,28 "Built target obstacle"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=25,26 "Built target obstacle"
 .PHONY : CMakeFiles/obstacle.dir/all
 
 # Build rule for subdir invocation for target.
@@ -546,7 +546,7 @@ CMakeFiles/managing.dir/all: CMakeFiles/module.dir/all
 CMakeFiles/managing.dir/all: CMakeFiles/energy_consuber.dir/all
 	$(MAKE) -f CMakeFiles/managing.dir/build.make CMakeFiles/managing.dir/depend
 	$(MAKE) -f CMakeFiles/managing.dir/build.make CMakeFiles/managing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=17,18 "Built target managing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=15,16 "Built target managing"
 .PHONY : CMakeFiles/managing.dir/all
 
 # Build rule for subdir invocation for target.
@@ -574,7 +574,7 @@ CMakeFiles/observation_center.dir/all: CMakeFiles/environment_describer.dir/all
 CMakeFiles/observation_center.dir/all: CMakeFiles/sensor.dir/all
 	$(MAKE) -f CMakeFiles/observation_center.dir/build.make CMakeFiles/observation_center.dir/depend
 	$(MAKE) -f CMakeFiles/observation_center.dir/build.make CMakeFiles/observation_center.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=25,26 "Built target observation_center"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=23,24 "Built target observation_center"
 .PHONY : CMakeFiles/observation_center.dir/all
 
 # Build rule for subdir invocation for target.
@@ -601,7 +601,7 @@ CMakeFiles/observation_center.dir/clean:
 CMakeFiles/sensor.dir/all: CMakeFiles/environment_describer.dir/all
 	$(MAKE) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/depend
 	$(MAKE) -f CMakeFiles/sensor.dir/build.make CMakeFiles/sensor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=37,38 "Built target sensor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=35,36 "Built target sensor"
 .PHONY : CMakeFiles/sensor.dir/all
 
 # Build rule for subdir invocation for target.
@@ -628,7 +628,7 @@ CMakeFiles/sensor.dir/clean:
 CMakeFiles/command_center.dir/all:
 	$(MAKE) -f CMakeFiles/command_center.dir/build.make CMakeFiles/command_center.dir/depend
 	$(MAKE) -f CMakeFiles/command_center.dir/build.make CMakeFiles/command_center.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=5,6 "Built target command_center"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target command_center"
 .PHONY : CMakeFiles/command_center.dir/all
 
 # Build rule for subdir invocation for target.
@@ -655,7 +655,7 @@ CMakeFiles/command_center.dir/clean:
 CMakeFiles/display.dir/all:
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/depend
 	$(MAKE) -f CMakeFiles/display.dir/build.make CMakeFiles/display.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=7,8 "Built target display"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=5,6 "Built target display"
 .PHONY : CMakeFiles/display.dir/all
 
 # Build rule for subdir invocation for target.
