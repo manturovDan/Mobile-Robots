@@ -238,7 +238,7 @@ namespace std {
 
     public:
         template <class IterType>
-        IterType begin() {
+        IterType begin() const {
             Vertex * pntr = top;
             if (pntr == nullptr)
                 return IterType(nullptr);
@@ -249,13 +249,13 @@ namespace std {
         }
 
         template <class IterType>
-        IterType end() {
+        IterType end() const {
             IterType iter;
             return iter;
         }
 
         template <class IterType>
-        IterType rbegin() {
+        IterType rbegin() const {
             Vertex * pntr = top;
             while(pntr->getRightChild() != nullptr)
                 pntr = pntr->getRightChild();
@@ -263,35 +263,35 @@ namespace std {
             return iter;
         }
 
-        iterator begin() {
+        iterator begin() const {
             return begin<iterator>();
         }
 
-        iterator end() {
+        iterator end() const {
             return end<iterator>();
         }
 
-        reverse_iterator rbegin() {
+        reverse_iterator rbegin() const {
             return rbegin<reverse_iterator>();
         }
 
-        reverse_iterator rend() {
+        reverse_iterator rend() const {
             return end<reverse_iterator>();
         }
 
-        const_iterator cbegin() {
+        const_iterator cbegin() const {
             return begin<const_iterator>();
         }
 
-        const_iterator cend() {
+        const_iterator cend() const {
             return end<const_iterator>();
         }
 
-        const_reverse_iterator crbegin() {
+        const_reverse_iterator crbegin() const {
             return rbegin<const_reverse_iterator>();
         }
 
-        const_reverse_iterator crend() {
+        const_reverse_iterator crend() const {
             return end<const_reverse_iterator>();
         }
 
@@ -398,11 +398,11 @@ namespace std {
             return iterator(target);
         }
 
-        iterator find(const elemType & x) {
+        iterator find(const elemType & x) const {
             return search(x, top);
         }
 
-        iterator search(const elemType& x, Vertex * goer) {
+        iterator search(const elemType& x, Vertex * goer) const {
             if (goer == nullptr || x == goer->getElem())
                 return iterator(goer);
             if (x < goer->getElem())

@@ -30,8 +30,8 @@ namespace robo {
         std::deque<std::pair<Robot_Scout *, int>> report;
         Moving_Describer * md;
         Environment_describer * envir;
-        std::set<std::array<unsigned int, 4>> busyArea;
-        std::set<coordinates> busyPoints;
+        std::dmultiset<std::array<unsigned int, 4>> busyArea;
+        std::dmultiset<coordinates> busyPoints;
         bool theEnd = false;
     public:
         Ai_Deep() = delete;
@@ -75,7 +75,7 @@ namespace robo {
         bool getEnd() const { return theEnd; }
         void setEnd() { theEnd = true; }
         /// returns 1 if area is busy, else 0
-        std::set<std::array<unsigned int, 4>>::iterator checkArea (unsigned int, unsigned int, unsigned int, unsigned int) const;
+        std::dmultiset<std::array<unsigned int, 4>>::iterator checkArea (unsigned int, unsigned int, unsigned int, unsigned int) const;
         /// return 1 if point is busy, else 0
         bool checkInAreas(coordinates) const;
         ///true if successfully

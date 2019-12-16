@@ -1000,7 +1000,7 @@ namespace robo {
         return 0;
     }
 
-    std::set<std::array<unsigned int, 4>>::iterator Ai_Deep::checkArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) const {
+    std::dmultiset<std::array<unsigned int, 4>>::iterator Ai_Deep::checkArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) const {
         //std::cout << "FINDDDDING " << top_cor << " " << left_cor << " " << bottom_cor << " " << right_cor << std::endl;
         auto req = std::array<unsigned int, 4>({top_cor, left_cor, bottom_cor, right_cor});
         return busyArea.find(req);
