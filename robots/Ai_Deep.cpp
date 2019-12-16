@@ -961,52 +961,30 @@ namespace robo {
             coordinates sub = comm->getPair()->getPosition();
 
             std::cout << "DEADEND " << sub.x << ";" << sub.y << std::endl;
-            coordinates tar;
+            coordinates tar[] = {{sub.x, sub.y+1}, {sub.x-1, sub.y}, {sub.x, sub.y-1}, {sub.x+1, sub.y}};
+            auto surrPoint = ai_dict.begin();
 
-            auto surrPoint = ai_dict.find({sub.x, sub.y+1});
-            if (surrPoint != ai_dict.end() && comm->getPosition() != coordinates {sub.x, sub.y+1}) {
-                if ((surrPoint->second.iam == nullptr || !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) && !checkBlocked({sub.x, sub.y+1})) {
-                    std::cout << "TOP_FREE" << std::endl;
-                }
-            }
+            for (int i = 0; i < 4; ++i) {
+                if (i == 1 && sub.x == 0)
+                    continue;
+                if (i == 2 && sub.y == 0)
+                    continue;
 
-            if (sub.x != 0) {
-                tar = {sub.x - 1, sub.y};
-                surrPoint = ai_dict.find(tar);
-                if (surrPoint != ai_dict.end() && comm->getPosition() != tar) {
-                    std::cout << "LEFT " << tar.x << ";" << tar.y << std::endl;
+                surrPoint = ai_dict.find(tar[i]);
+                if (surrPoint != ai_dict.end() && comm->getPosition() != tar[i]) {
                     if ((surrPoint->second.iam == nullptr ||
                          !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
-                        !checkBlocked(tar) && !checkInAreas(tar)) {
-                        if (!md->onRoute(tar)) {
-                            std::cout << "LEFT_FREE " << tar.x << ";" << tar.y << std::endl;
+                        !checkBlocked(tar[i]) && !checkInAreas(tar[i])) {
+                        if (!md->onRoute(tar[i])) {
                             deleteBlockedPoint(comm->getPosition());
-                            addBlockedPoint(tar);
-                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), tar, 0, envir->getTime()+1);
+                            addBlockedPoint(tar[i]);
+                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), tar[i], 0, envir->getTime()+1);
                             md->routePoint(comm, sub, 11, envir->getTime()+2);
+                            if (!ava) setEnd();
+                            return;
                         }
 
                     }
-                }
-            }
-
-            if (sub.y != 0) {
-                surrPoint = ai_dict.find({sub.x, sub.y-1});
-                if (surrPoint != ai_dict.end() && comm->getPosition() != coordinates{sub.x, sub.y-1}) {
-                    if ((surrPoint->second.iam == nullptr ||
-                         !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
-                        !checkBlocked({sub.x, sub.y - 1})) {
-                        std::cout << "BOTTOM_FREE" << std::endl;
-                    }
-                }
-            }
-
-            surrPoint = ai_dict.find({sub.x+1, sub.y});
-            if (surrPoint != ai_dict.end() && comm->getPosition() != coordinates{sub.x+1, sub.y}) {
-                if ((surrPoint->second.iam == nullptr ||
-                     !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
-                    !checkBlocked({sub.x+1, sub.y})) {
-                    std::cout << "RIGHT_FREE" << std::endl;
                 }
             }
 
@@ -1015,8 +993,7 @@ namespace robo {
             md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
         }
 
-        if (!ava)
-            setEnd();
+        if (!ava) setEnd();
 
     }
 

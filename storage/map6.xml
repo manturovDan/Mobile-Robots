@@ -106,7 +106,56 @@
     <Obstacle x = "30" y = "20"/>
 
     <Obstacle x = "31" y = "20"/>
-    <Obstacle x = "31" y = "21"/>
+    <Obstacle x = "31" y = "19"/>
+    <Obstacle x = "31" y = "18"/>
+    <Obstacle x = "31" y = "17"/>
+    <Obstacle x = "31" y = "16"/>
+    <Obstacle x = "31" y = "15"/>
+    <Obstacle x = "31" y = "14"/>
+    <Obstacle x = "31" y = "13"/>
+    <Obstacle x = "31" y = "12"/>
+    <Obstacle x = "31" y = "11"/>
+    <Obstacle x = "31" y = "10"/>
+    <Obstacle x = "31" y = "9"/>
+
+    <Obstacle x = "32" y = "9"/>
+
+    <Obstacle x = "33" y = "21"/>
+    <Obstacle x = "33" y = "20"/>
+    <Obstacle x = "33" y = "19"/>
+    <Obstacle x = "33" y = "18"/>
+    <Obstacle x = "33" y = "17"/>
+    <Obstacle x = "33" y = "16"/>
+    <Obstacle x = "33" y = "15"/>
+    <Obstacle x = "33" y = "14"/>
+    <Obstacle x = "33" y = "13"/>
+    <Obstacle x = "33" y = "12"/>
+    <Obstacle x = "33" y = "11"/>
+    <Obstacle x = "33" y = "9"/>
+
+    <Obstacle x = "34" y = "9"/>
+
+    <Obstacle x = "35" y = "9"/>
+
+    <Obstacle x = "36" y = "9"/>
+
+    <Obstacle x = "37" y = "9"/>
+
+    <Obstacle x = "38" y = "9"/>
+
+    <Obstacle x = "39" y = "9"/>
+
+    <Obstacle x = "34" y = "11"/>
+
+    <Obstacle x = "35" y = "11"/>
+
+    <Obstacle x = "36" y = "11"/>
+
+    <Obstacle x = "37" y = "11"/>
+
+    <Obstacle x = "38" y = "11"/>
+
+    <Obstacle x = "39" y = "11"/>
 
     <Robot_Commander price = "10000" consumption = "10"  description = "commander2" ports = "15">
         <Power_Generator priority = "1" production = "100"/>
