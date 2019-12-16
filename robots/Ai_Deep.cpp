@@ -989,9 +989,8 @@ namespace robo {
             }
 
         }
-        else {
-            md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
-        }
+
+        md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
 
         if (!ava) setEnd();
 
