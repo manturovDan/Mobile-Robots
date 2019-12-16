@@ -1011,13 +1011,13 @@ namespace robo {
         return 0;
     }
 
-    std::dmultiset<std::array<unsigned int, 4>>::iterator Ai_Deep::checkArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) {
+    std::set<std::array<unsigned int, 4>>::iterator Ai_Deep::checkArea(unsigned int top_cor, unsigned int left_cor, unsigned int bottom_cor, unsigned int right_cor) const {
         //std::cout << "FINDDDDING " << top_cor << " " << left_cor << " " << bottom_cor << " " << right_cor << std::endl;
         auto req = std::array<unsigned int, 4>({top_cor, left_cor, bottom_cor, right_cor});
         return busyArea.find(req);
     }
 
-    bool Ai_Deep::checkInAreas(coordinates pnt) {
+    bool Ai_Deep::checkInAreas(coordinates pnt) const {
         for (auto it : busyArea) {
             if (pnt.y >= it[2] && pnt.y <= it[0] && pnt.x >= it[1] && pnt.x <= it[3]) {
                 //std::cout << it[0] << " * " << it[1] << " * " << it[2] << " * " << it[3] << std::endl;
