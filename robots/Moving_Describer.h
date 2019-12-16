@@ -32,7 +32,7 @@ namespace robo {
     public:
         Moving_Describer() = default;
         int addStep(moment);
-        void printSteps(std::ostream & stream = std::cout);
+        void printSteps(std::ostream & stream = std::cout) const;
         int makeSteps(unsigned int);
         bool isMoving(Robot_Scout *);
         unsigned int routePoint(Robot_Scout *, coordinates, int, unsigned int);

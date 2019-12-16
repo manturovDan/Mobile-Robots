@@ -207,7 +207,7 @@ namespace robo {
         std::vector<std::pair<Robot_Scout *, int>> nextRep;
 
         for (auto rep = report.begin(); rep != report.end(); ++rep) {
-            //std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
+            std::cout << "REP " << rep->second << " - " << rep->first->getDescription() << std::endl;
             if (rep->second == 1) {
                 auto commer = static_cast<Robot_Commander *>(rep->first);
                 auto pair = commer->getPair();
@@ -377,7 +377,7 @@ namespace robo {
                 if (leeTab[it.y - bottom_cor_m][it.x - left_cor_m] > 0) {
                     makeRoute(leeTab, route, left_cor_m, bottom_cor_m, it);
                     for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-                        std::cout << coord->x << ";" << coord->y << std::endl;
+                        //std::cout << coord->x << ";" << coord->y << std::endl;
 
                         if (*coord == route[0])
                             md->routePoint(comm->getPair(), *coord, 5, envir->getTime());
@@ -893,63 +893,123 @@ namespace robo {
 
         auto checkLee = leeAv();
         bool ava = false;
+        bool deadend = true;
 
         for (auto g : grey) {
-            std::cout << "G " << g.x << ";" << g.y << std::endl;
+            //std::cout << "G " << g.x << ";" << g.y << std::endl;
 
             if (checkLee[g.y][g.x] > 0) {
                 ava = true;
                 std::vector<coordinates> route;
 
+
                 coordinates last;
-                if (leeTab[g.y][g.x] > 0 && !checkInAreas(g)) {
-                    deleteBlockedPoint(comm->getPosition());
-                    if (comm->getPair() != nullptr)
-                        deleteBlockedPoint(comm->getPair()->getPosition());
+                if (leeTab[g.y][g.x] > 0) {
+                    deadend = false;
+                    if (!checkInAreas(g)) {
+                        deleteBlockedPoint(comm->getPosition());
+                        if (comm->getPair() != nullptr)
+                            deleteBlockedPoint(comm->getPair()->getPosition());
 
-                    unsigned int pairRad;
-                    int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
-                    // in g.x, g.y
-                    if (comm->getPair() != nullptr)
-                        pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
-                    else
-                        pairRad = comm->getMaxRadius();
-
-                    Observation_Center::determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri,
-                                                        comm->manMod()->getRadius() +
-                                                        pairRad, g);
-
-                    addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
-
-                    makeRoute(leeTab, route, 0, 0, {g.x, g.y});
-                    for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-                        std::cout << coord->x << ";" << coord->y << std::endl;
-                        unsigned int atime;
-
-                        if (*coord != *route.begin() || comm->getPair() != nullptr)
-                            atime = md->routePoint(comm, *coord, 2, envir->getTime());
+                        unsigned int pairRad;
+                        int top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri;
+                        // in g.x, g.y
+                        if (comm->getPair() != nullptr)
+                            pairRad = dynamic_cast<Robot_Scout *>(comm->getPair())->getMaxRadius();
                         else
-                            atime = md->routePoint(comm, *coord, 3, envir->getTime());
+                            pairRad = comm->getMaxRadius();
 
-                        if (comm->getPair() != nullptr) {
-                            if (coord == route.rbegin()) {
-                                std::cout << "WAY " << comm->getX() << ";" << comm->getY() << " <- "
-                                          << comm->getPair()->getX() << ";" << comm->getPair()->getY() << std::endl;
-                                md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2,
-                                               atime + 1);
-                            } else if (*coord != *route.begin()) {
-                                md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
-                            } else {
-                                md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
+                        Observation_Center::determineCorers(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri,
+                                                            comm->manMod()->getRadius() +
+                                                            pairRad, g);
+
+                        addArea(top_cor_ri, left_cor_ri, bottom_cor_ri, right_cor_ri);
+
+                        makeRoute(leeTab, route, 0, 0, {g.x, g.y});
+                        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+                            std::cout << coord->x << ";" << coord->y << std::endl;
+                            unsigned int atime;
+
+                            if (*coord != *route.begin() || comm->getPair() != nullptr)
+                                atime = md->routePoint(comm, *coord, 2, envir->getTime());
+                            else
+                                atime = md->routePoint(comm, *coord, 3, envir->getTime());
+
+                            if (comm->getPair() != nullptr) {
+                                if (coord == route.rbegin()) {
+                                    //std::cout << "WAY " << comm->getX() << ";" << comm->getY() << " <- "
+                                    //          << comm->getPair()->getX() << ";" << comm->getPair()->getY() << std::endl;
+                                    md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), comm->getPosition(), 2,
+                                                   atime + 1);
+                                } else if (*coord != *route.begin()) {
+                                    md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 2, envir->getTime());
+                                } else {
+                                    md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), last, 3, envir->getTime());
+                                }
+
+                                last = *coord;
                             }
-
-                            last = *coord;
                         }
-                    }
 
-                    return;
+                        return;
+                    }
                 }
             }
+        }
+
+        if (deadend && comm->getPair() != nullptr) {
+            coordinates sub = comm->getPair()->getPosition();
+
+            std::cout << "DEADEND " << sub.x << ";" << sub.y << std::endl;
+            coordinates tar;
+
+            auto surrPoint = ai_dict.find({sub.x, sub.y+1});
+            if (surrPoint != ai_dict.end() && comm->getPosition() != coordinates {sub.x, sub.y+1}) {
+                if ((surrPoint->second.iam == nullptr || !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) && !checkBlocked({sub.x, sub.y+1})) {
+                    std::cout << "TOP_FREE" << std::endl;
+                }
+            }
+
+            if (sub.x != 0) {
+                tar = {sub.x - 1, sub.y};
+                surrPoint = ai_dict.find(tar);
+                if (surrPoint != ai_dict.end() && comm->getPosition() != tar) {
+                    std::cout << "LEFT " << tar.x << ";" << tar.y << std::endl;
+                    if ((surrPoint->second.iam == nullptr ||
+                         !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
+                        !checkBlocked(tar)) {
+                        if (!md->onRoute(tar)) {
+                            std::cout << "LEFT_FREE " << tar.x << ";" << tar.y << std::endl;
+                            deleteBlockedPoint(comm->getPosition());
+                            addBlockedPoint(tar);
+                            md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), tar, 0, envir->getTime()+1);
+                            md->routePoint(comm, sub, 0, envir->getTime()+2);
+                        }
+
+                    }
+                }
+            }
+
+            if (sub.y != 0) {
+                surrPoint = ai_dict.find({sub.x, sub.y-1});
+                if (surrPoint != ai_dict.end() && comm->getPosition() != coordinates{sub.x, sub.y-1}) {
+                    if ((surrPoint->second.iam == nullptr ||
+                         !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
+                        !checkBlocked({sub.x, sub.y - 1})) {
+                        std::cout << "BOTTOM_FREE" << std::endl;
+                    }
+                }
+            }
+
+            surrPoint = ai_dict.find({sub.x+1, sub.y});
+            if (surrPoint != ai_dict.end() && comm->getPosition() != coordinates{sub.x+1, sub.y}) {
+                if ((surrPoint->second.iam == nullptr ||
+                     !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
+                    !checkBlocked({sub.x+1, sub.y})) {
+                    std::cout << "RIGHT_FREE" << std::endl;
+                }
+            }
+
         }
 
         if (!ava)

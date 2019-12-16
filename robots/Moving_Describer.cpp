@@ -12,7 +12,7 @@ namespace robo {
         return 0;
     }
 
-    void Moving_Describer::printSteps(std::ostream & stream) {
+    void Moving_Describer::printSteps(std::ostream & stream) const {
         return;
         stream << "--------------\nMOVING:\n--------------" << std::endl;
         for (auto & it : move_d) {
@@ -108,8 +108,6 @@ namespace robo {
         }
 
 
-        //TODO if object stops on the point it must make it blocked and previously check if no routs have his point
-
         addStep({mobile, pos, tarDir, assumeTime, destination});
 
         return assumeTime;
@@ -149,8 +147,9 @@ namespace robo {
 
     bool Moving_Describer::onRoute(coordinates tar) const {
         for (auto & it : move_d) {
-            if (it.pos == tar)
+            if (it.moving_obj != nullptr && it.pos == tar) {
                 return true;
+            }
         }
 
         return false;
