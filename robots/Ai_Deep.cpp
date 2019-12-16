@@ -977,13 +977,13 @@ namespace robo {
                     std::cout << "LEFT " << tar.x << ";" << tar.y << std::endl;
                     if ((surrPoint->second.iam == nullptr ||
                          !strcmp(typeid(*surrPoint->second.iam).name(), "N4robo14Interest_PointE")) &&
-                        !checkBlocked(tar)) {
+                        !checkBlocked(tar) && !checkInAreas(tar)) {
                         if (!md->onRoute(tar)) {
                             std::cout << "LEFT_FREE " << tar.x << ";" << tar.y << std::endl;
                             deleteBlockedPoint(comm->getPosition());
                             addBlockedPoint(tar);
                             md->routePoint(dynamic_cast<Robot_Scout *>(comm->getPair()), tar, 0, envir->getTime()+1);
-                            md->routePoint(comm, sub, 0, envir->getTime()+2);
+                            md->routePoint(comm, sub, 11, envir->getTime()+2);
                         }
 
                     }
@@ -1011,11 +1011,12 @@ namespace robo {
             }
 
         }
+        else {
+            md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
+        }
 
         if (!ava)
             setEnd();
-
-        md->addStep({comm, comm->getPosition(), comm->getDirection(), envir->getTime()+1, 11});
 
     }
 

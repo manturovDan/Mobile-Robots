@@ -85,7 +85,7 @@ namespace robo {
             return assumeTime;
         }
         else {
-            std::cout << lastPos.x << " " << pos.x << " " << lastPos.y << " " <<  pos.y << std::endl;
+            std::cerr << lastPos.x << " " << lastPos.y << " -> " << pos.x << " " <<  pos.y << " name: " << mobile->getDescription() << std::endl;
             throw std::invalid_argument("Unknown direction");
         }
 
