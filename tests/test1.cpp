@@ -426,18 +426,29 @@ TEST (ResearchSimple, MapRes) {
 
     robo::Env_Consistent_Iter it = env.begin();
     robo::coordinates obs1 {5 ,1};
+    auto obs1_o = dynamic_cast<robo::Obstacle *>(*it);
 
     ++it;
     robo::coordinates obs2 {1 ,2};
+    auto obs2_o = dynamic_cast<robo::Obstacle *>(*it);
 
     ++it;
     robo::coordinates obs3 {15, 20};
+    auto obs3_o = dynamic_cast<robo::Obstacle *>(*it);
 
     ++it;
     robo::coordinates int1 {0, 22};
+    auto int1_o = dynamic_cast<robo::Interest_Point *>(*it);
 
     ++it;
     robo::coordinates int2 {10, 14};
+    auto int2_o = dynamic_cast<robo::Interest_Point *>(*it);
+
+    ASSERT_NE(obs1_o, nullptr);
+    ASSERT_NE(obs2_o, nullptr);
+    ASSERT_NE(obs3_o, nullptr);
+    ASSERT_NE(int1_o, nullptr);
+    ASSERT_NE(int2_o, nullptr);
 
     ++it;
     robo::coordinates general_pos {29, 24};
@@ -478,6 +489,45 @@ TEST (ResearchSimple, MapRes) {
         if(ai.getMd()->makeSteps(env.getTime()))
             ai.setEnd();
     }
+
+    ASSERT_EQ(ai.countOfOpened(), 30*25);
+
+    std::dmultiset<robo::coordinates> smtThere;
+    smtThere.insert(obs1);
+    smtThere.insert(obs2);
+    smtThere.insert(obs3);
+    smtThere.insert(int1);
+    smtThere.insert(int2);
+    smtThere.insert(general_pos);
+    smtThere.insert(subord1_pos);
+
+    auto map_it = ai.begin();
+    for (unsigned int x = 0; x <= 29; ++x) {
+        for (unsigned y = 0; y <= 24; ++y) {
+            robo::coordinates curCor {x, y};
+            ASSERT_EQ(map_it->first, curCor);
+            if (smtThere.find(curCor) == smtThere.end()) {
+                ASSERT_EQ(map_it->second.iam, nullptr);
+            } else if (curCor == obs1)
+                ASSERT_EQ(map_it->second.iam, obs1_o);
+            else if (curCor == obs2)
+                ASSERT_EQ(map_it->second.iam, obs2_o);
+            else if (curCor == obs3)
+                ASSERT_EQ(map_it->second.iam, obs3_o);
+            else if (curCor == int1)
+                ASSERT_EQ(map_it->second.iam, int1_o);
+            else if (curCor == int2)
+                ASSERT_EQ(map_it->second.iam, int2_o);
+            else if (curCor == general_pos)
+                ASSERT_EQ(map_it->second.iam, general);
+            else if (curCor == subord1_pos)
+                ASSERT_EQ(map_it->second.iam, subord1);
+            else
+                ASSERT_EQ(true, false);
+            map_it++;
+        }
+    }
+
 }
 
 
