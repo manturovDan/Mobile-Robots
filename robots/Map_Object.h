@@ -23,11 +23,13 @@ namespace robo {
          * */
         Map_Object() : appeared(false), position({0, 0}) {}
 
+
         /**
          * constructor for static robots where start position never changes
          * and defined in the beginning of the program
          */
         explicit Map_Object(coordinates coords);
+
 
         /**
          * getter @returns X coordinate of object in current time
@@ -35,11 +37,13 @@ namespace robo {
          * */
         unsigned int getX() const { return position.x; }
 
+
         /**
          * getter @returns Y coordinate of object in current time
          * (position.y)
          * */
         unsigned int getY() const { return position.y; }
+
 
         /**
          * static method to assign \env
@@ -47,11 +51,13 @@ namespace robo {
          * */
         static void setEnv(Environment_describer *envd);
 
+
         /**
          * getter of position
          * @return value /position
          */
         coordinates getPosition() const { return position; }
+
 
         /**
          * the binary operator of equation
@@ -61,6 +67,7 @@ namespace robo {
         friend bool operator==(const Map_Object &left, const Map_Object &right) {
             return ((left.position.x == right.position.x) && (left.position.y == right.position.y));
         }
+
 
         /**
          * debug method prints position of and object that returns in the flow
@@ -76,6 +83,11 @@ namespace robo {
          * */
         virtual std::string whoami() = 0;
 
+
+        /**
+         * getter of @appeared field
+         * */
+        bool isAppeared() const { return appeared; }
 
 
         /**

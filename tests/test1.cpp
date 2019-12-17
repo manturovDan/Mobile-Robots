@@ -319,6 +319,41 @@ TEST (XMLload, XMLTest) {
     std::string ss1 = sub1->getDescription();
     std::string sub1s = "subord1";
     ASSERT_EQ(ss1 , sub1s);
+    ASSERT_EQ(sub1->getMaxRadius(), 8);
+
+    ++it;
+    robo::coordinates pos8 {0, 2}; //default
+    ASSERT_EQ((*it)->getPosition(), pos8);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo11Robot_ScoutE");
+    robo::Robot_Scout * sc1;
+    sc1 = dynamic_cast<robo::Robot_Scout *>(*it);
+    ASSERT_NE(sc1, nullptr);
+    std::string sc1d = sc1->getDescription();
+    std::string sc1dr = "subord_move";
+    ASSERT_EQ(sc1d , sc1dr);
+    ASSERT_EQ(sc1->getMaxRadius(), 8);
+    ASSERT_EQ(sc1->getBlocked(), true);
+
+    ++it;
+    robo::coordinates pos9 {0, 2}; //default
+    ASSERT_EQ((*it)->getPosition(), pos9);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo15Robot_CommanderE");
+    robo::Robot_Commander * rcom;
+    rcom = dynamic_cast<robo::Robot_Commander *>(*it);
+    ASSERT_NE(rcom, nullptr);
+    std::string cdesc = rcom->getDescription();
+    std::string cn1r = "general_move";
+    ASSERT_EQ(cdesc, cn1r);
+    ASSERT_EQ(rcom->getMaxRadius(), 9);
+
+    ASSERT_EQ(rcom->getPair(), sc1);
+    ASSERT_EQ(sc1->getOwner(), rcom);
+
+    ASSERT_EQ(sub1->getOwner(), nullptr);
+
+    ++it;
+    ASSERT_EQ(it, env.end());
+
 }
 
 
