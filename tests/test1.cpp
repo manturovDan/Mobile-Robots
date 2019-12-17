@@ -8,11 +8,6 @@
 #include "../robots/interface.h"
 #include "../robots/Ai_Deep.h"
 
-//count of researched points
-//creating route
-//route table optimization
-//blocked points
-//blocked areas
 
 TEST (SimpleCreating, RobotConst) {
     robo::Environment_describer env;
@@ -604,6 +599,341 @@ TEST (deadEndGoBack, mapRes) {
 
     ASSERT_NE(opened.find({13, 6}), opened.end());
     ASSERT_NE(opened.find({39, 10}), opened.end());
+}
+
+
+TEST(BlockedAread, aiTest) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    ai.addArea(24, 0, 10, 26);
+    ASSERT_EQ(ai.checkInAreas({0, 0}), false);
+    ASSERT_EQ(ai.checkInAreas({0, 10}), true);
+    ASSERT_EQ(ai.checkInAreas({3, 11}), true);
+    ASSERT_EQ(ai.checkInAreas({24, 11}), true);
+    ASSERT_EQ(ai.checkInAreas({19, 15}), true);
+    ASSERT_EQ(ai.checkInAreas({1, 9}), false);
+    ASSERT_EQ(ai.checkInAreas({29, 15}), false);
+    ASSERT_EQ(ai.checkInAreas({7, 17}), true);
+
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
+    }
+
+    ASSERT_LE(ai.countOfOpened(), 30*25);
+
+    std::dmultiset<robo::coordinates> opened;
+
+    for (const auto & map_it : ai) {
+        opened.insert(map_it.first);
+    }
+
+    ASSERT_EQ(opened.find({0, 29}), opened.end());
+    ASSERT_EQ(opened.find({0, 28}), opened.end());
+    ASSERT_NE(opened.find({0, 10}), opened.end());
+    ASSERT_NE(opened.find({0, 0}), opened.end());
+    ASSERT_NE(opened.find({20, 24}), opened.end());
+    ASSERT_NE(opened.find({29, 24}), opened.end());
+    ASSERT_NE(opened.find({5, 5}), opened.end());
+    ASSERT_EQ(opened.find({6, 25}), opened.end());
+    ASSERT_NE(opened.find({19, 14}), opened.end());
+}
+
+TEST (BlockUnblockArea, aiTest) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    ai.addArea(24, 0, 10, 26);
+    ai.deleteArea(24, 0, 10, 26);
+
+    ai.addArea(5, 0, 10, 26);
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
+    }
+
+    ASSERT_EQ(ai.countOfOpened(), 30*25);
+
+    auto map_it = ai.begin();
+    for (unsigned int x = 0; x <= 29; ++x) {
+        for (unsigned y = 0; y <= 24; ++y) {
+            robo::coordinates curCor {x, y};
+            ASSERT_EQ(map_it->first, curCor);
+            map_it++;
+        }
+    }
+
+}
+
+TEST (BlockedPoints, aiRes) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    ai.addBlockedPoint({0, 11});
+    ai.addBlockedPoint({2, 3});
+    ai.addBlockedPoint({5, 9});
+    ai.addBlockedPoint({20, 11});
+    ai.addBlockedPoint({20, 20});
+
+    ASSERT_TRUE(ai.checkBlocked({0, 11}));
+    ASSERT_TRUE(ai.checkBlocked({20, 11}));
+    ASSERT_FALSE(ai.checkBlocked({20, 12}));
+    ASSERT_FALSE(ai.checkBlocked({1000, 11}));
+    ASSERT_FALSE(ai.checkBlocked({15, 11}));
+    ASSERT_FALSE(ai.checkBlocked({0, 1}));
+    ASSERT_TRUE(ai.checkBlocked({20, 20}));
+    ai.deleteBlockedPoint({20, 20});
+    ASSERT_FALSE(ai.checkBlocked({20, 20}));
+    ai.deleteBlockedPoint({20, 21});
+    ASSERT_TRUE(ai.checkBlocked({0, 11}));
+    ASSERT_TRUE(ai.checkBlocked({20, 11}));
+    ai.deleteBlockedPoint({0, 11});
+    ASSERT_FALSE(ai.checkBlocked({0, 11}));
+    ASSERT_TRUE(ai.checkBlocked({20, 11}));
+
+}
+
+TEST (routeControlGood, aiTest) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    robo::Env_Consistent_Iter it = env.begin();
+    robo::coordinates obs1 {5 ,1};
+    auto obs1_o = dynamic_cast<robo::Obstacle *>(*it);
+
+    ++it;
+    robo::coordinates obs2 {1 ,2};
+    auto obs2_o = dynamic_cast<robo::Obstacle *>(*it);
+
+    ++it;
+    robo::coordinates obs3 {15, 20};
+    auto obs3_o = dynamic_cast<robo::Obstacle *>(*it);
+
+    ++it;
+    robo::coordinates int1 {0, 22};
+    auto int1_o = dynamic_cast<robo::Interest_Point *>(*it);
+
+    ++it;
+    robo::coordinates int2 {10, 14};
+    auto int2_o = dynamic_cast<robo::Interest_Point *>(*it);
+
+    ASSERT_NE(obs1_o, nullptr);
+    ASSERT_NE(obs2_o, nullptr);
+    ASSERT_NE(obs3_o, nullptr);
+    ASSERT_NE(int1_o, nullptr);
+    ASSERT_NE(int2_o, nullptr);
+
+    ++it;
+    robo::coordinates general_pos {29, 24};
+    robo::Command_Center * general;
+    general = dynamic_cast<robo::Command_Center *>(*it);
+
+    ++it;
+    robo::coordinates subord1_pos {8, 4};
+    robo::Observation_Center * subord1;
+    subord1 = dynamic_cast<robo::Observation_Center *>(*it);
+
+    ++it;
+    robo::Robot_Scout * subord_move;
+    subord_move = dynamic_cast<robo::Robot_Scout *>(*it);
+
+    ++it;
+    robo::Robot_Commander * general_move;
+    general_move = dynamic_cast<robo::Robot_Commander *>(*it);
+
+    ++it;
+    ASSERT_EQ(it, env.end());
+
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
+    }
+
+
+    std::vector<robo::coordinates> route;
+
+    route.push_back({1,1});
+    route.push_back({0,1});
+    route.push_back({0,2});
+    route.push_back({0,3});
+    route.push_back({0,4});
+    route.push_back({0,5});
+    route.push_back({1,5});
+    route.push_back({2,5});
+    route.push_back({3,5});
+    route.push_back({3,4});
+    route.push_back({3,4});
+    route.push_back({3,5});
+    route.push_back({4,5});
+
+    for (auto coord = route.begin(); coord != route.end(); ++coord) {
+        ASSERT_NO_THROW(ai.getMd()->routePoint(general_move->getPair(), *coord, 5, env.getTime()));
+    }
+}
+
+TEST (routeControlBad, aiTest) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    robo::Env_Consistent_Iter it = env.begin();
+    robo::coordinates obs1 {5 ,1};
+    auto obs1_o = dynamic_cast<robo::Obstacle *>(*it);
+
+    ++it;
+    robo::coordinates obs2 {1 ,2};
+    auto obs2_o = dynamic_cast<robo::Obstacle *>(*it);
+
+    ++it;
+    robo::coordinates obs3 {15, 20};
+    auto obs3_o = dynamic_cast<robo::Obstacle *>(*it);
+
+    ++it;
+    robo::coordinates int1 {0, 22};
+    auto int1_o = dynamic_cast<robo::Interest_Point *>(*it);
+
+    ++it;
+    robo::coordinates int2 {10, 14};
+    auto int2_o = dynamic_cast<robo::Interest_Point *>(*it);
+
+    ASSERT_NE(obs1_o, nullptr);
+    ASSERT_NE(obs2_o, nullptr);
+    ASSERT_NE(obs3_o, nullptr);
+    ASSERT_NE(int1_o, nullptr);
+    ASSERT_NE(int2_o, nullptr);
+
+    ++it;
+    robo::coordinates general_pos {29, 24};
+    robo::Command_Center * general;
+    general = dynamic_cast<robo::Command_Center *>(*it);
+
+    ++it;
+    robo::coordinates subord1_pos {8, 4};
+    robo::Observation_Center * subord1;
+    subord1 = dynamic_cast<robo::Observation_Center *>(*it);
+
+    ++it;
+    robo::Robot_Scout * subord_move;
+    subord_move = dynamic_cast<robo::Robot_Scout *>(*it);
+
+    ++it;
+    robo::Robot_Commander * general_move;
+    general_move = dynamic_cast<robo::Robot_Commander *>(*it);
+
+    ++it;
+    ASSERT_EQ(it, env.end());
+
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
+    }
+
+
+    std::vector<robo::coordinates> route;
+
+    route.push_back({1,1});
+    route.push_back({0,1});
+    route.push_back({0,2});
+    route.push_back({0,3});
+    route.push_back({0,4});
+    route.push_back({0,5});
+    route.push_back({1,5});
+    route.push_back({2,5});
+    route.push_back({10, 11});
+    route.push_back({3,5});
+    route.push_back({3,4});
+    route.push_back({3,4});
+    route.push_back({3,5});
+    route.push_back({4,5});
+
+
+    auto coord = route.begin();
+    for (; coord != route.end(); ++coord) {
+        try {
+            ai.getMd()->routePoint(general_move->getPair(), *coord, 5, env.getTime());
+        } catch (std::exception &e) {
+            break;
+        }
+    }
+
+    ASSERT_NE(coord, route.end());
 }
 
 
