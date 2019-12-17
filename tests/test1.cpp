@@ -6,8 +6,6 @@
 #include "../robots/Power_Generator.h"
 #include "../robots/Sensor.h"
 
-
-//env max size
 //envoronment construction
 //static ai checking
 //real direction
@@ -127,6 +125,48 @@ TEST (EnvCollision, EnvConst) {
     std::string desc = "Obs1";
     ASSERT_NO_THROW(env.setObject(robo::Command_Center_t, 5, 10, 50, modl, desc, pos));
     ASSERT_THROW(env.setObject(robo::Obstacle_t, pos), std::invalid_argument);
+    ASSERT_THROW(env.setWidth(5000), std::invalid_argument);
+    ASSERT_THROW(env.setHeight(5), std::invalid_argument);
+    ASSERT_THROW(env.setWidth(-1), std::invalid_argument);
+    ASSERT_EQ(env.getWidth(), 50);
+    ASSERT_EQ(env.getHeight(), 50);
+}
+
+TEST (EnvSizes, EnvConst) {
+    ASSERT_THROW(robo::Environment_describer env (10, 5);, std::invalid_argument);
+    ASSERT_THROW(robo::Environment_describer env (10, 5000);, std::invalid_argument);
+    ASSERT_NO_THROW(robo::Environment_describer env (70, 50));
+    ASSERT_THROW(robo::Environment_describer env (10, 3);, std::invalid_argument);
+}
+
+TEST (EnvResize, Env) {
+    robo::Environment_describer env (70, 50);
+
+    std::vector<robo::Module *> modl;
+    modl.push_back(new robo::Power_Generator(1, 12));
+    modl.push_back(new robo::Power_Generator(2, 12));
+    modl.push_back(new robo::Power_Generator(3, 30));
+    modl.push_back(new robo::Sensor(3, 0, 0, 20, 4));
+    modl.push_back(new robo::Managing(4, 20, 3, 5));
+    robo::coordinates pos1 {5, 5};
+    robo::coordinates pos2 {5, 6};
+    robo::coordinates pos3 {69, 40};
+    robo::coordinates pos4 {5, 5};
+    robo::coordinates pos5 {70, 0};
+    std::string desc = "desc";
+
+    ASSERT_NO_THROW(env.setObject(robo::Command_Center_t, 5, 10, 50, modl, desc, pos1));
+    ASSERT_NO_THROW(env.setObject(robo::Observation_Center_t, 5, 10, 50, modl, desc, pos2));
+    ASSERT_NO_THROW(env.setObject(robo::Obstacle_t, pos3));
+    ASSERT_THROW(env.setObject(robo::Interest_t, pos4), std::invalid_argument);
+    ASSERT_THROW(env.setObject(robo::Obstacle_t, pos5), std::invalid_argument);
+
+    ASSERT_THROW(env.setWidth(55), std::invalid_argument);
+    ASSERT_EQ(env.getHeight(), 50);
+    ASSERT_EQ(env.getWidth(), 70);
+    ASSERT_NO_THROW(env.setWidth(75));
+    ASSERT_EQ(env.getHeight(), 50);
+    ASSERT_EQ(env.getWidth(), 75);
 }
 
 int main(int argc, char **argv) {

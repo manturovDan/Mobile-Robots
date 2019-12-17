@@ -2,7 +2,7 @@
 
 namespace robo {
     Environment_describer::Environment_describer(int widthG, int heightG) : Environment_describer() {
-        if (widthG > 1000 || widthG < 10 || height > heightG || heightG < 10)
+        if (widthG > 1000 || widthG < 10 || heightG > 1000 || heightG < 10)
             throw std::invalid_argument("Incorrect map params!");
         width = widthG;
         height = heightG;
@@ -11,22 +11,26 @@ namespace robo {
     int Environment_describer::setWidthHeight(int newVal, bool coord) {
         if (newVal > 1000 || newVal < 10)
             throw std::invalid_argument("Incorrect map params!");
-        if (coord)
+
+        unsigned int prev;
+        if (coord) {
+            prev = width;
             width = newVal;
-        else
+        }
+        else {
+            prev = height;
             height = newVal;
+        }
 
-        auto map_resident = map_obj.begin();
-        /*while (map_resident != map_obj.end()) {
-            if ((map_resident->getX() <= newVal && coord) || ((*map_resident)->getY() <= newVal && coord)) { //delete this
-                th
+        for(robo::Env_Consistent_Iter it = begin(); it != end(); ++it) {
+            if ((*it)->getX() >= width || (*it)->getY()>= height) {
+                if (coord)
+                    width = prev;
+                else
+                    height = prev;
+                throw std::invalid_argument("Incorrect map resizing");
             }
-
-            ++map_resident;
-        }*/
-
-        //map_obj.erase(std::remove(map_obj.begin(), map_obj.end(), nullptr), map_obj.end()); // or error
-        //TODO Dont forget about robots
+        }
 
         return 0;
     }
@@ -46,11 +50,11 @@ namespace robo {
                 throw std::invalid_argument("Unknown object tries to penetrate in my laboratory work (nature)");
             }
         } catch (std::exception &e) {
+            std::cerr << e.what() << std::endl;
             throw std::invalid_argument("Incorrect object tries to penetrate in my laboratory work (nature)");
         }
 
         map_obj.push_back(nw_obj);
-        //qTree.add(nw_obj);
 
         return nw_obj;
     }

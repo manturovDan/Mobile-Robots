@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/danila/source/robots/multiset/multiset.h
+stdlib.h
+-
+
 /home/danila/source/robots/robots/Ai_Deep.h
 map
 -
@@ -15,6 +19,8 @@ array
 -
 deque
 -
+../multiset/multiset.h
+/home/danila/source/robots/multiset/multiset.h
 robot.h
 /home/danila/source/robots/robots/robot.h
 Managing.h
