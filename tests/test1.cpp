@@ -571,6 +571,41 @@ TEST (MazeResAndLoneCommander, MapRes) {
 
 }
 
+TEST (deadEndGoBack, mapRes) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapDeadEnd.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    ai.run();
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
+    }
+
+    ASSERT_GT(ai.countOfOpened(), 113);
+    std::dmultiset<robo::coordinates> opened;
+
+    for (const auto & map_it : ai) {
+        opened.insert(map_it.first);
+    }
+
+    ASSERT_NE(opened.find({13, 6}), opened.end());
+    ASSERT_NE(opened.find({39, 10}), opened.end());
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
