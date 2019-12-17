@@ -38,8 +38,6 @@ namespace robo {
         auto com_i = commanders.rbegin();
         auto sco_i = scouts.begin();
 
-        std::cout << "RASPR" << std::endl;
-
         for(; com_i != commanders.rend(); ++com_i) {
             auto *com = dynamic_cast<Robot_Commander *>(com_i->second);
             if (sco_i == scouts.end()) {

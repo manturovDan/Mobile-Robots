@@ -225,4 +225,6 @@ iostream
 /home/danila/source/robots/robots/Sensor.h
 ../robots/interface.h
 /home/danila/source/robots/robots/interface.h
+../robots/Ai_Deep.h
+/home/danila/source/robots/robots/Ai_Deep.h
 

@@ -45,7 +45,6 @@ namespace robo {
         int top_cor, left_cor, bottom_cor, right_cor;
         determineCorers(top_cor, left_cor, bottom_cor, right_cor, matchMan->getRadius());
 
-        std::cout << "Finding SUBJECTS:" << std::endl;
         for (int h = top_cor; h >= bottom_cor; --h) {
             for (int w = left_cor; w <= right_cor; ++w) {
                 if (getX() != w || getY() != h) {

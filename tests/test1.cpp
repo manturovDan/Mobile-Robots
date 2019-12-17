@@ -6,6 +6,7 @@
 #include "../robots/Power_Generator.h"
 #include "../robots/Sensor.h"
 #include "../robots/interface.h"
+#include "../robots/Ai_Deep.h"
 
 //static ai checking
 //real direction
@@ -267,6 +268,57 @@ TEST (XMLload, XMLTest) {
     robo::Environment_describer env;
     std::string filename = "/home/danila/source/robots/tests/mapXMLtest.xml";
     interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    robo::Env_Consistent_Iter it = env.begin();
+    robo::coordinates pos1 {5 ,1};
+    ASSERT_EQ((*it)->getPosition(), pos1);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo8ObstacleE");
+
+    ++it;
+    robo::coordinates pos2 {1 ,2};
+    ASSERT_EQ((*it)->getPosition(), pos2);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo8ObstacleE");
+
+    ++it;
+    robo::coordinates pos3 {15, 20};
+    ASSERT_EQ((*it)->getPosition(), pos3);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo8ObstacleE");
+
+    ++it;
+    robo::coordinates pos4 {0, 22};
+    ASSERT_EQ((*it)->getPosition(), pos4);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo14Interest_PointE");
+
+    ++it;
+    robo::coordinates pos5 {10, 14};
+    ASSERT_EQ((*it)->getPosition(), pos5);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo14Interest_PointE");
+
+    ++it;
+    robo::coordinates pos6 {29, 24};
+    ASSERT_EQ((*it)->getPosition(), pos6);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo14Command_CenterE");
+    robo::Command_Center * com1;
+    com1 = dynamic_cast<robo::Command_Center *>(*it);
+    ASSERT_NE(com1, nullptr);
+    ASSERT_EQ(com1->getPosition(), pos6);
+    std::string s1 = com1->getDescription();
+    std::string gen = "general";
+    ASSERT_EQ(s1 , gen);
+
+    ++it;
+    robo::coordinates pos7 {8, 4};
+    ASSERT_EQ((*it)->getPosition(), pos7);
+    ASSERT_STREQ(typeid(**it).name(), "N4robo18Observation_CenterE");
+    robo::Observation_Center * sub1;
+    sub1 = dynamic_cast<robo::Observation_Center *>(*it);
+    ASSERT_NE(sub1, nullptr);
+    ASSERT_EQ(sub1->getPosition(), pos7);
+    std::string ss1 = sub1->getDescription();
+    std::string sub1s = "subord1";
+    ASSERT_EQ(ss1 , sub1s);
 }
 
 
