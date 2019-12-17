@@ -18,7 +18,6 @@ namespace robo {
         void unBlock() { blocked = false; }
         void move(coordinates, int);
         void report(int);
-        //std::map<coordinates, Map_Object *> look() override;
 
         std::string whoami() override;
     };

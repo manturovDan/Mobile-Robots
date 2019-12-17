@@ -19,10 +19,15 @@ namespace interf {
     /// Class that creates Environment from XML FILE
     class EnvXMLCreate {
     public:
+        /**
+         * default constructor is deleted
+         * */
         EnvXMLCreate() = delete;
 
-        ///@param std::string path - path of XML file
         /**
+         * @filename std::string path - path of XML file
+         * @env - empty environment that we create
+         * @stream - flow - where we print information
          * format of XML file:
          * <Environment width = WIDTH_OF_MAP height = HEIGHT_OF_MAP>
          *      <OBJECT_TYPE ...>
@@ -118,13 +123,18 @@ namespace interf {
          * </Environment>
          */
 
-
         EnvXMLCreate(const std::string &, robo::Environment_describer &, std::ostream & stream = std::cout);
 
     private:
+        /**
+         * common method that calls when something with file is wrong
+         * */
         static void fileDamaged(std::ostream &, const std::string & add = "unknown");
     };
 
+    /**
+     * debug class to stay SOLID concept - prints all environment
+     * */
     class InterfaceTools {
     private:
         robo::Environment_describer * env;

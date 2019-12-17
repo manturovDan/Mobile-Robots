@@ -17,7 +17,7 @@ namespace robo {
     /// 9 - MO is researching, subordinate is ready to RI-1 researching
     /// 10 - subordinate has researched part in RI-1 area; 101 - revolved
     /// 11 - commander can't find and grey points
-    /// REPORT_TYPES
+    /// REPORT_TYPES - @destination
     struct moment {
         Robot_Scout * moving_obj;
         coordinates pos;
