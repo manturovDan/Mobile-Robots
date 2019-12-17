@@ -266,7 +266,7 @@ TEST (EnvSetObj, Env) {
 
 TEST (XMLload, XMLTest) {
     robo::Environment_describer env;
-    std::string filename = "/home/danila/source/robots/tests/mapXMLtest.xml";
+    std::string filename = "../tests/mapXMLtest.xml";
     interf::EnvXMLCreate(filename, env);
     auto ai = robo::Ai_Deep(&env);
     robo::Managing::setAI(&ai);
@@ -354,6 +354,64 @@ TEST (XMLload, XMLTest) {
     ++it;
     ASSERT_EQ(it, env.end());
 
+}
+
+TEST(AiStaticRes, AiTest) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    robo::Env_Consistent_Iter it = env.begin();
+    robo::coordinates obs1 {5 ,1};
+
+    ++it;
+    robo::coordinates obs2 {1 ,2};
+
+    ++it;
+    robo::coordinates obs3 {15, 20};
+
+    ++it;
+    robo::coordinates int1 {0, 22};
+
+    ++it;
+    robo::coordinates int2 {10, 14};
+
+    ++it;
+    robo::coordinates general_pos {29, 24};
+    robo::Command_Center * general;
+    general = dynamic_cast<robo::Command_Center *>(*it);
+
+    ++it;
+    robo::coordinates subord1_pos {8, 4};
+    robo::Observation_Center * subord1;
+    subord1 = dynamic_cast<robo::Observation_Center *>(*it);
+
+    ++it;
+    robo::Robot_Scout * subord_move;
+    subord_move = dynamic_cast<robo::Robot_Scout *>(*it);
+
+    ++it;
+    robo::Robot_Commander * general_move;
+    general_move = dynamic_cast<robo::Robot_Commander *>(*it);
+
+    ++it;
+    ASSERT_EQ(it, env.end());
+
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    auto map_it = ai.begin();
+
+    for (unsigned int x = 28; x <= 29; ++x) {
+        for (unsigned y = 23; y <= 24; ++y) {
+            robo::coordinates curCor {x, y};
+            ASSERT_EQ(map_it->first, curCor);
+            map_it++;
+        }
+    }
 }
 
 
