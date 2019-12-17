@@ -8,11 +8,8 @@
 #include "../robots/interface.h"
 #include "../robots/Ai_Deep.h"
 
-//static ai checking
-//real direction
 //lee
 //count of researched points
-//finding grey
 //creating route
 //route table optimization
 //blocked points
@@ -409,8 +406,77 @@ TEST(AiStaticRes, AiTest) {
         for (unsigned y = 23; y <= 24; ++y) {
             robo::coordinates curCor {x, y};
             ASSERT_EQ(map_it->first, curCor);
+            if (x == 29 && y == 24) {
+                ASSERT_EQ(map_it->second.iam, general);
+            }
+            else {
+                ASSERT_EQ(map_it->second.iam, nullptr);
+            }
             map_it++;
         }
+    }
+}
+
+TEST (ResearchSimple, MapRes) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    robo::Env_Consistent_Iter it = env.begin();
+    robo::coordinates obs1 {5 ,1};
+
+    ++it;
+    robo::coordinates obs2 {1 ,2};
+
+    ++it;
+    robo::coordinates obs3 {15, 20};
+
+    ++it;
+    robo::coordinates int1 {0, 22};
+
+    ++it;
+    robo::coordinates int2 {10, 14};
+
+    ++it;
+    robo::coordinates general_pos {29, 24};
+    robo::Command_Center * general;
+    general = dynamic_cast<robo::Command_Center *>(*it);
+
+    ++it;
+    robo::coordinates subord1_pos {8, 4};
+    robo::Observation_Center * subord1;
+    subord1 = dynamic_cast<robo::Observation_Center *>(*it);
+
+    ++it;
+    robo::Robot_Scout * subord_move;
+    subord_move = dynamic_cast<robo::Robot_Scout *>(*it);
+
+    ++it;
+    robo::Robot_Commander * general_move;
+    general_move = dynamic_cast<robo::Robot_Commander *>(*it);
+
+    ++it;
+    ASSERT_EQ(it, env.end());
+
+
+    ai.run();
+    ASSERT_EQ(ai.countOfOpened(), 4);
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
     }
 }
 

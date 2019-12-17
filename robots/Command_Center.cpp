@@ -96,7 +96,6 @@ namespace robo {
     }
 
     std::map<coordinates, Map_Object *> Command_Center::research() {
-        std::cout << "RESEARCHING" << std::endl;
         std::map<coordinates, Map_Object *> full_look_res;
         std::map<coordinates, Map_Object *> look_res = look();
 

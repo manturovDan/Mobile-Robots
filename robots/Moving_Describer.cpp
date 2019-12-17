@@ -47,11 +47,11 @@ namespace robo {
         }
 
         //std::cout << "SECOND " << curTime << std::endl;
-        for (auto dit : delev) { //not iter
-            std::cout << "Robot: " << dit->moving_obj->getDescription() << "; target_position: {" << dit->pos.x << "; " <<
-            dit->pos.y << "}; direction: " << dit->direction << "; target_time: " << dit->time << "; dest: " << dit->destination << std::endl;
-            move_d.erase(dit);
-        }
+        //for (auto dit : delev) { //not iter
+            //std::cout << "Robot: " << dit->moving_obj->getDescription() << "; target_position: {" << dit->pos.x << "; " <<
+            //dit->pos.y << "}; direction: " << dit->direction << "; target_time: " << dit->time << "; dest: " << dit->destination << std::endl;
+            //move_d.erase(dit);
+        //}
         //std::cout << "---------------------" <<std::endl;
         return 0;
     }

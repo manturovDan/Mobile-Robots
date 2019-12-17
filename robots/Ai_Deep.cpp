@@ -46,7 +46,7 @@ namespace robo {
             else {
                 auto *rob = dynamic_cast<Robot_Scout *>(sco_i->second);
 
-                std::cout << com->getMaxRadius() << " " << com_i->first << " " << rob->getMaxRadius() << std::endl;
+                //std::cout << com->getMaxRadius() << " " << com_i->first << " " << rob->getMaxRadius() << std::endl;
                 if (com->getMaxRadius() < com_i->first + rob->getMaxRadius()) { //not need subordinates
                     if (!com->connectScout(rob)) {
                         sco_i++;
@@ -91,7 +91,7 @@ namespace robo {
             }
         }
 
-        print_d(70, 70);
+        //print_d(70, 70);
     }
 
     void Ai_Deep::connectResult(const std::map<coordinates, Map_Object *> & res_res) {
@@ -415,7 +415,7 @@ namespace robo {
         std::vector<std::vector<int>> leeTab = initLee(top_cor_m, left_cor_m, bottom_cor_m, right_cor_m, comm, &target);
         leeComp(leeTab, left_cor_m, bottom_cor_m, comm->getPair()->getPosition());
 
-        std::cout << "BACK_HOME" << std::endl;
+        //std::cout << "BACK_HOME" << std::endl;
 
         std::vector<coordinates> route;
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, target);
@@ -603,7 +603,7 @@ namespace robo {
         else
             big_bottom = bottom_cor - radius;
 
-        std::cout << big_top << " " << big_left << " " << big_bottom << " " << big_right << std::endl;
+        //std::cout << big_top << " " << big_left << " " << big_bottom << " " << big_right << std::endl;
 
         std::vector<coordinates> ri_grey;
         std::vector<coordinates> big = findGrey(big_top, big_left, big_bottom, big_right);
@@ -713,12 +713,13 @@ namespace robo {
         if (minway < 0)
             return 1;
 
-        std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
+        //ROUTE_PRINT
+        //std::cout << " TO ::: " << nearest.x << ";" << nearest.y << " ";
         makeRoute(leeTab, route, left_cor_m, bottom_cor_m, {nearest.x, nearest.y});
-        std::cout << "RTTT" << std::endl;
-        for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-            std::cout << coord->x << ";" << coord->y << std::endl;
-        }
+        //std::cout << "RTTT" << std::endl;
+        //for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
+        //    std::cout << coord->x << ";" << coord->y << std::endl;
+        //}
         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
             if (*coord == route[0]) {
                 md->routePoint(comm->getPair(), *coord, 10, envir->getTime());
@@ -914,7 +915,7 @@ namespace robo {
 
                         makeRoute(leeTab, route, 0, 0, {g.x, g.y});
                         for (auto coord = route.rbegin(); coord != route.rend(); ++coord) {
-                            std::cout << coord->x << ";" << coord->y << std::endl;
+                            //std::cout << coord->x << ";" << coord->y << std::endl;
                             unsigned int atime;
 
                             if (*coord != *route.begin() || comm->getPair() != nullptr)
@@ -947,7 +948,7 @@ namespace robo {
         if (deadend && comm->getPair() != nullptr) {
             coordinates sub = comm->getPair()->getPosition();
 
-            std::cout << "DEADEND " << sub.x << ";" << sub.y << std::endl;
+            //std::cout << "DEADEND " << sub.x << ";" << sub.y << std::endl;
             coordinates tar[] = {{sub.x, sub.y+1}, {sub.x-1, sub.y}, {sub.x, sub.y-1}, {sub.x+1, sub.y}};
             auto surrPoint = ai_dict.begin();
 

@@ -175,7 +175,7 @@ namespace robo {
                         if (sens->getAngle() > 0) {
                             for (unsigned int h = top_cor; h >= position.y && h <= top_cor; --h) {
                                 for (unsigned int w = position.x+1; w <= right_cor; ++w) {
-                                    std::cout << " { " << w << ", " << h << " } ";
+                                    //std::cout << " { " << w << ", " << h << " } ";
                                     coordinates posit = {static_cast<unsigned int>(w), static_cast<unsigned int>(h)};
                                     Map_Object * resp = env->checkStaticPoint(posit);
                                     one_view[posit] = resp;
