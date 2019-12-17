@@ -8,7 +8,6 @@
 #include "../robots/interface.h"
 #include "../robots/Ai_Deep.h"
 
-//lee
 //count of researched points
 //creating route
 //route table optimization
@@ -525,6 +524,48 @@ TEST (ResearchSimple, MapRes) {
             else
                 ASSERT_EQ(true, false);
             map_it++;
+        }
+    }
+
+}
+
+TEST (MazeResAndLoneCommander, MapRes) {
+    robo::Environment_describer env;
+    std::string filename = "../tests/mapMaze.xml";
+    interf::EnvXMLCreate(filename, env);
+    auto ai = robo::Ai_Deep(&env);
+    robo::Managing::setAI(&ai);
+
+    ai.run();
+
+    ASSERT_EQ(env.getTime(), 0);
+    unsigned int time = 0;
+    while (true) {
+        env.plusTime();
+        ASSERT_EQ(env.getTime(), ++time);
+
+        if (ai.getEnd()) {
+            break;
+        }
+
+        ai.nextComp();
+        if(ai.getMd()->makeSteps(env.getTime()))
+            ai.setEnd();
+    }
+
+    ASSERT_GT(ai.countOfOpened(), 606);
+    std::dmultiset<robo::coordinates> opened;
+
+    for (const auto & map_it : ai) {
+        opened.insert(map_it.first);
+    }
+
+    for (unsigned int x = 0; x <= 25; ++x) {
+        for (unsigned y = 0; y <= 24; ++y) {
+            robo::coordinates curCor {x, y};
+            auto found = opened.find(curCor);
+            ASSERT_NE(found, opened.end());
+            opened.erase(found);
         }
     }
 
