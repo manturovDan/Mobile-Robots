@@ -6,6 +6,36 @@
 
 #IncludeRegexTransform: 
 
+/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h
+ctype.h
+-
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stddef.h
+-
+cctype
+-
+climits
+-
+cstdio
+-
+cstdlib
+-
+cstring
+-
+stdint.h
+-
+android/log.h
+-
+assert.h
+-
+
 /home/danila/source/robots/multiset/multiset.h
 stdlib.h
 -
@@ -146,6 +176,30 @@ Environment_describer.h
 Energy_Consumer.h
 /home/danila/source/robots/robots/Energy_Consumer.h
 
+/home/danila/source/robots/robots/interface.h
+iostream
+-
+string
+-
+SFML/Graphics.hpp
+-
+../libraries/tinyxml2-lib/tinyxml2.h
+/home/danila/source/robots/libraries/tinyxml2-lib/tinyxml2.h
+typeinfo
+-
+Environment_describer.h
+/home/danila/source/robots/robots/Environment_describer.h
+Map_Object.h
+/home/danila/source/robots/robots/Map_Object.h
+Robot_Commander.h
+/home/danila/source/robots/robots/Robot_Commander.h
+Power_Generator.h
+/home/danila/source/robots/robots/Power_Generator.h
+Sensor.h
+/home/danila/source/robots/robots/Sensor.h
+Managing.h
+/home/danila/source/robots/robots/Managing.h
+
 /home/danila/source/robots/robots/robot.h
 vector
 -
@@ -169,4 +223,6 @@ iostream
 /home/danila/source/robots/robots/Power_Generator.h
 ../robots/Sensor.h
 /home/danila/source/robots/robots/Sensor.h
+../robots/interface.h
+/home/danila/source/robots/robots/interface.h
 

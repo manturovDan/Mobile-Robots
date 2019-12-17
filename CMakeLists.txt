@@ -53,5 +53,5 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(u_test tests/test1.cpp robots/robot.h)
 target_link_libraries(u_test ${GTEST_LIBRARIES} pthread obstacle map_object environment_describer interest_point
         observation_center command_center robot_scout robot_commander module power_generator managing sensor display
-        moving_describer ai_robots energy_consuber)
+        moving_describer ai_robots energy_consuber interfacelib tinyxml2)
 add_test(NAME uTest COMMAND u_test)

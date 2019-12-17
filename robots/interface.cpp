@@ -27,7 +27,7 @@ namespace interf {
 
         while (mapEl != nullptr) {
 
-            stream << mapEl->Name() << std::endl;
+            //stream << mapEl->Name() << std::endl;
 
             tinyxml2::XMLElement * module = mapEl->FirstChildElement();
 
@@ -40,7 +40,6 @@ namespace interf {
                 if (module->QueryIntAttribute("priority", &priority) != 0) fileDamaged(stream, "getting priority of pg");
 
                 if (!strcmp(module->Name(), "Power_Generator")) {
-                    std::cout << "POWER" << std::endl;
                     unsigned int production;
 
                     if (module->QueryUnsignedAttribute("production", &production) != 0) fileDamaged(stream, "getting production of pg");
@@ -48,7 +47,6 @@ namespace interf {
                     mod = new robo::Power_Generator(priority, production);
 
                 } else if (!strcmp(module->Name(), "Sensor")) {
-                    std::cout << "SENSOR" << std::endl;
 
                     unsigned int consumption, radius, direction, angle;
 
@@ -60,7 +58,6 @@ namespace interf {
                     mod = new robo::Sensor(radius, direction, angle, consumption, priority);
                 }
                 else if (!strcmp(module->Name(), "Managing")) {
-                    std::cout << "MAN_MODULE" << std::endl;
 
                     unsigned int consumption, radius, subs;
 
@@ -154,8 +151,8 @@ namespace interf {
         stream << "DEBUG - printing all objects:" << std::endl;
         unsigned int number = 0;
         for (auto it = env->begin(); it != env->end(); ++it) {
-            std::cout << (++number) << " --- OBJECT - " << typeid(*(*it)).name() << std::endl;
-            std::cout << (*it)->whoami() << std::endl;
+            stream << (++number) << " --- OBJECT - " << typeid(*(*it)).name() << std::endl;
+            stream << (*it)->whoami() << std::endl;
         }
     }
 }

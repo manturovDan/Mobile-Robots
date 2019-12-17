@@ -1,0 +1,323 @@
+<Environment width = "40" height = "25">
+    <Obstacle x = "1" y = "1"/>
+    <Obstacle x = "1" y = "2"/>
+    <Obstacle x = "1" y = "3"/>
+    <Obstacle x = "1" y = "4"/>
+    <Obstacle x = "1" y = "5"/>
+    <Obstacle x = "1" y = "6"/>
+    <Obstacle x = "1" y = "7"/>
+    <Obstacle x = "1" y = "8"/>
+    <Obstacle x = "1" y = "9"/>
+    <Obstacle x = "1" y = "10"/>
+    <Obstacle x = "1" y = "11"/>
+    <Obstacle x = "1" y = "12"/>
+    <Obstacle x = "1" y = "13"/>
+    <Obstacle x = "1" y = "14"/>
+    <Obstacle x = "1" y = "15"/>
+    <Obstacle x = "1" y = "16"/>
+    <Obstacle x = "1" y = "17"/>
+    <Obstacle x = "1" y = "18"/>
+    <Obstacle x = "1" y = "19"/>
+    <Obstacle x = "1" y = "20"/>
+
+    <Obstacle x = "2" y = "0"/>
+    <Obstacle x = "2" y = "1"/>
+    <Obstacle x = "2" y = "20"/>
+
+    <Obstacle x = "3" y = "2"/>
+    <Obstacle x = "3" y = "3"/>
+    <Obstacle x = "3" y = "11"/>
+    <Obstacle x = "3" y = "14"/>
+    <Obstacle x = "3" y = "15"/>
+    <Obstacle x = "3" y = "16"/>
+    <Obstacle x = "3" y = "17"/>
+    <Obstacle x = "3" y = "18"/>
+    <Obstacle x = "3" y = "19"/>
+    <Obstacle x = "3" y = "20"/>
+    <Obstacle x = "3" y = "22"/>
+
+    <Obstacle x = "4" y = "2"/>
+    <Obstacle x = "4" y = "4"/>
+    <Obstacle x = "4" y = "11"/>
+    <Obstacle x = "4" y = "14"/>
+    <Obstacle x = "4" y = "15"/>
+    <Obstacle x = "4" y = "18"/>
+    <Obstacle x = "4" y = "20"/>
+    <Obstacle x = "4" y = "22"/>
+
+    <Obstacle x = "5" y = "2"/>
+    <Obstacle x = "5" y = "5"/>
+    <Obstacle x = "5" y = "6"/>
+    <Obstacle x = "5" y = "7"/>
+    <Obstacle x = "5" y = "8"/>
+    <Obstacle x = "5" y = "9"/>
+    <Obstacle x = "5" y = "11"/>
+    <Obstacle x = "5" y = "14"/>
+    <Obstacle x = "5" y = "15"/>
+    <Obstacle x = "5" y = "18"/>
+    <Obstacle x = "5" y = "20"/>
+
+    <Obstacle x = "6" y = "2"/>
+    <Obstacle x = "6" y = "6"/>
+    <Obstacle x = "6" y = "11"/>
+    <Obstacle x = "6" y = "12"/>
+    <Obstacle x = "6" y = "14"/>
+    <Obstacle x = "6" y = "15"/>
+    <Obstacle x = "6" y = "16"/>
+    <Obstacle x = "6" y = "17"/>
+    <Obstacle x = "6" y = "18"/>
+    <Obstacle x = "6" y = "19"/>
+    <Obstacle x = "6" y = "20"/>
+
+    <Obstacle x = "7" y = "7"/>
+    <Obstacle x = "7" y = "11"/>
+    <Obstacle x = "7" y = "14"/>
+    <Obstacle x = "7" y = "15"/>
+    <Obstacle x = "7" y = "16"/>
+    <Obstacle x = "7" y = "17"/>
+    <Obstacle x = "7" y = "18"/>
+    <Obstacle x = "7" y = "19"/>
+    <Obstacle x = "7" y = "20"/>
+    <Obstacle x = "7" y = "21"/>
+    <Obstacle x = "7" y = "22"/>
+    <Obstacle x = "7" y = "23"/>
+
+    <Obstacle x = "8" y = "4"/>
+    <Obstacle x = "8" y = "8"/>
+    <Obstacle x = "8" y = "11"/>
+    <Obstacle x = "8" y = "23"/>
+
+    <Obstacle x = "9" y = "4"/>
+    <Obstacle x = "9" y = "9"/>
+    <Obstacle x = "9" y = "11"/>
+    <Obstacle x = "9" y = "15"/>
+    <Obstacle x = "9" y = "18"/>
+    <Obstacle x = "9" y = "21"/>
+    <Obstacle x = "9" y = "23"/>
+
+    <Obstacle x = "10" y = "4"/>
+    <Obstacle x = "10" y = "10"/>
+    <Obstacle x = "10" y = "11"/>
+    <Obstacle x = "10" y = "23"/>
+
+    <Obstacle x = "11" y = "0"/>
+    <Obstacle x = "11" y = "1"/>
+    <Obstacle x = "11" y = "4"/>
+    <Obstacle x = "11" y = "5"/>
+    <Obstacle x = "11" y = "6"/>
+    <Obstacle x = "11" y = "7"/>
+    <Obstacle x = "11" y = "8"/>
+    <Obstacle x = "11" y = "9"/>
+    <Obstacle x = "11" y = "10"/>
+    <Obstacle x = "11" y = "11"/>
+    <Obstacle x = "11" y = "12"/>
+    <Obstacle x = "11" y = "13"/>
+    <Obstacle x = "11" y = "17"/>
+    <Obstacle x = "11" y = "18"/>
+    <Obstacle x = "11" y = "19"/>
+    <Obstacle x = "11" y = "20"/>
+    <Obstacle x = "11" y = "21"/>
+    <Obstacle x = "11" y = "22"/>
+    <Obstacle x = "11" y = "23"/>
+
+    <Obstacle x = "12" y = "4"/>
+    <Obstacle x = "12" y = "9"/>
+    <Obstacle x = "12" y = "11"/>
+    <Obstacle x = "12" y = "23"/>
+
+    <Obstacle x = "13" y = "4"/>
+    <Obstacle x = "13" y = "9"/>
+    <Obstacle x = "13" y = "11"/>
+    <Obstacle x = "13" y = "16"/>
+    <Obstacle x = "13" y = "18"/>
+    <Obstacle x = "13" y = "19"/>
+    <Obstacle x = "13" y = "20"/>
+    <Obstacle x = "13" y = "21"/>
+    <Obstacle x = "13" y = "23"/>
+
+    <Obstacle x = "14" y = "0"/>
+    <Obstacle x = "14" y = "1"/>
+    <Obstacle x = "14" y = "4"/>
+    <Obstacle x = "14" y = "8"/>
+    <Obstacle x = "14" y = "9"/>
+    <Obstacle x = "14" y = "11"/>
+    <Obstacle x = "14" y = "13"/>
+    <Obstacle x = "14" y = "14"/>
+    <Obstacle x = "14" y = "16"/>
+    <Obstacle x = "14" y = "23"/>
+
+    <Obstacle x = "15" y = "4"/>
+    <Obstacle x = "15" y = "7"/>
+    <Obstacle x = "15" y = "9"/>
+    <Obstacle x = "15" y = "11"/>
+    <Obstacle x = "15" y = "16"/>
+    <Obstacle x = "15" y = "17"/>
+    <Obstacle x = "15" y = "18"/>
+    <Obstacle x = "15" y = "19"/>
+    <Obstacle x = "15" y = "20"/>
+    <Obstacle x = "15" y = "21"/>
+    <Obstacle x = "15" y = "22"/>
+    <Obstacle x = "15" y = "23"/>
+
+    <Obstacle x = "16" y = "0"/>
+    <Obstacle x = "16" y = "1"/>
+    <Obstacle x = "16" y = "4"/>
+    <Obstacle x = "16" y = "6"/>
+    <Obstacle x = "16" y = "9"/>
+    <Obstacle x = "16" y = "11"/>
+    <Obstacle x = "16" y = "20"/>
+
+    <Obstacle x = "17" y = "1"/>
+    <Obstacle x = "17" y = "4"/>
+    <Obstacle x = "17" y = "9"/>
+    <Obstacle x = "17" y = "11"/>
+    <Obstacle x = "17" y = "14"/>
+    <Obstacle x = "17" y = "15"/>
+    <Obstacle x = "17" y = "18"/>
+    <Obstacle x = "17" y = "20"/>
+
+    <Obstacle x = "18" y = "4"/>
+    <Obstacle x = "18" y = "9"/>
+    <Obstacle x = "18" y = "11"/>
+    <Obstacle x = "18" y = "14"/>
+    <Obstacle x = "18" y = "15"/>
+    <Obstacle x = "18" y = "18"/>
+    <Obstacle x = "18" y = "20"/>
+
+    <Obstacle x = "19" y = "0"/>
+    <Obstacle x = "19" y = "1"/>
+    <Obstacle x = "19" y = "4"/>
+    <Obstacle x = "19" y = "9"/>
+    <Obstacle x = "19" y = "11"/>
+    <Obstacle x = "19" y = "14"/>
+    <Obstacle x = "19" y = "15"/>
+    <Obstacle x = "19" y = "18"/>
+    <Obstacle x = "19" y = "20"/>
+
+    <Obstacle x = "20" y = "4"/>
+    <Obstacle x = "20" y = "14"/>
+    <Obstacle x = "20" y = "15"/>
+    <Obstacle x = "20" y = "18"/>
+    <Obstacle x = "20" y = "22"/>
+
+    <Obstacle x = "21" y = "18"/>
+
+    <Obstacle x = "22" y = "18"/>
+    <Obstacle x = "22" y = "20"/>
+
+    <Obstacle x = "23" y = "0"/>
+    <Obstacle x = "23" y = "1"/>
+    <Obstacle x = "23" y = "2"/>
+    <Obstacle x = "23" y = "4"/>
+    <Obstacle x = "23" y = "5"/>
+    <Obstacle x = "23" y = "6"/>
+    <Obstacle x = "23" y = "7"/>
+    <Obstacle x = "23" y = "8"/>
+    <Obstacle x = "23" y = "9"/>
+    <Obstacle x = "23" y = "10"/>
+    <Obstacle x = "23" y = "11"/>
+    <Obstacle x = "23" y = "12"/>
+    <Obstacle x = "23" y = "13"/>
+    <Obstacle x = "23" y = "14"/>
+    <Obstacle x = "23" y = "15"/>
+    <Obstacle x = "23" y = "16"/>
+    <Obstacle x = "23" y = "17"/>
+    <Obstacle x = "23" y = "18"/>
+    <Obstacle x = "23" y = "19"/>
+    <Obstacle x = "23" y = "20"/>
+    <Obstacle x = "23" y = "21"/>
+    <Obstacle x = "23" y = "22"/>
+    <Obstacle x = "23" y = "23"/>
+    <Obstacle x = "23" y = "24"/>
+
+    <Obstacle x = "24" y = "2"/>
+    <Obstacle x = "24" y = "4"/>
+
+    <Obstacle x = "25" y = "2"/>
+    <Obstacle x = "25" y = "3"/>
+    <Obstacle x = "25" y = "4"/>
+
+    <Obstacle x = "30" y = "20"/>
+
+    <Obstacle x = "32" y = "16"/>
+
+    <Obstacle x = "35" y = "8"/>
+
+    <Obstacle x = "36" y = "8"/>
+    <Obstacle x = "36" y = "20"/>
+
+    <Interest x = "0" y = "9"/>
+    <Interest x = "0" y = "24"/>
+    <Interest x = "5" y = "10"/>
+    <Interest x = "10" y = "12"/>
+    <Interest x = "13" y = "24"/>
+    <Interest x = "14" y = "24"/>
+    <Interest x = "20" y = "5"/>
+    <Interest x = "24" y = "3"/>
+    <Interest x = "33" y = "11"/>
+    <Interest x = "36" y = "4"/>
+    <Interest x = "39" y = "14"/>
+
+
+    <Command_Center x = "0" y = "23" price = "2000" description = "general1" consumption = "13" ports = "5">
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "3" production = "25"/>
+        <Power_Generator priority = "2" production = "25"/>
+        <Managing consumption = "12" priority = "1" radius = "4" subordinates_count = "14"/>
+    </Command_Center>
+
+    <Command_Center x = "23" y = "3" price = "2000" description = "general2" consumption = "13" ports = "5">
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "250"/>
+        <Sensor consumption = "8" radius = "3" priority = "100" direction = "0" angle = "2"/>
+        <Managing consumption = "12" priority = "-1" radius = "4" subordinates_count = "14"/>
+    </Command_Center>
+
+    <Command_Center x = "29" y = "3" price = "2000" description = "general3" consumption = "13" ports = "5">
+        <Power_Generator priority = "12" production = "25"/>
+        <Power_Generator priority = "11" production = "25"/>
+        <Sensor consumption = "8" radius = "3" priority = "111" direction = "1" angle = "1"/>
+        <Managing consumption = "12" priority = "110" radius = "4" subordinates_count = "14"/>
+    </Command_Center>
+
+    <Observation_Center x = "0" y = "22" price = "1000" consumption = "10"  description = "station1" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "1" priority = "11" angle = "2"/>
+    </Observation_Center>
+
+    <Observation_Center x = "38" y = "24" price = "1000" consumption = "10"  description = "station2" ports = "15">
+        <Power_Generator priority = "14" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "11" direction = "3" angle = "1"/>
+        <Sensor consumption = "8" radius = "3" priority = "0" direction="2" angle = "2"/>
+    </Observation_Center>
+
+    <Robot_Commander price = "10000" consumption = "10"  description = "commander1" ports = "15">
+        <Power_Generator priority = "0" production = "100"/>
+        <Sensor consumption = "8" radius = "3" priority = "111" direction = "0" angle = "2"/>
+        <Sensor consumption = "8" radius = "1" priority = "12" direction="1" angle = "0"/>
+        <Managing consumption = "8" radius = "3" priority = "23" subordinates_count = "5"/>
+    </Robot_Commander>
+
+    <Robot_Commander price = "10000" consumption = "10"  description = "commander2" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "4" priority = "1321" angle = "2"/>
+        <Managing consumption = "8" radius = "4" priority = "21" subordinates_count = "5"/>
+    </Robot_Commander>
+
+    <Robot_Commander price = "10000" consumption = "10"  description = "commander3" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "3" priority = "1" direction = "1" angle = "0"/>
+        <Managing consumption = "8" radius = "7" priority = "2" subordinates_count = "5"/>
+    </Robot_Commander>
+
+    <Robot_Scout price = "10000" consumption = "10"  description = "scout1" ports = "15">
+        <Power_Generator priority = "-1" production = "100"/>
+        <Sensor consumption = "8" radius = "5" priority = "1" direction = "0" angle = "0"/>
+    </Robot_Scout>
+
+    <Robot_Scout price = "10000" consumption = "10"  description = "scout2" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "6" priority = "0" direction = "3" angle = "0"/>
+    </Robot_Scout>
+
+</Environment>

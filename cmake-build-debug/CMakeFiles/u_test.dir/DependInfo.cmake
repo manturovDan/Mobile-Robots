@@ -30,6 +30,8 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/danila/source/robots/cmake-build-debug/CMakeFiles/moving_describer.dir/DependInfo.cmake"
   "/home/danila/source/robots/cmake-build-debug/CMakeFiles/ai_robots.dir/DependInfo.cmake"
   "/home/danila/source/robots/cmake-build-debug/CMakeFiles/energy_consuber.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/interfacelib.dir/DependInfo.cmake"
+  "/home/danila/source/robots/cmake-build-debug/CMakeFiles/tinyxml2.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

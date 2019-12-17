@@ -1,0 +1,38 @@
+<Environment width = "30" height = "25">
+    <Obstacle x = "5" y = "1"/>
+    <Obstacle x = "1" y = "2"/>
+    <Obstacle x = "15" y = "20"/>
+
+    <Interest x = "0" y = "22"/>
+    <Interest x = "10" y = "14"/>
+
+    <Command_Center x = "29" y = "24" price = "2000" description = "general" consumption = "13" ports = "5">
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Power_Generator priority = "1" production = "25"/>
+        <Sensor consumption = "8" radius = "1" priority = "1" angle = "2"/>
+        <Managing consumption = "12" priority = "1" radius = "7" subordinates_count = "14"/>
+    </Command_Center>
+
+    <Observation_Center x = "8" y = "4" price = "1000" consumption = "10"  description = "subord1" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "3" angle = "1"/>
+        <Sensor consumption = "8" radius = "3" priority = "1" direction="2" angle = "2"/>
+    </Observation_Center>
+
+    <Robot_Scout price = "10000" consumption = "10"  description = "subord_move" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
+        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
+    </Robot_Scout>
+
+    <Robot_Commander price = "10000" consumption = "10"  description = "general_move" ports = "15">
+        <Power_Generator priority = "1" production = "100"/>
+        <Sensor consumption = "8" radius = "8" priority = "1" direction = "0" angle = "3"/>
+        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
+        <Sensor consumption = "8" radius = "25" priority = "1" direction="1" angle = "0"/>
+        <Managing consumption = "8" radius = "25" priority = "2" subordinates_count = "5"/>
+    </Robot_Commander>
+
+
+</Environment>

@@ -96,14 +96,16 @@ u_test: libdisplay.a
 u_test: libmoving_describer.a
 u_test: libai_robots.a
 u_test: libenergy_consuber.a
+u_test: libinterfacelib.a
+u_test: libtinyxml2.a
 u_test: libobstacle.a
 u_test: libmap_object.a
 u_test: libenvironment_describer.a
 u_test: libobstacle.a
 u_test: libmap_object.a
 u_test: libenvironment_describer.a
-u_test: libmodule.a
 u_test: libmoving_describer.a
+u_test: libmodule.a
 u_test: CMakeFiles/u_test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/danila/source/robots/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable u_test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/u_test.dir/link.txt --verbose=$(VERBOSE)

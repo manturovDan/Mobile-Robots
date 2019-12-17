@@ -5,6 +5,7 @@
 #include "../robots/robot.h"
 #include "../robots/Power_Generator.h"
 #include "../robots/Sensor.h"
+#include "../robots/interface.h"
 
 //static ai checking
 //real direction
@@ -261,6 +262,13 @@ TEST (EnvSetObj, Env) {
     ASSERT_THROW(env.setObject(robo::Command_Center_t, 5, 10, 50, modl, desc), std::invalid_argument);
     ASSERT_THROW(env.setObject(robo::Obstacle_t, 5, 10, 50, modl, desc), std::invalid_argument);
 }
+
+TEST (XMLload, XMLTest) {
+    robo::Environment_describer env;
+    std::string filename = "/home/danila/source/robots/tests/mapXMLtest.xml";
+    interf::EnvXMLCreate(filename, env);
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
