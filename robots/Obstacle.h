@@ -8,7 +8,7 @@ namespace robo {
     public:
         Obstacle() = delete;
 
-        Obstacle(coordinates pos) : Map_Object(pos) {};
+        Obstacle(coordinates pos) : Map_Object(pos) { if (pos.x == 0 && pos.y < 2) throw std::invalid_argument("Can't create Obstacle in origin"); };
         //Obstacle * clone() const;
         std::string whoami() override ;
 
