@@ -217,8 +217,6 @@ namespace dispr {
 
     void Display::justTimer() {
         ai->run();
-        //ai->testMove();
-        //ai->testNext();
 
         using namespace std::chrono_literals;
         os << "Hello waiter\n" << std::flush;
