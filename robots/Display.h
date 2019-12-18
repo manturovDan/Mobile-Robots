@@ -23,10 +23,7 @@ namespace dispr {
     public:
         Display() = delete;
         Display(robo::Environment_describer *, robo::Ai_Deep *, std::ostream & ostr = std::cout, std::istream & istr = std::cin);
-        void show();
         void run();
-        void justTimer();
-
         void computing();
         void draw();
     };
