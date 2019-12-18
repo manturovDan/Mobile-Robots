@@ -36,7 +36,7 @@ namespace dispr {
             m.unlock();
         }
 
-        os << "THE END!\nPress any key to continue" << std::endl;
+        os << "THE END!\nPress any key to exit" << std::endl;
 
         is.ignore();
         is.get();
@@ -119,6 +119,7 @@ namespace dispr {
                 mobile.clear();
                 window.clear();
                 window.close();
+                exit(0);
             }
 
             if (!is_comp)
