@@ -16,9 +16,11 @@ namespace dispr {
         robo::Ai_Deep * ai;
         std::mutex sw;
         bool is_comp;
+        std::ostream & os;
+        std::istream & is;
     public:
         Display() = delete;
-        Display(robo::Environment_describer *, robo::Ai_Deep *);
+        Display(robo::Environment_describer *, robo::Ai_Deep *, std::ostream & ostr = std::cout, std::istream & istr = std::cin);
         void show();
         void run();
         void justTimer();

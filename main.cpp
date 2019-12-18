@@ -1,6 +1,5 @@
 #include <iostream>
 
-//#include "robots/robot.h"
 #include "robots/interface.h"
 #include "robots/Display.h"
 #include "robots/Ai_Deep.h"

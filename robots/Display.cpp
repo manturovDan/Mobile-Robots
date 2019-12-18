@@ -1,7 +1,8 @@
 #include "Display.h"
 
 namespace dispr {
-    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip) : env(envir), ai(aip) { is_comp = false; }
+    Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip, std::ostream & ostr, std::istream & istr)
+    : env(envir), ai(aip), os(ostr), is(istr) { is_comp = false; }
 
     void Display::show() {
         const int winWidth = 700;
@@ -220,7 +221,7 @@ namespace dispr {
         //ai->testNext();
 
         using namespace std::chrono_literals;
-        std::cout << "Hello waiter\n" << std::flush;
+        os << "Hello waiter\n" << std::flush;
         ai->getMd()->printSteps();
 
         int i = 1;
@@ -244,7 +245,11 @@ namespace dispr {
                     break; // error
             }
         }
-        std::cout << "THE END DETECTION" << std::endl;
+        os << "THE END DETECTION - Press any key to continue" << std::endl;
+        is.ignore();
+        is.get();
+
+        os << "END THREADS" << std::endl;
     }
 
     void Display::run() {

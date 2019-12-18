@@ -133,7 +133,8 @@ namespace interf {
     };
 
     /**
-     * debug class to stay SOLID concept - prints all environment
+     * class to stay SOLID concept - prints all environment
+     * and input from cin
      * */
     class InterfaceTools {
     private:
