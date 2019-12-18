@@ -85,6 +85,7 @@ namespace robo {
         void deleteBlockedPoint(coordinates);
         bool checkBlocked(coordinates);
         int countOfOpened() const { return ai_dict.size(); }
+        ~Ai_Deep() { delete md; }
     };
 }
 
