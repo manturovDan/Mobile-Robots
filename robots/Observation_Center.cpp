@@ -249,4 +249,10 @@ namespace robo {
         if (right_cor >= env->getWidth())
             right_cor = env->getWidth() - 1;
     }
+
+    Observation_Center::~Observation_Center() {
+        for (auto mod : modules) {
+            delete mod;
+        }
+    }
 }

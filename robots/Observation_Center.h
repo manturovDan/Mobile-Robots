@@ -38,7 +38,7 @@ namespace robo {
         Map_Object * getOwner() const { return owner; }
         unsigned int getMaxRadius() const;
         virtual int getDirection() const { return 0; }
-        virtual ~Observation_Center() override = default;
+        ~Observation_Center() override;
     };
 }
 

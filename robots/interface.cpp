@@ -137,8 +137,11 @@ namespace interf {
             }
 
             mapEl = mapEl->NextSiblingElement();
-        }
 
+            for (auto md : modl) {
+                delete md;
+            }
+        }
     }
 
     void EnvXMLCreate::fileDamaged(std::ostream & stream = std::cout, const std::string & add) {

@@ -55,7 +55,7 @@ namespace robo {
         void plusTime() { time++; };
         unsigned int getTime() { return time; }
         void print(std::ostream &stream = std::cout);
-        ~Environment_describer() = default; // clear vector
+        ~Environment_describer();
         friend class Env_Consistent_Iter;
         Env_Consistent_Iter begin() { return Env_Consistent_Iter(map_obj); }
         Env_Consistent_Iter end() { return Env_Consistent_Iter(map_obj.end()); }
@@ -64,6 +64,7 @@ namespace robo {
         bool isBoundary(coordinates);
         bool isTopBoundary(coordinates);
         bool isRightBoundary(coordinates);
+
     };
 }
 

@@ -145,6 +145,11 @@ namespace robo {
         return point.x == width - 1;
     }
 
+    Environment_describer::~Environment_describer() {
+        for (auto obj : map_obj)
+            delete obj;
+    }
+
     Env_Consistent_Iter Env_Consistent_Iter::operator++(int) { //postfix
         auto retit = Env_Consistent_Iter(iter);
         iter++;
