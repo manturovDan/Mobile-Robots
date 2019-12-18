@@ -49,6 +49,8 @@ chrono
 -
 mutex
 -
+vector
+-
 Environment_describer.h
 /home/danila/source/robots/robots/Environment_describer.h
 Ai_Deep.h

@@ -5,6 +5,7 @@
 #include <thread>
 #include <chrono>
 #include <mutex>
+#include <vector>
 
 #include "Environment_describer.h"
 #include "Ai_Deep.h"
