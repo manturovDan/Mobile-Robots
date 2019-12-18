@@ -20,6 +20,7 @@ namespace dispr {
         std::ostream & os;
         std::istream & is;
         std::mutex m;
+        bool closed = false;
     public:
         Display() = delete;
         Display(robo::Environment_describer *, robo::Ai_Deep *, std::ostream & ostr = std::cout, std::istream & istr = std::cin);

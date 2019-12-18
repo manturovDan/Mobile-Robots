@@ -11,6 +11,8 @@ namespace dispr {
 
         int i = 0;
         while (true) {
+            if (closed)
+                return;
             auto start = std::chrono::high_resolution_clock::now();
             std::this_thread::sleep_for(0.1s);
             env->plusTime();
@@ -34,7 +36,11 @@ namespace dispr {
             m.unlock();
         }
 
-        os << "THE END!" << std::endl;
+        os << "THE END!\nPress any key to continue" << std::endl;
+
+        is.ignore();
+        is.get();
+        closed = true;
     }
 
     void Display::draw() {
@@ -108,6 +114,13 @@ namespace dispr {
 
 
         while (window.isOpen()) {
+            if (closed) {
+                viz.clear();
+                mobile.clear();
+                window.clear();
+                window.close();
+            }
+
             if (!is_comp)
                 continue;
 
@@ -183,10 +196,16 @@ namespace dispr {
             window.setView(view);
             sf::Event event;
             while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
+                if (event.type == sf::Event::Closed) {
+                    std::cout << "CLOSING" << std::endl;
+                    closed = true;
+                    viz.clear();
+                    mobile.clear();
+                    window.clear();
                     window.close();
+                    exit(0);
+                }
             }
-
 
             view.setCenter(static_cast<float >(winWidth)/2 + right, static_cast<float>(winHeight)/2 - up);
 
@@ -244,22 +263,13 @@ namespace dispr {
             window.display();
 
         }
-
-        //close window
     }
 
     void Display::run() {
-        //std::thread trDisp = std::thread(&Display::show, this);
-        //std::thread trInte = std::thread(&Display::justTimer, this);
-
-        //trDisp.join();
-        //trInte.join();
-
         std::thread trComp = std::thread(&Display::computing, this);
         std::thread trDraw = std::thread(&Display::draw, this);
 
         trComp.join();
         trDraw.join();
-
     }
 }
