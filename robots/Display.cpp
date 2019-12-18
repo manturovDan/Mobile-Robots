@@ -2,7 +2,7 @@
 
 namespace dispr {
     Display::Display(robo::Environment_describer * envir, robo::Ai_Deep *aip, std::ostream & ostr, std::istream & istr)
-    : env(envir), ai(aip), os(ostr), is(istr) { is_comp = false; }
+    : env(envir), ai(aip), os(ostr), is(istr), is_comp(false) { m.unlock(); }
 
     void Display::show() {
         const int winWidth = 700;
@@ -220,7 +220,7 @@ namespace dispr {
 
         using namespace std::chrono_literals;
         os << "Hello waiter\n" << std::flush;
-        ai->getMd()->printSteps();
+        //ai->getMd()->printSteps();
 
         int i = 1;
         while(true) {
@@ -250,9 +250,47 @@ namespace dispr {
         os << "END THREADS" << std::endl;
     }
 
+    void Display::computing() {
+        ai->run();
+        using namespace std::chrono_literals;
+        os << "START" << std::endl;
+
+        int i = 0;
+        while (true) {
+            auto start = std::chrono::high_resolution_clock::now();
+            std::this_thread::sleep_for(0.01s);
+            env->plusTime();
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+
+            if (ai->getEnd()) {
+                break;
+            }
+
+            m.lock();
+            ai->nextComp();
+            if(ai->getMd()->makeSteps(env->getTime()))
+                ai->setEnd();
+            is_comp = true;
+            if (i++ == std::numeric_limits<unsigned int>::max() - 1) {
+                os << "Time limit was exceeded" << std::endl;
+                break;
+            }
+            m.unlock();
+        }
+    }
+
+    void Display::draw() {
+
+    }
+
     void Display::run() {
         std::thread trDisp = std::thread(&Display::show, this);
         std::thread trInte = std::thread(&Display::justTimer, this);
+
+        //std::thread trComp = std::thread(&Display::computing, this);
+        //std::thread trDraw = std::thread(&Display::computing, this);
+
         trDisp.join();
         trInte.join();
     }
